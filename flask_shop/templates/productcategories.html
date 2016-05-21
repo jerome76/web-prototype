@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %} - {{page}}{% endblock %}
+{% block page %} / Product Categories{% endblock %}
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <h3>Product Categories:</h3>
+  <br>
+  <p>Model: {{db_model}}</p>
+  <p>Loop through the list:</p>
+  <ul>
+    {% for n in db_list %}
+    <li>{{n}}</li>
+    {% endfor %}
+  </ul>
+  <h3></h3>
+{% endblock %}

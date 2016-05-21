@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %} - {{page}}{% endblock %}
+{% block page %} / Products{% endblock %}
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <h3>Products:</h3>
+  <br>
+  <p>My string: {{db_model}}</p>
+  <p>Loop through the list:</p>
+  <ul>
+    {% for n in db_list %}
+    <li><a href="/cart/add/{{n.id}}">Buy</a>{{n.id, n.code, n.name, n.description, n.list_price, n.attributes}}
+      <ul>
+      {% for o in n.categories %}
+      <li>{{o.id, o.name, o.parent}}</li>
+      {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+  </ul>
+  <ul>
+    {% for n in attachments %}
+    <li>
+      {{n.id, n.type, n.link, n.resource}}
+    </li>
+    {% endfor %}
+  </ul>
+  <h3></h3>
+{% endblock %}

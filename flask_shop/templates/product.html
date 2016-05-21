@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %} - {{page}}{% endblock %}
+{% block page %} / Product{% endblock %}
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <h3>Product:</h3>
+  <br>
+  <p>Product Details:</p>
+  <ul>
+    {% if product %}
+    <li><a href="/cart/add/{{product.id}}">Buy</a> - <a href="/shop/">Back</a>
+      <ul>
+      <li>Name: {{product.name}}</li>
+      <li>Description: {{product.description}}</li>
+      <li>Price: {{product.list_price}}</li>
+        {% if product.attributes %}
+            <br><img src="/static/products/{{ product.attributes['image'] }}">
+            <li>Size: {{product.attributes.size}}</li>
+            <li>Color: {{product.attributes.color}}</li>
+            <li>Pattern: {{product.attributes.pattern}}</li>
+        {% endif %}
+        </ul>
+      <br><br><br><br><br><br>
+    </li>
+    {% endif %}
+  </ul>
+{% endblock %}

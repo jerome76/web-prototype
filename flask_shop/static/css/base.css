@@ -1,0 +1,66 @@
+#footer {
+    background-color: #272727;;
+    font-size: 16px;
+    font-family: "Perpetua";
+    color: rgb(255, 255, 255);
+    line-height: 1.2;
+    padding: 18px 40px 16px 40px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 30;
+}
+
+#footer a {
+    padding: 0 8px;
+    color: white;
+}
+
+#footer a:hover {
+    text-decoration: none;
+}
+
+#footer #registered, #footer a.active {
+    color: gray;
+}
+
+#navbar {
+    font-size: 30px;
+    font-family: "Perpetua";
+    line-height: 1.2;
+    background-color: rgb(247, 247, 247);
+    width: 100%;
+    padding: 10px 0;
+    z-index: 20;
+}
+
+#menu a {
+    color: #969495;
+    font-size: 28px;
+    padding: 0 2px;
+}
+
+#navbar a:hover {
+    text-decoration: none;
+}
+
+#logo {
+    padding: 10px 4px 0 25px;
+    max-width: 430px;
+}
+
+#submenu a, #submenu span {
+    font-size: 14px;
+}
+
+#submenu #currency {
+    padding: 0;
+}
+
+#currency a {
+    color: black;
+}
+
+#lang {
+    padding:0;
+}

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %} - {{page}}{% endblock %}
+{% block page %} / Checkout / Payment {% endblock %}
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+	<div class="container">
+		{% if session['logged_in'] %}
+			<p>In order to pay you will be forwarded to Paypal:</p>
+			<form name="topaypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+				<input type="hidden" name="cmd" value="_xclick">
+				<input type="hidden" name="custom" value="{{ custom }}"/>
+				<input type="hidden" name="business" value="{{ business }}">
+				<input type="hidden" name="item_name" value="{{ item_name }}">
+				<input type="hidden" name="item_number" value="{{ item_number }}">
+				<input type="hidden" name="no_shipping" value="{{ no_shipping }}">
+				<input type="hidden" name="amount" value="{{ amount }}">
+				<input type="hidden" name="currency_code" value="{{ currency_code }}">
+				<input type="hidden" name="shipping" value="{{ shipping }}">
+				<input type="hidden" name="return" value="{{ hostname }}/success/">
+				<input type="hidden" name="cancel_return" value="{{ hostname }}/cancel/">
+				<input type="hidden" name="notify_url" value="{{ hostname }}/ipn/">
+				<input type="submit" value="Pay" name="submit" title="PayPal - The safer, easier way to pay online!" class="btn btn-primary">
+			</form>	
+		{% else %}
+			<p>You need to be <a href="/login/" target="blank"><strong>logged in</strong></a> to pay.</p>
+		{% endif %}
+	</div>
+{% endblock %}

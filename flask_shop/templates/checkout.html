@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+{% block title %} - {{page}}{% endblock %}
+{% block page %} / <a href="cart">Cart</a> / Checkout{% endblock %}
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <h3>Products:</h3>
+  {% if product %}
+  <ul>
+    {% for n in product %}
+    <li>
+        {{n.id, n.name, n.description, n.list_price}}
+    </li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+  <h3>{{ pt }}</h3>
+  <br>
+      <p>{{ pc |safe }}</p>
+
+        <form class="form-horizontal" action="" method="post" name="checkout">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+            {% for error in form.name.errors %}
+                  <span style="color: red;">[{{error}}]</span>
+            {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Name (*)</label>
+                <div class="col-sm-10">
+                    {{ form.name(size=80) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Name2</label>
+                <div class="col-sm-10">
+                    {{ form.name2(size=80) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+            {% for error in form.street.errors %}
+                  <span style="color: red;">[{{error}}]</span>
+            {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="street" class="col-sm-2 control-label">Street (*)</label>
+                <div class="col-sm-10">
+                    {{ form.street(size=80) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="street2" class="col-sm-2 control-label">Street 2</label>
+                <div class="col-sm-10">
+                    {{ form.street2(size=80) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+            {% for error in form.zip.errors %}
+                  <span style="color: red;">[{{error}}]</span>
+            {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="zip" class="col-sm-2 control-label">Zip (*)</label>
+                <div class="col-sm-10">
+                    {{ form.zip(size=80) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+            {% for error in form.city.errors %}
+                  <span style="color: red;">[{{error}}]</span>
+            {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="city" class="col-sm-2 control-label">City (*)</label>
+                <div class="col-sm-10">
+                    {{ form.city(size=80) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="state" class="col-sm-2 control-label">State</label>
+                <div class="col-sm-10">
+                    {{ form.state(size=20) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+            {% for error in form.country.errors %}
+                  <span style="color: red;">[{{error}}]</span>
+            {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="country" class="col-sm-2 control-label">Country (*)</label>
+                <div class="col-sm-10">
+                    {{ form.country(size=20) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="delivery" class="col-sm-2 control-label">Delivery</label>
+                <div class="col-sm-10">
+                    {{ form.delivery }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="country" class="col-sm-2 control-label">Invoice</label>
+                <div class="col-sm-10">
+                    {{ form.invoice }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <input type="submit" value="Send" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+
+
+{% endblock %}

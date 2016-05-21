@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block title %} - {{page}}{% endblock %}
+{% block page %} / Über uns{% endblock %}
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <h3>{{ pt }}</h3>
+  <br>
+      <p>{{ pc |safe }}</p>
+{% endblock %}

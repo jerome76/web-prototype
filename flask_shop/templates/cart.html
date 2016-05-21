@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %} - {{page}}{% endblock %}
+{% block page %} / {{ _('cart') }}{% endblock %}
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <h3>{{ _('cart') }}:</h3>
+  {% if cart %}
+  <ul>
+    {% for n in cart %}
+    <li>
+        {{n.id, n.name, n.description, n.list_price}}
+    </li>
+      {% endfor %}
+  </ul>
+  <p><a href='/checkout'>Checkout</a></p>
+  {% else %}
+    {{ _('cart_empty') }}
+    <p><a href='/shop'>{{ _('back_to_shop') }}</a></p>
+  {% endif %}
+
+
+{% endblock %}

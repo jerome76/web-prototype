@@ -1,0 +1,167 @@
+#:kivy 1.9
+
+<Controller>:
+    label_wid: my_custom_label
+    scroll_view_wid: my_scroll_view
+    text_input_wid: my_search_textinput
+    tabbed_panel_wid: my_tabbed_panel
+    list_view_wid: my_list_view
+    item_list_wid: my_item_list
+    grid_layout_wid: my_grid_layout
+
+
+    BoxLayout:
+        orientation: 'horizontal'
+        padding: 0
+
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 0
+
+            BoxLayout:
+                orientation: 'horizontal'
+                padding: 1
+                size_hint: 1, .1
+                Image:
+                    source: 'logo.png'
+                    size_hint: 0.2, 1
+                Label:
+                    id: my_custom_label
+                    text: 'My label before button press'
+                    size_hint: 0.8, 1
+            ScrollView:
+                id: my_item_list
+                text: 'items in list'
+                size_hint: 1, .6
+                ListView:
+                    id: my_list_view
+            BoxLayout:
+                orientation: 'horizontal'
+                padding: 1
+                size_hint: 1, .3
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: 1
+                    Button:
+                        text: 'Customer'
+                        size_hint: 1, .2
+                        on_press: root.do_action()
+                    Button:
+                        text: 'Payment'
+                        size_hint: 1, .8
+                        on_press: root.do_action()
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: 1
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        padding: 1
+                        Button:
+                            text: '1'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+                        Button:
+                            text: '2'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+                        Button:
+                            text: '3'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+                        Button:
+                            text: 'Qty'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        padding: 1
+                        Button:
+                            text: '4'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+                        Button:
+                            text: '5'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+                        Button:
+                            text: '6'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+                        Button:
+                            text: 'Disc'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        padding: 1
+                        Button:
+                            text: '7'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+                        Button:
+                            text: '8'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+                        Button:
+                            text: '9'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+                        Button:
+                            text: 'Price'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        padding: 1
+                        Button:
+                            text: '+/-'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+                        Button:
+                            text: '0'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+                        Button:
+                            text: '.'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+                        Button:
+                            text: 'Del'
+                            size_hint: .25, 1
+                            on_press: root.do_action()
+
+
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 0
+
+            TabbedPanel:
+                id: my_tabbed_panel
+                size_hint: 1, .1
+                do_default_tab: False
+                TabbedPanelItem:
+                    size_hint: 0.2, 1
+                    text: '1'
+                TabbedPanelItem:
+                    size_hint: 0.2, 1
+                    text: '+'
+                TabbedPanelItem:
+                    size_hint: 0.2, 1
+                    text: '-'
+            TextInput:
+                id: my_search_textinput
+                text: ''
+                multiline: False
+                size_hint: 1, .1
+                on_text_validate: root.do_search()
+            ScrollView:
+                id: my_scroll_view
+                text: 'My label before button press'
+                size_hint: 1, 0.8
+                GridLayout:
+                    id: my_grid_layout
+                    cols: 4
+                    spacing: 10
+                    size_hint_y: None

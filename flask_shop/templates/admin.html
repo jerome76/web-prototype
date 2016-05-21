@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% block title %} - {{page}}{% endblock %}
+{% block page %} / Account{% endblock %}
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <h3>User list</h3>
+  <br>
+      <p>{{message}}</p>
+      <p>Value from the list: {{id}}</p>
+  <p>Parties:</p>
+  <p>Loop through the list:</p>
+  <ul>
+    {% for n in db_list %}
+    <li>{{n.id, n.name, n.code, n.active}}
+          <ul>
+          {% for o in n.addresses %}
+          <li>{{o.id, o.city, o.name, o.zip, o.subdivision, o.streetbis,
+            o.street, o.country.name, o.active, o.delivery, o.invoice}}</li>
+          {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <p>Inventory:</p>
+  <p>Loop through the list:</p>
+  <ul>
+    {% for n in stock_list %}
+    <li>{{n.id, n.currency, n.unit_price, n.state, n.shipment,
+      n.effective_date, n.uom, n.cost_price, n.internal_quantity,
+      n.product, n.to_location, n.from_location, n.quantity,
+      n.invoice_address}}
+    </li>
+    {% endfor %}
+  </ul>
+
+
+  <p>Products:</p>
+  <p>Loop through the list:</p>
+  <ul>
+    {% for n in product_list %}
+    <li>{{n.id, n.name, n.description, n.list_price, n.consumable, n.code, n.cost_price,
+      n.cost_price_method, n.cost_price_uom, n.forecast_quantity, n.purchasable, n.salable,
+      n.taxes_category, n.type}}
+      <ul>
+      {% for o in n.categories %}
+      <li>{{o.id, o.name, o.description}}</li>
+      {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <p>Sales:</p>
+  <p>Loop through the list:</p>
+  <ul>
+    {% for n in sale_list %}
+    <li>{{n.id, n.comment, n.payment_term, n.currency, n.shipment_method,
+      n.state, n.untaxed_amount_cache, n.warehouse, n.total_amount_cache,
+      n.shipment_state, n.tax_amount_cache, n.invoice_state, n.invoice_method,
+      n.invoice_address}}
+          <ul>
+            {% for o in n.lines %}
+            <li>{{o.id, o.unit_price, o.quantity, o.product, o.type, o.unit, o.description}}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <p>Invoices:</p>
+  <p>Loop through the list:</p>
+  <ul>
+    {% for n in invoice_list %}
+    <li>{{n.id, n.payment_term, n.currency, n.description,
+      n.move, n.cancel_move, n.state, n.party, n.type, n.invoice_address}}
+          <ul>
+            {% for o in n.lines %}
+            <li>{{o.id, o.origin, o.currency, o.unit_price,
+              o.note, o.product, o.type, o.unit, o.invoice_type, o.quantity}}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

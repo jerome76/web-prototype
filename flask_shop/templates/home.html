@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %} - {{page}}{% endblock %}
+{% block page %}{% endblock %}
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <h3>{{ pt }}</h3>
+  <br>
+      <p>{{ pc |safe }}</p>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <img class="img-responsive" src="/static/Cosy-Bandana.jpg" />
+        </div>
+        <div class="col-sm-4">
+            <img class="img-responsive" src="/static/Cosy-Loop.jpg" />
+        </div>
+        <div class="col-sm-4">
+            <img class="img-responsive" src="/static/Cosy-Kaye.jpg" />
+        </div>
+    </div>
+</div>
+{% endblock %}

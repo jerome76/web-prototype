@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %} - {{page}}{% endblock %}
+{% block page %} / Account{% endblock %}
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+	<div class="container">
+		{% if session['logged_in'] %}
+			<p>Order Overview:</p>
+            <p>Loop through the list:</p>
+            <ul>
+              {% for n in sale_list %}
+              <li>{{n.id, n.comment, n.payment_term, n.currency, n.shipment_method,
+                n.state, n.untaxed_amount_cache, n.warehouse, n.total_amount_cache,
+                n.shipment_state, n.tax_amount_cache, n.invoice_state, n.invoice_method,
+                n.invoice_address}}
+                    <ul>
+                      {% for o in n.lines %}
+                      <li>{{o.id, o.unit_price, o.quantity, o.product, o.type, o.unit, o.description}}</li>
+                      {% endfor %}
+                  </ul>
+              </li>
+              {% endfor %}
+            </ul>
+		{% else %}
+			<p>You need to be <a href="/login/" target="blank"><strong>logged in</strong></a> to view this page.</p>
+		{% endif %}
+	</div>
+{% endblock %}

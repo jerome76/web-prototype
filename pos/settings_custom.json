@@ -1,0 +1,32 @@
+[
+    { "type": "title",
+      "title": "POS Settings" },
+
+    { "type": "string",
+      "title": "Server URL",
+      "desc": "Server url for accessing your database",
+      "section": "serverconnection",
+      "key": "server.url" },
+
+    { "type": "options",
+      "title": "Default payment type",
+      "desc": "Default payment type",
+      "section": "section1",
+      "key": "default_payment_type",
+      "options": ["cash"] },
+
+    { "type": "numeric",
+      "title": "Default customer id",
+      "desc": "Default customer id for payment slip",
+      "section": "section1",
+      "key": "default_customer_id" },
+
+    { "type": "options",
+      "title": "POS printing enabled",
+      "desc": "Enable POS printing",
+      "section": "section1",
+      "key": "pos_printing_enabled",
+      "options": ["True", "False"] }
+
+]
+
