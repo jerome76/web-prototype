@@ -67,7 +67,7 @@ class PaymentScreen(Screen):
                 self.text_input_wid.text = str(amount)
         if len(self.text_input_wid.text) > 0:
             change = Decimal(self.text_input_wid.text) - self.manager.get_screen('posscreen').get_total()
-            if change > Decimal(0.00):
+            if change >= Decimal(0.00):
                 self.label_change_wid.text = str(change)
             else:
                 self.label_change_wid.text = ''

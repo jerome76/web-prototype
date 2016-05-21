@@ -5,10 +5,9 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.config import Config, ConfigParser
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import ObjectProperty, StringProperty, ListProperty
-from kivy.adapters.models import SelectableDataItem
 from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.progressbar import ProgressBar
 from kivy.uix.image import Image
 from kivy.network.urlrequest import UrlRequest
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
@@ -19,27 +18,67 @@ from decimal import Decimal, InvalidOperation
 from kivy.factory import Factory
 from kivy.uix.popup import Popup
 import os, os.path
+import traceback
+from functools import partial
+import time
 #from escpos import *
-
-class ImageButton(ButtonBehavior, Image):
-    pass
 
 TRYTON_HOST = "http://192.168.1.102:5000/pos/products"
 TRYTON_HOST_SEARCH = "http://192.168.1.102:5000/pos/product/"
 
 
-class ImageButton(ButtonBehavior, FloatLayout, Image):
-    def on_press(self):
-        print ('POSScreen.ImageButton.on_press: upload payslips')
-        file_count = len([name for name in os.listdir('offline/') if os.path.isfile(name)])
-        popup = Popup(title='Uploading payslips', content=Label(text='Synchronizing ' + str(file_count) +
-                                                                     'payslips...'),
-                      size_hint=(None, None), size=(400, 400))
-        popup.open()
-        for fn in os.listdir('.'):
-            if os.path.isfile(fn):
+class ImageButton(ButtonBehavior, Image):
+    pb = ProgressBar(max=100) #100
+    popup = Popup(title='Uploading payslips',
+                  content=pb,
+                  size_hint=(0.7, 0.3))
 
-                print (fn)
+    def on_release(self):
+        print ('POSScreen.ImageButton.on_press: upload payslips')
+        upload_count = len(os.listdir('offline/'))
+        if upload_count > 0:
+            self.popup.open()
+            self.pb.value = 0
+            file_count = len(os.listdir('offline/'))
+            increment = 100.0/file_count
+            for fn in os.listdir('offline/'):
+                if os.path.isfile('offline/'+fn):
+                    Clock.schedule_once(partial(self.upload_payslips, fn, increment), 0)
+
+    def upload_payslips(self, fn, pb_inc, *args):
+        def on_success(req, result):
+            self.pb.value += pb_inc
+            print("Progressbar is on {0}%".format(self.pb.value))
+            os.remove('offline/' + fn)
+            if self.pb.value >= 99.9:
+                self.popup.dismiss()
+
+        def on_failure(req, result):
+            on_error(req, result)
+
+        def on_error(req, result):
+            self.pb.value += pb_inc
+            print("Progressbar is on {0}%".format(self.pb.value))
+            if self.pb.value >= 99.9:
+                self.popup.dismiss()
+
+        try:
+            print ("POSScreen.upload_payslips()" + fn + ' ' + str(pb_inc))
+            config = ConfigParser.get_configparser(name='app')
+            print(config.get('serverconnection', 'server.url'))
+            saleurl = config.get('serverconnection', 'server.url') + "pos/sale/"
+            with open('offline/'+fn) as data_file:
+                result = json.load(data_file)
+                file_param = dict([])
+                file_param['filename'] = fn
+                result['filename'] = file_param
+                data_json = json.dumps(result)
+                headers = {'Content-type': 'application/jsonrequest', 'Accept': 'application/jsonrequest'}
+                UrlRequest(url=saleurl, on_success=on_success, on_failure=on_failure, on_error=on_error,
+                           req_headers=headers, req_body=data_json)
+        except Exception:
+            print(traceback.format_exc())
+            print "POSScreen.upload_payslips() Error: Could not upload payslip"
 
 
 class DataItem(object):
@@ -67,6 +106,7 @@ class POSScreen(Screen):
     _current_value = 0.0
     label_wid = ObjectProperty()
     label_total_wid = ObjectProperty()
+    icon_wid = ObjectProperty()
     info = StringProperty()
     default_currency = 'CHF'
     products_list = []
@@ -91,7 +131,7 @@ class POSScreen(Screen):
 
     def on_pre_enter(self, *args):
         def on_success(req, result):
-            self.icon_wid.source = 'icon.png'
+            self.icon_wid.source='data/icon.png'
             with open('products.json', 'w') as fp:
                 json.dump(result, fp)
                 fp.close()
@@ -111,6 +151,7 @@ class POSScreen(Screen):
                 print ('add online product ' + code)
                 self.grid_layout_home_wid.add_widget(btn)
             self.grid_layout_home_wid.height = (len(result['result'])/4)*110
+
         try:
             config = ConfigParser.get_configparser(name='app')
             print(config.get('serverconnection', 'server.url'))
@@ -150,8 +191,8 @@ class POSScreen(Screen):
                 code = str(i['code'])
                 if code == '':
                     code = '200001'
-                btn = ImageButton(source='./products/'+code+'-small.png', id=code, text=str(i['id']),
-                                  size_hint_y=None, width=300, height=100)
+                btn = Factory.CustomButton(image_source='./products/'+code+'-small.png', id=code,
+                                           size_hint_y=None, width=300, height=100, subtext=code)
                 btn.bind(on_press=self.do_add_item)
                 self.products_search_list.append(btn)
                 self.grid_layout_search_wid.add_widget(btn)
