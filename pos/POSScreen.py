@@ -242,6 +242,7 @@ class POSScreen(Screen):
     def do_clear_item_list(self):
         print('do_clear_item_list')
         del self.my_data_view[:]
+        self._selected_line_index = 0
         self.list_view_wid.height = self.height * 0.6
 
     def do_add_item(self, event):
