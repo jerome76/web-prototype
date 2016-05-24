@@ -32,7 +32,7 @@ def getProductDirect(category=None, size=None):
     con = None
     result = None
     try:
-        con = psycopg2.connect(database='tryton_dev', user='tryton', password='password')
+        con = psycopg2.connect("dbname='tryton_dev' user='tryton' host='localhost' password='password'")
         cur = con.cursor()
         cur.execute("SELECT product.id, product.code, product.description, " +
                     "t.name, product.template, product.attributes, " +
