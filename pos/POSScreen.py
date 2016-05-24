@@ -152,37 +152,42 @@ class POSScreen(Screen):
                 self.grid_layout_home_wid.add_widget(btn)
             self.grid_layout_home_wid.height = (len(result['result'])/4)*110
 
+        def on_failure(req, result):
+            on_error(req, result)
+
+        def on_error(req, result):
+            for key, val in self.ids.items():
+                print("key={0}, val={1}".format(key, val))
+            if len(self.products_list) > 0:
+                for n in self.products_list:
+                    self.grid_layout_home_wid.remove_widget(n)
+            if len(self.products_list) == 0:
+                with open('products.json') as data_file:
+                    result = json.load(data_file)
+                    self.products_json = result
+                for i in result['result']:
+                    code = i['code']
+                    if code == '':
+                        code = '200001'
+                    btn = Factory.CustomButton(image_source='./products/'+code+'-small.png', id=code,
+                                               size_hint_y=None, width=300, height=100, subtext=code)
+                    btn.bind(on_press=self.do_add_item)
+                    self.products_list.append(btn)
+                    print ('add local product ' + code)
+                    self.grid_layout_home_wid.add_widget(btn)
+                self.grid_layout_home_wid.height = (len(result['result'])/4)*110
+
         try:
             config = ConfigParser.get_configparser(name='app')
             print(config.get('serverconnection', 'server.url'))
             producturl = config.get('serverconnection', 'server.url') + "pos/products/"
             if len(self.products_list) == 0:
-                UrlRequest(producturl, on_success)
+                UrlRequest(url=producturl, on_success=on_success, on_failure=on_failure, on_error=on_error)
             else:
                 return
         except:
             print "POSScreen Error: Could not load products"
         print "Initialize products selection"
-        for key, val in self.ids.items():
-            print("key={0}, val={1}".format(key, val))
-        if len(self.products_list) > 0:
-            for n in self.products_list:
-                self.grid_layout_home_wid.remove_widget(n)
-        if len(self.products_list) == 0:
-            with open('products.json') as data_file:
-                result = json.load(data_file)
-                self.products_json = result
-            for i in result['result']:
-                code = i['code']
-                if code == '':
-                    code = '200001'
-                btn = Factory.CustomButton(image_source='./products/'+code+'-small.png', id=code,
-                                           size_hint_y=None, width=300, height=100, subtext=code)
-                btn.bind(on_press=self.do_add_item)
-                self.products_list.append(btn)
-                print ('add local product ' + code)
-                self.grid_layout_home_wid.add_widget(btn)
-            self.grid_layout_home_wid.height = (len(result['result'])/4)*110
 
     def do_search(self):
         def on_success(req, result):
