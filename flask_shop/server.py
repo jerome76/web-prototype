@@ -90,6 +90,17 @@ def get_products():
                      'uom_rounding': p['uom_rounding']})
     return jsonify(result=list)
 
+@app.route("/pos/currency/", methods=['GET'])
+def get_currency():
+    config.set_trytond(DATABASE_NAME, config_file=CONFIG)
+    CurrencyRate = Model.get('currency.currency.rate')
+    currency_rate = CurrencyRate.find(['id', '>', 0])
+    list = []
+    for n in currency_rate:
+        list.append({'id': str(n.id), 'code': n.currency.code, 'symbol': n.currency.symbol, 'name': n.currency.name,
+                     'rate': str(n.rate), 'date': str(n.date)})
+    return jsonify(result=list)
+
 
 @app.route('/pos/product/<productid>')
 def search_product(productid=None):
