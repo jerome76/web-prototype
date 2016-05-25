@@ -43,7 +43,7 @@
             <td><a href="/product/{{n.id}}">Details</a> &nbsp;
               <a href="/cart/add/{{n.id}}">Buy</a>
               <br>{{n.id, n.code, n.description, n.name, n.template}}
-              <br>{{n.list_price, n.category}}
+              <br>{{session['currency_code']}} {{n.list_price, n.category}}
               <br>{{n.attributes}}
             </td>
           </tr>
