@@ -139,20 +139,25 @@ def sendus():
 
 @app.route("/product/<productid>")
 def product(productid=None):
+    try:
+        if session['currency_rate'] is None:
+            session['currency_rate'] = 1.000
+    except KeyError:
+        session['currency_rate'] = 1.000
+
     page_topic = gettext(u'Product')
     page_content = gettext(u'Product:')
     config.set_trytond(DATABASE_NAME, config_file=CONFIG)
     Product = Model.get('product.product')
     product = Product.find(['id', '=', productid])
-    return render_template('product.html', pt=page_topic, pc=page_content, product=product[0], title="Milliondog", page=gettext('Product'))
+    list_price = '{:20,.2f}'.format(product[0].list_price * Decimal(session['currency_rate']))
+    return render_template('product.html', pt=page_topic, pc=page_content, product=product[0], list_price=list_price,
+                           title="Milliondog", page=gettext('Product'))
 
 @app.route("/shop/<category>/<size>")
 @app.route("/shop/<category>")
 @app.route("/shop/")
 def shop(category=None, size=None):
-    def format_decimal(value):
-        return "{0:0.2f}".format(float(value))
-
     try:
         if session['currency_rate'] is None:
             session['currency_rate'] = 1.000
