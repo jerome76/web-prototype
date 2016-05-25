@@ -60,7 +60,7 @@ class MainApp(App):
             'pos_printing_enabled': True
         })
         config.setdefaults('serverconnection', {
-            'server.url': 'http://127.0.0.1:5000/'
+            'server.url': 'http://milliondog.ddns.net/'
         })
 
     def close_settings(self, settings):
