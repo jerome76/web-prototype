@@ -13,6 +13,7 @@ import requests
 import json
 from decimal import *
 import psycopg2
+import urlparse
 from passlib.hash import pbkdf2_sha256
 from validate_email import validate_email
 
@@ -32,7 +33,9 @@ def getProductDirect(category=None, size=None):
     con = None
     result = None
     try:
-        con = psycopg2.connect(database='tryton_dev', user='tryton', password='password')
+        result = urlparse.urlparse(app.config['SQLALCHEMY_DATABASE_URI'])
+        con = psycopg2.connect(database=result.path[1:], host=result.hostname, user=result.username,
+                               password=result.password)
         cur = con.cursor()
         cur.execute("SELECT product.id, product.code, product.description, " +
                     "t.name, product.template, product.attributes, " +

@@ -5,6 +5,7 @@ from proteus import config, Model, Wizard, Report
 import time
 import decimal
 import json
+import urlparse
 from escpos import *
 import psycopg2
 
@@ -18,7 +19,9 @@ def getProductDirect():
     con = None
     result = None
     try:
-        con = psycopg2.connect(database='tryton_dev', user='tryton', password='password')
+        result = urlparse.urlparse(app.config['SQLALCHEMY_DATABASE_URI'])
+        con = psycopg2.connect(database=result.path[1:], host=result.hostname, user=result.username,
+                               password=result.password)
         cur = con.cursor()
         cur.execute("SELECT product.id, product.code, product.description, " +
                     "t.name, product.template, product.attributes, " +
