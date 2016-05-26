@@ -1,11 +1,21 @@
 {% extends "layout.html" %}
-{% block title %} - {{page}}{% endblock %}
-{% block page %} / Über uns{% endblock %}
-{% block heading %}
-  {{ super() }}
-{% endblock %}
 {% block content %}
-  <h3>{{ pt }}</h3>
-  <br>
-      <p>{{ pc |safe }}</p>
+<div class="container">
+    <div class="well">
+        <h2 id="title">About us</h2>
+        <h4><p>We created Milliondog because we love dogs. Milliondog symbolizes the importance of a dog for his owner and our 
+        philosophy reflects just that.</p>
+        <p>Each Milliondog Cosy is unique in material and colour and emphasises the individual personality and uniqueness 
+        of your pawesome darling.<p>
+        <p>We love our work and you can see this in every Cosy.</p></h4><br>
+
+        <h2 id="title">Send us</h2>
+        <h4><p>We welcome your enquiries regarding our exclusive service using your own fabrics, for example we can use material
+        from your children’s, parent’s or partner’s clothes to make a special Milliondog-Cosy for your dog. 
+        Get in touch with us so we can work together to give your dog a unique look.</p>
+        <p>Let your dog play his own part by wearing a Milliondog-Cosy at a special day in your life.</p>
+        <p>For more information contact us by Email.</p></h4><br>
+        <p><a class="btn btn-primary" href="/contact">Contact</a></p>
+    </div>
+</div>
 {% endblock %}
