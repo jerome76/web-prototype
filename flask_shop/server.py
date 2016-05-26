@@ -5,6 +5,7 @@ from proteus import config, Model, Wizard, Report
 import time
 import decimal
 import json
+import urlparse
 from escpos import *
 import psycopg2
 
@@ -18,7 +19,9 @@ def getProductDirect():
     con = None
     result = None
     try:
-        con = psycopg2.connect(database='tryton_dev', user='tryton', password='password')
+        result = urlparse.urlparse(app.config['SQLALCHEMY_DATABASE_URI'])
+        con = psycopg2.connect(database=result.path[1:], host=result.hostname, user=result.username,
+                               password=result.password)
         cur = con.cursor()
         cur.execute("SELECT product.id, product.code, product.description, " +
                     "t.name, product.template, product.attributes, " +
@@ -85,6 +88,17 @@ def get_products():
         list.append({'id': p['id'], 'code': p['code'], 'name': p['name'], 'price': p['list_price'],
                      'uom_id': p['uom_id'], 'uom_name': p['uom_name'], 'uom_symbol': p['uom_symbol'],
                      'uom_rounding': p['uom_rounding']})
+    return jsonify(result=list)
+
+@app.route("/pos/currency/", methods=['GET'])
+def get_currency():
+    config.set_trytond(DATABASE_NAME, config_file=CONFIG)
+    CurrencyRate = Model.get('currency.currency.rate')
+    currency_rate = CurrencyRate.find(['id', '>', 0])
+    list = []
+    for n in currency_rate:
+        list.append({'id': str(n.id), 'code': n.currency.code, 'symbol': n.currency.symbol, 'name': n.currency.name,
+                     'rate': str(n.rate), 'date': str(n.date)})
     return jsonify(result=list)
 
 

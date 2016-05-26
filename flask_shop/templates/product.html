@@ -14,7 +14,7 @@
       <ul>
       <li>Name: {{product.name}}</li>
       <li>Description: {{product.description}}</li>
-      <li>Price: {{product.list_price}}</li>
+      <li>Price: {{list_price}} {{session['currency_code']}} </li>
         {% if product.attributes %}
             <br><img src="/static/products/{{ product.attributes['image'] }}">
             <li>Size: {{product.attributes.size}}</li>

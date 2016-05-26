@@ -13,6 +13,7 @@ import requests
 import json
 from decimal import *
 import psycopg2
+import urlparse
 from passlib.hash import pbkdf2_sha256
 from validate_email import validate_email
 
@@ -32,7 +33,9 @@ def getProductDirect(category=None, size=None):
     con = None
     result = None
     try:
-        con = psycopg2.connect("dbname='tryton_dev' user='tryton' host='localhost' password='password'")
+        result = urlparse.urlparse(app.config['SQLALCHEMY_DATABASE_URI'])
+        con = psycopg2.connect(database=result.path[1:], host=result.hostname, user=result.username,
+                               password=result.password)
         cur = con.cursor()
         cur.execute("SELECT product.id, product.code, product.description, " +
                     "t.name, product.template, product.attributes, " +
@@ -68,7 +71,7 @@ def getProductDirect(category=None, size=None):
             row['uom_name'] = p[7]
             row['uom_symbol'] = p[8]
             row['uom_rounding'] = p[9]
-            row['list_price'] = p[10]
+            row['list_price'] = '{:20,.2f}'.format(Decimal(p[10]) * Decimal(session['currency_rate']))
             row['category'] = p[11]
             result.append(row)
         print result
@@ -136,18 +139,31 @@ def sendus():
 
 @app.route("/product/<productid>")
 def product(productid=None):
+    try:
+        if session['currency_rate'] is None:
+            session['currency_rate'] = 1.000
+    except KeyError:
+        session['currency_rate'] = 1.000
+
     page_topic = gettext(u'Product')
     page_content = gettext(u'Product:')
     config.set_trytond(DATABASE_NAME, config_file=CONFIG)
     Product = Model.get('product.product')
     product = Product.find(['id', '=', productid])
-    return render_template('product.html', pt=page_topic, pc=page_content, product=product[0], title="Milliondog", page=gettext('Product'))
-
+    list_price = '{:20,.2f}'.format(product[0].list_price * Decimal(session['currency_rate']))
+    return render_template('product.html', pt=page_topic, pc=page_content, product=product[0], list_price=list_price,
+                           title="Milliondog", page=gettext('Product'))
 
 @app.route("/shop/<category>/<size>")
 @app.route("/shop/<category>")
 @app.route("/shop/")
 def shop(category=None, size=None):
+    try:
+        if session['currency_rate'] is None:
+            session['currency_rate'] = 1.000
+    except KeyError:
+        session['currency_rate'] = 1.000
+
     print("Shop ")
     page_topic = gettext(u'Shop')
     page_content = gettext(u'Shop:')
@@ -272,6 +288,12 @@ def setlang(language=None):
 def setcurrency(currency=None):
     setattr(g, 'currency_code', currency)
     session['currency_code'] = currency
+    config.set_trytond(DATABASE_NAME, config_file=CONFIG)
+    CurrencyRate = Model.get('currency.currency.rate')
+    currency_rate = CurrencyRate.find(['id', '>', 0])
+    for n in currency_rate:
+        if n.currency.code == currency:
+            session['currency_rate'] = float(n.rate)
     return redirect("/")
 
 @app.route('/login/', methods=['GET', 'POST'])

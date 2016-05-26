@@ -19,7 +19,10 @@ class CustomerScreen(Screen):
             self.products_json = result
             print ('customers loaded.')
             for i in result['result']:
-                btn = Button(id=str(i['id']), text=i['name'], size_hint_y=None, width=200, height=48)
+                name = i['name']
+                if i['name'] is None:
+                    name = str(i['id'])
+                btn = Button(id=str(i['id']), text=name, size_hint_y=None, width=200, height=48)
                 btn.bind(on_press=self.do_action)
                 print ('add customer ' + str(i['id']))
                 self.customer_list_wid.add_widget(btn)
@@ -57,7 +60,7 @@ class MainApp(App):
             'pos_printing_enabled': True
         })
         config.setdefaults('serverconnection', {
-            'server.url': 'http://127.0.0.1:5000/'
+            'server.url': 'http://milliondog.ddns.net/'
         })
 
     def close_settings(self, settings):
