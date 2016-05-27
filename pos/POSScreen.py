@@ -18,6 +18,7 @@ from decimal import Decimal, InvalidOperation
 from kivy.factory import Factory
 from kivy.uix.popup import Popup
 import os, os.path
+import glob
 import traceback
 from functools import partial
 import time
@@ -35,13 +36,13 @@ class ImageButton(ButtonBehavior, Image):
 
     def on_release(self):
         print ('POSScreen.ImageButton.on_press: upload payslips')
-        upload_count = len(os.listdir('offline/'))
+        upload_count = len(glob.glob('offline/*.json'))
         if upload_count > 0:
             self.popup.open()
             self.pb.value = 0
             file_count = len(os.listdir('offline/'))
             increment = 100.0/file_count
-            for fn in os.listdir('offline/'):
+            for fn in glob.glob('offline/*.json'):
                 if os.path.isfile('offline/'+fn):
                     Clock.schedule_once(partial(self.upload_payslips, fn, increment), 0)
 
@@ -126,7 +127,7 @@ class POSScreen(Screen):
     def post_init(self, *args):
         config = ConfigParser.get_configparser(name='app')
         self.customer_id = config.get('section1', 'default_customer_id')
-        self.btn_customer_wid.text = 'Customer: ' + str(self.customer_id)
+        self.btn_customer_wid.text = 'Client: ' + str(self.customer_id)
         print ('post_init...')
 
     def on_pre_enter(self, *args):
@@ -257,8 +258,10 @@ class POSScreen(Screen):
                                     + " / " + product['uom_symbol'],
                                price=Decimal(product['price']),
                                qty=Decimal(1.000))
+            newitem.color = (0.1,0.1,0.1,1)
         else:
             newitem = DataItem(event.id, text=str(event.id))
+            newitem.color = (0.1, 0.1, 0.1, 1)
         print('do_add_item ' + newitem.text)
         self.my_data_view.append(newitem)
         if hasattr(self.list_view_wid, '_reset_spopulate'):
