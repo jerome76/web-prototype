@@ -143,6 +143,10 @@ def product(productid=None):
     product = Product.find(['id', '=', productid])
     return render_template('product.html', pt=page_topic, pc=page_content, product=product[0], title="Milliondog", page=gettext('Product'))
 
+@app.route("/categories")
+def category():
+    return render_template('categories.html')
+
 
 @app.route("/shop/<category>/<size>")
 @app.route("/shop/<category>")
