@@ -5,6 +5,10 @@
     padding-left: 40px;
 }
 
+.navbar-inner{
+    background-color: transparent;
+}
+
 .nav a{
     font-family: "Perpetua Titling MT";
     padding-right: 20px !important;
@@ -27,7 +31,7 @@
 }
 
 #title{
-    color: #158cba;
+    color: #ba9fbb;
 }
 
 body {
@@ -46,6 +50,20 @@ body {
 
 form textarea#message{
     height: 150px;
+}
+
+.btn-primary{
+    background-color: #ba9fbb;
+    border-color: #B298B3;
+}
+.btn-primary:hover{
+    background-color: #ba9fbb;
+    border-color: #B298B3;
+}
+
+.label-primary{
+    background-color: #8c5c8e;
+    border-color: #B298B3;
 }
 
 /*full width container*/

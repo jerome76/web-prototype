@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <link type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
     <link type="text/css" href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-image-gallery.min.css">
     {% block page_css %}
     {% endblock %}
 </head>
@@ -15,6 +17,7 @@
     <div class="navbar-wrapper">
         <div class="container-fluid">
             <nav class="navbar navbar-default navbar-static-top">
+                <div class="navbar-inner">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                             <span class="sr-only">Toggle navigation</span>
@@ -48,6 +51,7 @@
                             <li><a href="/account">Login</a></li>
                         </ul>
                     </div>
+                </div>
             </nav>
         </div>
     </div>
@@ -75,7 +79,8 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-
+<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<script src="/static/js/bootstrap-image-gallery.min.js"></script>
 {% block page_js %}
 {% endblock %}
 
