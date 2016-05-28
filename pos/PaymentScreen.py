@@ -10,8 +10,7 @@ from decimal import Decimal
 import uuid
 import os
 import traceback
-#from escpos import *
-
+from ESCPrint  import EscPrint
 
 class PaymentScreen(Screen):
     label_wid = ObjectProperty()
@@ -114,10 +113,13 @@ class PaymentScreen(Screen):
             with open('offline/' + str(unique_id) + '.json', 'w') as fp:
                 json.dump(payslip_json, fp)
                 fp.close()
-            # clear list
+            # print payslip
             config = ConfigParser.get_configparser(name='app')
-            print(config.get('serverconnection', 'server.url'))
+            print_enabled = config.get('section1', 'pos_printing_enabled')
+            if print_enabled:
+                EscPrint.print_payslip(payslip_items)
             saleurl = config.get('serverconnection', 'server.url') + "pos/sale/"
+            print(config.get('serverconnection', 'server.url'))
             data_json = json.dumps(payslip_json)
             headers = {'Content-type': 'application/jsonrequest', 'Accept': 'application/jsonrequest'}
             if len(self.manager.get_screen('posscreen').my_data_view) > 0:
@@ -128,3 +130,5 @@ class PaymentScreen(Screen):
         except Exception:
             print(traceback.format_exc())
             print "PaymentScreen.pay() Error: Could not send payslip"
+
+
