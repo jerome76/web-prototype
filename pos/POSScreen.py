@@ -421,25 +421,6 @@ class POSScreen(Screen):
         print(str(self.get_total()))
         self.label_total_wid.text = 'Total: ' + str(self.get_total())
 
-'''    def callback(self, event):
-        data = json.load(urllib2.urlopen(TRYTON_HOST_SEARCH+'200018'))
-        product = data['result'][0]
-        """ Seiko Epson Corp. Receipt Printer M129 Definitions (EPSON TM-T88IV) """
-        Epson = printer.Usb(0x04b8,0x0202)
-        # Print text
-        Epson.text(str(product[0].id) + ' ' + product['name'] + ' ' + str(product[0].list_price) + '\n')
-        # Print image
-        Epson.image("logo.gif")
-        # Print QR Code
-        Epson.qr("http://www.milliondog.com")
-        # Print barcode
-        Epson.barcode('1324354657687','EAN13',64,2,'','')
-        # Cut paper
-        Epson.cut()
-        print("button touched")  # test
-        self.label.text = "button touched"
-'''
-
 
 class MyTabbedPanel(TabbedPanel):
     def __init__(self, **kwargs):
