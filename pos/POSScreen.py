@@ -421,25 +421,6 @@ class POSScreen(Screen):
         print(str(self.get_total()))
         self.label_total_wid.text = 'Total: ' + str(self.get_total())
 
-    def build(self):
-        config = ConfigParser.get_configparser(name='app')
-        producturl = config.get('serverconnection', 'server.url') + "pos/product/" + '200018'
-        data = json.load(urllib2.urlopen(producturl))
-        product = data['result'][0]
-        layout = BoxLayout(orientation='vertical')
-        # use a (r, g, b, a) tuple
-        blue = (0, 0, 1.5, 2.5)
-        red = (2.5, 0, 0, 1.5)
-        btn = Button(text='Touch me!'+product['name'], background_color=blue, font_size=40)
-        btn.bind(on_press=self.callback)
-        self.label = Label(text="------------", font_size='50sp')
-        layout.add_widget(btn)
-        layout.add_widget(self.label)
-        return layout
-
-    def contentChanged_cb(self, obj, value):
-        print 'CHANGE'
-
 '''    def callback(self, event):
         data = json.load(urllib2.urlopen(TRYTON_HOST_SEARCH+'200018'))
         product = data['result'][0]
@@ -463,13 +444,13 @@ class POSScreen(Screen):
 class MyTabbedPanel(TabbedPanel):
     def __init__(self, **kwargs):
         super(MyTabbedPanel, self).__init__(**kwargs)
-        self.bind(current_tab=self.contentChanged_cb)
+        self.bind(current_tab=self.content_changed_cb)
 
     def switch_to(self, header):
         super(MyTabbedPanel, self).switch_to(header)
         print 'switch_to, content is ', header.text
 
-    def contentChanged_cb(self, obj, value):
+    def content_changed_cb(self, obj, value):
         if value.text == 'Home':
             value.background_color = (0.81, 0.27, 0.33, 1)
             value.background_normal = ''
