@@ -161,7 +161,7 @@ def shop(category=None, size=None):
     end = time.time()
     print("Shop.getProductDirect " + str(end - start) + " ms.")
     resp = render_template('shop.html', pt=page_topic, pc=page_content, db_model='Products', db_list=directproducts,
-                           title="Milliondog", page=gettext('Shop'))
+                           title="Milliondog", page=gettext('Shop'), category=category)
     return resp
 
 @app.route("/gallery/")
