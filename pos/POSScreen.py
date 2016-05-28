@@ -8,6 +8,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ObjectProperty, StringProperty, ListProperty
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.progressbar import ProgressBar
+from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.image import Image
 from kivy.network.urlrequest import UrlRequest
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
@@ -117,7 +118,7 @@ class POSScreen(Screen):
     customer_id = 0
     payslip_items_list = []
     my_data_view = ListProperty([])
-    selected_value = StringProperty('select a button')
+    selected_value = StringProperty('select a product.')
 
     def __init__(self, **kwargs):
         super(Screen,self).__init__(**kwargs)
@@ -140,7 +141,7 @@ class POSScreen(Screen):
             print ('products loaded.')
 
             if len(result['result']) > 0:
-                self.grid_layout_home_wid.clear_widgets()
+                self.my_tabbed_panel_wid.grid_layout_home_wid.clear_widgets()
             for i in result['result']:
                 code = i['code']
                 if code == '':
@@ -150,8 +151,8 @@ class POSScreen(Screen):
                 btn.bind(on_press=self.do_add_item)
                 self.products_list.append(btn)
                 print ('add online product ' + code)
-                self.grid_layout_home_wid.add_widget(btn)
-            self.grid_layout_home_wid.height = (len(result['result'])/4)*110
+                self.my_tabbed_panel_wid.grid_layout_home_wid.add_widget(btn)
+            self.my_tabbed_panel_wid.grid_layout_home_wid.height = (len(result['result'])/4)*110
 
         def on_failure(req, result):
             on_error(req, result)
@@ -161,7 +162,7 @@ class POSScreen(Screen):
                 print("key={0}, val={1}".format(key, val))
             if len(self.products_list) > 0:
                 for n in self.products_list:
-                    self.grid_layout_home_wid.remove_widget(n)
+                    self.my_tabbed_panel_wid.grid_layout_home_wid.remove_widget(n)
             if len(self.products_list) == 0:
                 with open('products.json') as data_file:
                     result = json.load(data_file)
@@ -175,8 +176,8 @@ class POSScreen(Screen):
                     btn.bind(on_press=self.do_add_item)
                     self.products_list.append(btn)
                     print ('add local product ' + code)
-                    self.grid_layout_home_wid.add_widget(btn)
-                self.grid_layout_home_wid.height = (len(result['result'])/4)*110
+                    self.my_tabbed_panel_wid.grid_layout_home_wid.add_widget(btn)
+                self.my_tabbed_panel_wid.grid_layout_home_wid.height = (len(result['result'])/4)*110
 
         try:
             config = ConfigParser.get_configparser(name='app')
@@ -201,13 +202,13 @@ class POSScreen(Screen):
                                            size_hint_y=None, width=300, height=100, subtext=code)
                 btn.bind(on_press=self.do_add_item)
                 self.products_search_list.append(btn)
-                self.grid_layout_search_wid.add_widget(btn)
-                self.tabbed_panel_wid.switch_to(self.tab_search_wid)
-            self.grid_layout_search_wid.height = (len(result['result'])/4+4)*110
+                self.my_tabbed_panel_wid.grid_layout_search_wid.add_widget(btn)
+                self.my_tabbed_panel_wid.switch_to(self.my_tabbed_panel_wid.tab_search_wid)
+            self.my_tabbed_panel_wid.grid_layout_search_wid.height = (len(result['result'])/4+4)*110
 
         if len(self.products_search_list) > 0:
             for n in self.products_search_list:
-                self.grid_layout_search_wid.remove_widget(n)
+                self.my_tabbed_panel_wid.grid_layout_search_wid.remove_widget(n)
         self.products_search_list = []
         config = ConfigParser.get_configparser(name='app')
         producturl = config.get('serverconnection', 'server.url') + "pos/product/" + self.text_input_wid.text
@@ -216,7 +217,7 @@ class POSScreen(Screen):
     def do_category(self, category):
         print('do_category: ' + category)
         if category == 'Home':
-            self.grid_layout_home_wid.clear_widgets()
+            self.my_tabbed_panel_wid.grid_layout_home_wid.clear_widgets()
             with open('products.json') as data_file:
                 result = json.load(data_file)
                 self.products_json = result
@@ -229,8 +230,8 @@ class POSScreen(Screen):
                 btn.bind(on_press=self.do_add_item)
                 self.products_list.append(btn)
                 print ('add local product ' + code)
-                self.grid_layout_home_wid.add_widget(btn)
-            self.grid_layout_home_wid.height = (len(result['result'])/4)*110
+                self.my_tabbed_panel_wid.grid_layout_home_wid.add_widget(btn)
+            self.my_tabbed_panel_wid.grid_layout_home_wid.height = (len(result['result'])/4)*110
 
 
     def getProduct(self, code):
@@ -349,8 +350,8 @@ class POSScreen(Screen):
 
             if event == 'Disc':
                 self.btn_disc_wid.background_color = [0.81, 0.27, 0.33, 1]
-                self.btn_qty_wid.background_color = [1, 1, 1, 1]
-                self.btn_price_wid.background_color = [1, 1, 1, 1]
+                self.btn_qty_wid.background_color = [0.2, 0.2, 0.2, 1.0]
+                self.btn_price_wid.background_color = [0.2, 0.2, 0.2, 1.0]
                 self.set_mode('Disc')
                 try:
                     self.info = str(active_line.discount)
@@ -358,8 +359,8 @@ class POSScreen(Screen):
                     print('decimal.InvalidOperation')
                 print('Discount: ' + self.info)
             elif event == 'Price':
-                self.btn_disc_wid.background_color = [1, 1, 1, 1]
-                self.btn_qty_wid.background_color = [1, 1, 1, 1]
+                self.btn_disc_wid.background_color = [0.2, 0.2, 0.2, 1.0]
+                self.btn_qty_wid.background_color = [0.2, 0.2, 0.2, 1.0]
                 self.btn_price_wid.background_color = [0.81, 0.27, 0.33, 1]
                 self.set_mode('Price')
                 try:
@@ -368,8 +369,8 @@ class POSScreen(Screen):
                     print('decimal.InvalidOperation')
                 print('Price: ' + self.info)
             elif event == 'Qty':
-                self.btn_disc_wid.background_color = [1, 1, 1, 1]
-                self.btn_price_wid.background_color = [1, 1, 1, 1]
+                self.btn_disc_wid.background_color = [0.2, 0.2, 0.2, 1.0]
+                self.btn_price_wid.background_color = [0.2, 0.2, 0.2, 1.0]
                 self.btn_qty_wid.background_color = [0.81, 0.27, 0.33, 1]
                 self.set_mode('Qty')
                 try:
@@ -436,6 +437,9 @@ class POSScreen(Screen):
         layout.add_widget(self.label)
         return layout
 
+    def contentChanged_cb(self, obj, value):
+        print 'CHANGE'
+
 '''    def callback(self, event):
         data = json.load(urllib2.urlopen(TRYTON_HOST_SEARCH+'200018'))
         product = data['result'][0]
@@ -454,3 +458,27 @@ class POSScreen(Screen):
         print("button touched")  # test
         self.label.text = "button touched"
 '''
+
+
+class MyTabbedPanel(TabbedPanel):
+    def __init__(self, **kwargs):
+        super(MyTabbedPanel, self).__init__(**kwargs)
+        self.bind(current_tab=self.contentChanged_cb)
+
+    def switch_to(self, header):
+        super(MyTabbedPanel, self).switch_to(header)
+        print 'switch_to, content is ', header.text
+
+    def contentChanged_cb(self, obj, value):
+        if value.text == 'Home':
+            value.background_color = (0.81, 0.27, 0.33, 1)
+            value.background_normal = ''
+            value.background_down = ''
+            self.tab_search_wid.background_color = [0.2, 0.2, 0.2, 1.0]
+            self.tab_search_wid.background_color = [0.2, 0.2, 0.2, 1.0]
+        if value.text == 'Search':
+            value.background_color = (0.81, 0.27, 0.33, 1)
+            value.background_down = ''
+            value.background_normal = ''
+            self.tab_home_wid.background_color = [0.2, 0.2, 0.2, 1.0]
+            self.tab_home_wid.background_color = [0.2, 0.2, 0.2, 1.0]
