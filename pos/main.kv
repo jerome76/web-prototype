@@ -13,35 +13,71 @@ ScreenManagement:
     name: "main"
     canvas.before:
         Color:
-            rgba: 0.6, 0.6, 0.6, 1
+            rgba: 0.99, 0.99, 0.99, 1
         Rectangle:
             pos: self.pos
             size: self.size
-    TextInput:
-        id: main_username
-        text: 'admin'
-        write_tab: False
-        multiline: False
-        on_text_validate: app.root.current = "posscreen"
-        size_hint: .3, None
-        height: 48
-        pos: (root.right - self.width) / 2, ((root.top - self.height) / 2) + self.height*2
-    TextInput:
-        id: main_password
-        password: True
-        text: 'admin'
-        write_tab: False
-        multiline: False
-        on_text_validate: app.root.current = "posscreen"
-        height: 48
-        size_hint: .3, None
-        pos: (root.right - self.width) / 2, ((root.top - self.height) / 2) + self.height
-    Button:
-        on_release: app.root.current = "posscreen"
-        text: "Start session"
-        height: 48
-        size_hint: .3, None
-        pos: (root.right - self.width) / 2, (root.top - self.height) / 2
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 0
+        spacing: 0
+        BoxLayout:
+            canvas:
+                Color:
+                    rgb: 0.2,0.2,0.2
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            id: bl_payment_header
+            cols: 3
+            padding: 0
+            spacing: 1
+            size_hint: 1, 0.1
+            Label:
+                id: main_title
+                color: (0.99, 0.99, 0.99, 1.0)
+                text: 'Semilimes POS'
+                font_size: '48sp'
+                size_hint: 1, 1
+
+        GridLayout:
+            canvas:
+                Color:
+                    rgb: 0.99,0.99,0.99
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            id: main_body
+            cols: 1
+            padding: 50
+            spacing: 10
+            TextInput:
+                id: main_username
+                text: 'admin'
+                font_size: '48sp'
+                write_tab: False
+                multiline: False
+                on_text_validate: app.root.current = "posscreen"
+                size_hint: 1, 0.25
+            TextInput:
+                id: main_password
+                password: True
+                text: 'admin'
+                font_size: '48sp'
+                write_tab: False
+                multiline: False
+                on_text_validate: app.root.current = "posscreen"
+                size_hint: 1, 0.25
+            Button:
+                on_release: app.root.current = "posscreen"
+                background_color: (0.415, 0.651, 0.259, 1.0)
+                background_normal: ''
+                text: "Start session"
+                font_size: '48sp'
+                size_hint: 1, 0.25
+            Widget:
+                size_hint: 1, 0.25
+
 
 <PaymentScreen>:
     label_wid: payment_amount_due
@@ -51,7 +87,7 @@ ScreenManagement:
     name: "paymentscreen"
     canvas.before:
         Color:
-            rgba: 0.6, 0.6, 0.6, 1
+            rgba: 0.99, 0.99, 0.99, 1
         Rectangle:
             pos: self.pos
             size: self.size
@@ -59,32 +95,52 @@ ScreenManagement:
     BoxLayout:
         orientation: 'vertical'
         padding: 0
+        spacing: 0
         BoxLayout:
+            canvas:
+                Color:
+                    rgb: 0.2,0.2,0.2
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
             id: bl_payment_header
             cols: 3
-            spacing: 10
+            padding: 0
+            spacing: 3
             size_hint: 1, 0.1
             Button:
                 on_release: app.root.current = "posscreen"
-                text: "<< Back"
-                size_hint: .1, 1
+                background_color: (0.415, 0.651, 0.259, 1.0)
+                background_normal: ''
+                text: "Back"
+                font_size: '18sp'
+                size_hint: 0.1, 1
             Label:
                 id: main_payment_title
+                color: (0.99, 0.99, 0.99, 1.0)
                 text: 'Payment'
+                font_size: '48sp'
                 size_hint: .8, 1
             Button:
                 on_release: app.root.get_screen('paymentscreen').pay()
-                text: "Validate >>"
-                size_hint: .1, 1
+                background_color: (0.415, 0.651, 0.259, 1.0)
+                background_normal: ''
+                text: "Validate"
+                font_size: '18sp'
+                size_hint: 0.1, 1
         BoxLayout:
             id: bl_payment_body
+            padding: 1
+            spacing: 2
             orientation: 'horizontal'
             size_hint: 1, 0.9
 
             BoxLayout:
                 id: bl_payment_body_cash
+                padding: 1
+                spacing: 2
                 orientation: 'horizontal'
-                size_hint: 0.3, 1
+                size_hint: 0.2, 1
 
                 StackLayout:
                     orientation: 'rl-tb'
@@ -93,168 +149,236 @@ ScreenManagement:
 
                     Button:
                         on_release: app.root.current = "posscreen"
-                        text: "Cash"
+                        text: "***Cash***"
                         size_hint: .9, .1
 
                     Widget:
 
             BoxLayout:
                 id: bl_payment_body_info
+                padding: 1
+                spacing: 10
                 orientation: 'vertical'
-                size_hint: 0.7, 1
+                size_hint: 0.8, 1
 
-                StackLayout:
-                    orientation: 'lr-tb'
+                GridLayout:
+                    cols: 4
                     id: payment_type
-                    size_hint: 0.7, 0.3
-
+                    padding: 1
+                    spacing: 2
+                    size_hint: 1, 0.2
                     Label:
                         text: 'Due'
-                        height: 40
-                        size_hint: .25, .2
-                        size_hint_y: None
+                        color: (0.2, 0.2, 0.2, 1.0)
+                        font_size: '24sp'
+                        size_hint: .25, .5
                     Label:
                         text: 'Tendered'
-                        height: 40
-                        size_hint: .25, .2
-                        size_hint_y: None
+                        color: (0.2, 0.2, 0.2, 1.0)
+                        font_size: '24sp'
+                        size_hint: .25, .5
                     Label:
                         text: 'Change'
-                        height: 40
-                        size_hint: .25, .2
-                        size_hint_y: None
+                        color: (0.2, 0.2, 0.2, 1.0)
+                        font_size: '24sp'
+                        size_hint: .25, .5
                     Label:
                         text: 'Method'
-                        height: 40
-                        size_hint: .25, .2
-                        size_hint_y: None
+                        color: (0.2, 0.2, 0.2, 1.0)
+                        font_size: '24sp'
+                        size_hint: .25, .5
                     Label:
                         id: payment_amount_due
                         text: ''
-                        height: 40
-                        size_hint: .25, .2
-                        size_hint_y: None
+                        color: (0.2, 0.2, 0.2, 1.0)
+                        font_size: '24sp'
+                        size_hint: .25, .5
                     TextInput:
                         id: payment_amount_tendered
+                        color: (0.2, 0.2, 0.2, 1.0)
                         text: ''
-                        height: 40
                         write_tab: False
+                        font_size: '24sp'
                         on_text_validate: None
-                        size_hint: .25, .2
-                        size_hint_y: None
+                        size_hint: .25, .5
                     Label:
                         id: payment_amount_change
+                        color: (0.2, 0.2, 0.2, 1.0)
                         text: ''
-                        height: 40
-                        size_hint: .25, .2
-                        size_hint_y: None
+                        font_size: '24sp'
+                        size_hint: .25, .5
                     Label:
                         id: payment_amount_method
+                        color: (0.2, 0.2, 0.2, 1.0)
                         text: 'Cash (CHF)'
-                        height: 40
-                        size_hint: .25, .2
-                        size_hint_y: None
-                    Widget:
-                        height: 200
-                        size_hint: 1, .2
+                        font_size: '24sp'
+                        size_hint: .25, .5
 
                 BoxLayout:
                     id: bl_calc
-                    spacing: 10
+                    padding: 1
+                    spacing: 2
                     orientation: 'horizontal'
-                    size_hint: 1, 1
+                    size_hint: 1, 0.8
 
                     GridLayout:
                         id: bl_calculator
                         cols: 4
+                        padding: 1
+                        spacing: 2
                         orientation: 'horizontal'
-                        size_hint: 0.5, 1
+                        size_hint: 0.8, 1
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action(1)
                             text: "1"
-                            size_hint: .25, .2
+                            color: 0.1,0.1,0.1,1
+                            font_size: '48sp'
+                            background_color: (0.9, 0.9, 0.9, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action(2)
                             text: "2"
-                            size_hint: .25, .2
+                            color: 0.1,0.1,0.1,1
+                            font_size: '48sp'
+                            background_color: (0.9, 0.9, 0.9, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action(3)
                             text: "3"
-                            size_hint: .25, .2
+                            color: 0.1,0.1,0.1,1
+                            font_size: '48sp'
+                            background_color: (0.9, 0.9, 0.9, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action('+10')
                             text: "+10"
-                            size_hint: .25, .2
+                            color: 0.99,0.99,0.99,1
+                            font_size: '24sp'
+                            background_color: (0.2, 0.2, 0.2, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action(4)
                             text: "4"
-                            size_hint: .25, .2
+                            color: 0.1,0.1,0.1,1
+                            font_size: '48sp'
+                            background_color: (0.9, 0.9, 0.9, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action(5)
                             text: "5"
-                            size_hint: .25, .2
+                            color: 0.1,0.1,0.1,1
+                            font_size: '48sp'
+                            background_color: (0.9, 0.9, 0.9, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action(6)
                             text: "6"
-                            size_hint: .25, .2
+                            color: 0.1,0.1,0.1,1
+                            font_size: '48sp'
+                            background_color: (0.9, 0.9, 0.9, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action('+20')
                             text: "+20"
-                            size_hint: .25, .2
+                            color: 0.99,0.99,0.99,1
+                            font_size: '24sp'
+                            background_color: (0.2, 0.2, 0.2, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action(7)
                             text: "7"
-                            size_hint: .25, .2
+                            color: 0.1,0.1,0.1,1
+                            font_size: '48sp'
+                            background_color: (0.9, 0.9, 0.9, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action(8)
                             text: "8"
-                            size_hint: .25, .2
+                            color: 0.1,0.1,0.1,1
+                            font_size: '48sp'
+                            background_color: (0.9, 0.9, 0.9, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action(9)
                             text: "9"
-                            size_hint: .25, .2
+                            color: 0.1,0.1,0.1,1
+                            font_size: '48sp'
+                            background_color: (0.9, 0.9, 0.9, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action('+50')
                             text: "+50"
-                            size_hint: .25, .2
+                            color: 0.99,0.99,0.99,1
+                            font_size: '24sp'
+                            background_color: (0.2, 0.2, 0.2, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action('C')
                             text: "C"
-                            size_hint: .25, .2
+                            color: 0.1,0.1,0.1,1
+                            font_size: '48sp'
+                            background_color: (0.9, 0.9, 0.9, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action(0)
                             text: "0"
-                            size_hint: .25, .2
+                            color: 0.1,0.1,0.1,1
+                            font_size: '48sp'
+                            background_color: (0.9, 0.9, 0.9, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action('.')
                             text: "."
-                            size_hint: .25, .2
+                            color: 0.1,0.1,0.1,1
+                            font_size: '48sp'
+                            background_color: (0.9, 0.9, 0.9, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
                         Button:
                             on_release: app.root.get_screen('paymentscreen').do_action('Del')
                             text: "Del"
-                            height: 80
-                            size_hint: .25, .2
+                            color: 0.99,0.99,0.99,1
+                            font_size: '24sp'
+                            background_color: (0.2, 0.2, 0.2, 1.0)
+                            background_normal: ''
+                            size_hint: .25, .25
                             size_hint_y: None
 
                     BoxLayout:
                         id: bl_customer_invoice
+                        padding: 1
+                        spacing: 2
                         orientation: 'vertical'
-                        size_hint: 0.5, 1
+                        size_hint: 0.2, 1
 
                         Button:
                             on_release: app.root.current = "customerscreen"
@@ -264,12 +388,12 @@ ScreenManagement:
                             size_hint_y: None
                         Button:
                             on_release: app.root.current = "posscreen"
-                            text: "Invoice"
+                            text: "***Invoice***"
                             height: 40
                             size_hint: 1, .25
                             size_hint_y: None
                         Widget:
-                            height: 400
+                            size_hint: 1, 0.5
 
 
 <CustomerScreen>:
@@ -279,7 +403,7 @@ ScreenManagement:
     name: "customerscreen"
     canvas.before:
         Color:
-            rgba: 0.6, 0.6, 0.6, 1
+            rgba: 0.99, 0.99, 0.99, 1
         Rectangle:
             pos: self.pos
             size: self.size
@@ -287,23 +411,43 @@ ScreenManagement:
     BoxLayout:
         orientation: 'vertical'
         padding: 0
+        spacing: 0
         BoxLayout:
+            canvas:
+                Color:
+                    rgb: 0.2,0.2,0.2
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
             id: customer_boxlayout
             cols: 3
-            spacing: 10
+            padding: 0
+            spacing: 3
             size_hint: 1, 0.1
             Button:
                 on_release: app.root.current = "posscreen"
                 text: "Set"
-                size_hint: .1, 1
+                background_color: (0.415, 0.651, 0.259, 1.0)
+                background_normal: ''
+                text: "Back"
+                font_size: '18sp'
+                size_hint: 0.1, 1
             Label:
-                id: main_customer
                 text: ''
+                background_color: (0.9, 0.9, 0.9, 1.0)
+                background_normal: ''
+                id: main_customer
+                color: (0.99, 0.99, 0.99, 1.0)
+                font_size: '18sp'
                 size_hint: .8, 1
             Button:
                 on_release: app.root.current = "posscreen"
                 text: "Back"
-                size_hint: .1, 1
+                background_color: (0.415, 0.651, 0.259, 1.0)
+                background_normal: ''
+                text: "Set"
+                font_size: '18sp'
+                size_hint: 0.1, 1
 
         ScrollView:
             text: 'Customers'
@@ -316,7 +460,9 @@ ScreenManagement:
 
 <CustomButton@Button>:
     background_color: 1, 1, 1, 1
+    background_normal: ''
     image_source: ''
+    font_size: '18sp'
     subtext: ''
     GridLayout:
         background_color: 1, 1, 1, 1
@@ -326,263 +472,416 @@ ScreenManagement:
         cols: 1
         Image:
             source: root.image_source
+            size_hint: 1, 0.8
         Label:
+            size_hint: 1, 0.2
+            color: 0.2, 0.2, 0.2, 1
             text: root.subtext
 
 <ListItemButton>:
-    size: (100, '48dp')
+    background_normal: ''
+    font_size: '18sp'
+    color: 0.1,0.1,0.1,1
+    selected_color: 0.85, 0.85, 0.85, 1
+    deselected_color: 0.95, 0.95, 0.95, 1
+    size_hint: 1,0.1
     on_press: app.root.get_screen('posscreen').selection_change(*args)
+
+
+<MyTabbedPanel>:
+    scroll_view_home_wid: my_home_scroll_view
+    grid_layout_home_wid: my_home_grid_layout
+    grid_layout_search_wid: my_search_grid_layout
+    tabbed_panel_wid: my_tabbed_panel
+    tab_home_wid: my_home_tab
+    tab_search_wid: my_search_tab
+    id: my_tabbed_panel
+    canvas:
+        Color:
+            rgba: (0.8, 0.8, 0.8, 1.0)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    size_hint: 1, 1
+    do_default_tab: False
+    TabbedPanelItem:
+        id: my_home_tab
+        color: 1,1,1,1
+        font_size: '24sp'
+        background_color: (0.81, 0.27, 0.33, 1)
+        background_normal: ''
+        background_down: ''
+        text: 'Home'
+        ScrollView:
+            id: my_home_scroll_view
+            canvas.before:
+                Color:
+                    rgba: (0.95, 0.95, 0.95, 1.0)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            text: 'Product list'
+            size_hint: 1, 1
+            GridLayout:
+                id: my_home_grid_layout
+                cols: 4
+                spacing: 2
+                size_hint_y: None
+    TabbedPanelItem:
+        id: my_search_tab
+        color: 1,1,1,1
+        font_size: '24sp'
+        background_color: (0.2, 0.2, 0.2, 1)
+        background_normal: ''
+        text: 'Search'
+        ScrollView:
+            id: my_search_scroll_view
+            canvas.before:
+                Color:
+                    rgba: (0.95, 0.95, 0.95, 1.0)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            text: 'Product search list'
+            size_hint: 1, 1
+            GridLayout:
+                id: my_search_grid_layout
+                cols: 4
+                spacing: 2
+                size_hint_y: None
+
 
 <POSScreen>:
     name: "posscreen"
     canvas.before:
         Color:
-            rgba: 0.6, 0.6, 0.6, 1
+            rgba: 0.99, 0.99, 0.99, 1
         Rectangle:
             pos: self.pos
             size: self.size
 
     label_wid: my_custom_label
     label_total_wid: my_total_label
-    scroll_view_home_wid: my_home_scroll_view
-    grid_layout_home_wid: my_home_grid_layout
-    grid_layout_search_wid: my_search_grid_layout
     text_input_wid: my_search_textinput
-    tabbed_panel_wid: my_tabbed_panel
     scroll_view_payslip_wid: my_payslip_scroll_view
     list_view_wid: my_payslip_list
     btn_qty_wid: my_btn_qty
     btn_disc_wid: my_btn_disc
     btn_price_wid: my_btn_price
     btn_customer_wid: my_customer_button
-    tab_home_wid: my_home_tab
-    tab_search_wid: my_search_tab
     icon_wid: my_icon_status
+    my_tabbed_panel_wid: my_tabbed_panel
 
     BoxLayout:
-        orientation: 'horizontal'
+        orientation: 'vertical'
         padding: 0
+        spacing: 0
+        BoxLayout:
+            canvas:
+                Color:
+                    rgb: 0.2,0.2,0.2
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            id: customer_boxlayout
+            cols: 5
+            padding: 0
+            spacing: 3
+            size_hint: 1, 0.1
+            Button:
+                on_release: app.root.current = "main"
+                background_color: (0.415, 0.651, 0.259, 1.0)
+                background_normal: ''
+                text: "Close"
+                font_size: '18sp'
+                size_hint: 0.1, 1
+            Button:
+                on_release: app.open_settings()
+                background_color: (0.415, 0.651, 0.259, 1.0)
+                background_normal: ''
+                text: "Settings"
+                font_size: '18sp'
+                size_hint: 0.15, 1
+            Label:
+                id: my_custom_label
+                font_size: '18sp'
+                color: 0.99,0.99,0.99,1
+                text: ''
+                size_hint: 0.2, 1
+            Label:
+                id: my_total_label
+                font_size: '18sp'
+                color: 0.99,0.99,0.99,1
+                text: 'Total: 0.00'
+                size_hint: 0.3, 1
+
+            Button:
+                size_hint: 0.1, 1
+                color: 1,1,1,1
+                font_size: '24sp'
+                background_color: (0.81, 0.27, 0.33, 1)
+                background_normal: ''
+                text: '***1***'
+            Button:
+                size_hint: 0.05, 1
+                color: 0.1,0.1,0.1,1
+                font_size: '24sp'
+                background_color: (0.8, 0.8, 0.8, 1.0)
+                background_normal: ''
+                text: '*+*'
+            Button:
+                size_hint: 0.05, 1
+                color: 0.1,0.1,0.1,1
+                font_size: '24sp'
+                background_color: (0.8, 0.8, 0.8, 1.0)
+                background_normal: ''
+                text: '*-*'
+            ImageButton:
+                id: my_icon_status
+                source: 'data/icon_offline.png'
+                size_hint_x: None
+                size_hint_y: 1
 
         BoxLayout:
-            orientation: 'vertical'
-            padding: 0
+            id: pos_body
+            padding: 1
+            spacing: 2
+            orientation: 'horizontal'
+            size_hint: 1, 0.9
 
             BoxLayout:
-                orientation: 'horizontal'
+                id: pos_payslip
                 padding: 1
-                size_hint: 1, .1
-                ImageButton:
-                    id: my_icon_status
-                    source: 'data/icon_offline.png'
-                    size_hint: 0.2, 1
-                Button:
-                    on_release: app.root.current = "main"
-                    text: "Close"
-                    font_size: 10
-                    size_hint: 0.1, 1
-                Button:
-                    on_release: app.open_settings()
-                    text: "Settings"
-                    font_size: 10
-                    size_hint: 0.1, 1
+                spacing: 2
+                orientation: 'vertical'
+                size_hint: 0.5, 1
+
+                ScrollView:
+                    id: my_payslip_scroll_view
+                    text: 'items in list'
+                    background_color: 0.99,0.99,0.99,1
+                    size_hint: 1, 0.6
+                    ListView:
+                        id: my_payslip_list
+                        size_hint_y: 1
+                        adapter:
+                            ListAdapter(data=root.my_data_view,
+                            args_converter=lambda row_index, obj: {'text': obj.text, 'size_hint_y': None, 'height': 48},
+                            selection_mode='single',
+                            allow_empty_selection=True,
+                            cls=ListItemButton)
                 Label:
-                    id: my_custom_label
-                    text: ''
-                    size_hint: 0.3, 1
-                Label:
-                    id: my_total_label
-                    text: 'Total: 0.00'
-                    size_hint: 0.3, 1
-            ScrollView:
-                id: my_payslip_scroll_view
-                text: 'items in list'
-                size_hint: 1, 0.6
-                ListView:
-                    id: my_payslip_list
-                    size_hint_y: 1
-                    adapter:
-                        ListAdapter(data=root.my_data_view,
-                        args_converter=lambda row_index, obj: {'text': obj.text, 'size_hint_y': None, 'height': 48},
-                        selection_mode='single',
-                        allow_empty_selection=True,
-                        cls=ListItemButton)
+                    size_hint_y: .1
                     canvas.before:
                         Color:
-                            rgb: 1,.5,0
+                            rgb: 0.99,0.99,0.99
                         Rectangle:
                             pos: self.pos
                             size: self.size
-            Label:
-                size_hint_y: .1
-                canvas.before:
-                    Color:
-                        rgb: 0,.5,1
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
-                text: root.selected_value
+                    text: root.selected_value
+                    font_size: '16sp'
+                    color: 0.1,0.1,0.1,1
+                BoxLayout:
+                    orientation: 'horizontal'
+                    padding: 1
+                    spacing: 2
+                    size_hint: 1, .3
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        padding: 1
+                        spacing: 2
+                        Button:
+                            id: my_customer_button
+                            color: 0.1,0.1,0.1,1
+                            font_size: '18sp'
+                            background_color: (0.9, 0.9, 0.9, 1.0)
+                            background_normal: ''
+                            text: 'Client'
+                            size_hint: 1, 0.25
+                            on_release: app.root.current = "customerscreen"
+                        Button:
+                            text: 'Payment'
+                            font_size: '24sp'
+                            color: (0.415, 0.651, 0.259, 1.0)
+                            background_color: (0.95, 0.95, 0.95, 1.0)
+                            background_normal: ''
+                            size_hint: 1, .75
+                            on_release: app.root.current = "paymentscreen"
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        padding: 1
+                        spacing: 0
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            padding: 1
+                            spacing: 1
+                            Button:
+                                text: '1'
+                                color: 0.1,0.1,0.1,1
+                                font_size: '24sp'
+                                background_color: (0.9, 0.9, 0.9, 1.0)
+                                background_normal: ''
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action(1)
+                            Button:
+                                text: '2'
+                                color: 0.1,0.1,0.1,1
+                                font_size: '24sp'
+                                background_color: (0.9, 0.9, 0.9, 1.0)
+                                background_normal: ''
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action(2)
+                            Button:
+                                text: '3'
+                                color: 0.1,0.1,0.1,1
+                                font_size: '24sp'
+                                background_color: (0.9, 0.9, 0.9, 1.0)
+                                background_normal: ''
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action(3)
+                            Button:
+                                id: my_btn_qty
+                                text: 'Qty'
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action('Qty')
+                                background_color: 0.81, 0.27, 0.33, 1
+                                background_normal: ''
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            padding: 1
+                            spacing: 1
+                            Button:
+                                text: '4'
+                                color: 0.1,0.1,0.1,1
+                                font_size: '24sp'
+                                background_color: (0.9, 0.9, 0.9, 1.0)
+                                background_normal: ''
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action(4)
+                            Button:
+                                text: '5'
+                                color: 0.1,0.1,0.1,1
+                                font_size: '24sp'
+                                background_color: (0.9, 0.9, 0.9, 1.0)
+                                background_normal: ''
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action(5)
+                            Button:
+                                text: '6'
+                                color: 0.1,0.1,0.1,1
+                                font_size: '24sp'
+                                background_color: (0.9, 0.9, 0.9, 1.0)
+                                background_normal: ''
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action(6)
+                            Button:
+                                id: my_btn_disc
+                                text: 'Disc'
+                                color: 0.99,0.99,0.99,1
+                                font_size: '18sp'
+                                background_color: (0.2, 0.2, 0.2, 1.0)
+                                background_normal: ''
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action('Disc')
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            padding: 1
+                            spacing: 1
+                            Button:
+                                text: '7'
+                                color: 0.1,0.1,0.1,1
+                                font_size: '24sp'
+                                background_color: (0.9, 0.9, 0.9, 1.0)
+                                background_normal: ''
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action(7)
+                            Button:
+                                text: '8'
+                                color: 0.1,0.1,0.1,1
+                                font_size: '24sp'
+                                background_color: (0.9, 0.9, 0.9, 1.0)
+                                background_normal: ''
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action(8)
+                            Button:
+                                text: '9'
+                                color: 0.1,0.1,0.1,1
+                                font_size: '24sp'
+                                background_color: (0.9, 0.9, 0.9, 1.0)
+                                background_normal: ''
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action(9)
+                            Button:
+                                id: my_btn_price
+                                text: 'Price'
+                                color: 0.99,0.99,0.99,1
+                                font_size: '18sp'
+                                background_color: (0.2, 0.2, 0.2, 1.0)
+                                background_normal: ''
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action('Price')
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            padding: 1
+                            spacing: 1
+                            Button:
+                                text: '.'
+                                color: 0.1,0.1,0.1,1
+                                font_size: '24sp'
+                                background_color: (0.9, 0.9, 0.9, 1.0)
+                                background_normal: ''
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action('.')
+                            Button:
+                                text: '0'
+                                color: 0.1,0.1,0.1,1
+                                font_size: '24sp'
+                                background_color: (0.9, 0.9, 0.9, 1.0)
+                                background_normal: ''
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action(0)
+                            Button:
+                                text: '+/-'
+                                color: 0.1,0.1,0.1,1
+                                font_size: '24sp'
+                                background_color: (0.9, 0.9, 0.9, 1.0)
+                                background_normal: ''
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action('+/-')
+                            Button:
+                                text: 'Del'
+                                font_size: '18sp'
+                                background_color: (0.415, 0.651, 0.259, 1.0)
+                                background_normal: ''
+                                size_hint: .25, 1
+                                on_release: app.root.get_screen('posscreen').do_action('Del')
+
             BoxLayout:
-                orientation: 'horizontal'
+                id: pos_product_selection
                 padding: 1
-                size_hint: 1, .3
+                spacing: 2
+                orientation: 'vertical'
+                size_hint: 0.5, 1
 
                 BoxLayout:
-                    orientation: 'vertical'
-                    padding: 1
+                    orientation: 'horizontal'
+                    padding: 0
+                    size_hint: 1, .1
                     Button:
-                        id: my_customer_button
-                        text: 'Customer'
-                        size_hint: 1, .2
-                        on_release: app.root.current = "customerscreen"
-                    Button:
-                        text: 'Payment'
-                        size_hint: 1, .8
-                        on_release: app.root.current = "paymentscreen"
-
-                BoxLayout:
-                    orientation: 'vertical'
-                    padding: 1
-                    BoxLayout:
-                        orientation: 'horizontal'
-                        padding: 1
-                        Button:
-                            text: '1'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action(1)
-                        Button:
-                            text: '2'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action(2)
-                        Button:
-                            text: '3'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action(3)
-                        Button:
-                            id: my_btn_qty
-                            text: 'Qty'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action('Qty')
-                            background_color: 0.81, 0.27, 0.33, 1
-                    BoxLayout:
-                        orientation: 'horizontal'
-                        padding: 1
-                        Button:
-                            text: '4'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action(4)
-                        Button:
-                            text: '5'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action(5)
-                        Button:
-                            text: '6'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action(6)
-                        Button:
-                            id: my_btn_disc
-                            text: 'Disc'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action('Disc')
-                    BoxLayout:
-                        orientation: 'horizontal'
-                        padding: 1
-                        Button:
-                            text: '7'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action(7)
-                        Button:
-                            text: '8'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action(8)
-                        Button:
-                            text: '9'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action(9)
-                        Button:
-                            id: my_btn_price
-                            text: 'Price'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action('Price')
-                    BoxLayout:
-                        orientation: 'horizontal'
-                        padding: 1
-                        Button:
-                            text: '.'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action('.')
-                        Button:
-                            text: '0'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action(0)
-                        Button:
-                            text: '+/-'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action('+/-')
-                        Button:
-                            text: 'Del'
-                            size_hint: .25, 1
-                            on_release: app.root.get_screen('posscreen').do_action('Del')
-
-
-        BoxLayout:
-            orientation: 'vertical'
-            padding: 0
-
-            BoxLayout:
-                size_hint: 1, .05
-                do_default_tab: False
-                Button:
-                    width: 50
-                    size_hint: 0.2, 1
-                    text: '1'
-                Button:
-                    width: 50
-                    size_hint: 0.2, 1
-                    text: '+'
-                Button:
-                    width: 50
-                    size_hint: 0.2, 1
-                    text: '-'
-            BoxLayout:
-                orientation: 'horizontal'
-                padding: 0
-                size_hint: 1, .05
-                Button:
-                    text: 'All'
-                    size_hint: .25, 1
-                    on_release: app.root.get_screen('posscreen').do_category('Home')
-                TextInput:
-                    id: my_search_textinput
-                    text: ''
-                    multiline: False
-                    size_hint: .75, 1
-                    on_text_validate: root.do_search()
-            TabbedPanel:
-                id: my_tabbed_panel
-                size_hint: 1, 1
-                do_default_tab: False
-                TabbedPanelItem:
-                    id: my_home_tab
-                    text: 'Home'
-                    ScrollView:
-                        id: my_home_scroll_view
-                        text: 'Product list'
-                        size_hint: 1, 1
-                        GridLayout:
-                            id: my_home_grid_layout
-                            cols: 4
-                            spacing: 2
-                            size_hint_y: None
-
-                TabbedPanelItem:
-                    id: my_search_tab
-                    text: 'Search'
-                    ScrollView:
-                        id: my_search_scroll_view
-                        text: 'Product search list'
-                        size_hint: 1, 1
-                        GridLayout:
-                            id: my_search_grid_layout
-                            cols: 4
-                            spacing: 2
-                            size_hint_y: None
+                        text: 'All'
+                        color: 0.1,0.1,0.1,1
+                        font_size: '24sp'
+                        background_color: (0.99, 0.99, 0.99, 1.0)
+                        background_normal: ''
+                        size_hint: .25, 1
+                        on_release: app.root.get_screen('posscreen').do_category('Home')
+                    TextInput:
+                        id: my_search_textinput
+                        text: ''
+                        multiline: False
+                        size_hint: .75, 1
+                        on_text_validate: root.do_search()
+                MyTabbedPanel
+                    id: my_tabbed_panel

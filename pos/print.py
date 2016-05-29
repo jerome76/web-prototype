@@ -3,7 +3,9 @@ import time
 
 """ Seiko Epson Corp. Receipt Printer M129 Definitions (EPSON TM-T88IV) """
 # max line: Epson.text("012345678901234567890123456789012345678901\n")
-Epson = printer.Usb(0x04b8,0x0202)
+#Epson = printer.Usb(0x04b8,0x0202)
+#Epson = printer.Serial("COM1")
+Epson = printer.Usb(0x0416,0x5011,4,0x81,0x03)
 # Print image
 Epson.text("\n\n")
 Epson.image("logo.gif")
@@ -30,7 +32,7 @@ Epson.text("http://milliondog.semilimes.com/\n")
 # Print barcode
 Epson.text("\n\n")
 Epson.set(align='center')
-Epson.barcode('1000002000014','EAN13',64,2,'','')
+#Epson.barcode('1000002000014','EAN13',64,2,'','')
 # Print text
 Epson.text("\n\n")
 Epson.set(font='b', align='center')

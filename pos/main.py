@@ -10,6 +10,7 @@ from PaymentScreen import *
 class MainScreen(Screen):
     pass
 
+
 class CustomerScreen(Screen):
     def on_pre_enter(self):
         def on_success(req, result):
@@ -18,12 +19,22 @@ class CustomerScreen(Screen):
                 fp.close()
             self.products_json = result
             print ('customers loaded.')
+            if len(result['result']) > 0:
+                self.customer_list_wid.clear_widgets()
             for i in result['result']:
-                name = i['name']
+                cd_name = i['name']
                 if i['name'] is None:
-                    name = str(i['id'])
-                btn = Button(id=str(i['id']), text=name, size_hint_y=None, width=200, height=48)
+                    cd_name = str(i['id'])
+                cd_address = i['street'], i['city'], i['zip'], str(i['country'])
+                btn_text = cd_name.ljust(22) + ', '.join(item for item in cd_address if item)
+                btn = Button(id=str(i['id']), text=btn_text, halign="left", valign="middle")
                 btn.bind(on_press=self.do_action)
+                btn.color = (0.1, 0.1, 0.1, 1)
+                btn.font_size = '18sp'
+                btn.background_color = (0.9, 0.9, 0.9, 1.0)
+                btn.background_normal = ''
+                btn.text_size[0] = self.size[0] * 0.9
+                btn.size_hint_y = 0.05
                 print ('add customer ' + str(i['id']))
                 self.customer_list_wid.add_widget(btn)
             self.customer_list_wid.height = (len(result['result'])+4)*50
@@ -40,9 +51,9 @@ class CustomerScreen(Screen):
 
     def do_action(self, event):
         print('CustomerScreen Button was ' + str(event))
-        self.label_wid.text = '[' + event.id + '] ' + event.text
+        self.label_wid.text = ('[' + event.id + '] ' + event.text)
         self.manager.get_screen('posscreen').customer_id = event.id
-        self.manager.get_screen('posscreen').btn_customer_wid.text = 'Customer: ' + event.text
+        self.manager.get_screen('posscreen').btn_customer_wid.text = 'Client: ' + event.id
 
 
 class ScreenManagement(ScreenManager):

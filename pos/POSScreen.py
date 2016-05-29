@@ -8,6 +8,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ObjectProperty, StringProperty, ListProperty
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.progressbar import ProgressBar
+from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.image import Image
 from kivy.network.urlrequest import UrlRequest
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
@@ -18,6 +19,7 @@ from decimal import Decimal, InvalidOperation
 from kivy.factory import Factory
 from kivy.uix.popup import Popup
 import os, os.path
+import glob
 import traceback
 from functools import partial
 import time
@@ -35,13 +37,13 @@ class ImageButton(ButtonBehavior, Image):
 
     def on_release(self):
         print ('POSScreen.ImageButton.on_press: upload payslips')
-        upload_count = len(os.listdir('offline/'))
+        upload_count = len(glob.glob('offline/*.json'))
         if upload_count > 0:
             self.popup.open()
             self.pb.value = 0
             file_count = len(os.listdir('offline/'))
             increment = 100.0/file_count
-            for fn in os.listdir('offline/'):
+            for fn in glob.glob('offline/*.json'):
                 if os.path.isfile('offline/'+fn):
                     Clock.schedule_once(partial(self.upload_payslips, fn, increment), 0)
 
@@ -116,7 +118,7 @@ class POSScreen(Screen):
     customer_id = 0
     payslip_items_list = []
     my_data_view = ListProperty([])
-    selected_value = StringProperty('select a button')
+    selected_value = StringProperty('select a product.')
 
     def __init__(self, **kwargs):
         super(Screen,self).__init__(**kwargs)
@@ -126,7 +128,7 @@ class POSScreen(Screen):
     def post_init(self, *args):
         config = ConfigParser.get_configparser(name='app')
         self.customer_id = config.get('section1', 'default_customer_id')
-        self.btn_customer_wid.text = 'Customer: ' + str(self.customer_id)
+        self.btn_customer_wid.text = 'Client: ' + str(self.customer_id)
         print ('post_init...')
 
     def on_pre_enter(self, *args):
@@ -139,7 +141,7 @@ class POSScreen(Screen):
             print ('products loaded.')
 
             if len(result['result']) > 0:
-                self.grid_layout_home_wid.clear_widgets()
+                self.my_tabbed_panel_wid.grid_layout_home_wid.clear_widgets()
             for i in result['result']:
                 code = i['code']
                 if code == '':
@@ -149,8 +151,8 @@ class POSScreen(Screen):
                 btn.bind(on_press=self.do_add_item)
                 self.products_list.append(btn)
                 print ('add online product ' + code)
-                self.grid_layout_home_wid.add_widget(btn)
-            self.grid_layout_home_wid.height = (len(result['result'])/4)*110
+                self.my_tabbed_panel_wid.grid_layout_home_wid.add_widget(btn)
+            self.my_tabbed_panel_wid.grid_layout_home_wid.height = (len(result['result'])/4)*110
 
         def on_failure(req, result):
             on_error(req, result)
@@ -160,7 +162,7 @@ class POSScreen(Screen):
                 print("key={0}, val={1}".format(key, val))
             if len(self.products_list) > 0:
                 for n in self.products_list:
-                    self.grid_layout_home_wid.remove_widget(n)
+                    self.my_tabbed_panel_wid.grid_layout_home_wid.remove_widget(n)
             if len(self.products_list) == 0:
                 with open('products.json') as data_file:
                     result = json.load(data_file)
@@ -174,8 +176,8 @@ class POSScreen(Screen):
                     btn.bind(on_press=self.do_add_item)
                     self.products_list.append(btn)
                     print ('add local product ' + code)
-                    self.grid_layout_home_wid.add_widget(btn)
-                self.grid_layout_home_wid.height = (len(result['result'])/4)*110
+                    self.my_tabbed_panel_wid.grid_layout_home_wid.add_widget(btn)
+                self.my_tabbed_panel_wid.grid_layout_home_wid.height = (len(result['result'])/4)*110
 
         try:
             config = ConfigParser.get_configparser(name='app')
@@ -200,13 +202,13 @@ class POSScreen(Screen):
                                            size_hint_y=None, width=300, height=100, subtext=code)
                 btn.bind(on_press=self.do_add_item)
                 self.products_search_list.append(btn)
-                self.grid_layout_search_wid.add_widget(btn)
-                self.tabbed_panel_wid.switch_to(self.tab_search_wid)
-            self.grid_layout_search_wid.height = (len(result['result'])/4+4)*110
+                self.my_tabbed_panel_wid.grid_layout_search_wid.add_widget(btn)
+                self.my_tabbed_panel_wid.switch_to(self.my_tabbed_panel_wid.tab_search_wid)
+            self.my_tabbed_panel_wid.grid_layout_search_wid.height = (len(result['result'])/4+4)*110
 
         if len(self.products_search_list) > 0:
             for n in self.products_search_list:
-                self.grid_layout_search_wid.remove_widget(n)
+                self.my_tabbed_panel_wid.grid_layout_search_wid.remove_widget(n)
         self.products_search_list = []
         config = ConfigParser.get_configparser(name='app')
         producturl = config.get('serverconnection', 'server.url') + "pos/product/" + self.text_input_wid.text
@@ -215,7 +217,7 @@ class POSScreen(Screen):
     def do_category(self, category):
         print('do_category: ' + category)
         if category == 'Home':
-            self.grid_layout_home_wid.clear_widgets()
+            self.my_tabbed_panel_wid.grid_layout_home_wid.clear_widgets()
             with open('products.json') as data_file:
                 result = json.load(data_file)
                 self.products_json = result
@@ -228,8 +230,8 @@ class POSScreen(Screen):
                 btn.bind(on_press=self.do_add_item)
                 self.products_list.append(btn)
                 print ('add local product ' + code)
-                self.grid_layout_home_wid.add_widget(btn)
-            self.grid_layout_home_wid.height = (len(result['result'])/4)*110
+                self.my_tabbed_panel_wid.grid_layout_home_wid.add_widget(btn)
+            self.my_tabbed_panel_wid.grid_layout_home_wid.height = (len(result['result'])/4)*110
 
 
     def getProduct(self, code):
@@ -257,8 +259,10 @@ class POSScreen(Screen):
                                     + " / " + product['uom_symbol'],
                                price=Decimal(product['price']),
                                qty=Decimal(1.000))
+            newitem.color = (0.1,0.1,0.1,1)
         else:
             newitem = DataItem(event.id, text=str(event.id))
+            newitem.color = (0.1, 0.1, 0.1, 1)
         print('do_add_item ' + newitem.text)
         self.my_data_view.append(newitem)
         if hasattr(self.list_view_wid, '_reset_spopulate'):
@@ -346,8 +350,8 @@ class POSScreen(Screen):
 
             if event == 'Disc':
                 self.btn_disc_wid.background_color = [0.81, 0.27, 0.33, 1]
-                self.btn_qty_wid.background_color = [1, 1, 1, 1]
-                self.btn_price_wid.background_color = [1, 1, 1, 1]
+                self.btn_qty_wid.background_color = [0.2, 0.2, 0.2, 1.0]
+                self.btn_price_wid.background_color = [0.2, 0.2, 0.2, 1.0]
                 self.set_mode('Disc')
                 try:
                     self.info = str(active_line.discount)
@@ -355,8 +359,8 @@ class POSScreen(Screen):
                     print('decimal.InvalidOperation')
                 print('Discount: ' + self.info)
             elif event == 'Price':
-                self.btn_disc_wid.background_color = [1, 1, 1, 1]
-                self.btn_qty_wid.background_color = [1, 1, 1, 1]
+                self.btn_disc_wid.background_color = [0.2, 0.2, 0.2, 1.0]
+                self.btn_qty_wid.background_color = [0.2, 0.2, 0.2, 1.0]
                 self.btn_price_wid.background_color = [0.81, 0.27, 0.33, 1]
                 self.set_mode('Price')
                 try:
@@ -365,8 +369,8 @@ class POSScreen(Screen):
                     print('decimal.InvalidOperation')
                 print('Price: ' + self.info)
             elif event == 'Qty':
-                self.btn_disc_wid.background_color = [1, 1, 1, 1]
-                self.btn_price_wid.background_color = [1, 1, 1, 1]
+                self.btn_disc_wid.background_color = [0.2, 0.2, 0.2, 1.0]
+                self.btn_price_wid.background_color = [0.2, 0.2, 0.2, 1.0]
                 self.btn_qty_wid.background_color = [0.81, 0.27, 0.33, 1]
                 self.set_mode('Qty')
                 try:
@@ -417,37 +421,26 @@ class POSScreen(Screen):
         print(str(self.get_total()))
         self.label_total_wid.text = 'Total: ' + str(self.get_total())
 
-    def build(self):
-        config = ConfigParser.get_configparser(name='app')
-        producturl = config.get('serverconnection', 'server.url') + "pos/product/" + '200018'
-        data = json.load(urllib2.urlopen(producturl))
-        product = data['result'][0]
-        layout = BoxLayout(orientation='vertical')
-        # use a (r, g, b, a) tuple
-        blue = (0, 0, 1.5, 2.5)
-        red = (2.5, 0, 0, 1.5)
-        btn = Button(text='Touch me!'+product['name'], background_color=blue, font_size=40)
-        btn.bind(on_press=self.callback)
-        self.label = Label(text="------------", font_size='50sp')
-        layout.add_widget(btn)
-        layout.add_widget(self.label)
-        return layout
 
-'''    def callback(self, event):
-        data = json.load(urllib2.urlopen(TRYTON_HOST_SEARCH+'200018'))
-        product = data['result'][0]
-        """ Seiko Epson Corp. Receipt Printer M129 Definitions (EPSON TM-T88IV) """
-        Epson = printer.Usb(0x04b8,0x0202)
-        # Print text
-        Epson.text(str(product[0].id) + ' ' + product['name'] + ' ' + str(product[0].list_price) + '\n')
-        # Print image
-        Epson.image("logo.gif")
-        # Print QR Code
-        Epson.qr("http://www.milliondog.com")
-        # Print barcode
-        Epson.barcode('1324354657687','EAN13',64,2,'','')
-        # Cut paper
-        Epson.cut()
-        print("button touched")  # test
-        self.label.text = "button touched"
-'''
+class MyTabbedPanel(TabbedPanel):
+    def __init__(self, **kwargs):
+        super(MyTabbedPanel, self).__init__(**kwargs)
+        self.bind(current_tab=self.content_changed_cb)
+
+    def switch_to(self, header):
+        super(MyTabbedPanel, self).switch_to(header)
+        print 'switch_to, content is ', header.text
+
+    def content_changed_cb(self, obj, value):
+        if value.text == 'Home':
+            value.background_color = (0.81, 0.27, 0.33, 1)
+            value.background_normal = ''
+            value.background_down = ''
+            self.tab_search_wid.background_color = [0.2, 0.2, 0.2, 1.0]
+            self.tab_search_wid.background_color = [0.2, 0.2, 0.2, 1.0]
+        if value.text == 'Search':
+            value.background_color = (0.81, 0.27, 0.33, 1)
+            value.background_down = ''
+            value.background_normal = ''
+            self.tab_home_wid.background_color = [0.2, 0.2, 0.2, 1.0]
+            self.tab_home_wid.background_color = [0.2, 0.2, 0.2, 1.0]
