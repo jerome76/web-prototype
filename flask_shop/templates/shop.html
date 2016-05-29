@@ -1,58 +1,134 @@
 {% extends "layout.html" %}
-{% block title %} - {{page}}{% endblock %}
-{% block page %} / Products{% endblock %}
-{% block heading %}
-  {{ super() }}
+
+{% block page_css %}
+<style>
+#small{
+    font-size: 25px;
+    padding: 3px 15px;
+    border-radius: 20px;
+    line-height: 1.428571429;
+    background-color: #dfd3df;
+}
+#medium{
+    width: 53px;
+    height: 53px;
+    font-size: 25px;
+    padding: 7px 0px;
+    border-radius: 25px;
+    line-height: 1.428571429;
+    background-color: #c3abc3;
+}
+#large{
+    font-size: 25px;
+    padding: 15px 25px;
+    border-radius: 30px;
+    line-height: 1.33;
+    background-color: #a884a8;
+}
+#xlarge{
+    width: 80px;
+    height: 80px;
+    font-size: 25px;
+    border-radius: 35px;
+    padding: 23px 0;
+    line-height: 1.33;
+    background-color: #8c5c8e;
+}
+.caption{
+    text-align: center;
+}
+</style>
 {% endblock %}
 {% block content %}
-  <h3>{{ pt }}</h3>
-  <br>
-      <p>{{ pc |safe }}</p>
-  <p>{{db_model}}
-    <br>- <a href="/shop/Cosy-Bandana">Cosy Bandana</a>
-    [ <a href="/shop/Cosy-Bandana/S">S</a> |
-      <a href="/shop/Cosy-Bandana/M">M</a> |
-      <a href="/shop/Cosy-Bandana/L">L</a>
-    ]
-    - <a href="/shop/Cosy-Loop">Cosy Loop</a></p>
-    [ <a href="/shop/Cosy-Loop/XS-S">XS-S</a> |
-      <a href="/shop/Cosy-Loop/S-M">S-M</a> |
-      <a href="/shop/Cosy-Loop/M-L">M-L</a> |
-      <a href="/shop/Cosy-Loop/L-XL">L-XL</a>
-    ]
-    - <a href="/shop/Cosy-Kaye">Cosy Kaye</a>
-    [ <a href="/shop/Cosy-Kaye/XS-S">XS-S</a> |
-      <a href="/shop/Cosy-Kaye/S-M">S-M</a> |
-      <a href="/shop/Cosy-Kaye/M-L">M-L</a>
-    ]
-  <p>Loop through the list {{ db_list.length }}:</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="page-header" id="title">{{ category }}</h2>
+            Lorem ipsum dolor sit amet, pri dolore civibus forensibus no, solum movet has ei. Vim ad sint dissentiunt efficiantur. Duo legimus placerat te. Dissentias contentiones vel ut, id sea porro sapientem. Vix dicta sonet senserit et, vix partem equidem mediocrem at.
+
+            Nec ea utinam philosophia conclusionemque, no duo magna ullum integre. An sed eius modus, et has tollit theophrastus. Ea argumentum liberavisse mediocritatem duo, eros mundi te eos. Pri eu tota mnesarchum. Prima assentior ex his, usu nihil senserit id.
+
+            Molestiae referrentur at pro, eos error dicunt ad, duo ei soluta noluisse adolescens. Vis dico purto rationibus ea, in eos fugit nobis quidam, discere fierent intellegebat eu mel. Eam evertitur consequat voluptatibus eu, voluptua apeirian eam ad. Pro malorum abhorreant at, alii populo invenire an ius, at vel quod recusabo.
+
+        </div>
+    </div>
+    <center><h3>Sizes</h3></center>
+    {% if category == 'Cosy-Bandana' %}
+        <div class="row">
+            <div class="col-md-2"></div>    
+            <div class="col-md-3">
+                <a href="/shop/Cosy-Bandana/S"><span class="badge" id="small">S</span></a>
+                 26 - 29 CM
+            </div>
+            <div class="col-md-3">
+                <a href="/shop/Cosy-Bandana/M"><span class="badge" id="medium">M</span></a>
+                31 - 36 CM 
+            </div>
+            <div class="col-md-3">
+                <a href="/shop/Cosy-Bandana/L"><span class="badge" id="large">L</span></a>
+                45 - 51 CM
+            </div>
+            <div class="col-md-1"></div>
+        </div>            
+    {% elif category == 'Cosy-Loop' %}
+        <div class="row">
+            <div class="col-md-2"></div>    
+            <div class="col-md-2">
+                <a href="/shop/Cosy-Loop/XS-S"><span class="badge" id="small">S</span></a>
+                 26 - 29 CM
+            </div>
+            <div class="col-md-2">
+                <a href="/shop/Cosy-Loop/S-M"><span class="badge" id="medium">M</span></a>
+                31 - 36 CM 
+            </div>
+            <div class="col-md-2">
+                <a href="/shop/Cosy-Loop/M-L"><span class="badge" id="large">L</span></a>
+                45 - 51 CM
+            </div>
+            <div class="col-md-2">
+                <a href="/shop/Cosy-Loop/L-XL"><span class="badge" id="xlarge">XL</span></a>
+                > 51 CM
+            </div>
+            <div class="col-md-2"></div>
+        </div>            
+    {% else %}
+        <div class="row">
+            <div class="col-md-2"></div>    
+            <div class="col-md-3">
+                <a href="/shop/Cosy-Kaye/XS-S"><span class="badge" id="small">S</span></a>
+                 26 - 29 CM
+            </div>
+            <div class="col-md-3">
+                <a href="/shop/Cosy-Kaye/S-M"><span class="badge" id="medium">M</span></a>
+                31 - 36 CM 
+            </div>
+            <div class="col-md-3">
+                <a href="/shop/Cosy-Kaye/M-L"><span class="badge" id="large">L</span></a>
+                45 - 51 CM
+            </div>
+            <div class="col-md-1"></div>
+        </div>            
+
+    {% endif %}
+    <hr>
+    <div class="row">
     {% for n in db_list %}
-        <table>
-          <tr>
-             {% if n.attributes %}
-            <td>
-              <ul>
+        <div class="col-md-3">
+            <a href="/product/{{n.id}}">
+                <div class="thumbnail">
+                    <img class="img-responsive img-rounded" src="/static/products/{{ n.attributes['image_tn'] }}">
+                </div>
+            </a>
+            <div class="caption">
                 <li>{{ n.attributes['serial_number'] }}</li>
                 <li>{{ n.attributes['pattern'] }}</li>
                 <li>{{ n.attributes['color'] }}</li>
                 <li>{{ n.attributes['size'] }}</li>
-              </ul>
-            </td>
-            <td><img src="/static/products/{{ n.attributes['image_tn'] }}"></td>
-            {% endif %}
-            <td><a href="/product/{{n.id}}">Details</a> &nbsp;
-              <a href="/cart/add/{{n.id}}">Buy</a>
-              <br>{{n.id, n.code, n.description, n.name, n.template}}
-              <br>{{session['currency_code']}} {{n.list_price, n.category}}
-              <br>{{n.attributes}}
-            </td>
-          </tr>
-        </table>
-      <ul>
-        {% for o in n.categories %}
-        <li>{{o.id, o.name, o.parent}}</li>
+                <h3><span class="label label-primary">Available</span></h3>
+                <br>
+            </div>
+        </div>
         {% endfor %}
-      </ul>
-    {% endfor %}
-  <h3></h3>
+    </div>
+</div>
 {% endblock %}

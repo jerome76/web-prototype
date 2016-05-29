@@ -1,0 +1,106 @@
+#footer {
+    background-color: #272727;;
+    font-size: 16px;
+    font-family: "Perpetua";
+    color: rgb(255, 255, 255);
+    line-height: 1.2;
+    padding: 18px 40px 16px 40px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 30;
+}
+
+#footer a {
+    padding: 0 8px;
+    color: white;
+}
+
+#footer a:hover {
+    text-decoration: none;
+}
+
+#footer #registered, #footer a.active {
+    color: gray;
+}
+.navbar.transparent.navbar-defaul .navbar-inner {
+    border-width: 0px;
+    -webkit-box-shadow: 0px 0px;
+    box-shadow: 0px 0px;
+    background-color: rgba(0,0,0,0.0);
+    background-image: -webkit-gradient(linear, 50.00% 0.00%, 50.00% 100.00%, color-stop( 0% , rgba(0,0,0,0.00)),color-stop( 100% , rgba(0,0,0,0.00)));
+    background-image: -webkit-linear-gradient(270deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
+    background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
+}
+
+.navbar-brand{
+    line-height: 120px;
+    height: 120px;
+    padding-top: 20px;
+    padding-left: 40px;
+}
+
+.nav a{
+    font-family: "Perpetua Titling MT";
+    padding-right: 20px !important;
+    padding-top: 30px !important;
+    color: #4E4E4E !important;
+    font-size: 1.8em;
+}
+
+.nav li{
+    padding-right: 5px !important;
+}
+
+.navbar-right{
+    padding-right: 30px !important;
+}
+
+#lang {
+    padding-right: 0px !important;
+    font-size: 1.1em !important;
+}
+
+#title{
+    color: #ba9fbb;
+}
+
+body {
+    font-family: "Perpetua";
+    height: 100%;
+}
+
+.carousel .item {
+    width: 100%; /*slider width*/
+    max-height: 950px; /*slider height*/
+}
+
+.carousel .item img {
+    width: 100%; /*img width*/
+}
+
+form textarea#message{
+    height: 150px;
+}
+
+.btn-primary{
+    background-color: #ba9fbb;
+    border-color: #B298B3;
+}
+.btn-primary:hover{
+    background-color: #ba9fbb;
+    border-color: #B298B3;
+}
+
+.label-primary{
+    background-color: #8c5c8e;
+    border-color: #B298B3;
+}
+
+/*full width container*/
+@media (max-width: 767px) {
+    .block {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+}

@@ -24,43 +24,78 @@
     color: gray;
 }
 
-#navbar {
-    font-size: 30px;
-    font-family: "Perpetua";
-    line-height: 1.2;
-    background-color: rgb(247, 247, 247);
-    width: 100%;
-    padding: 10px 0;
-    z-index: 20;
+.navbar-brand{
+    line-height: 120px;
+    height: 120px;
+    padding-top: 20px;
+    padding-left: 40px;
 }
 
-#menu a {
-    color: #969495;
-    font-size: 28px;
-    padding: 0 2px;
+.nav a{
+    font-family: "Perpetua Titling MT";
+    padding-right: 20px !important;
+    padding-top: 30px !important;
+    color: #4E4E4E !important;
+    font-size: 1.8em;
 }
 
-#navbar a:hover {
-    text-decoration: none;
+.nav li{
+    padding-right: 5px !important;
 }
 
-#logo {
-    padding: 10px 4px 0 25px;
-    max-width: 430px;
+.navbar-default{
+    opacity: 0.9;
 }
 
-#submenu a, #submenu span {
-    font-size: 14px;
-}
-
-#submenu #currency {
-    padding: 0;
-}
-
-#currency a {
-    color: black;
+.navbar-right{
+    padding-right: 30px !important;
 }
 
 #lang {
-    padding:0;
+    padding-right: 0px !important;
+    font-size: 1.1em !important;
+}
+
+#title{
+    color: #ba9fbb;
+}
+
+body {
+    font-family: "Perpetua";
+    height: 100%;
+}
+
+.carousel .item {
+    width: 100%; /*slider width*/
+    max-height: 950px; /*slider height*/
+}
+
+.carousel .item img {
+    width: 100%; /*img width*/
+}
+
+form textarea#message{
+    height: 150px;
+}
+
+.btn-primary{
+    background-color: #ba9fbb;
+    border-color: #B298B3;
+}
+.btn-primary:hover{
+    background-color: #ba9fbb;
+    border-color: #B298B3;
+}
+
+.label-primary{
+    background-color: #8c5c8e;
+    border-color: #B298B3;
+}
+
+/*full width container*/
+@media (max-width: 767px) {
+    .block {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
 }

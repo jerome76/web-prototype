@@ -1,36 +1,37 @@
-{% extends "layout.html" %}
-{% block title %} - {{page}}{% endblock %}
-{% block page %}{% endblock %}
-{% block head %}
-    <link rel="stylesheet" href="/static/css/index.css">
-    <link href="/static/css/superslides.css" rel="stylesheet">
-{% endblock %}
-{% block heading %}
-  {{ super() }}
+{% extends 'layout.html' %}
+
+{% block page_css %}
+<style>
+.navbar-wrapper {
+    width: 100% !important;
+    position: absolute;
+    z-index: 10;
+}
+</style>
 {% endblock %}
 
-{% block slides %}
-<div id="slides">
-  <div class="slides-container">
-    <img src="/static/images/bigpic 2.png" alt="">
-    <img src="/static/images/big pic.png" alt="">
-  </div>
+{% block content %}
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img class="first-slide" src="/static/images/bigpic.png" alt="First slide">
+        </div>
+        <div class="item">
+            <img class="second-slide" src="/static/images/bigpic2.png" alt="Second slide">
+        </div>
+    </div>
 </div>
 
 {% endblock %}
 
-
-{% block js %}
-
-  <script src="/static/js/jquery.easing.1.3.js"></script>
-  <script src="/static/js/jquery.animate-enhanced.min.js"></script>
-  <script src="/static/js/jquery.superslides.min.js"></script>
-  <script>
-    $(function() {
-      $('#slides').superslides({
-        hashchange: false,
-        play: 4000,
-      });
-    });
-  </script>
+{% block page_js %}
+<script>
+    $('.carousel').carousel({
+        interval: 5000
+    })
+</script>
 {% endblock %}

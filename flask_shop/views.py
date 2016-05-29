@@ -154,6 +154,11 @@ def product(productid=None):
     return render_template('product.html', pt=page_topic, pc=page_content, product=product[0], list_price=list_price,
                            title="Milliondog", page=gettext('Product'))
 
+@app.route("/categories")
+def category():
+    return render_template('categories.html')
+
+
 @app.route("/shop/<category>/<size>")
 @app.route("/shop/<category>")
 @app.route("/shop/")
@@ -173,7 +178,7 @@ def shop(category=None, size=None):
     end = time.time()
     print("Shop.getProductDirect " + str(end - start) + " ms.")
     resp = render_template('shop.html', pt=page_topic, pc=page_content, db_model='Products', db_list=directproducts,
-                           title="Milliondog", page=gettext('Shop'))
+                           title="Milliondog", page=gettext('Shop'), category=category)
     return resp
 
 @app.route("/gallery/")
