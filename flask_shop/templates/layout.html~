@@ -17,7 +17,7 @@
 <body>
     <div class="navbar-wrapper">
         <div class="container-fluid">
-            <nav class="navbar transparent navbar-default navbar-static-top">
+            <nav class="navbar navbar-default navbar-static-top">
                 <div class="navbar-inner">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -75,21 +75,6 @@
 
     {% block content %}
     {% endblock %}
-    <br><br><br>
-	 <div class="container-fluid"  id="footer">
-          <div class="row">
-            <div class="col-md-8 col-sm-12">
-              <a href="/shipping">{{ _('Payment & Shipping') }}</a>
-              <a href="/returns" class="active">{{ _('Right of revocation') }}</a>
-              <a href="/termsandconditions">{{ _('Terms & conditions') }}</a>
-              <a href="/privacy">{{ _('Disclaimer') }}</a>
-              <a href="/legal">{{ _('Legal info') }}</a>
-            </div>
-            <div class="col-md-4 col-sm-12 text-right" id="registered">
-              2016 MillionDog - All rights reserved
-            </div>
-          </div>
-        </div>
 
 </body>
 
