@@ -33,7 +33,10 @@ version = 0.3
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
-requirements = kivy,python-escpos
+requirements = kivy,python-escpos,pyserial,pil
+# remove termios from .buildozer/android/platform/python-for-android/src/blacklist.txt
+# remove termios from .buildozer/android/platform/python-for-android/dist/blacklist.txt
+
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
