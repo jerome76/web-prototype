@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{% block page_css %}
+
+<style>
+.nopadding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+</style>                  
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row nopadding">
+        <div class="col-md-4">
+            <a href="/shop/Cosy-Bandana">
+                <div class="hovereffect">
+                    <img class="img-responsive img-rounded" src="/static/Cosy_Bandana-Main.JPG" alt=""/>
+                
+                    <div class="overlay">
+                        <h1><span>Cosy-Bandana</span></h1>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="/shop/Cosy-Loop">
+                <div class="hovereffect">
+                    <img class="img-responsive img-rounded" src="/static/Cosy_Loop_Main.jpg" alt=""/>
+                    <div class="overlay">
+                        <h1><span>Cosy-Loop</span></h1>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="/shop/Cosy-Kaye">
+                <div class="hovereffect">
+                    <img class="img-responsive img-rounded" src="/static/Cosy_Kaye_Main.jpg" alt=""/>
+                    <div class="overlay">
+                        <h1><span>Cosy-Kaye</span></h1>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
