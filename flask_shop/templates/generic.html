@@ -5,7 +5,12 @@
   {{ super() }}
 {% endblock %}
 {% block content %}
-  <h3>{{ pt }}</h3>
-  <br>
-      <p>{{ pc |safe }}</p>
+<div class="container">
+    <div class="well">
+        <h2 id="title">{{ pt }}</h2>
+        <h4>
+            <p>{{ pc |safe }}</p>
+        </h4><br>
+    </div>
+</div>
 {% endblock %}

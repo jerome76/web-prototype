@@ -121,20 +121,20 @@ def getProductFromSession():
 @app.route("/about/")
 def about():
     page_topic = gettext(u'About us')
-    page_content = gettext(u'''
-                We created Milliondog because we love dogs. Milliondog symbolizes the importance of a dog for his owner and our philosophy reflects just that. Each Milliondog Cosy is unique in material and colour and emphasises the individual personality and uniqueness of your pawesome darling.
-                <br><br>We love our work and you can see this in every Cosy.
-                ''')
+    page_content = gettext(u'''<h4>
+                <p>We created Milliondog because we love dogs. Milliondog symbolizes the importance of a dog for his owner and our philosophy reflects just that. Each Milliondog Cosy is unique in material and colour and emphasises the individual personality and uniqueness of your pawesome darling.</p>
+                <p>We love our work and you can see this in every Cosy.</p>
+                </h4>''')
     return render_template('about.html', pt=page_topic, pc=page_content, title="Milliondog", page=gettext('About us'))
 
 @app.route("/sendus/")
 def sendus():
     page_topic = gettext(u'Send us')
-    page_content = gettext(u'''
-                <br>We welcome your enquiries regarding our exclusive service using your own fabrics, for example we can use material from your children’s, parent’s or partner’s clothes to make a special Milliondog-Cosy for your dog. Get in touch with us so we can work together to give your dog a unique look.
-                <br>Let your dog play his own part by wearing a Milliondog-Cosy at a special day in your life.
-                <br>For more information contact us by Email
-                ''')
+    page_content = gettext(u'''<h4>
+                <p>We welcome your enquiries regarding our exclusive service using your own fabrics, for example we can use material from your children’s, parent’s or partner’s clothes to make a special Milliondog-Cosy for your dog. Get in touch with us so we can work together to give your dog a unique look.</p>
+                <p>Let your dog play his own part by wearing a Milliondog-Cosy at a special day in your life.</p>
+                <p>For more information contact us by Email</p>
+                </h4>''')
     return render_template('sendus.html', pt=page_topic, pc=page_content, title="Milliondog", page=gettext('Send us'))
 
 @app.route("/product/<productid>")
@@ -150,8 +150,16 @@ def product(productid=None):
     config.set_trytond(DATABASE_NAME, config_file=CONFIG)
     Product = Model.get('product.product')
     product = Product.find(['id', '=', productid])
-    list_price = '{:20,.2f}'.format(product[0].list_price * Decimal(session['currency_rate']))
-    return render_template('product.html', pt=page_topic, pc=page_content, product=product[0], list_price=list_price,
+    item = {}
+    if len(product) > 0:
+        item['id'] = product[0].id
+        item['code'] = product[0].code
+        item['image'] = product[0].attributes['image']
+        item['size'] = product[0].attributes['size']
+        item['name'] = product[0].name
+        item['description'] = product[0].description
+        item['list_price'] = '{:20,.2f}'.format(Decimal(product[0].list_price) * Decimal(session['currency_rate']))
+    return render_template('product.html', pt=page_topic, pc=page_content, product=item,
                            title="Milliondog", page=gettext('Product'))
 
 @app.route("/categories")
@@ -171,7 +179,17 @@ def shop(category=None, size=None):
 
     print("Shop ")
     page_topic = gettext(u'Shop')
-    page_content = gettext(u'Shop:')
+    page_content = gettext(u'''<h4>
+        <p>Every Milliondog-Cosy is a handmade unique piece and emphasises the personality of your dog.
+        <br>The individual, careful processing of the comfortable cotton and jersey materials for a Milliondog-Cosy
+        begins for us with the choice of the special materials and their combination with each other.
+        <br>Give your dog the friendly look he deserves – every dog can be a true Milliondog.
+        <br>You can choose a standard Cosy sizes or you can order a Cosy in exactly the right size for your dog.
+        <br>Each Cosy is reversible, it can be worn on either side.</p>
+        <p>Dimensions table: Dog neck S = 26 – 29 cm, M = 31 – 36 cm, L = 45 – 51 cm, XL = to 55 cm
+        <br>Please measure the neck of your dog, so you can be sure, you will order the right Cosy size.</p>
+        <p><b>Delivery Time</b>: 4-7 working days within Switzerland, approximately 20 working days for overseas.</p>
+        </h4>''')
     start = time.time()
     # fastproducts = models.Product.query.all()
     directproducts = getProductDirect(category, size)
@@ -207,6 +225,8 @@ def index():
     try:
         if session['lang_code'] is None:
             session['lang_code'] = 'de'
+        if session['currency_code'] is None:
+            session['currency_code'] = 'CHF'
     except KeyError:
         # session not initialized
         session['lang_code'] = 'de'
@@ -669,35 +689,31 @@ def ipn():
 @app.route("/shipping/")
 def shipping():
     page_topic = gettext(u'Payment and Shipping')
-    page_content = gettext(u'''
-                Payment & Shipping<br>
-                We accept PayPAL payment only.<br>
-                Handling time: 2-3 days<br>
-                Estimate shipping time is about 4-7 working days within Switzerland, approximately 20 working days for overseas, 7.50 CHF, for all articles.<br>
-                Please feel free to contact us if you have any question. Hope you enjoy dealing with us!<br>
+    page_content = gettext(u'''<br>
+                <p>We accept PayPal payment only.</p><br>
+                <p>Handling time: 2-3 days</p><br>
+                <p>Estimate shipping time is about 4-7 working days within Switzerland, approximately 20 working days for overseas, 7.50 CHF, for all articles.</p><br>
+                <p>Please feel free to contact us if you have any question. Hope you enjoy dealing with us!</p><br>
                 ''')
     return render_template('generic.html', pt=page_topic, pc=page_content, title="Milliondog", page=gettext('Payment and Shipping'))
 
 @app.route("/returns/")
 def returns():
     page_topic = gettext(u'Right of revocation')
-    page_content = gettext(u'''
-                Right of revocation<br>
-                Conditions of returned goods<br>
-                We will gladly take back your order if you are not satisfied.<br>
-                Please note, however that the goods must be in the normal conditions.<br>
-                All returns of goods that have obviously been used and that therefore can not be sold will not be accepted.<br>
-                The payment amount will be credited back to your PayPal account.<br>
+    page_content = gettext(u'''<br><br>
+                <p>Conditions of returned goods<br><br></p>
+                <p>We will gladly take back your order if you are not satisfied.</p><br>
+                <p>Please note, however that the goods must be in the normal conditions.</p><br>
+                <p>All returns of goods that have obviously been used and that therefore can not be sold will not be accepted.</p><br>
+                <p>The payment amount will be credited back to your PayPal account.</p><br>
                 ''')
     return render_template('generic.html', pt=page_topic, pc=page_content, title="Milliondog", page=gettext('Right of revocation'))
 
 @app.route("/termsandconditions/")
 def termsandconditions():
     page_topic = gettext(u'General terms and conditions')
-    page_content = gettext(u'''
-        Terms & Conditions<br><br>
-        Allgemeine Geschäftsbedingungen mit Kundeninformationen<br>
-
+    page_content = gettext(u'''<br><br><p>
+        Allgemeine Geschäftsbedingungen mit Kundeninformationen<br><br>
         1. Geltungsbereich<br>
         2. Vertragsschluss<br>
         3. Widerrufsrecht<br>
@@ -705,7 +721,7 @@ def termsandconditions():
         5. Liefer und Versandbedingungen<br>
         6. Mängelhaftung<br>
         7. Freistellung bei Verletzung von Drittrechten<br>
-        8. Anwendbares Recht<br>
+        8. Anwendbares Recht<br></p>
                 ''')
     return render_template('generic.html', pt=page_topic, pc=page_content, title="Milliondog", page=gettext('General terms and conditions'))
 
@@ -718,10 +734,10 @@ def privacy():
 @app.route("/legal/")
 def legal():
     page_topic = gettext(u'Legal notice')
-    page_content = gettext(u'''Legal notice<br><br>
+    page_content = gettext(u'''<p><br>
                                 MillionDog<br>
                                 CH-4800 Zofingen<br>
-                                e-mail: informme@milliondog.com<br>
-                                All contents on www.milliondog are owned by Milliondog and copyright protected. Any use of milliondog`s contents, including pictures, texts and intellectual property needs strictly consent by Milliondog
+                                e-mail: informme@milliondog.com<br><br>
+                                All contents on www.milliondog are owned by Milliondog and copyright protected. Any use of milliondog`s contents, including pictures, texts and intellectual property needs strictly consent by Milliondog</p>
                 ''')
     return render_template('generic.html', pt=page_topic, pc=page_content, title="Milliondog", page=gettext('Legal notice'))

@@ -44,12 +44,7 @@
     <div class="row">
         <div class="col-md-12">
             <h2 class="page-header" id="title">{{ category }}</h2>
-            Lorem ipsum dolor sit amet, pri dolore civibus forensibus no, solum movet has ei. Vim ad sint dissentiunt efficiantur. Duo legimus placerat te. Dissentias contentiones vel ut, id sea porro sapientem. Vix dicta sonet senserit et, vix partem equidem mediocrem at.
-
-            Nec ea utinam philosophia conclusionemque, no duo magna ullum integre. An sed eius modus, et has tollit theophrastus. Ea argumentum liberavisse mediocritatem duo, eros mundi te eos. Pri eu tota mnesarchum. Prima assentior ex his, usu nihil senserit id.
-
-            Molestiae referrentur at pro, eos error dicunt ad, duo ei soluta noluisse adolescens. Vis dico purto rationibus ea, in eos fugit nobis quidam, discere fierent intellegebat eu mel. Eam evertitur consequat voluptatibus eu, voluptua apeirian eam ad. Pro malorum abhorreant at, alii populo invenire an ius, at vel quod recusabo.
-
+            {{ pc |safe }}
         </div>
     </div>
     <center><h3>Sizes</h3></center>
@@ -120,11 +115,11 @@
                 </div>
             </a>
             <div class="caption">
-                <li>{{ n.attributes['serial_number'] }}</li>
-                <li>{{ n.attributes['pattern'] }}</li>
-                <li>{{ n.attributes['color'] }}</li>
-                <li>{{ n.attributes['size'] }}</li>
-                <h3><span class="label label-primary">Available</span></h3>
+                <p><b>{{n.name}} {{n.code}}</b></p>
+                <p>{{n.list_price}} {{ session['currency_code'] }}</p>
+                <p>&nbsp;&nbsp;{{ _('VAT incl., excluding <a href="/shipping">shipping</a>') }}</p>
+                <h3><a href="/cart/add/{{n.id}}">
+                    <span class="label label-primary">{{ _('Add to cart') }}</span></a></h3>
                 <br>
             </div>
         </div>

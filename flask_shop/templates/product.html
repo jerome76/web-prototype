@@ -4,13 +4,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <img class="img-responsive img-rounded" src="/static/products/{{ product.attributes['image'] }}">
+                <img class="img-responsive img-rounded" src="/static/products/{{ product.image }}">
             </div>
             <div class="col-md-6">
                 <h2>{{product.name}}</h2>
-                {{product.description}}<br>
-                {{product.list_price}} <a href="/cart/add/{{product.id}}"><span class="label label-success">Buy</span></a><br>
-                <h3><span class="label label-primary">Available</span></h3>
+                <h4>&nbsp;&nbsp;{{ _('Art. Nr.') }}: {{product.description}} {{product.code}}</h4>
+                <h4>&nbsp;&nbsp;{{ _('Size') }}: {{product.size}}</h4>
+                <h2>{{product.list_price}} {{ session['currency_code'] }}</h2>
+                <h4>&nbsp;&nbsp;{{ _('VAT incl., excluding <a href="/shipping">shipping</a>') }}</h4>
+                <h3><a href="/cart/add/{{product.id}}">
+                    <span class="label label-primary">{{ _('Add to cart') }}</span></a></h3>
             </div>
         </div>
     </div>

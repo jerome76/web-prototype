@@ -11,7 +11,7 @@
                         <legend id="title">Contact us</legend>
                         {{ form.hidden_tag() }}
                         <div class="form-group">
-                            <label for="name" class="col-md-2 control-label">Name</label>
+                            <label for="name" class="col-md-2 control-label">Name (required)</label>
                             <div class="col-md-10">
                                 {{ form.name(class_="form-control") }}
                                 {% if form.name.errors %}
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="email" class="col-md-2 control-label">Email</label>
+                            <label for="email" class="col-md-2 control-label">Email (required)</label>
                             <div class="col-md-10">
                                 {{ form.email(class_="form-control") }}
                                 {% if form.email.errors %}
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="subject" class="col-md-2 control-label">Subject</label>
+                            <label for="subject" class="col-md-2 control-label">Subject (required)</label>
                             <div class="col-md-10">
                                 {{ form.subject(class_="form-control") }}
                                 {% if form.subject.errors %}
