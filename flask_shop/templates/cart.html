@@ -5,20 +5,22 @@
   {{ super() }}
 {% endblock %}
 {% block content %}
-  <h3>{{ _('cart') }}:</h3>
-  {% if cart %}
-  <ul>
-    {% for n in cart %}
-    <li>
-        {{n.id, n.name, n.description, n.list_price}}
-    </li>
-      {% endfor %}
-  </ul>
-  <p><a href='/checkout'>Checkout</a></p>
-  {% else %}
-    {{ _('cart_empty') }}
-    <p><a href='/shop'>{{ _('back_to_shop') }}</a></p>
-  {% endif %}
-
-
+<div class="container">
+    <div class="well">
+        <h2 id="title">{{ _('Items in cart') }}:</h2>
+        {% if cart %}
+          <ul>
+            {% for n in cart %}
+            <li>
+                {{n.id, n.name, n.description, n.list_price}}
+            </li>
+              {% endfor %}
+          </ul>
+          <h3><a href="/checkout"><span class="label label-primary">{{ _('Checkout') }}</span></a></h3>
+        {% else %}
+          {{ _('cart_empty') }}
+          <h3><a href="/shop"><span class="label label-primary">{{ _('back_to_shop') }}</span></a></h3>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

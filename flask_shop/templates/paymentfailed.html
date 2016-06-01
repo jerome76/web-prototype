@@ -5,7 +5,9 @@
   {{ super() }}
 {% endblock %}
 {% block content %}
-	<div class="container">
-		<p>Payment failed!</p>
-	</div>
+<div class="container">
+    <div class="well">
+        <h4>{{ _('Payment failed!') }}</h4>
+    </div>
+</div>
 {% endblock %}

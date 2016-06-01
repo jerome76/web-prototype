@@ -5,85 +5,133 @@
   {{ super() }}
 {% endblock %}
 {% block content %}
-  <h3>User list</h3>
-  <br>
-      <p>{{message}}</p>
-      <p>Value from the list: {{id}}</p>
-  <p>Parties:</p>
-  <p>Loop through the list:</p>
-  <ul>
-    {% for n in db_list %}
-    <li>{{n.id, n.name, n.code, n.active}}
-          <ul>
-          {% for o in n.addresses %}
-          <li>{{o.id, o.city, o.name, o.zip, o.subdivision, o.streetbis,
-            o.street, o.country.name, o.active, o.delivery, o.invoice}}</li>
-          {% endfor %}
-        </ul>
-    </li>
-    {% endfor %}
-  </ul>
+<div class="container">
+    {% if session['logged_in'] %}
+        <h2><p>Admin page:</p></h2>
+        <h4><p>{{message}} [ID:{{id}}]</p></h4>
 
-  <p>Inventory:</p>
-  <p>Loop through the list:</p>
-  <ul>
-    {% for n in stock_list %}
-    <li>{{n.id, n.currency, n.unit_price, n.state, n.shipment,
-      n.effective_date, n.uom, n.cost_price, n.internal_quantity,
-      n.product, n.to_location, n.from_location, n.quantity,
-      n.invoice_address}}
-    </li>
-    {% endfor %}
-  </ul>
+        {% for n in db_list %}
+        <div class="row">
+            <div class="col-md-2">
+                <p>Party: {{n.id}}</p>
+            </div>
+            <div class="col-md-10">
+                <p>&nbsp;&nbsp;{{ _('Name') }}: {{n.name}}</p>
+                <p>&nbsp;&nbsp;{{ _('Code') }}: {{n.codee}}</p>
+                <p>&nbsp;&nbsp;{{ _('Active') }}: {{n.active}}</p>
+                <ul>
+                    {% for o in n.addresses %}
+                    <li>{{o.id, o.city, o.name, o.zip, o.subdivision, o.streetbis,
+                        o.street, o.country.name, o.active, o.delivery, o.invoice}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
 
+        {% for n in stock_list %}
+        <div class="row">
+            <div class="col-md-2">
+                <p>Inventory: {{n.id}}</p>
+            </div>
+            <div class="col-md-10">
+                <p>&nbsp;&nbsp;{{ _('Currency') }}: {{n.currency}}</p>
+                <p>&nbsp;&nbsp;{{ _('Unit Price') }}: {{n.unit_price}}</p>
+                <p>&nbsp;&nbsp;{{ _('Shipment') }}: {{n.shipment}}</p>
+                <p>&nbsp;&nbsp;{{ _('Effective Date') }}: {{n.effective_date}}</p>
+                <p>&nbsp;&nbsp;{{ _('UOM') }}: {{n.uom}}</p>
+                <p>&nbsp;&nbsp;{{ _('Cost Price') }}: {{n.cost_price}}</p>
+                <p>&nbsp;&nbsp;{{ _('Product') }}: {{n.product}}</p>
+                <p>&nbsp;&nbsp;{{ _('From Location') }}: {{n.from_location}}</p>
+                <p>&nbsp;&nbsp;{{ _('To Location') }}: {{n.to_location}}</p>
+                <p>&nbsp;&nbsp;{{ _('Quantity') }}: {{n.quantity}}</p>
+                <p>&nbsp;&nbsp;{{ _('Invoice Address') }}: {{n.invoice_address}}</p>
+            </div>
+        </div>
+        {% endfor %}
 
-  <p>Products:</p>
-  <p>Loop through the list:</p>
-  <ul>
-    {% for n in product_list %}
-    <li>{{n.id, n.name, n.description, n.list_price, n.consumable, n.code, n.cost_price,
-      n.cost_price_method, n.cost_price_uom, n.forecast_quantity, n.purchasable, n.salable,
-      n.taxes_category, n.type}}
-      <ul>
-      {% for o in n.categories %}
-      <li>{{o.id, o.name, o.description}}</li>
-      {% endfor %}
-        </ul>
-    </li>
-    {% endfor %}
-  </ul>
+        {% for n in product_list %}
+        <div class="row">
+            <div class="col-md-2">
+                <p>Product: {{n.id}}</p>
+            </div>
+            <div class="col-md-10">
+                <p>&nbsp;&nbsp;{{ _('Currency') }}: {{n.name}}</p>
+                <p>&nbsp;&nbsp;{{ _('Unit Price') }}: {{n.description}}</p>
+                <p>&nbsp;&nbsp;{{ _('Shipment') }}: {{n.list_price}}</p>
+                <p>&nbsp;&nbsp;{{ _('Effective Date') }}: {{n.consumable}}</p>
+                <p>&nbsp;&nbsp;{{ _('UOM') }}: {{n.code}}</p>
+                <p>&nbsp;&nbsp;{{ _('Cost Price') }}: {{n.cost_price}}</p>
+                <p>&nbsp;&nbsp;{{ _('Product') }}: {{n.cost_price_method}}</p>
+                <p>&nbsp;&nbsp;{{ _('From Location') }}: {{n.cost_price_uom}}</p>
+                <p>&nbsp;&nbsp;{{ _('To Location') }}: {{n.forecast_quantity}}</p>
+                <p>&nbsp;&nbsp;{{ _('Quantity') }}: {{n.purchasable}}</p>
+                <p>&nbsp;&nbsp;{{ _('Invoice Address') }}: {{n.salable}}</p>
+                <p>&nbsp;&nbsp;{{ _('Invoice Address') }}: {{n.taxes_category}}</p>
+                <p>&nbsp;&nbsp;{{ _('Invoice Address') }}: {{n.type}}</p>
+                <ul>
+                {% for o in n.categories %}
+                  <li>{{o.id, o.name, o.description}}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
 
-  <p>Sales:</p>
-  <p>Loop through the list:</p>
-  <ul>
-    {% for n in sale_list %}
-    <li>{{n.id, n.comment, n.payment_term, n.currency, n.shipment_method,
-      n.state, n.untaxed_amount_cache, n.warehouse, n.total_amount_cache,
-      n.shipment_state, n.tax_amount_cache, n.invoice_state, n.invoice_method,
-      n.invoice_address}}
-          <ul>
-            {% for o in n.lines %}
-            <li>{{o.id, o.unit_price, o.quantity, o.product, o.type, o.unit, o.description}}</li>
-            {% endfor %}
-        </ul>
-    </li>
-    {% endfor %}
-  </ul>
+        {% for n in sale_list %}
+        <div class="row">
+            <div class="col-md-2">
+                <p>Sale: {{n.id}}</p>
+            </div>
+            <div class="col-md-10">
+                <p>&nbsp;&nbsp;{{ _('Currency') }}: {{n.comment}}</p>
+                <p>&nbsp;&nbsp;{{ _('Unit Price') }}: {{n.payment_term}}</p>
+                <p>&nbsp;&nbsp;{{ _('Shipment') }}: {{n.currency}}</p>
+                <p>&nbsp;&nbsp;{{ _('Effective Date') }}: {{n.shipment_method}}</p>
+                <p>&nbsp;&nbsp;{{ _('UOM') }}: {{n.state}}</p>
+                <p>&nbsp;&nbsp;{{ _('Cost Price') }}: {{n.untaxed_amount_cache}}</p>
+                <p>&nbsp;&nbsp;{{ _('Product') }}: {{n.warehouse}}</p>
+                <p>&nbsp;&nbsp;{{ _('From Location') }}: {{n.total_amount_cache}}</p>
+                <p>&nbsp;&nbsp;{{ _('To Location') }}: {{n.invoice_method}}</p>
+                <p>&nbsp;&nbsp;{{ _('Quantity') }}: {{n.invoice_address}}</p>
+                <ul>
+                {% for o in n.lines %}
+                  <li>{{o.id, o.unit_price, o.quantity, o.product, o.type, o.unit, o.description}}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
 
-  <p>Invoices:</p>
-  <p>Loop through the list:</p>
-  <ul>
-    {% for n in invoice_list %}
-    <li>{{n.id, n.payment_term, n.currency, n.description,
-      n.move, n.cancel_move, n.state, n.party, n.type, n.invoice_address}}
-          <ul>
-            {% for o in n.lines %}
-            <li>{{o.id, o.origin, o.currency, o.unit_price,
-              o.note, o.product, o.type, o.unit, o.invoice_type, o.quantity}}</li>
-            {% endfor %}
-        </ul>
-    </li>
-    {% endfor %}
-  </ul>
+        {% for n in invoice_list %}
+        <div class="row">
+            <div class="col-md-2">
+                <p>Invoice: {{n.id}}</p>
+            </div>
+            <div class="col-md-10">
+                <p>&nbsp;&nbsp;{{ _('Currency') }}: n.payment_term</p>
+                <p>&nbsp;&nbsp;{{ _('Unit Price') }}: n.description</p>
+                <p>&nbsp;&nbsp;{{ _('Shipment') }}: {{n.currency}}</p>
+                <p>&nbsp;&nbsp;{{ _('Effective Date') }}: {{n.move}}</p>
+                <p>&nbsp;&nbsp;{{ _('UOM') }}: {{n.cancel_move}}</p>
+                <p>&nbsp;&nbsp;{{ _('Cost Price') }}: {{n.state}}</p>
+                <p>&nbsp;&nbsp;{{ _('Product') }}: {{n.party}}</p>
+                <p>&nbsp;&nbsp;{{ _('From Location') }}: {{n.type}}</p>
+                <p>&nbsp;&nbsp;{{ _('To Location') }}: {{n.invoice_address}}</p>
+                <ul>
+                {% for o in n.lines %}
+                  <li>{{o.id, o.origin, o.currency, o.unit_price,
+                        o.note, o.product, o.type, o.unit, o.invoice_type, o.quantity}}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
 
+    {% else %}
+    <div class="well">
+		<p>You need to be <a href="/login/" target="blank"><strong>logged in</strong></a> to view this page.</p>
+    </div>
+	{% endif %}
+</div>
 {% endblock %}

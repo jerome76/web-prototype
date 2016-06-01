@@ -295,8 +295,9 @@ def admin():
     salelist = Sale.find(['id', '>=', '0'])
     Invoice = Model.get('account.invoice')
     invoicelist = Invoice.find(['id', '>=', '0'])
-    return render_template('account.html', message=user[0].name,
-                           id=user[0].id, db_list=partyList, invoice_list=invoicelist, sale_list=salelist, stock_list=stocklist, product_list=productlist, title="Milliondog", page='Account')
+    return render_template('admin.html', message=user[0].name,
+                           id=user[0].id, db_list=partyList, invoice_list=invoicelist, sale_list=salelist,
+                           stock_list=stocklist, product_list=productlist, title="Milliondog", page='Account')
 
 
 @app.route('/setlang/<language>')
