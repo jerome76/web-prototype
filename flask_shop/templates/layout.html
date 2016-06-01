@@ -49,12 +49,12 @@
                                 </div>
                             </div>
                             <li><a href="/index">Home</a></li>
-                            <li><a href="/categories">Shop</a></li>
-                            <li><a href="/gallery">Gallery</a></li>
-                            <li><a href="/about">About us</a></li>
-                            <li><a href="/sendus">Send us</a></li>
-                            <li><a href="/contact">Contact</a></li>
-                            <li><a href="/account">Login</a></li>
+                            <li><a href="/categories">{{ _('Shop') }}</a></li>
+                            <li><a href="/gallery">{{ _('Gallery') }}</a></li>
+                            <li><a href="/about">{{ _('About us') }}</a></li>
+                            <li><a href="/sendus">{{ _('Send us') }}</a></li>
+                            <li><a href="/contact">{{ _('Contact') }}</a></li>
+                            <li><a href="/account">{{ _('Login') }}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -81,11 +81,11 @@
     {% block content %}
     {% endblock %}
     {% set navigation_bar = [
-        ('/shipping', 'shipping', 'Payment & Shipping'),
-        ('/returns/', 'returns', 'Right of revocation'),
-        ('/termsandconditions/', 'termsandconditions', 'Terms & conditions'),
-        ('/privacy/', 'privacy', 'Disclaimer'),
-        ('/legal/', 'legal', 'Legal info')
+        ('/shipping', 'shipping', _('Payment and Shipping')),
+        ('/returns/', 'returns', _('Right of revocation')),
+        ('/termsandconditions/', 'termsandconditions', _('Terms and conditions')),
+        ('/privacy/', 'privacy', _('Disclaimer')),
+        ('/legal/', 'legal', _('Legal notice'))
     ] -%}
     <br><br><br>
 	 <div class="container-fluid"  id="footer">
@@ -93,7 +93,7 @@
             <div class="col-md-8 col-sm-12">
                 {% for href, id, caption in navigation_bar %}
                 <a href="{{ href|e }}"{% if id == active_page %} class="active"{% endif %}>
-                {{ _(caption) }}</a>
+                {{ caption }}</a>
                 {% endfor %}
             </div>
             <div class="col-md-4 col-sm-12 text-right" id="registered">
