@@ -80,15 +80,21 @@
 
     {% block content %}
     {% endblock %}
+    {% set navigation_bar = [
+        ('/shipping', 'shipping', 'Payment & Shipping'),
+        ('/returns/', 'returns', 'Right of revocation'),
+        ('/termsandconditions/', 'termsandconditions', 'Terms & conditions'),
+        ('/privacy/', 'privacy', 'Disclaimer'),
+        ('/legal/', 'legal', 'Legal info')
+    ] -%}
     <br><br><br>
 	 <div class="container-fluid"  id="footer">
           <div class="row">
             <div class="col-md-8 col-sm-12">
-              <a href="/shipping">{{ _('Payment & Shipping') }}</a>
-              <a href="/returns" class="active">{{ _('Right of revocation') }}</a>
-              <a href="/termsandconditions">{{ _('Terms & conditions') }}</a>
-              <a href="/privacy">{{ _('Disclaimer') }}</a>
-              <a href="/legal">{{ _('Legal info') }}</a>
+                {% for href, id, caption in navigation_bar %}
+                <a href="{{ href|e }}"{% if id == active_page %} class="active"{% endif %}>
+                {{ _(caption) }}</a>
+                {% endfor %}
             </div>
             <div class="col-md-4 col-sm-12 text-right" id="registered">
               2016 MillionDog - All rights reserved

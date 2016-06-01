@@ -688,6 +688,7 @@ def ipn():
 # footer information
 @app.route("/shipping/")
 def shipping():
+    active_page = 'shipping'
     page_topic = gettext(u'Payment and Shipping')
     page_content = gettext(u'''<br>
                 <p>We accept PayPal payment only.</p><br>
@@ -695,10 +696,11 @@ def shipping():
                 <p>Estimate shipping time is about 4-7 working days within Switzerland, approximately 20 working days for overseas, 7.50 CHF, for all articles.</p><br>
                 <p>Please feel free to contact us if you have any question. Hope you enjoy dealing with us!</p><br>
                 ''')
-    return render_template('generic.html', pt=page_topic, pc=page_content, title="Milliondog", page=gettext('Payment and Shipping'))
+    return render_template('generic.html', active_page=active_page, pt=page_topic, pc=page_content, title="Milliondog", page=gettext('Payment and Shipping'))
 
 @app.route("/returns/")
 def returns():
+    active_page = 'returns'
     page_topic = gettext(u'Right of revocation')
     page_content = gettext(u'''<br><br>
                 <p>Conditions of returned goods<br><br></p>
@@ -707,32 +709,99 @@ def returns():
                 <p>All returns of goods that have obviously been used and that therefore can not be sold will not be accepted.</p><br>
                 <p>The payment amount will be credited back to your PayPal account.</p><br>
                 ''')
-    return render_template('generic.html', pt=page_topic, pc=page_content, title="Milliondog", page=gettext('Right of revocation'))
+    return render_template('generic.html', active_page=active_page, pt=page_topic, pc=page_content, title="Milliondog", page=gettext('Right of revocation'))
 
 @app.route("/termsandconditions/")
 def termsandconditions():
+    active_page = 'termsandconditions'
     page_topic = gettext(u'General terms and conditions')
-    page_content = gettext(u'''<br><br><p>
-        Allgemeine Geschäftsbedingungen mit Kundeninformationen<br><br>
-        1. Geltungsbereich<br>
-        2. Vertragsschluss<br>
-        3. Widerrufsrecht<br>
-        4. Preise und Zahlungsbedingungen<br>
-        5. Liefer und Versandbedingungen<br>
-        6. Mängelhaftung<br>
-        7. Freistellung bei Verletzung von Drittrechten<br>
-        8. Anwendbares Recht<br></p>
+    page_content = gettext(u'''<h2>Allgemeine Geschäftsbedingungen mit Kundeninformationen</h2>
+                        <p>1. Geltungsbereich<br>
+                        2. Vertragsschluss<br>
+                        3. Widerrufsrecht<br>
+                        4. Preise und Zahlungsbedingungen<br>
+                        5. Liefer und Versandbedingungen<br>
+                        6. Mängelhaftung<br>
+                        7. Freistellung bei Verletzung von Drittrechten<br>
+                        8. Anwendbares Recht</p>
+                        <p><strong>1. Geltungsbereich<br>
+                        </strong>1.1 Diese Allgemeinen Geschäftsbedingungen (nachfolgend “AGB”) von “Milliondog” (nachfolgend “Verkäufer”), gelten für alle Verträge, die ein Verbraucher oder Unternehmer (nachfolgend “Kunde”) mit dem Verkäufer hinsichtlich der vom Verkäufer in seinem Online-Shop dargestellten Waren und/oder Leistungen abschließt. Hiermit wird der Einbeziehung von eigenen Bedingungen des Kunden widersprochen, es sei denn, es ist etwas anderes vereinbart.</p>
+                        <p>1.2 Verbraucher im Sinne dieser AGB ist jede natürliche Person, die ein Rechtsgeschäft zu Zwecken abschließt, die überwiegend weder ihrer gewerblichen noch ihrer selbstständigen beruflichen Tätigkeit zugerechnet werden können. Unternehmer im Sinne dieser AGB ist jede natürliche oder juristische Person oder eine rechtsfähige Personengesellschaft, die bei Abschluss eines Rechtsgeschäfts in Ausübung ihrer selbstständigen beruflichen oder gewerblichen Tätigkeit handelt.</p>
+                        <p><strong>2. Vertragsschluss<br>
+                        </strong>2.1 Die im Online-Shop des Verkäufers enthaltenen Produktdarstellungen stellen keine verbindlichen Angebote seitens des Verkäufers dar, sondern dienen zur Abgabe eines verbindlichen Angebots durch den Kunden.</p>
+                        <p>2.2 Der Kunde kann das Angebot über das in den Online-Shop des Verkäufers integrierte Online-Bestellformular abgeben. Dabei gibt der Kunde, nachdem er die ausgewählten Waren und/oder Leistungen in den virtuellen Warenkorb gelegt und den elektronischen Bestellprozess durchlaufen hat, durch Klicken des den Bestellvorgang abschliessenden Buttons ein rechtlich verbindliches Vertragsangebot in Bezug auf die im Warenkorb enthaltenen Waren und/oder Leistungen ab.</p>
+                        <p>2.3 Der Verkäufer kann das Angebot des Kunden innerhalb von fünf Tagen annehmen,<br>
+                        – indem er dem Kunden eine schriftliche Auftragsbestätigung oder eine Auftragsbestätigung in Textform (Fax oder E-Mail) übermittelt, wobei insoweit der Zugang der Auftragsbestätigung beim Kunden massgeblich ist, oder</p>
+                        <p>– indem er dem Kunden die bestellte Ware liefert, wobei insoweit der Zugang der Ware beim Kunden massgeblich ist.</p>
+                        <p>Liegen mehrere der vorgenannten Alternativen vor, kommt der Vertrag in dem Zeitpunkt zustande, in dem eine der vorgenannten Alternativen zuerst eintritt. Nimmt der Verkäufer das Angebot des Kunden innerhalb vorgenannter Frist nicht an, so gilt dies als Ablehnung des Angebots mit der Folge, dass der Kunde nicht mehr an seine Willenserklärung gebunden ist.</p>
+                        <p>2.4 Die Frist zur Annahme des Angebots beginnt am Tag nach der Absendung des Angebots durch den Kunden zu laufen und endet mit dem Ablauf des fünften Tages, welcher auf die Absendung des Angebots folgt.</p>
+                        <p>2.5 Bei der Abgabe eines Angebots über das Online-Bestellformular des Verkäufers wird der Vertragstext vom Verkäufer gespeichert und dem Kunden nach Absendung seiner Bestellung nebst den vorliegenden AGB in Textform (z. B. E-Mail, Fax oder Brief) zugeschickt. Zusätzlich wird der Vertragstext auf der Internetseite des Verkäufers archiviert und kann vom Kunden über sein passwortgeschütztes Kundenkonto unter Angabe der entsprechenden Login-Daten kostenlos abgerufen werden, sofern der Kunde vor Absendung seiner Bestellung ein Kundenkonto im Online-Shop des Verkäufers angelegt hat.</p>
+                        <p>2.6 Vor verbindlicher Abgabe der Bestellung über das Online-Bestellformular des Verkäufers kann der Kunde seine Eingaben laufend über die üblichen Tastatur- und Mausfunktionen korrigieren. Darüber hinaus werden alle Eingaben vor der verbindlichen Abgabe der Bestellung noch einmal in einem Bestätigungsfenster angezeigt und können auch dort mittels der üblichen Tastatur- und Mausfunktionen korrigiert werden.</p>
+                        <p>2.7 Für den Vertragsschluss steht ausschließlich die deutsche Sprache zur Verfügung.</p>
+                        <p>2.8 Die Bestellabwicklung und Kontaktaufnahme finden in der Regel per E-Mail und automatisierter Bestellabwicklung statt. Der Kunde hat sicherzustellen, dass die von ihm zur Bestellabwicklung angegebene E-Mail-Adresse zutreffend ist, so dass unter dieser Adresse die vom Verkäufer versandten E-Mails empfangen werden können. Insbesondere hat der Kunde bei dem Einsatz von SPAM-Filtern sicherzustellen, dass alle vom Verkäufer oder von diesem mit der Bestellabwicklung beauftragten Dritten versandten Mails zugestellt werden können.</p>
+                        <p><strong>3. Widerrufsrecht<br>
+                        </strong>Verbrauchern steht grundsätzlich ein Widerrufsrecht zu. Nähere Informationen zum Widerrufsrecht ergeben sich aus der&nbsp;<a href="http://milliondog.com/widerrufsrecht/">Widerrufsbelehrung</a>&nbsp;des Verkäufers.</p>
+                        <p><strong>4. Preise und Zahlungsbedingungen<br>
+                        </strong>4.1 Sofern sich aus dem Angebot des Verkäufers nichts anderes ergibt, handelt es sich bei den angegebenen Preisen um Endpreise, die die gesetzliche Umsatzsteuer enthalten. Gegebenenfalls zusätzlich anfallende Liefer- und Versandkosten werden in der jeweiligen Produktbeschreibung gesondert angegeben.</p>
+                        <p>4.2 Bei Lieferungen in Länder ausserhalb der Europäischen Union können im Einzelfall weitere Kosten anfallen, die der Verkäufer nicht zu vertreten hat und die vom Kunden zu tragen sind. Hierzu zählen beispielsweise Kosten für die Geldübermittlung durch Kreditinstitute (z.B. Überweisungsgebühren, Wechselkursgebühren) oder einfuhrrechtliche Abgaben bzw. Steuern (z.B. Zölle).</p>
+                        <p><strong>5. Liefer und Versandbedingungen<br>
+                        </strong>5.1 Die Lieferung von Waren erfolgt regelmäßig auf dem Versandwege und an die vom Kunden angegebene Lieferanschrift. Bei der Abwicklung der Transaktion, ist die in der Kaufabwicklung des Verkäufers angegebene Lieferanschrift maßgeblich. Für die Zahlungsart PayPal gilt die vom Kunden zum Zeitpunkt der Bezahlung bei PayPal hinterlegte Lieferanschrift als massgeblich.</p>
+                        <p>5.2 Sendet das Transportunternehmen die versandte Ware an den Verkäufer zurück, da eine Zustellung beim Kunden nicht möglich war, trägt der Kunde die Kosten für den erfolglosen Versand. Dies gilt nicht, wenn er den Umstand, der zur Unmöglichkeit der Zustellung geführt hat, nicht zu vertreten hat oder wenn er vorübergehend an der Annahme der angebotenen Leistung verhindert war, es sei denn, dass der Verkäufer ihm die Leistung eine angemessene Zeit vorher angekündigt hatte.</p>
+                        <p><strong>6. Mängelhaftung<br>
+                        </strong>Es gilt die gesetzliche Mängelhaftung</p>
+                        <p><strong>7. Freistellung bei Verletzung von Drittrechten<br>
+                        </strong>Schuldet der Verkäufer nach dem Inhalt des Vertrages neben der Warenlieferung auch die Verarbeitung der Ware nach bestimmten Vorgaben des Kunden, hat der Kunde sicherzustellen, dass die dem Verkäufer von ihm zum Zwecke der Verarbeitung überlassenen Inhalte nicht die Rechte Dritter (z. B. Urheberrechte oder Markenrechte) verletzen. Der Kunde stellt den Verkäufer von Ansprüchen Dritter frei, die diese im Zusammenhang mit einer Verletzung ihrer Rechte durch die vertragsgemässe Nutzung der Inhalte des Kunden durch den Verkäufer diesem gegenüber geltend machen können. Der Kunde übernimmt hierbei auch die angemessenen Kosten der notwendigen Rechtsverteidigung einschliesslich aller Gerichts- und Anwaltskosten in gesetzlicher Höhe. Dies gilt nicht, wenn die Rechtsverletzung vom Kunden nicht zu vertreten ist. Der Kunde ist verpflichtet, dem Verkäufer im Falle einer Inanspruchnahme durch Dritte unverzüglich, wahrheitsgemäss und vollständig alle Informationen zur Verfügung zu stellen, die für die Prüfung der Ansprüche und eine Verteidigung erforderlich sind.</p>
+                        <p><strong>8. Anwendbares Recht<br>
+                        </strong>8.1 Für sämtliche Rechtsbeziehungen der Parteien gilt das Recht der Schweiz, unter Ausschluss der Gesetze über den internationalen Kauf beweglicher Waren. Bei Verbrauchern gilt diese Rechtswahl nur insoweit, als nicht der gewährte Schutz durch zwingende Bestimmungen des Rechts des Staates, in dem der Verbraucher seinen gewöhnlichen Aufenthalt hat, entzogen wird.</p>
                 ''')
-    return render_template('generic.html', pt=page_topic, pc=page_content, title="Milliondog", page=gettext('General terms and conditions'))
+    return render_template('generic.html', active_page=active_page, pt=page_topic, pc=page_content, title="Milliondog", page=gettext('General terms and conditions'))
 
 @app.route("/privacy/")
 def privacy():
+    active_page = 'privacy'
     page_topic = gettext(u'Privacy Statment')
-    page_content = gettext(u'<br>')
-    return render_template('generic.html', pt=page_topic, pc=page_content, title="Milliondog", page=gettext('Privacy Statment'))
+    page_content = gettext(u'''
+                    <p><strong>Der Schutz Ihrer Privatsphäre ist uns ein wichtiges Anliegen. Bitte beachten Sie die folgenden Punkte unserer Datenschutzerklärung.</strong></p>
+                    <p><strong>Geltungsbereich<br>
+                    </strong>Diese Datenschutzerklärung klärt Nutzer über die Art, den Umfang und Zwecke der Erhebung und Verwendung personenbezogener Daten durch den verantwortlichen Anbieter Sabine Reiss und Anke Siegrist, Obere Rebbergstrasse 34, CH-4800 Zofingen , Telefon: +41 62 752 40 48, E-Mail: informme@milliondog.com auf dieser Website (im folgenden “Angebot”) auf.</p>
+                    <p>Das Bundesgesetz über den Datenschutz (DSG) bildet die Grundlage dieser Datenschutzerklärung.</p>
+                    <p>&nbsp;</p>
+                    <p><strong>Zugriffsdaten/ Server-Logfiles<br>
+                    </strong>Der Anbieter (beziehungsweise sein Webspace-Provider) erhebt Daten über jeden Zugriff auf das Angebot (so genannte Serverlogfiles). Zu den Zugriffsdaten gehören:</p>
+                    <p>Name der abgerufenen Webseite, Datei, Datum und Uhrzeit des Abrufs, übertragene Datenmenge, Meldung über erfolgreichen Abruf, Browsertyp nebst Version, das Betriebssystem des Nutzers, Referrer URL (die zuvor besuchte Seite), IP-Adresse und der anfragende Provider.</p>
+                    <p>Der Anbieter verwendet die Protokolldaten nur für statistische Auswertungen zum Zweck des Betriebs, der Sicherheit und der Optimierung des Angebotes. Der Anbieterbehält sich jedoch vor, die Protokolldaten nachträglich zu überprüfen, wenn aufgrund konkreter Anhaltspunkte der berechtigte Verdacht einer rechtswidrigen Nutzung besteht.</p>
+                    <p>&nbsp;</p>
+                    <p><strong>Umgang mit personenbezogenen Daten<br>
+                    </strong>Personenbezogene Daten sind Informationen, mit deren Hilfe eine Person bestimmbar ist, also Angaben, die zurück zu einer Person verfolgt werden können. Dazu gehören der Name, die Emailadresse oder die Telefonnummer. Aber auch Daten über Vorlieben, Hobbies, Mitgliedschaften oder welche Webseiten von jemandem angesehen wurden zählen zu personenbezogenen Daten.</p>
+                    <p>Personenbezogene Daten werden von dem Anbieter nur dann erhoben, genutzt und weiter gegeben, wenn dies gesetzlich erlaubt ist oder die Nutzer in die Datenerhebung einwilligen.</p>
+                    <p>&nbsp;</p>
+                    <p><strong>Kontaktaufnahme<br>
+                    </strong>Bei der Kontaktaufnahme mit dem Anbieter (zum Beispiel per Kontaktformular oder E-Mail) werden die Angaben des Nutzers zwecks Bearbeitung der Anfrage sowie für den Fall, dass Anschlussfragen entstehen, gespeichert.</p>
+                    <p>&nbsp;</p>
+                    <p><strong>Kommentare und Beiträge<br>
+                    </strong>Wenn Nutzer Kommentare im Blog oder sonstige Beiträge hinterlassen, werden ihre IP-Adressen gespeichert. Das erfolgt zur Sicherheit des Anbieters, falls jemand in Kommentaren und Beiträgen widerrechtliche Inhalte schreibt (Beleidigungen, verbotene politische Propaganda, etc.). In diesem Fall kann der Anbieter selbst für den Kommentar oder Beitrag belangt werden und ist daher an der Identität des Verfassers interessiert.</p>
+                    <p>&nbsp;</p>
+                    <p><strong>Cookies<br>
+                    </strong>Cookies sind kleine Dateien, die es ermöglichen, auf dem Zugriffsgerät der Nutzer (PC, Smartphone o.ä.) spezifische, auf das Gerät bezogene Informationen zu speichern. Sie dienen zum einem der Benutzerfreundlichkeit von Webseiten und damit den Nutzern (z.B. Speicherung von Logindaten). Zum anderen dienen sie, um die statistische Daten der Webseitennutzung zu erfassen und sie zwecks Verbesserung des Angebotes analysieren zu können. Die Nutzer können auf den Einsatz der Cookies Einfluss nehmen. Die meisten Browser verfügen eine Option mit der das Speichern von Cookies eingeschränkt oder komplett verhindert wird. Allerdings wird darauf hingewiesen, dass die Nutzung und insbesondere der Nutzungskomfort ohne Cookies eingeschränkt werden.</p>
+                    <p>Sie können viele Online-Anzeigen-Cookies von Unternehmen über die US-amerikanische Seite <a href="http://www.aboutads.info/choices/">http://www.aboutads.info/choices/</a> oder die EU-Seite <a href="http://www.youronlinechoices.com/uk/your-ad-choices/ ">http://www.youronlinechoices.com/uk/your-ad-choices/ </a> verwalten.</p>
+                    <p>&nbsp;</p>
+                    <p><strong>Registrierfunktion<br>
+                    </strong>Die im Rahmen der Registrierung eingegebenen Daten werden für die Zwecke der Nutzung des Angebotes verwendet. Die Nutzer können über angebots- oder registrierungsrelevante Informationen, wie Änderungen des Angebotsumfangs oder technische Umstände per E-Mail informiert werden. Die erhobenen Daten sind aus der Eingabemaske im Rahmen der Registrierung ersichtlich. Dazu gehören Name, postalische Adresse, E-Mail-Adresse.</p>
+                    <p>&nbsp;</p>
+                    <p><strong>Google Analytics<br>
+                    </strong>Dieses Angebot benutzt Google Analytics, einen Webanalysedienst der Google Inc. („Google“). Google Analytics verwendet sog. „Cookies“, Textdateien, die auf Computer der Nutzer gespeichert werden und die eine Analyse der Benutzung der Website durch sie ermöglichen. Die durch den Cookie erzeugten Informationen über Benutzung dieser Website durch die Nutzer werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert.</p>
+                    <p>Im Falle der Aktivierung der IP-Anonymisierung auf dieser Webseite, wird die IP-Adresse der Nutzer von Google jedoch innerhalb von Mitgliedstaaten der Europäischen Union oder in anderen Vertragsstaaten des Abkommens über den Europäischen Wirtschaftsraum zuvor gekürzt. Nur in Ausnahmefällen wird die volle IP-Adresse an einen Server von Google in den USA übertragen und dort gekürzt. Die IP-Anonymisierung ist auf dieser Website aktiv. Im Auftrag des Betreibers dieser Website wird Google diese Informationen benutzen, um die Nutzung der Website durch die Nutzer auszuwerten, um Reports über die Websiteaktivitäten zusammenzustellen und um weitere mit der Websitenutzung und der Internetnutzung verbundene Dienstleistungen gegenüber dem Websitebetreiber zu erbringen.</p>
+                    <p>Die im Rahmen von Google Analytics von Ihrem Browser übermittelte IP-Adresse wird nicht mit anderen Daten von Google zusammengeführt. Die Nutzer können die Speicherung der Cookies durch eine entsprechende Einstellung Ihrer Browser-Software verhindern; Dieses Angebot weist die Nutzer jedoch darauf hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche Funktionen dieser Website vollumfänglich werden nutzen können. Die Nutzer können darüber hinaus die Erfassung der durch das Cookie erzeugten und auf ihre Nutzung der Website bezogenen Daten (inkl. Ihrer IP-Adresse) an Google sowie die Verarbeitung dieser Daten durch Google verhindern, indem sie das unter dem folgenden Link verfügbare Browser-Plugin herunterladen und installieren: <a href="http://tools.google.com/dlpage/gaoptout?hl=de">http://tools.google.com/dlpage/gaoptout?hl=de</a>.</p>
+                    <p>Alternativ zum Browser-Add-On oder innerhalb von Browsern auf mobilen Geräten, <a id="GAOptOut" title="Google Analytics Opt-Out-Cookie setzen" href="javascript:gaOptout()">klicken Sie bitte diesen Link</a>, um die Erfassung durch Google Analytics innerhalb dieser Website zukünftig zu verhindern. Dabei wird ein Opt-Out-Cookie auf Ihrem Gerät abgelegt. Löschen Sie Ihre Cookies, müssen Sie diesen Link erneut klicken.</p>
+                    <p>&nbsp;</p>
+                    <p><strong>Widerruf, Änderungen, Berichtigungen und Aktualisierungen<br>
+                    </strong>Der Nutzer hat das Recht, auf Antrag unentgeltlich Auskunft zu erhalten über die personenbezogenen Daten, die über ihn gespeichert wurden. Zusätzlich hat der Nutzer das Recht auf Berichtigung unrichtiger Daten, Sperrung und Löschung seiner personenbezogenen Daten, soweit dem keine gesetzliche Aufbewahrungspflicht entgegensteht.</p>
+                    ''')
+    return render_template('generic.html', active_page=active_page, pt=page_topic, pc=page_content, title="Milliondog", page=gettext('Privacy Statment'))
 
 @app.route("/legal/")
 def legal():
+    active_page = 'legal'
     page_topic = gettext(u'Legal notice')
     page_content = gettext(u'''<p><br>
                                 MillionDog<br>
@@ -740,4 +809,4 @@ def legal():
                                 e-mail: informme@milliondog.com<br><br>
                                 All contents on www.milliondog are owned by Milliondog and copyright protected. Any use of milliondog`s contents, including pictures, texts and intellectual property needs strictly consent by Milliondog</p>
                 ''')
-    return render_template('generic.html', pt=page_topic, pc=page_content, title="Milliondog", page=gettext('Legal notice'))
+    return render_template('generic.html', active_page=active_page, pt=page_topic, pc=page_content, title="Milliondog", page=gettext('Legal notice'))
