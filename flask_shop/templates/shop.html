@@ -47,21 +47,22 @@
             {{ pc |safe }}
         </div>
     </div>
-    <center><h3>Sizes</h3></center>
+    <center><h2 id="title">{{ _('Dimensions table: (Dog neck)') }}</h2></center>
+    <center><p>{{ _('Please measure the neck of your dog, so you can be sure, you will order the right Cosy size.') }}</p></center>
     {% if category == 'Cosy-Bandana' %}
         <div class="row">
             <div class="col-md-2"></div>    
             <div class="col-md-3">
                 <a href="/shop/Cosy-Bandana/S"><span class="badge" id="small">S</span></a>
-                 26 - 29 CM
+                 26 - 29 cm
             </div>
             <div class="col-md-3">
                 <a href="/shop/Cosy-Bandana/M"><span class="badge" id="medium">M</span></a>
-                31 - 36 CM 
+                31 - 36 cm
             </div>
             <div class="col-md-3">
                 <a href="/shop/Cosy-Bandana/L"><span class="badge" id="large">L</span></a>
-                45 - 51 CM
+                45 - 51 cm
             </div>
             <div class="col-md-1"></div>
         </div>            
@@ -70,19 +71,19 @@
             <div class="col-md-2"></div>    
             <div class="col-md-2">
                 <a href="/shop/Cosy-Loop/XS-S"><span class="badge" id="small">S</span></a>
-                 26 - 29 CM
+                 26 - 29 cm
             </div>
             <div class="col-md-2">
                 <a href="/shop/Cosy-Loop/S-M"><span class="badge" id="medium">M</span></a>
-                31 - 36 CM 
+                31 - 36 cm
             </div>
             <div class="col-md-2">
                 <a href="/shop/Cosy-Loop/M-L"><span class="badge" id="large">L</span></a>
-                45 - 51 CM
+                45 - 51 cm
             </div>
             <div class="col-md-2">
                 <a href="/shop/Cosy-Loop/L-XL"><span class="badge" id="xlarge">XL</span></a>
-                > 51 CM
+                > 51 cm
             </div>
             <div class="col-md-2"></div>
         </div>            
@@ -91,20 +92,21 @@
             <div class="col-md-2"></div>    
             <div class="col-md-3">
                 <a href="/shop/Cosy-Kaye/XS-S"><span class="badge" id="small">S</span></a>
-                 26 - 29 CM
+                 26 - 29 cm
             </div>
             <div class="col-md-3">
                 <a href="/shop/Cosy-Kaye/S-M"><span class="badge" id="medium">M</span></a>
-                31 - 36 CM 
+                31 - 36 cm
             </div>
             <div class="col-md-3">
                 <a href="/shop/Cosy-Kaye/M-L"><span class="badge" id="large">L</span></a>
-                45 - 51 CM
+                45 - 51 cm
             </div>
             <div class="col-md-1"></div>
-        </div>            
-
+        </div>
     {% endif %}
+    <center><h2 id="title">{{ _('Delivery Time') }}:</h2></center>
+    <center><p>{{ _('4-7 working days within Switzerland, approximately 20 working days for overseas.') }}</p></center>
     <hr>
     <div class="row">
     {% for n in db_list %}

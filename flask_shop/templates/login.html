@@ -8,10 +8,10 @@
             <div class="well">
                 <form class="form-horizontal" method="post">
                     <fieldset>
-                        <legend id="title">Sign in</legend>
+                        <legend id="title">{{ _('Sign in') }}</legend>
                         {{ form.hidden_tag() }}
                         <div class="form-group">
-                            <label for="email" class="col-md-2 control-label">Email</label>
+                            <label for="email" class="col-md-2 control-label">{{ _('Email') }}</label>
                             <div class="col-md-10">
                                 {{ form.email(class_="form-control") }}
                                 {% if form.email.errors %}
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="password" class="col-md-2 control-label">Password</label>
+                            <label for="password" class="col-md-2 control-label">{{ _('Password') }}</label>
                             <div class="col-md-10">
                                 {{ form.password(class_="form-control") }}
                                 {% if form.password.errors %}
@@ -32,11 +32,11 @@
                                 {% endif %}
                             </div>
                             <div class="col-md-offset-2">
-                                &nbsp&nbsp&nbsp&nbsp{{ form.remember_me }} Remember me
+                                &nbsp&nbsp&nbsp&nbsp{{ form.remember_me }} {{ _('Remember me') }}
                             </div>    
                         </div>
                         <div class="form-group">
-                            <label for="human" class="col-md-2 control-label">2+3=?</label>
+                            <label for="human" class="col-md-2 control-label">{{ _('2+3=?') }}</label>
                             <div class="col-md-10">
                                 {{ form.answer(class_="form-control") }}
                                 {% if form.answer.errors %}
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <center><button type="submit" class="btn btn-primary">Sign in</button></center>
+                            <center><button type="submit" class="btn btn-primary">{{ _('Sign in') }}</button></center>
                         </div>
                     </fieldset>
                 </form>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-01 17:25+0200\n"
+"POT-Creation-Date: 2016-06-02 09:53+0200\n"
 "PO-Revision-Date: 2016-04-22 10:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -32,12 +32,13 @@ msgid ""
 "        <p>We love our work and you can see this in every Cosy.</p>\n"
 "        </h4>"
 msgstr ""
-"<h4><p>Aus unserer Liebe zu Hunden gründeten wir Milliondog. Der Name steht "
-"symbolisch für die Bedeutung und den Wert, den der Hund für seinen Besitzer hat. "
-"Unsere Philosophie baut auf diese Bedeutung. Die handgefertigten Cosys sind "
-"Unikate in Stoff- und Farbkombination und unterstreichen die individuelle Persönlichkeit "
-"und Einzigartigkeit Ihres Lieblings.</p>\n"
-"<p>Wir lieben unsere Arbeit und das sieht man an jedem Cosy…."</p><h4>"
+"<h4><p>Aus unserer Liebe zu Hunden gründeten wir Milliondog. Der Name "
+"steht symbolisch für die Bedeutung und den Wert, den der Hund für seinen "
+"Besitzer hat. Unsere Philosophie baut auf diese Bedeutung. Die "
+"handgefertigten Cosys sind Unikate in Stoff- und Farbkombination und "
+"unterstreichen die individuelle Persönlichkeit und Einzigartigkeit Ihres "
+"Lieblings.</p>\n"
+"<p>Wir lieben unsere Arbeit und das sieht man an jedem Cosy….\"</p><h4>"
 
 #: flask_shop/views.py:131 flask_shop/views.py:136
 #: flask_shop/templates/layout.html:55
@@ -56,10 +57,15 @@ msgid ""
 "        <p>For more information contact us by Email</p>\n"
 "        </h4>"
 msgstr ""
-"<h4><p>Nutzen Sie&nbsp;unseren exklusiven Service. Gerne&nbsp;verarbeiten wir für Sie auch&nbsp;Stoffe mit besonderer emotionaler Bedeutung, wie zum Beispiel Kleidungsstücke von Kindern, Eltern, Partnern etc.</p>"
-"<p>Kontaktieren Sie uns gerne per <a href="http://milliondog.com/kontakt/">Email</a>.</p></h4>"
+"<h4><p>Nutzen Sie&nbsp;unseren exklusiven Service. Gerne&nbsp;verarbeiten"
+" wir für Sie auch&nbsp;Stoffe mit besonderer emotionaler Bedeutung, wie "
+"zum Beispiel Kleidungsstücke von Kindern, Eltern, Partnern "
+"etc.</p><p>Kontaktieren Sie uns gerne per <a "
+"href=\"/contact/\">Email</a>.</p></h4>"
 
 #: flask_shop/views.py:146 flask_shop/views.py:161
+#: flask_shop/templates/admin.html:44 flask_shop/templates/admin.html:65
+#: flask_shop/templates/admin.html:93 flask_shop/templates/admin.html:118
 msgid "Product"
 msgstr "Produkt"
 
@@ -67,7 +73,7 @@ msgstr "Produkt"
 msgid "Product:"
 msgstr "Produkt:"
 
-#: flask_shop/views.py:179 flask_shop/views.py:196
+#: flask_shop/views.py:179 flask_shop/views.py:193
 #: flask_shop/templates/layout.html:52
 msgid "Shop"
 msgstr "Shop"
@@ -85,110 +91,104 @@ msgid ""
 "        <br>You can choose a standard Cosy sizes or you can order a Cosy "
 "in exactly the right size for your dog.\n"
 "        <br>Each Cosy is reversible, it can be worn on either side.</p>\n"
-"        <p>Dimensions table: Dog neck S = 26 – 29 cm, M = 31 – 36 cm, L ="
-" 45 – 51 cm, XL = to 55 cm\n"
-"        <br>Please measure the neck of your dog, so you can be sure, you "
-"will order the right Cosy size.</p>\n"
-"        <p><b>Delivery Time</b>: 4-7 working days within Switzerland, "
-"approximately 20 working days for overseas.</p>\n"
 "        </h4>"
 msgstr ""
-"<h4><p>Die individuelle, sorgfältige Verarbeitung der bequemen Baumwoll- und "
-"Jerseystoffe zu einem MillionDog-Cosy beginnt für uns bei der Auswahl der "
-"besonderen Stoffe und deren Kombinationen miteinander."
-"<br>Jedes MillionDog-Cosy ist ein handgefertigtes Einzelstück und hebt die "
-"Persönlichkeit ihres Hundes hervor.<br><br>"
-"Jeder Hund ist doch ein wahrer MillionDog..."
-"<br><br>Wir bieten Cosy-Standardgrössen und fertigen speziell auf einen von "
-"Ihnen angegebenen Halsumfang Ihres Hundes.<br>Die Cosys sind beidseits tragbar.</p>"
-"<p>Grössentabelle: Halsumfang S = 26 – 29 cm; M = 31 – 36 cm; L = 45 – 51 cm; XL = bis 55 cm"
-"<br>Messen Sie zur Sicherheit den Halsumfang Ihres Hundes um die richtige Cosy-Grösse bestellen zu können."
-"<p><b>Lieferzeiten</b>: Inland 4-7 Werktage, Ausland bis 20 Tage je nach Land</p></h4>"
+"<h4><p>Die individuelle, sorgfältige Verarbeitung der bequemen Baumwoll- "
+"und Jerseystoffe zu einem MillionDog-Cosy beginnt für uns bei der Auswahl"
+" der besonderen Stoffe und deren Kombinationen miteinander.<br>Jedes "
+"MillionDog-Cosy ist ein handgefertigtes Einzelstück und hebt die "
+"Persönlichkeit ihres Hundes hervor.<br><br>Jeder Hund ist doch ein wahrer"
+" MillionDog...<br><br>Wir bieten Cosy-Standardgrössen und fertigen "
+"speziell auf einen von Ihnen angegebenen Halsumfang Ihres Hundes.<br>Die "
+"Cosys sind beidseits tragbar.</p></h4>"
 
-#: flask_shop/views.py:201 flask_shop/views.py:203
-#: flask_shop/templates/layout.html:53
+#: flask_shop/views.py:198 flask_shop/views.py:200
+#: flask_shop/templates/gallery.html:46 flask_shop/templates/layout.html:53
 msgid "Gallery"
 msgstr "Galerie"
 
-#: flask_shop/views.py:202
+#: flask_shop/views.py:199
 msgid "Gallery:"
 msgstr "Galerie:"
 
-#: flask_shop/views.py:217
+#: flask_shop/views.py:214
 msgid "Products"
 msgstr "Produkte"
 
-#: flask_shop/views.py:231
+#: flask_shop/views.py:228
 msgid "Start"
 msgstr "Start"
 
-#: flask_shop/views.py:232
+#: flask_shop/views.py:229
 msgid "exclusive accessoires for your awesome darling"
 msgstr "Exklusive Accessoires für Ihren einzigartigen Liebling"
 
-#: flask_shop/views.py:339
+#: flask_shop/views.py:337
 msgid "login successful."
 msgstr "Anmeldung erfolgreich"
 
-#: flask_shop/views.py:346 flask_shop/views.py:349
+#: flask_shop/views.py:344 flask_shop/views.py:347
 msgid "invalid email or password."
 msgstr "Email oder Passwort ist ungültig"
 
-#: flask_shop/views.py:352 flask_shop/views.py:400
+#: flask_shop/views.py:350 flask_shop/views.py:398
 msgid "Invalid email address given."
 msgstr "Email Adresse ist ungültig."
 
-#: flask_shop/views.py:355
+#: flask_shop/views.py:353 flask_shop/templates/login.html:11
+#: flask_shop/templates/login.html:50
 msgid "Sign in"
 msgstr "Anmelden"
 
-#: flask_shop/views.py:367
+#: flask_shop/views.py:365
 msgid "Email address already registered."
 msgstr "Email-Adresse ist bereits registriert."
 
-#: flask_shop/views.py:397
+#: flask_shop/views.py:395
 msgid "System is down."
 msgstr "Das System ist ausser Betrieb"
 
-#: flask_shop/views.py:403
+#: flask_shop/views.py:401
 msgid "Register"
 msgstr "Registrieren"
 
-#: flask_shop/views.py:413 flask_shop/views.py:427
+#: flask_shop/views.py:411 flask_shop/views.py:425
 #: flask_shop/templates/layout.html:56
 msgid "Contact"
 msgstr "Kontakt"
 
-#: flask_shop/views.py:414
+#: flask_shop/views.py:412 flask_shop/templates/contact.html:12
 msgid "You can send us a message here:"
 msgstr "Kontaktieren Sie uns unverbindlich, wir freuen uns über Ihre Nachricht:"
 
-#: flask_shop/views.py:417
+#: flask_shop/views.py:415
 msgid "Thank you for your message."
 msgstr "Vielen Dank für Ihre Nachricht."
 
-#: flask_shop/views.py:434 flask_shop/views.py:515
+#: flask_shop/views.py:432 flask_shop/views.py:513
+#: flask_shop/templates/cart.html:28
 msgid "Checkout"
 msgstr "Zur Kasse"
 
-#: flask_shop/views.py:435
+#: flask_shop/views.py:433
 msgid "Please enter your address here:"
 msgstr "Geben Sie bitte nachfolgend Ihre Adresse an:"
 
-#: flask_shop/views.py:522 flask_shop/views.py:543
+#: flask_shop/views.py:520 flask_shop/views.py:541
+#: flask_shop/templates/payment.html:11
 msgid "Payment"
 msgstr "Bezahlung"
 
-#: flask_shop/views.py:523
+#: flask_shop/views.py:521
 msgid "Please follow the link to pay with Paypal:"
 msgstr "Bitte benutzen Sie folgenden Link um mit Paypal zu bezahlen:"
 
-#: flask_shop/views.py:689 flask_shop/views.py:695
+#: flask_shop/views.py:687 flask_shop/views.py:693
 #: flask_shop/templates/layout.html:84
 msgid "Payment and Shipping"
 msgstr "Zahlung und Versand"
 
-#: flask_shop/views.py:690
+#: flask_shop/views.py:688
 msgid ""
 "<p>We accept PayPal payment only.</p><br>\n"
 "        <p>Handling time: 2-3 days</p><br>\n"
@@ -214,15 +214,15 @@ msgstr ""
 "frachtfrei.<br><br>Weltweit Versand unter 0,5 kg für 7.50 "
 "CHF<br><br>Bitte beachten Sie, dass bei grenzüberschreitenden Lieferungen"
 " weitere Steuern (etwa im Fall eines innergemeinschaftlichen Erwerbs) "
-"und/oder Abgaben, etwa in Form von Zöllen anfallen können, die von "
-"Ihnen zu tragen sind.<br><br>"
+"und/oder Abgaben, etwa in Form von Zöllen anfallen können, die von Ihnen "
+"zu tragen sind.<br><br>"
 
-#: flask_shop/views.py:700 flask_shop/views.py:707
+#: flask_shop/views.py:698 flask_shop/views.py:705
 #: flask_shop/templates/layout.html:85
 msgid "Right of revocation"
 msgstr "Widerrufsrecht"
 
-#: flask_shop/views.py:701
+#: flask_shop/views.py:699
 msgid ""
 "<p>Conditions of returned goods<br><br></p>\n"
 "        <p>We will gladly take back your order if you are not "
@@ -235,57 +235,87 @@ msgid ""
 "account.</p><br>\n"
 "        "
 msgstr ""
-"<p>Wir fertigen jedes unserer Produkte mit grösster Sorgfalt. Sollten Sie dennoch Grund zu Unzufriedenheit oder eine falsche Grösse bestellt haben, können Sie die Ware an uns zurück schicken.<br>"
-"Die Versandkosten hierfür fallen zu Ihren Lasten.</p>"
-"<p>Natürlichen Personen, nachfolgend Verbraucher genannt, die ein Rechtsgeschäft zu Zwecken abschliessen, die weder ihrer gewerblichen noch ihrer selbständigen beruflichen Tätigkeit zugerechnet werden können steht ein Widerrufsrecht nach folgender Massgabe zu,</p>"
-"<h2>Widerrufsbelehrung</h2>"
-"<h3>Widerrufsrecht</h3>"
-"<p>Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen.</p>"
-"<p>Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die letzte Ware in Besitz genommen haben bzw. hat.</p>"
-"<p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns<br>"
-"(MillionDog, Sabine Reiss, Anke Siegrist<br>"
-"Obere Rebbergstrasse 34,<br>"
-"CH- 4800 Zofingen,<br>"
-"Tel: 062 – 752 40 48,<br>"
-"E-Mail: <a href="mailto:informme@milliondog.com">informme@milliondog.com</a>)<br>"
-"mittels einer eindeutigen Erklärung (z. B. ein mit der Post versandter Brief oder E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. Sie können dafür das beigefügte Muster-Widerrufsformular verwenden, das jedoch nicht vorgeschrieben ist.</p>"
-"<p>Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist absenden.</p>"
-"<p>&nbsp;</p>"
-"<p><strong>Folgen des Widerrufs<br>"
-"</strong>Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die wir von Ihnen erhalten haben, einschließlich der Lieferkosten (mit Ausnahme der zusätzlichen Kosten, die sich daraus ergeben, dass Sie eine andere Art der Lieferung als die von uns angebotene, günstigste Standardlieferung gewählt haben), unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die Mitteilung über Ihren Widerruf dieses Vertrags bei uns eingegangen ist. Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei der ursprünglichen Transaktion eingesetzt haben, es sei denn, mit Ihnen wurde ausdrücklich etwas anderes vereinbart; in keinem Fall werden Ihnen wegen dieser Rückzahlung Entgelte berechnet. Wir können die Rückzahlung&nbsp; verweigern, bis wir die Waren wieder zurückerhalten haben oder bis Sie den Nachweis erbracht haben, dass Sie die Waren zurückgesandt haben, je nachdem, welches der frühere Zeitpunkt ist.</p>"
-"<p>Sie haben die Waren unverzüglich und in jedem Fall spätestens binnen vierzehn Tagen ab dem Tag, an dem Sie uns über den Widerruf dieses Vertrags unterrichten, an uns&nbsp; zurückzusenden oder zu übergeben. Die Frist ist gewahrt, wenn Sie die Waren vor Ablauf der Frist von vierzehn Tagen absenden. Sie tragen die unmittelbaren Kosten der Rücksendung der Waren.</p>"
-"<p>Sie müssen für einen etwaigen Wertverlust der Waren nur aufkommen, wenn dieser Wertverlust auf einen zur Prüfung der Beschaffenheit, Eigenschaften und Funktionsweise der Waren nicht notwendigen Umgang mit ihnen zurückzuführen ist.</p>
-"<p>&nbsp;</p>"
-"<p><strong>Ausschluss bzw. vorzeitiges Erlöschen des Widerrufsrechts:<br>"
-"</strong>Das Widerrufsrecht besteht nicht bei Verträgen<br>"
-"– zur Lieferung von Waren, die nicht vorgefertigt sind und für deren Herstellung eine individuelle Auswahl oder Bestimmung durch den Verbraucher maßgeblich ist oder die eindeutig auf die persönlichen Bedürfnisse des Verbrauchers zugeschnitten sind.</p>"
-"<p>&nbsp;</p>"
-"<p><strong>Allgemeine Hinweise<br>"
-"</strong>1.1 Bitte vermeiden Sie Beschädigungen und Verunreinigungen der Ware. Senden Sie die Ware bitte möglichst in Originalverpackung mit sämtlichem Zubehör und mit allen Verpackungsbestandteilen an uns zurück. Verwenden Sie ggf. eine schützende Umverpackung. Wenn Sie die Originalverpackung nicht mehr besitzen, sorgen Sie bitte mit einer geeigneten Verpackung für einen ausreichenden Schutz vor Transportschäden.</p>"
-"<p>1.2 Senden Sie die Waren, die aufgrund ihrer Beschaffenheit normal mit der Post zurückgesandt werden können, bitte ausreichend frankiert an uns zurück.</p>"
-"<p>1.3 Bitte beachten Sie, dass die vorgenannten Ziffern 1-2 nicht Voraussetzung für die wirksame Ausübung des Widerrufsrechts sind.</p>"
-"<p>&nbsp;</p>"
-"<h3>Muster-Widerrufsformular</h3>"
-"<p>(Wenn Sie den Vertrag widerrufen wollen, dann füllen Sie bitte dieses Formular aus und senden Sie es zurück.)</p>"
-"<p>MillionDog, Sabine Reiss, Anke Siegrist<br>"
-"Obere Rebbergstrasse 34<br>"
-"CH- 4800 Zofingen<br>"
-"E-Mail: <a href="mailto:informme@milliondog.com">informme@milliondog.com</a></p>"
-"<p>Hiermit widerrufe(n) ich/wir(*) den von mir/uns abgeschlossenen Vertrag über den Kauf der folgenden Waren (*)/ die Erbringung der folgenden Dienstleistung (*)</p>"
-"<p>– Bestellt am (*) /erhalten am (*)</p>"
-"<p>– Name des/der Verbraucher(s)</p>"
-"<p>– Anschrift des/der Verbraucher(s)</p>"
-"<p>– Unterschrift des/der Verbraucher(s) (nur bei Mitteilung auf Papier)</p>"
-"<p>– Datum</p>"
-"<p>&nbsp;</p>"
-"<p>(*) Unzutreffendes streichen</p>"
+"<p>Wir fertigen jedes unserer Produkte mit grösster Sorgfalt. Sollten Sie"
+" dennoch Grund zu Unzufriedenheit oder eine falsche Grösse bestellt "
+"haben, können Sie die Ware an uns zurück schicken.<br>Die Versandkosten "
+"hierfür fallen zu Ihren Lasten.</p><p>Natürlichen Personen, nachfolgend "
+"Verbraucher genannt, die ein Rechtsgeschäft zu Zwecken abschliessen, die "
+"weder ihrer gewerblichen noch ihrer selbständigen beruflichen Tätigkeit "
+"zugerechnet werden können steht ein Widerrufsrecht nach folgender "
+"Massgabe zu,</p><h2>Widerrufsbelehrung</h2><h3>Widerrufsrecht</h3><p>Sie "
+"haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen "
+"Vertrag zu widerrufen.</p><p>Die Widerrufsfrist beträgt vierzehn Tage ab "
+"dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der "
+"Beförderer ist, die letzte Ware in Besitz genommen haben bzw. "
+"hat.</p><p>Um Ihr Widerrufsrecht auszuüben, müssen Sie "
+"uns<br>(MillionDog, Sabine Reiss, Anke Siegrist<br>Obere Rebbergstrasse "
+"34,<br>CH- 4800 Zofingen,<br>Tel: 062 – 752 40 48,<br>E-Mail: <a "
+"href=\"mailto:informme@milliondog.com\">informme@milliondog.com</a>)<br>mittels"
+" einer eindeutigen Erklärung (z. B. ein mit der Post versandter Brief "
+"oder E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, "
+"informieren. Sie können dafür das beigefügte Muster-Widerrufsformular "
+"verwenden, das jedoch nicht vorgeschrieben ist.</p><p>Zur Wahrung der "
+"Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung "
+"des Widerrufsrechts vor Ablauf der Widerrufsfrist "
+"absenden.</p><p>&nbsp;</p><p><strong>Folgen des "
+"Widerrufs<br></strong>Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen"
+" alle Zahlungen, die wir von Ihnen erhalten haben, einschließlich der "
+"Lieferkosten (mit Ausnahme der zusätzlichen Kosten, die sich daraus "
+"ergeben, dass Sie eine andere Art der Lieferung als die von uns "
+"angebotene, günstigste Standardlieferung gewählt haben), unverzüglich und"
+" spätestens binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die "
+"Mitteilung über Ihren Widerruf dieses Vertrags bei uns eingegangen ist. "
+"Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei "
+"der ursprünglichen Transaktion eingesetzt haben, es sei denn, mit Ihnen "
+"wurde ausdrücklich etwas anderes vereinbart; in keinem Fall werden Ihnen "
+"wegen dieser Rückzahlung Entgelte berechnet. Wir können die "
+"Rückzahlung&nbsp; verweigern, bis wir die Waren wieder zurückerhalten "
+"haben oder bis Sie den Nachweis erbracht haben, dass Sie die Waren "
+"zurückgesandt haben, je nachdem, welches der frühere Zeitpunkt "
+"ist.</p><p>Sie haben die Waren unverzüglich und in jedem Fall spätestens "
+"binnen vierzehn Tagen ab dem Tag, an dem Sie uns über den Widerruf dieses"
+" Vertrags unterrichten, an uns&nbsp; zurückzusenden oder zu übergeben. "
+"Die Frist ist gewahrt, wenn Sie die Waren vor Ablauf der Frist von "
+"vierzehn Tagen absenden. Sie tragen die unmittelbaren Kosten der "
+"Rücksendung der Waren.</p><p>Sie müssen für einen etwaigen Wertverlust "
+"der Waren nur aufkommen, wenn dieser Wertverlust auf einen zur Prüfung "
+"der Beschaffenheit, Eigenschaften und Funktionsweise der Waren nicht "
+"notwendigen Umgang mit ihnen zurückzuführen "
+"ist.</p<p>&nbsp;</p><p><strong>Ausschluss bzw. vorzeitiges Erlöschen des "
+"Widerrufsrechts:<br></strong>Das Widerrufsrecht besteht nicht bei "
+"Verträgen<br>– zur Lieferung von Waren, die nicht vorgefertigt sind und "
+"für deren Herstellung eine individuelle Auswahl oder Bestimmung durch den"
+" Verbraucher maßgeblich ist oder die eindeutig auf die persönlichen "
+"Bedürfnisse des Verbrauchers zugeschnitten "
+"sind.</p><p>&nbsp;</p><p><strong>Allgemeine Hinweise<br></strong>1.1 "
+"Bitte vermeiden Sie Beschädigungen und Verunreinigungen der Ware. Senden "
+"Sie die Ware bitte möglichst in Originalverpackung mit sämtlichem Zubehör"
+" und mit allen Verpackungsbestandteilen an uns zurück. Verwenden Sie ggf."
+" eine schützende Umverpackung. Wenn Sie die Originalverpackung nicht mehr"
+" besitzen, sorgen Sie bitte mit einer geeigneten Verpackung für einen "
+"ausreichenden Schutz vor Transportschäden.</p><p>1.2 Senden Sie die "
+"Waren, die aufgrund ihrer Beschaffenheit normal mit der Post "
+"zurückgesandt werden können, bitte ausreichend frankiert an uns "
+"zurück.</p><p>1.3 Bitte beachten Sie, dass die vorgenannten Ziffern 1-2 "
+"nicht Voraussetzung für die wirksame Ausübung des Widerrufsrechts "
+"sind.</p><p>&nbsp;</p><h3>Muster-Widerrufsformular</h3><p>(Wenn Sie den "
+"Vertrag widerrufen wollen, dann füllen Sie bitte dieses Formular aus und "
+"senden Sie es zurück.)</p><p>MillionDog, Sabine Reiss, Anke "
+"Siegrist<br>Obere Rebbergstrasse 34<br>CH- 4800 Zofingen<br>E-Mail: <a "
+"href=\"mailto:informme@milliondog.com\">informme@milliondog.com</a></p><p>Hiermit"
+" widerrufe(n) ich/wir(*) den von mir/uns abgeschlossenen Vertrag über den"
+" Kauf der folgenden Waren (*)/ die Erbringung der folgenden "
+"Dienstleistung (*)</p><p>– Bestellt am (*) /erhalten am (*)</p><p>– Name "
+"des/der Verbraucher(s)</p><p>– Anschrift des/der Verbraucher(s)</p><p>– "
+"Unterschrift des/der Verbraucher(s) (nur bei Mitteilung auf "
+"Papier)</p><p>– Datum</p><p>&nbsp;</p><p>(*) Unzutreffendes streichen</p>"
 
-#: flask_shop/views.py:712 flask_shop/views.py:752
+#: flask_shop/views.py:710 flask_shop/views.py:750
 #: flask_shop/templates/layout.html:86
 msgid "Terms and conditions"
 msgstr "AGB"
 
-#: flask_shop/views.py:713
+#: flask_shop/views.py:711
 msgid ""
 "<h2>Allgemeine Geschäftsbedingungen mit Kundeninformationen</h2>\n"
 "        <p>1. Geltungsbereich<br>\n"
@@ -428,12 +458,12 @@ msgid ""
 "        "
 msgstr ""
 
-#: flask_shop/views.py:757 flask_shop/views.py:794
+#: flask_shop/views.py:755 flask_shop/views.py:792
 #: flask_shop/templates/layout.html:87
 msgid "Disclaimer"
 msgstr "Datenschutz"
 
-#: flask_shop/views.py:758
+#: flask_shop/views.py:756
 msgid ""
 "<p><strong>Der Schutz Ihrer Privatsphäre ist uns ein wichtiges Anliegen. "
 "Bitte beachten Sie die folgenden Punkte unserer "
@@ -695,12 +725,12 @@ msgstr ""
 "soweit dem keine gesetzliche Aufbewahrungspflicht entgegensteht.</p>\n"
 "        "
 
-#: flask_shop/views.py:799 flask_shop/views.py:806
+#: flask_shop/views.py:797 flask_shop/views.py:804
 #: flask_shop/templates/layout.html:88
 msgid "Legal notice"
 msgstr "Impressum"
 
-#: flask_shop/views.py:800
+#: flask_shop/views.py:798
 msgid ""
 "<p><br>\n"
 "        MillionDog<br>\n"
@@ -716,47 +746,205 @@ msgstr ""
 "        MillionDog<br>\n"
 "        CH-4800 Zofingen<br>\n"
 "        e-mail: informme@milliondog.com<br><br>\n"
-"        Sämtliche Inhalte auf www.milliondog.com sind urheberrechtlich geschützt. Jegliche"
-" Verwendung von Bildern und Texten, im Gesamten und/oder Auszügen in "
-"gedruckter oder digitaler Weise im Internet darf ausschliesslich nur"
-"mit der Zustimmung von MillionDog, "
-"namentlich Sabine Reiss und Anke Siegrist erfolgen.<br>\n"
+"        Sämtliche Inhalte auf www.milliondog.com sind urheberrechtlich "
+"geschützt. Jegliche Verwendung von Bildern und Texten, im Gesamten "
+"und/oder Auszügen in gedruckter oder digitaler Weise im Internet darf "
+"ausschliesslich nurmit der Zustimmung von MillionDog, namentlich Sabine "
+"Reiss und Anke Siegrist erfolgen.<br>\n"
 "Beschwerdeverfahren<br>\n"
-"Online-Streitbeilegung gemäß Art. 14 Abs."
-" 1 ODR-VO: Die Europäische Kommission stellt eine Plattform zur Online-"
-"Streitbeilegung (OS) bereit, die Sie unter "
-"http://ec.europa.eu/consumers/odr/ finden.\n"
+"Online-Streitbeilegung gemäß Art. 14 Abs. 1 ODR-VO: Die Europäische "
+"Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit, "
+"die Sie unter http://ec.europa.eu/consumers/odr/ finden.\n"
 "                "
 
-#: flask_shop/templates/cart.html:3 flask_shop/templates/cart.html:8
+#: flask_shop/templates/account.html:19
+msgid "Order State"
+msgstr "Auftragsstatus"
+
+#: flask_shop/templates/account.html:20
+msgid "Payment term"
+msgstr "Zahlungsmethode"
+
+#: flask_shop/templates/account.html:21
+msgid "Amount"
+msgstr "Betrag"
+
+#: flask_shop/templates/account.html:22
+msgid "Untaxed Amount"
+msgstr "Betrag ohne Steuer"
+
+#: flask_shop/templates/account.html:23
+msgid "Tax"
+msgstr "Steuer"
+
+#: flask_shop/templates/account.html:24
+msgid "Shipment method"
+msgstr "Versandmethode"
+
+#: flask_shop/templates/account.html:25
+msgid "Shipment state"
+msgstr "Lieferstatus"
+
+#: flask_shop/templates/account.html:26
+msgid "Invoice method"
+msgstr "Zahlungsmethode"
+
+#: flask_shop/templates/account.html:27
+msgid "Invoice state"
+msgstr "Rechnungsstatus"
+
+#: flask_shop/templates/account.html:28
+msgid "Invoice address"
+msgstr "Rechnungsadresse"
+
+#: flask_shop/templates/admin.html:19
+msgid "Name"
+msgstr "Name"
+
+#: flask_shop/templates/admin.html:20
+msgid "Code"
+msgstr "Code"
+
+#: flask_shop/templates/admin.html:21
+msgid "Active"
+msgstr "Aktif"
+
+#: flask_shop/templates/admin.html:38 flask_shop/templates/admin.html:59
+#: flask_shop/templates/admin.html:87 flask_shop/templates/admin.html:112
+msgid "Currency"
+msgstr "Währung"
+
+#: flask_shop/templates/admin.html:39 flask_shop/templates/admin.html:60
+#: flask_shop/templates/admin.html:88 flask_shop/templates/admin.html:113
+msgid "Unit Price"
+msgstr "Preis pro Einheit"
+
+#: flask_shop/templates/admin.html:40 flask_shop/templates/admin.html:61
+#: flask_shop/templates/admin.html:89 flask_shop/templates/admin.html:114
+msgid "Shipment"
+msgstr "Lieferung"
+
+#: flask_shop/templates/admin.html:41 flask_shop/templates/admin.html:62
+#: flask_shop/templates/admin.html:90 flask_shop/templates/admin.html:115
+msgid "Effective Date"
+msgstr "Valutadatum"
+
+#: flask_shop/templates/admin.html:42 flask_shop/templates/admin.html:63
+#: flask_shop/templates/admin.html:91 flask_shop/templates/admin.html:116
+msgid "UOM"
+msgstr "Masseinheit"
+
+#: flask_shop/templates/admin.html:43 flask_shop/templates/admin.html:64
+#: flask_shop/templates/admin.html:92 flask_shop/templates/admin.html:117
+msgid "Cost Price"
+msgstr "Einkaufspreis"
+
+#: flask_shop/templates/admin.html:45 flask_shop/templates/admin.html:66
+#: flask_shop/templates/admin.html:94 flask_shop/templates/admin.html:119
+msgid "From Location"
+msgstr "Ursprungswarenlager"
+
+#: flask_shop/templates/admin.html:46 flask_shop/templates/admin.html:67
+#: flask_shop/templates/admin.html:95 flask_shop/templates/admin.html:120
+msgid "To Location"
+msgstr "Zielwarenlager"
+
+#: flask_shop/templates/admin.html:47 flask_shop/templates/admin.html:68
+#: flask_shop/templates/admin.html:96
+msgid "Quantity"
+msgstr "Anzahl"
+
+#: flask_shop/templates/admin.html:48 flask_shop/templates/admin.html:69
+#: flask_shop/templates/admin.html:70 flask_shop/templates/admin.html:71
+msgid "Invoice Address"
+msgstr "Rechnungsadresse"
+
+#: flask_shop/templates/cart.html:3
 msgid "cart"
 msgstr "Warenkorb"
 
-#: flask_shop/templates/cart.html:19
-msgid "cart_empty"
-msgstr "Dein Warenkorb ist gegenwärtig leer"
+#: flask_shop/templates/cart.html:10 flask_shop/templates/checkout.html:12
+msgid "Items in cart"
+msgstr "Produkte im Warenkorb"
 
-#: flask_shop/templates/cart.html:20
-msgid "back_to_shop"
-msgstr "Zurück zum Shop"
-
-#: flask_shop/templates/layout.html:57
-msgid "Login"
-msgstr ""
-
-#: flask_shop/templates/product.html:11
+#: flask_shop/templates/cart.html:19 flask_shop/templates/product.html:11
 msgid "Art. Nr."
 msgstr "Artikelnummer"
 
-#: flask_shop/templates/product.html:12
+#: flask_shop/templates/cart.html:20 flask_shop/templates/product.html:12
 msgid "Size"
 msgstr "Grösse"
 
-#: flask_shop/templates/product.html:14 flask_shop/templates/shop.html:120
+#: flask_shop/templates/cart.html:22 flask_shop/templates/product.html:14
+#: flask_shop/templates/shop.html:122
 msgid "VAT incl., excluding <a href=\"/shipping\">shipping</a>"
 msgstr "inklusive MwSt, zzgl. <a href=\"/shipping\">Versandkosten</a>"
 
-#: flask_shop/templates/product.html:16 flask_shop/templates/shop.html:122
+#: flask_shop/templates/cart.html:27
+msgid "Continue shopping"
+msgstr "Weiter einkaufen"
+
+#: flask_shop/templates/cart.html:32
+msgid "cart_empty"
+msgstr "Dein Warenkorb ist gegenwärtig leer"
+
+#: flask_shop/templates/cart.html:33
+msgid "back_to_shop"
+msgstr "Zurück zum Shop"
+
+#: flask_shop/templates/contact.html:11
+msgid "Contact us"
+msgstr "Kontaktformular"
+
+#: flask_shop/templates/contact.html:15
+msgid "Name (required)"
+msgstr "Ihr Name (Pflichtfeld)"
+
+#: flask_shop/templates/contact.html:26
+msgid "Email (required)"
+msgstr "Ihre E-Mail-Adresse (Pflichtfeld)"
+
+#: flask_shop/templates/contact.html:37
+msgid "Subject (required)"
+msgstr "Betreff (Pflichtfeld)"
+
+#: flask_shop/templates/contact.html:48
+msgid "Message"
+msgstr "Ihre Nachricht"
+
+#: flask_shop/templates/contact.html:59 flask_shop/templates/login.html:39
+msgid "2+3=?"
+msgstr "2+3=?"
+
+#: flask_shop/templates/contact.html:71
+msgid "Send"
+msgstr "Absenden"
+
+#: flask_shop/templates/layout.html:57
+msgid "Login"
+msgstr "Anmelden"
+
+#: flask_shop/templates/login.html:14
+msgid "Email"
+msgstr "Email-Adresse"
+
+#: flask_shop/templates/login.html:25
+msgid "Password"
+msgstr "Passwort"
+
+#: flask_shop/templates/login.html:35
+msgid "Remember me"
+msgstr "Angemeldet bleiben"
+
+#: flask_shop/templates/payment.html:12
+msgid "In order to pay you will be forwarded to Paypal"
+msgstr "Für die Zahlung werden sie zu Paypal weitergeleitet."
+
+#: flask_shop/templates/paymentfailed.html:10
+msgid "Payment failed!"
+msgstr "Die Zahlung ist fehlgeschlagen."
+
+#: flask_shop/templates/product.html:16 flask_shop/templates/shop.html:124
 msgid "Add to cart"
 msgstr "In den Warenkorb"
 
@@ -764,4 +952,29 @@ msgstr "In den Warenkorb"
 msgid "register"
 msgstr "Registrieren"
 
+#: flask_shop/templates/shop.html:50
+msgid "Dimensions table: (Dog neck)"
+msgstr "Grössentabelle: Halsumfang"
+
+#: flask_shop/templates/shop.html:51
+msgid ""
+"Please measure the neck of your dog, so you can be sure, you will order "
+"the right Cosy size."
+msgstr ""
+"Messen Sie zur Sicherheit den Halsumfang Ihres Hundes um die richtige "
+"Cosy-Grösse bestellen zu können."
+
+#: flask_shop/templates/shop.html:108
+msgid "Delivery Time"
+msgstr "Lieferzeiten"
+
+#: flask_shop/templates/shop.html:109
+msgid ""
+"4-7 working days within Switzerland, approximately 20 working days for "
+"overseas."
+msgstr "Inland 4-7 Werktage, Ausland bis 20 Tage je nach Land"
+
+#: flask_shop/templates/success.html:10
+msgid "Thank you for your purchase!"
+msgstr "Vielen Dank für Ihre Nachricht."
 

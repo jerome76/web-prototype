@@ -9,18 +9,30 @@
     <div class="well">
         <h2 id="title">{{ _('Items in cart') }}:</h2>
         {% if cart %}
-          <ul>
-            {% for n in cart %}
-            <li>
-                {{n.id, n.name, n.description, n.list_price}}
-            </li>
-              {% endfor %}
-          </ul>
-          <h3><a href="/checkout"><span class="label label-primary">{{ _('Checkout') }}</span></a></h3>
+            {% for product in cart %}
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-responsive img-rounded" src="/static/products/{{ product.code }}-small.png">
+                </div>
+                <div class="col-md-8">
+                    <h4>{{product.name}}</h4>
+                    <h4>&nbsp;&nbsp;{{ _('Art. Nr.') }}: {{product.description}} {{product.code}}</h4>
+                    <h4>&nbsp;&nbsp;{{ _('Size') }}: {{product.size}}</h4>
+                    <h4>{{product.list_price}} {{ session['currency_code'] }}</h4>
+                    <h4>&nbsp;&nbsp;{{ _('VAT incl., excluding <a href="/shipping">shipping</a>') }}</h4>
+                </div>
+            </div>
+            {% endfor %}
+            <h3>
+                <a href="/shop"><span class="label label-primary">{{ _('Continue shopping') }}</span></a>
+                <a href="/checkout"><span class="label label-primary">{{ _('Checkout') }}</span></a>
+            </h3>
+
         {% else %}
-          {{ _('cart_empty') }}
-          <h3><a href="/shop"><span class="label label-primary">{{ _('back_to_shop') }}</span></a></h3>
+            {{ _('cart_empty') }}
+            <h3><a href="/shop"><span class="label label-primary">{{ _('back_to_shop') }}</span></a></h3>
         {% endif %}
     </div>
 </div>
 {% endblock %}
+

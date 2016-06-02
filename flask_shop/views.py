@@ -183,9 +183,6 @@ def shop(category=None, size=None):
         <br>Give your dog the friendly look he deserves – every dog can be a true Milliondog.
         <br>You can choose a standard Cosy sizes or you can order a Cosy in exactly the right size for your dog.
         <br>Each Cosy is reversible, it can be worn on either side.</p>
-        <p>Dimensions table: Dog neck S = 26 – 29 cm, M = 31 – 36 cm, L = 45 – 51 cm, XL = to 55 cm
-        <br>Please measure the neck of your dog, so you can be sure, you will order the right Cosy size.</p>
-        <p><b>Delivery Time</b>: 4-7 working days within Switzerland, approximately 20 working days for overseas.</p>
         </h4>''')
     start = time.time()
     # fastproducts = models.Product.query.all()

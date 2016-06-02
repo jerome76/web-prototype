@@ -4,15 +4,16 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-2">
             <div class="well">
                 <form class="form-horizontal" method="post">
                     <fieldset>
-                        <legend id="title">Contact us</legend>
+                        <legend id="title">{{ _('Contact us') }}</legend>
+                        <p>{{ _('You can send us a message here:') }}</p>
                         {{ form.hidden_tag() }}
                         <div class="form-group">
-                            <label for="name" class="col-md-2 control-label">Name (required)</label>
-                            <div class="col-md-10">
+                            <label for="name" class="col-md-4 control-label">{{ _('Name (required)') }}</label>
+                            <div class="col-md-8">
                                 {{ form.name(class_="form-control") }}
                                 {% if form.name.errors %}
                                     {% for error in form.name.errors %}
@@ -22,8 +23,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="email" class="col-md-2 control-label">Email (required)</label>
-                            <div class="col-md-10">
+                            <label for="email" class="col-md-4 control-label">{{ _('Email (required)') }}</label>
+                            <div class="col-md-8">
                                 {{ form.email(class_="form-control") }}
                                 {% if form.email.errors %}
                                     {% for error in form.email.errors %}
@@ -33,8 +34,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="subject" class="col-md-2 control-label">Subject (required)</label>
-                            <div class="col-md-10">
+                            <label for="subject" class="col-md-4 control-label">{{ _('Subject (required)') }}</label>
+                            <div class="col-md-8">
                                 {{ form.subject(class_="form-control") }}
                                 {% if form.subject.errors %}
                                     {% for error in form.subject.errors %}
@@ -44,8 +45,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="message" class="col-md-2 control-label">Message</label>
-                            <div class="col-md-10">
+                            <label for="message" class="col-md-4 control-label">{{ _('Message') }}</label>
+                            <div class="col-md-8">
                                 {{ form.message(class_="form-control") }}
                                 {% if form.message.errors %}
                                     {% for error in form.message.errors %}
@@ -55,8 +56,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="human" class="col-md-2 control-label">2+3=?</label>
-                            <div class="col-md-10">
+                            <label for="human" class="col-md-4 control-label">{{ _('2+3=?') }}</label>
+                            <div class="col-md-8">
                                 {{ form.answer(class_="form-control") }}
                                 {% if form.answer.errors %}
                                     {% for error in form.answer.errors %}
@@ -67,7 +68,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-5 col-md-offset-5">
-                                <button type="submit" class="btn btn-primary">Send</button>
+                                <button type="submit" class="btn btn-primary">{{ _('Send') }}</button>
                             </div>
                         </div>
                     </fieldset>
