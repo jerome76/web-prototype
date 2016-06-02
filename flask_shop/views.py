@@ -27,6 +27,13 @@ def format_currency_amount(amount):
     return '{:20,.2f}'.format(amount)
 
 
+def getShipping(product_name):
+    Product = Model.get('product.product')
+    product = Product.find(['name', '=', product_name])
+    if product is not None:
+        return product[0]
+
+
 def getProductDirect(category=None, size=None):
     if category is None:
         category_condition = 'and 1 = 1 '
@@ -274,9 +281,18 @@ def cart():
     sub_total_tmp = Decimal(0.00)
     for p in cart:
         sub_total_tmp += p.list_price
+    shipping = getShipping('Versandkosten Schweiz')
+    shipping_cost_temp = 0.00
+    if shipping is not None:
+        if sub_total_tmp < Decimal(150.00*session['currency_rate']):
+            shipping_cost_temp = shipping.list_price * Decimal(session['currency_rate'])
+            sub_total_tmp += shipping_cost_temp
+
     sub_total = format_currency_amount(sub_total_tmp)
+    shipping_cost = format_currency_amount(shipping_cost_temp)
     session['user_name'] = 'paypal_testuser'
     return render_template('cart.html', message=user[0].name, id=user[0].id, cart=cart, sub_total=sub_total,
+                           shipping=shipping, shipping_cost=shipping_cost,
                            title="Milliondog", page='Cart')
 
 
@@ -474,6 +490,27 @@ def contact():
                            pt=page_topic, pc=page_content, title="Milliondog", page=gettext(u'Contact'),
                            form=form)
 
+
+def populate_form_choices(checkout_form):
+    """
+    Pulls choices from the database to populate our select fields.
+    """
+    states = models.State.query.order_by(models.State.name).all()
+    countries = models.Country.query.order_by(models.Country.name).all()
+    state_names = [('', gettext(u'Please select (optional)'))]
+    for state in states:
+        state_names.append([state.code, state.name])
+    #choices need to come in the form of a list comprised of enumerated lists
+    #example [('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')]
+    state_choices = state_names
+    country_names = []
+    for country in countries:
+        country_names.append([country.code, country.name])
+    country_choices = country_names
+    #now that we've built our choices, we need to set them.
+    checkout_form.state.choices = state_choices
+    checkout_form.country.choices = country_choices
+
 # Checkout process
 @app.route('/checkout/', methods=['GET', 'POST'])
 def checkout():
@@ -481,7 +518,20 @@ def checkout():
     page_topic = gettext(u'Checkout')
     page_content = gettext(u'Please enter your address here:')
     productlist = getProductFromSession()
-    form = CheckoutForm()
+    form = CheckoutForm(request.form, country='CH')
+    populate_form_choices(form)
+    sub_total_tmp = Decimal(0.00)
+    for p in productlist:
+        sub_total_tmp += p.list_price
+    shipping = getShipping('Versandkosten Schweiz')
+    shipping_cost_temp = 0.00
+    if shipping is not None:
+        if sub_total_tmp < Decimal(150.00*session['currency_rate']):
+            shipping_cost_temp = shipping.list_price * Decimal(session['currency_rate'])
+            sub_total_tmp += shipping_cost_temp
+
+    sub_total = format_currency_amount(sub_total_tmp)
+    shipping_cost = format_currency_amount(shipping_cost_temp)
     if form.validate_on_submit():
         try:
             partyid = session['partyid']
@@ -501,6 +551,8 @@ def checkout():
             party.addresses[0].streetbis = form.street2.data
             party.addresses[0].zip = form.zip.data
             party.addresses[0].city = form.city.data
+            country_id = form.country.data
+            state_id = form.state.data
             Country = Model.get('country.country')
             (ch, ) = Country.find([('code', '=', 'CH')])
             party.addresses[0].country = ch
@@ -557,7 +609,8 @@ def checkout():
         except KeyError:
             print('user is not logged in')
 
-    return render_template('checkout.html',
+    return render_template('checkout.html', cart=productlist, sub_total=sub_total,
+                           shipping=shipping, shipping_cost=shipping_cost,
                            pt=page_topic, pc=page_content, product=productlist, title="Milliondog",
                            page=gettext(u'Checkout'), form=form)
 

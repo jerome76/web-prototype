@@ -41,6 +41,29 @@ class Property(app.db.Model):
     value = app.db.Column(app.db.String(64))
 
 
+class State(app.db.Model):
+    __tablename__ = "country_subdivision"
+    id = app.db.Column(app.db.Integer, primary_key=True)
+    code = app.db.Column(app.db.String(10), unique=True)
+    name = app.db.Column(app.db.String(32), unique=True)
+    country = app.db.Column(app.db.Integer)
+    type = app.db.Column(app.db.String(32))
+
+    def __init__(self, name):
+        self.name = name
+
+
+class Country(app.db.Model):
+    __tablename__ = "country_country"
+    id = app.db.Column(app.db.Integer, primary_key=True)
+    # longest country length is currently 163 letters
+    name = app.db.Column(app.db.String(256), unique=True)
+    code = app.db.Column(app.db.String(2), unique=True)
+
+    def __init__(self, name):
+        self.name = name
+
+
 class User():
     id = None
     nickname = None

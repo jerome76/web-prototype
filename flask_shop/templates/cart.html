@@ -24,13 +24,25 @@
                 </div>
             </div>
             {% endfor %}
+            {% if shipping_cost > 0.00 %}
             <hr>
             <div class="row">
                 <div class="col-md-4">
 
                 </div>
                 <div class="col-md-8">
-                    <h4>{{ _('Subtotal')}}</h4>
+                    <h4>{{ _('Shipping') }}</h4>
+                    <p>{{shipping_cost}} {{ session['currency_code'] }} {{shipping.name}} </p>
+                </div>
+            </div>
+            {% endif %}
+            <hr>
+            <div class="row">
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-8">
+                    <h4>{{ _('Total')}}</h4>
                     <p>{{ sub_total }} {{ session['currency_code'] }}</p>
                 </div>
             </div>
@@ -47,8 +59,6 @@
                     </h3>
                 </div>
             </div>
-
-
         {% else %}
             {{ _('cart_empty') }}
             <h3><a href="/shop"><span class="label label-primary">{{ _('back_to_shop') }}</span></a></h3>

@@ -7,26 +7,23 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="well">
-                <h2 id="title_cart">{{ _('Items in cart') }}:</h2>
-                {% for n in product %}
-                    <p>{{n.code}} {{n.name}}: {{n.list_price}} {{ session['currency_code'] }}</p>
-                {% endfor %}
+                <legend id="title">{{ pt }}</legend>
+                <p>{{ _('If you already have an account with us, please login at the') }} <a href="/login"><span>{{ _('login page') }}</span></a></p>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="well">
                 <form class="form-horizontal" method="post" name="checkout">
                     <fieldset>
-                        <legend id="title">{{ pt }}</legend>
                         <p>{{ pc |safe }}</p>
                         {{ form.hidden_tag() }}
                         <div class="form-group">
-                            <label for="name" class="col-md-2 control-label">{{ _('Name (required)') }}</label>
-                            <div class="col-md-10">
+                            <label for="name" class="col-md-4 control-label">{{ _('Name') }} (*)</label>
+                            <div class="col-md-6">
                                 {{ form.name(class_="form-control") }}
                                 {% if form.name.errors %}
                                     {% for error in form.name.errors %}
@@ -36,8 +33,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="name2" class="col-md-2 control-label">{{ _('Name2') }}</label>
-                            <div class="col-md-10">
+                            <label for="name2" class="col-md-4 control-label">{{ _('Name2') }}</label>
+                            <div class="col-md-6">
                                 {{ form.name2(class_="form-control") }}
                                 {% if form.name2.errors %}
                                     {% for error in form.name2.errors %}
@@ -47,8 +44,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="street" class="col-md-2 control-label">{{ _('Street (required)') }}</label>
-                            <div class="col-md-10">
+                            <label for="street" class="col-md-4 control-label">{{ _('Street') }} (*)</label>
+                            <div class="col-md-6">
                                 {{ form.street(class_="form-control") }}
                                 {% if form.street.errors %}
                                     {% for error in form.street.errors %}
@@ -58,8 +55,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="street2" class="col-md-2 control-label">{{ _('Street2') }}</label>
-                            <div class="col-md-10">
+                            <label for="street2" class="col-md-4 control-label">{{ _('Street detail') }}</label>
+                            <div class="col-md-6">
                                 {{ form.street2(class_="form-control") }}
                                 {% if form.street2.errors %}
                                     {% for error in form.street2.errors %}
@@ -69,8 +66,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="zip" class="col-md-2 control-label">{{ _('Zip (required)') }}</label>
-                            <div class="col-md-10">
+                            <label for="zip" class="col-md-4 control-label">{{ _('Postcode/Zip') }} (*)</label>
+                            <div class="col-md-6">
                                 {{ form.zip(class_="form-control") }}
                                 {% if form.zip.errors %}
                                     {% for error in form.zip.errors %}
@@ -80,8 +77,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="city" class="col-md-2 control-label">{{ _('City (required)') }}</label>
-                            <div class="col-md-10">
+                            <label for="city" class="col-md-4 control-label">{{ _('City') }} (*)</label>
+                            <div class="col-md-6">
                                 {{ form.city(class_="form-control") }}
                                 {% if form.city.errors %}
                                     {% for error in form.city.errors %}
@@ -91,8 +88,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="state" class="col-md-2 control-label">{{ _('State') }}</label>
-                            <div class="col-md-10">
+                            <label for="state" class="col-md-4 control-label">{{ _('State/Province') }}</label>
+                            <div class="col-md-6">
                                 {{ form.state(class_="form-control") }}
                                 {% if form.state.errors %}
                                     {% for error in form.state.errors %}
@@ -102,8 +99,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="country" class="col-md-2 control-label">{{ _('Country (required)') }}</label>
-                            <div class="col-md-10">
+                            <label for="country" class="col-md-4 control-label">{{ _('Country') }} (*)</label>
+                            <div class="col-md-6">
                                 {{ form.country(class_="form-control") }}
                                 {% if form.country.errors %}
                                     {% for error in form.country.errors %}
@@ -113,8 +110,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="delivery" class="col-md-2 control-label">{{ _('Delivery') }}</label>
-                            <div class="col-md-10">
+                            <label for="delivery" class="col-md-4 control-label"></label>
+                            <div class="col-md-6">
+                                <center>{{ _('Delivery Address') }}</center>
                                 {{ form.delivery(class_="form-control") }}
                                 {% if form.delivery.errors %}
                                     {% for error in form.delivery.errors %}
@@ -124,8 +122,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="invoice" class="col-md-2 control-label">{{ _('Invoice') }}</label>
-                            <div class="col-md-10">
+                            <label for="invoice" class="col-md-4 control-label"></label>
+                            <div class="col-md-6">
+                                <center>{{ _('Invoice Address') }}</center>
                                 {{ form.invoice(class_="form-control") }}
                                 {% if form.invoice.errors %}
                                     {% for error in form.invoice.errors %}
@@ -135,12 +134,69 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="acceptterms" class="col-md-4 control-label"></label>
+                            <div class="col-md-6">
+                                <center>{{ _('Accept <a href="/termsandconditions">terms and conditions</a>') }}</center>
+                                {{ form.acceptterms(class_="form-control") }}
+                                {% if form.acceptterms.errors %}
+                                    {% for error in form.acceptterms.errors %}
+                                        <li><font color="red">{{ error }}</font></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-md-5 col-md-offset-5">
-                                <button type="submit" value="Send" class="btn btn-primary">{{ _('Send') }}</button>
+                                <button type="submit" value="Send" class="btn btn-primary">{{ _('Buy now') }}</button>
                             </div>
                         </div>
                     </fieldset>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="well">
+            <h2 id="title">{{ _('Items in cart') }}:</h2>
+            {% if cart %}
+                {% for product in cart %}
+                <div class="row">
+                    <div class="col-md-4">
+                        <img class="img-responsive img-rounded" src="/static/products/{{ product.code }}-small.png">
+                    </div>
+                    <div class="col-md-8">
+                        <h4>{{product.name}}</h4>
+                        <p>{{ _('Art. Nr.') }}: {{product.description}} {{product.code}}</p>
+                        <p>{{ _('Size') }}: {{product.attributes['size']}}</p>
+                        <p>{{product.list_price}} {{ session['currency_code'] }}</p>
+                        <p>{{ _('VAT incl., excluding <a href="/shipping">shipping</a>') }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                {% if shipping_cost > 0.00 %}
+                <hr>
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-8">
+                        <h4>{{ _('Shipping') }}</h4>
+                        <p>{{shipping_cost}} {{ session['currency_code'] }} {{shipping.name}} </p>
+                    </div>
+                </div>
+                {% endif %}
+                <hr>
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-8">
+                        <h4>{{ _('Total')}}</h4>
+                        <p>{{ sub_total }} {{ session['currency_code'] }}</p>
+                    </div>
+                </div>
+            {% endif %}
             </div>
         </div>
     </div>
