@@ -11,7 +11,7 @@
             <div class="well">
                 <h2 id="title_cart">{{ _('Items in cart') }}:</h2>
                 {% for n in product %}
-                    <p>{{n.id, n.name, n.description, n.list_price}}</p>
+                    <p>{{n.code}} {{n.name}}: {{n.list_price}} {{ session['currency_code'] }}</p>
                 {% endfor %}
             </div>
         </div>
@@ -25,7 +25,7 @@
                         <p>{{ pc |safe }}</p>
                         {{ form.hidden_tag() }}
                         <div class="form-group">
-                            <label for="name" class="col-md-2 control-label">Name (required)</label>
+                            <label for="name" class="col-md-2 control-label">{{ _('Name (required)') }}</label>
                             <div class="col-md-10">
                                 {{ form.name(class_="form-control") }}
                                 {% if form.name.errors %}
@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="name2" class="col-md-2 control-label">Name2</label>
+                            <label for="name2" class="col-md-2 control-label">{{ _('Name2') }}</label>
                             <div class="col-md-10">
                                 {{ form.name2(class_="form-control") }}
                                 {% if form.name2.errors %}
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="street" class="col-md-2 control-label">Street (required)</label>
+                            <label for="street" class="col-md-2 control-label">{{ _('Street (required)') }}</label>
                             <div class="col-md-10">
                                 {{ form.street(class_="form-control") }}
                                 {% if form.street.errors %}
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="street2" class="col-md-2 control-label">Street2</label>
+                            <label for="street2" class="col-md-2 control-label">{{ _('Street2') }}</label>
                             <div class="col-md-10">
                                 {{ form.street2(class_="form-control") }}
                                 {% if form.street2.errors %}
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="zip" class="col-md-2 control-label">Zip (required)</label>
+                            <label for="zip" class="col-md-2 control-label">{{ _('Zip (required)') }}</label>
                             <div class="col-md-10">
                                 {{ form.zip(class_="form-control") }}
                                 {% if form.zip.errors %}
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="city" class="col-md-2 control-label">City (required)</label>
+                            <label for="city" class="col-md-2 control-label">{{ _('City (required)') }}</label>
                             <div class="col-md-10">
                                 {{ form.city(class_="form-control") }}
                                 {% if form.city.errors %}
@@ -91,7 +91,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="state" class="col-md-2 control-label">State</label>
+                            <label for="state" class="col-md-2 control-label">{{ _('State') }}</label>
                             <div class="col-md-10">
                                 {{ form.state(class_="form-control") }}
                                 {% if form.state.errors %}
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="country" class="col-md-2 control-label">Country (required)</label>
+                            <label for="country" class="col-md-2 control-label">{{ _('Country (required)') }}</label>
                             <div class="col-md-10">
                                 {{ form.country(class_="form-control") }}
                                 {% if form.country.errors %}
@@ -113,7 +113,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="delivery" class="col-md-2 control-label">Delivery</label>
+                            <label for="delivery" class="col-md-2 control-label">{{ _('Delivery') }}</label>
                             <div class="col-md-10">
                                 {{ form.delivery(class_="form-control") }}
                                 {% if form.delivery.errors %}
@@ -124,7 +124,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="invoice" class="col-md-2 control-label">Invoice</label>
+                            <label for="invoice" class="col-md-2 control-label">{{ _('Invoice') }}</label>
                             <div class="col-md-10">
                                 {{ form.invoice(class_="form-control") }}
                                 {% if form.invoice.errors %}
@@ -136,7 +136,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-5 col-md-offset-5">
-                                <button type="submit" value="Send" class="btn btn-primary">Send</button>
+                                <button type="submit" value="Send" class="btn btn-primary">{{ _('Send') }}</button>
                             </div>
                         </div>
                     </fieldset>

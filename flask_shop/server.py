@@ -35,7 +35,8 @@ def getProductDirect():
                     "and product.template = t.id "
                     "and t.sale_uom = uom.id " +
                     "and p.res = 'product.template,'||t.id " +
-                    "and p.field = 757 " +
+                    "and p.field = (select f.id from ir_model_field f, ir_model m "
+                    "       where m.model = 'product.template' and m.id = f.model and f.name = 'list_price') " +
                     "and t.id = ptpc.template " +
                     category_condition +
                     size_condition +

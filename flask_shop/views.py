@@ -14,12 +14,18 @@ import json
 from decimal import *
 import psycopg2
 import urlparse
+from datetime import timedelta
 from passlib.hash import pbkdf2_sha256
 from validate_email import validate_email
 
 CONFIG = "./tryton.conf"
 DATABASE_NAME = "tryton_dev"
 config.set_trytond(DATABASE_NAME, config_file=CONFIG)
+
+
+def format_currency_amount(amount):
+    return '{:20,.2f}'.format(amount)
+
 
 def getProductDirect(category=None, size=None):
     if category is None:
@@ -71,7 +77,7 @@ def getProductDirect(category=None, size=None):
             row['uom_name'] = p[7]
             row['uom_symbol'] = p[8]
             row['uom_rounding'] = p[9]
-            row['list_price'] = '{:20,.2f}'.format(Decimal(p[10]) * Decimal(session['currency_rate']))
+            row['list_price'] = format_currency_amount(Decimal(p[10]) * Decimal(session['currency_rate']))
             row['category'] = p[11]
             result.append(row)
         print result
@@ -99,9 +105,27 @@ def get_timezone():
         return user.timezone
 
 @app.before_request
+def make_session_permanent():
+    session.permanent = False
+    app.permanent_session_lifetime = timedelta(minutes=5)
+
+@app.before_request
 def before_request():
     g.user = current_user
     g.user.locale = get_locale()
+    try:
+        if session['lang_code'] is None:
+            session['lang_code'] = 'de'
+        if session['currency_code'] is None:
+            session['currency_code'] = 'CHF'
+        if session['currency_rate'] is None:
+            session['currency_rate'] = 1.00
+    except KeyError:
+        # session not initialized
+        session['lang_code'] = 'de'
+        session['currency_code'] = 'CHF'
+        session['currency_rate'] = 1.00
+
 
 def getProductFromSession():
     try:
@@ -111,6 +135,7 @@ def getProductFromSession():
             Product = Model.get('product.product')
             product = Product.find(['id', '=', p])
             if product is not None:
+                product[0].list_price = Decimal(format_currency_amount(product[0].list_price * Decimal(session['currency_rate'])))
                 products.append(product[0])
         return products
     except KeyError:
@@ -236,8 +261,8 @@ def product_categories():
     ProductCategory = Model.get('product.category')
     categories = ProductCategory.find(['id', '>=', '0'])
     idlist = [c.name for c in categories]
-    return render_template('productcategories.html', db_model='Product Categories', db_list=idlist, title="Milliondog", page='Product Categories')
-
+    return render_template('productcategories.html', db_model='Product Categories', db_list=idlist,
+                           title="Milliondog", page='Product Categories')
 
 
 @app.route('/cart/')
@@ -246,20 +271,44 @@ def cart():
     User = Model.get('res.user')
     user = User.find(['id', '=', '1'])
     cart = getProductFromSession()
+    sub_total_tmp = Decimal(0.00)
+    for p in cart:
+        sub_total_tmp += p.list_price
+    sub_total = format_currency_amount(sub_total_tmp)
     session['user_name'] = 'paypal_testuser'
-    return render_template('cart.html', message=user[0].name, id=user[0].id, cart=cart, title="Milliondog", page='Cart')
+    return render_template('cart.html', message=user[0].name, id=user[0].id, cart=cart, sub_total=sub_total,
+                           title="Milliondog", page='Cart')
 
 
 @app.route('/cart/add/<productid>')
 def cart_add(productid=None):
     cart = []
+    cart_item_count = 0
     try:
         cart = session['cart']
+        cart_item_count = session['cart_item_count']
     except KeyError:
         session['cart'] = cart
+        session['cart_item_count'] = cart_item_count
     if productid not in cart:
         cart.append(productid)
+        session['cart_item_count'] = cart_item_count + 1
     return redirect("/cart")
+
+
+@app.route('/cart/remove/<productid>')
+def cart_remove(productid=None):
+    try:
+        cart = session['cart']
+        cart_item_count = session['cart_item_count']
+        if productid in cart:
+            cart.remove(productid)
+            session['cart_item_count'] = cart_item_count - 1
+    except KeyError:
+        print('view.py.cart_remove-KeyError: ' + productid)
+
+    return redirect("/cart")
+
 
 @app.route('/account/')
 def account():

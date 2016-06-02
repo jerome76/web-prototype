@@ -9,6 +9,7 @@
     <link type="text/css" href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-image-gallery.min.css">
+    <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
     {% block page_css %}
     {% endblock %}
 </head>
@@ -46,6 +47,11 @@
                                     <a href="/setlang/en" id="lang">EN</a>
                                     <span> / </span>
                                     <a href="/setlang/de" id="lang">DE</a>
+                                    {% if session.cart_item_count|safe %}
+                                        &nbsp;&nbsp;&nbsp;
+                                        <a href="/cart" id="lang"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            [{{session['cart_item_count']}}]</a>
+                                    {% endif %}
                                 </div>
                             </div>
                             <li><a href="/index">Home</a></li>
