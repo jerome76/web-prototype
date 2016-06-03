@@ -163,7 +163,7 @@ def sendus():
     page_topic = gettext(u'Send us')
     page_content = gettext(u'''<h4><p>We welcome your enquiries regarding our exclusive service using your own fabrics, for example we can use material from your children’s, parent’s or partner’s clothes to make a special Milliondog-Cosy for your dog. Get in touch with us so we can work together to give your dog a unique look.</p>
         <p>Let your dog play his own part by wearing a Milliondog-Cosy at a special day in your life.</p>
-        <p>For more information contact us by Email</p>
+        <p>For more information contact us by <a href=\"mailto:informme@milliondog.com\">Email</a>.</p>
         </h4>''')
     return render_template('sendus.html', pt=page_topic, pc=page_content, title="Milliondog", page=gettext('Send us'))
 
@@ -810,7 +810,7 @@ def returns():
 def termsandconditions():
     active_page = 'termsandconditions'
     page_topic = gettext(u'Terms and conditions')
-    page_content = gettext(u'''<h2>Allgemeine Geschäftsbedingungen mit Kundeninformationen</h2>
+    page_content = gettext(u'''<p><strong>Allgemeine Geschäftsbedingungen mit Kundeninformationen</strong></p>
         <p>1. Geltungsbereich<br>
         2. Vertragsschluss<br>
         3. Widerrufsrecht<br>
@@ -897,8 +897,10 @@ def privacy():
 def legal():
     active_page = 'legal'
     page_topic = gettext(u'Legal notice')
-    page_content = gettext(u'''<p><br>
+    page_content = gettext(u'''<p>
         MillionDog<br>
+        Inhaber: Sabine Reiss und Anke Siegrist<br>
+        Obere Rebbergstrasse 34<br>
         CH-4800 Zofingen<br>
         e-mail: informme@milliondog.com<br><br>
         All contents on www.milliondog are owned by Milliondog and copyright protected. Any use of milliondog`s contents, including pictures, texts and intellectual property needs strictly consent by Milliondog</p>

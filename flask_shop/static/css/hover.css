@@ -4,7 +4,7 @@
   overflow: hidden;
   position: relative;
   text-align: center;
-  background: #FCD94D;
+  background: #8c5c8e;
 }
 
 .hovereffect .overlay {
@@ -46,9 +46,9 @@
   background-color: transparent;
   background: rgba(0, 0, 0, 0.4);
   opacity: 0.8;
- -webkit-transform: translateY(250px);
-  -ms-transform: translateY(250px);
-  transform: translateY(250px);
+  -webkit-transform: translateY(200px);
+  -ms-transform: translateY(200px);
+  transform: translateY(200px);
   -webkit-transition: all 0.4s  cubic-bezier(0.88,-0.99, 0, 1.81);
   transition: all 0.4s  cubic-bezier(0.88,-0.99, 0, 1.81);
 }
