@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-03 11:42+0200\n"
+"POT-Creation-Date: 2016-06-03 12:21+0200\n"
 "PO-Revision-Date: 2016-04-22 10:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -181,6 +181,8 @@ msgstr "Geben Sie bitte nachfolgend Ihre Adresse an:"
 
 #: flask_shop/views.py:622 flask_shop/views.py:643
 #: flask_shop/templates/payment.html:11
+#: flask_shop/templates/paymentfailed.html:10
+#: flask_shop/templates/success.html:10
 msgid "Payment"
 msgstr "Bezahlung"
 
@@ -917,11 +919,11 @@ msgstr "Zahlungsmethode"
 
 #: flask_shop/templates/account.html:21
 msgid "Amount"
-msgstr "Betrag"
+msgstr "Preis"
 
 #: flask_shop/templates/account.html:22
 msgid "Untaxed Amount"
-msgstr "Betrag ohne Steuer"
+msgstr "Preis ohne Steuer"
 
 #: flask_shop/templates/account.html:23
 msgid "Tax"
@@ -947,7 +949,7 @@ msgstr "Rechnungsstatus"
 msgid "Invoice address"
 msgstr "Rechnungsadresse"
 
-#: flask_shop/templates/admin.html:19 flask_shop/templates/checkout.html:25
+#: flask_shop/templates/admin.html:19 flask_shop/templates/checkout.html:26
 msgid "Name"
 msgstr "Name"
 
@@ -1006,7 +1008,7 @@ msgstr "Anzahl"
 
 #: flask_shop/templates/admin.html:48 flask_shop/templates/admin.html:69
 #: flask_shop/templates/admin.html:70 flask_shop/templates/admin.html:71
-#: flask_shop/templates/checkout.html:127
+#: flask_shop/templates/checkout.html:120
 msgid "Invoice Address"
 msgstr "Rechnungsadresse"
 
@@ -1014,21 +1016,21 @@ msgstr "Rechnungsadresse"
 msgid "cart"
 msgstr "Warenkorb"
 
-#: flask_shop/templates/cart.html:10 flask_shop/templates/checkout.html:161
+#: flask_shop/templates/cart.html:10 flask_shop/templates/checkout.html:149
 msgid "Items in cart"
 msgstr "Produkte im Warenkorb"
 
-#: flask_shop/templates/cart.html:19 flask_shop/templates/checkout.html:170
+#: flask_shop/templates/cart.html:19 flask_shop/templates/checkout.html:158
 #: flask_shop/templates/product.html:11
 msgid "Art. Nr."
 msgstr "Artikelnummer"
 
-#: flask_shop/templates/cart.html:20 flask_shop/templates/checkout.html:171
+#: flask_shop/templates/cart.html:20 flask_shop/templates/checkout.html:159
 #: flask_shop/templates/product.html:12
 msgid "Size"
 msgstr "Grösse"
 
-#: flask_shop/templates/cart.html:22 flask_shop/templates/checkout.html:173
+#: flask_shop/templates/cart.html:22 flask_shop/templates/checkout.html:161
 #: flask_shop/templates/product.html:14 flask_shop/templates/shop.html:139
 msgid "VAT incl., excluding <a href=\"/shipping\">shipping</a>"
 msgstr "inklusive MwSt, zzgl. <a href=\"/shipping\">Versandkosten</a>"
@@ -1037,13 +1039,13 @@ msgstr "inklusive MwSt, zzgl. <a href=\"/shipping\">Versandkosten</a>"
 msgid "Remove"
 msgstr "Entfernen"
 
-#: flask_shop/templates/cart.html:34 flask_shop/templates/checkout.html:184
+#: flask_shop/templates/cart.html:34 flask_shop/templates/checkout.html:172
 msgid "Shipping"
-msgstr "Lieferkosten"
+msgstr "Versand"
 
-#: flask_shop/templates/cart.html:45 flask_shop/templates/checkout.html:195
+#: flask_shop/templates/cart.html:45 flask_shop/templates/checkout.html:183
 msgid "Total"
-msgstr "Endbetrag"
+msgstr "Gesamtsumme"
 
 #: flask_shop/templates/cart.html:53
 msgid "Continue shopping"
@@ -1061,47 +1063,47 @@ msgstr "Zurück zum Shop"
 msgid "If you already have an account with us, please login at the"
 msgstr "Besitzen Sie bereits ein Kundenkonto? Hier geht es zur"
 
-#: flask_shop/templates/checkout.html:13
+#: flask_shop/templates/checkout.html:14
 msgid "login page"
 msgstr "Anmeldeseite"
 
-#: flask_shop/templates/checkout.html:36
+#: flask_shop/templates/checkout.html:37
 msgid "Name2"
 msgstr "Name2"
 
-#: flask_shop/templates/checkout.html:47
+#: flask_shop/templates/checkout.html:48
 msgid "Street"
 msgstr "Strasse"
 
-#: flask_shop/templates/checkout.html:58
+#: flask_shop/templates/checkout.html:59
 msgid "Street detail"
 msgstr "Strasse Details"
 
-#: flask_shop/templates/checkout.html:69
+#: flask_shop/templates/checkout.html:70
 msgid "Postcode/Zip"
 msgstr "Postleitzahl"
 
-#: flask_shop/templates/checkout.html:80
+#: flask_shop/templates/checkout.html:81
 msgid "City"
 msgstr "Stadt"
 
-#: flask_shop/templates/checkout.html:91
+#: flask_shop/templates/checkout.html:92
 msgid "State/Province"
 msgstr "Kanton"
 
-#: flask_shop/templates/checkout.html:102
+#: flask_shop/templates/checkout.html:103
 msgid "Country"
 msgstr "Land"
 
-#: flask_shop/templates/checkout.html:115
+#: flask_shop/templates/checkout.html:114
 msgid "Delivery Address"
 msgstr "Lieferadresse"
 
-#: flask_shop/templates/checkout.html:139
+#: flask_shop/templates/checkout.html:126
 msgid "Accept <a href=\"/termsandconditions\">terms and conditions</a>"
 msgstr "<a href=\"/termsandconditions\">AGB</a> akzeptieren"
 
-#: flask_shop/templates/checkout.html:150
+#: flask_shop/templates/checkout.html:138
 msgid "Buy now"
 msgstr "Bestellen"
 
@@ -1153,7 +1155,7 @@ msgstr "Angemeldet bleiben"
 msgid "In order to pay you will be forwarded to Paypal"
 msgstr "Für die Zahlung werden sie zu Paypal weitergeleitet."
 
-#: flask_shop/templates/paymentfailed.html:10
+#: flask_shop/templates/paymentfailed.html:11
 msgid "Payment failed!"
 msgstr "Die Zahlung ist fehlgeschlagen."
 
@@ -1187,7 +1189,7 @@ msgid ""
 "overseas."
 msgstr "Inland 4-7 Werktage, Ausland bis 20 Tage je nach Land"
 
-#: flask_shop/templates/success.html:10
+#: flask_shop/templates/success.html:11
 msgid "Thank you for your purchase!"
 msgstr "Vielen Dank für Ihre Nachricht."
 
