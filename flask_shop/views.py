@@ -575,7 +575,8 @@ def checkout():
             Country = Model.get('country.country')
             (ch, ) = Country.find([('code', '=', 'CH')])
             party.addresses[0].country = ch
-            party.addresses[0].subdivision = form.state.data
+            # TODO: correct subdivision
+            # party.addresses[0].subdivision = form.state.data
             party.addresses[0].invoice = form.invoice.data
             party.addresses[0].delivery = form.delivery.data
             party.save()
