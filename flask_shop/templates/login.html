@@ -36,17 +36,6 @@
                             </div>    
                         </div>
                         <div class="form-group">
-                            <label for="human" class="col-md-2 control-label">{{ _('2+3=?') }}</label>
-                            <div class="col-md-10">
-                                {{ form.answer(class_="form-control") }}
-                                {% if form.answer.errors %}
-                                    {% for error in form.answer.errors %}
-                                        <li><font color="red">{{ error }}</font></li>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <center><button type="submit" class="btn btn-primary">{{ _('Sign in') }}</button></center>
                         </div>
                     </fieldset>

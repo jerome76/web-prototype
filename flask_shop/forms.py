@@ -7,27 +7,23 @@ class LoginForm(Form):
     email = StringField('email', validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired()])
     remember_me = BooleanField('remember_me', default=False)
-    answer = StringField('answer', validators=[DataRequired()])
 
 
 class RegisterForm(Form):
-    name = StringField('name', validators=[DataRequired()])
+    username = StringField('username', validators=[DataRequired()])
     email = StringField('email', validators=[DataRequired()])
     password = PasswordField('password', validators=[EqualTo('confirm', message='Passwords must match')])
-    confirm = PasswordField('repeat password', validators=[DataRequired()])
-    remember_me = BooleanField('remember_me', default=False)
-    answer = StringField('answer', validators=[DataRequired()])
+    confirm = PasswordField('confirm', validators=[DataRequired()])
 
 
 class CheckoutForm(Form):
     name = StringField('name', validators=[DataRequired()])
-    name2 = StringField('name2')
     street = StringField('street', validators=[DataRequired()])
     street2 = StringField('street2')
     zip = StringField('zip', validators=[DataRequired()])
     city = StringField('city', validators=[DataRequired()])
-    state = SelectField(label="State")
-    country = SelectField(label="Country", validators=[DataRequired()])
+    state = SelectField('State')
+    country = SelectField('Country', validators=[DataRequired()])
     # state = StringField('state')
     # country = StringField('country', validators=[DataRequired()])
     delivery = BooleanField('delivery', default=False)

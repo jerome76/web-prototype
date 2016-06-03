@@ -2,48 +2,86 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Register</h1>
-
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <br>
-        <ul>
-        {% for message in messages %}
-            <li>{{ message }} </li>
-        {% endfor %}
-        </ul>
-        <p><a href='/register'>{{ _('register') }}</a></p>
-      {% else %}
-        <form action="" method="post" name="register">
-            {{ form.hidden_tag() }}
-            <p>
-                Please enter your name:<br>
-                {{ form.name(size=32) }}
-                {% for error in form.name.errors %}
-                  <span style="color: red;">[{{error}}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                Please enter your email:<br>
-                {{ form.email(size=32) }}
-                {% for error in form.email.errors %}
-                  <span style="color: red;">[{{error}}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                Please enter your password:<br>
-                {{ form.password(size=32) }}
-                {% for error in form.password.errors %}
-                  <span style="color: red;">[{{error}}]</span>
-                {% endfor %}
-            </p>
-            <p>{{ form.remember_me }} Remember Me</p>
-            <p>2 + 3 = ?:<br> {{ form.answer(size=10) }}
-                {% for error in form.answer.errors %}
-                  <span style="color: red;">[{{error}}]</span>
-                {% endfor %}</p>
-            <p><input type="submit" value="Register"></p>
-        </form>
-      {% endif %}
-    {% endwith %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="well">
+                <h2 id="title">{{ pt }}</h2>
+                <h4><p>{{ _('If you already have an account with us, please login at the') }}
+                    <a href="/login"><span>{{ _('login page') }}</span></a></p></h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="well">
+                <h2 id="title">{{ _('Register') }}</h2>
+                <p>&nbsp;
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                </p>
+                <form class="form-horizontal" method="post" name="register">
+                    <fieldset>
+                        <h4><p>{{ pc |safe }}</p></h4>
+                        {{ form.hidden_tag() }}
+                        <div class="form-group">
+                            <label for="username" class="col-md-4 control-label">{{ _('Username') }} (*)</label>
+                            <div class="col-md-6">
+                                {{ form.username(class_="form-control") }}
+                                {% if form.username.errors %}
+                                    {% for error in form.username.errors %}
+                                        <li><font color="red">{{ error }}</font></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-md-4 control-label">{{ _('Email') }} (*)</label>
+                            <div class="col-md-6">
+                                {{ form.email(class_="form-control") }}
+                                {% if form.email.errors %}
+                                    {% for error in form.email.errors %}
+                                        <li><font color="red">{{ error }}</font></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-md-4 control-label">{{ _('Password') }} (*)</label>
+                            <div class="col-md-6">
+                                {{ form.password(class_="form-control") }}
+                                {% if form.password.errors %}
+                                    {% for error in form.password.errors %}
+                                        <li><font color="red">{{ error }}</font></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm" class="col-md-4 control-label">{{ _('Confirm password') }} (*)</label>
+                            <div class="col-md-6">
+                                {{ form.confirm(class_="form-control") }}
+                                {% if form.confirm.errors %}
+                                    {% for error in form.confirm.errors %}
+                                        <li><font color="red">{{ error }}</font></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-5 col-md-offset-5">
+                                <button type="submit" value="Register" class="btn btn-primary">{{ _('register') }}</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

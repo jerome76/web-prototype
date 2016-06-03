@@ -10,12 +10,13 @@
     <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-image-gallery.min.css">
     <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
+    <link rel="icon" href="/static/favicon.ico">
     {% block page_css %}
     {% endblock %}
 </head>
 
 
-<body>
+<body onload="init();">
     <div class="navbar-wrapper">
         <div class="container-fluid">
             <nav class="navbar transparent navbar-default navbar-static-top">
@@ -59,29 +60,35 @@
                             <li><a href="/about">{{ _('About us') }}</a></li>
                             <li><a href="/sendus"><font color="#a742ab">{{ _('Send us') }}</font></a></li>
                             <li><a href="/contact">{{ _('Contact') }}</a></li>
-                            <li><a href="/account">{{ _('Login') }}</a></li>
+                            {% if session['logged_in'] %}
+                                <li><a href="/logout">{{ _('Logout') }}</a></li>
+                            {% else %}
+                                <li><a href="/login">{{ _('Login') }}</a></li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
             </nav>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                {% with messages = get_flashed_messages(with_categories=True) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                            <div class="alert alert-{{ category }}" style="text-align: center;">
-                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
-                                {{ message | safe }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="well">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}" style="text-align: center;">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+                            <h4>{{ message | safe }}</h4>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        {% endif %}
+    {% endwith %}
 
     {% block content %}
     {% endblock %}

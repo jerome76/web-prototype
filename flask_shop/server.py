@@ -185,3 +185,28 @@ def make_sale():
     for n in saleResult:
         list.append({'id': str(n.id), 'party': str(n.party.id)})
     return jsonify(result=list)
+
+
+@app.route('/masterdata/state')
+def masterdata_state():
+    config.set_trytond(DATABASE_NAME, config_file=CONFIG)
+    Country = Model.get('country.country')
+    country = Country.find(['id', '>', 0])
+    resultlist = ['states[0]=""']
+    counter = 0
+    for n in country:
+        State = Model.get('country.subdivision')
+        state = State.find(['country', '=', n.id])
+        statelist = []
+        # print(n.name)
+        for m in state:
+            statelist.append('"' + m.name + '|' + str(m.id) + '"')
+            # print(m.name)
+        counter += 1
+        if len(statelist) > 0:
+            resultlist.append('states[' + str(counter) + ']=[' + (', '.join(statelist)) + ']')
+        else:
+            resultlist.append('states[' + str(counter) + ']=""')
+    result = ('\n'.join(resultlist))
+    print result
+    return result

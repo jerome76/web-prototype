@@ -127,11 +127,14 @@ def before_request():
             session['currency_code'] = 'CHF'
         if session['currency_rate'] is None:
             session['currency_rate'] = 1.00
+        if session['logged_in'] is None:
+            session['logged_in'] = False
     except KeyError:
         # session not initialized
         session['lang_code'] = 'de'
         session['currency_code'] = 'CHF'
         session['currency_rate'] = 1.00
+        session['logged_in'] = False
 
 
 def getProductFromSession():
@@ -279,8 +282,9 @@ def cart():
     user = User.find(['id', '=', '1'])
     cart = getProductFromSession()
     sub_total_tmp = Decimal(0.00)
-    for p in cart:
-        sub_total_tmp += p.list_price
+    if cart:
+        for p in cart:
+            sub_total_tmp += p.list_price
     shipping = getShipping('Versandkosten Schweiz')
     shipping_cost_temp = 0.00
     if shipping is not None:
@@ -387,8 +391,6 @@ def login():
     if form.validate_on_submit():
         is_valid = validate_email(form.email.data)
         if is_valid:
-            flash('Login requested for name="%s", remember_me=%s' %
-                  (form.email.data, str(form.remember_me.data)))
             config.set_trytond(DATABASE_NAME, config_file=CONFIG)
             User = Model.get('res.user')
             user = User.find(['login', '=', form.email.data])
@@ -405,6 +407,7 @@ def login():
                     session['userid'] = user[0].id
                     session['partyid'] = user[0].name.split(",")[1]
                     session['logged_in'] = True
+                    return redirect('/cart')
                 else:
                     flash(gettext(u'invalid email or password.'))
                     print('login failed: invalid password')
@@ -430,8 +433,8 @@ def register():
                 flash(gettext(u'Email address already registered.'))
                 print('Email address ' + form.email.data + ' already registered.')
             else:
-                flash('Login requested for email="%s", remember_me=%s' %
-                      (form.email.data, str(form.remember_me.data)))
+                flash('Login requested for email="%s", username=%s' %
+                      (form.email.data, str(form.username.data)))
                 config.set_trytond(DATABASE_NAME, config_file=CONFIG)
                 User = Model.get('res.user')
                 user = User()
@@ -443,15 +446,15 @@ def register():
                     user.email = form.email.data
                     Party = Model.get('party.party')
                     party = Party()
-                    party.name = form.name.data
+                    party.name = form.username.data
                     Lang = Model.get('ir.lang')
                     (en,) = Lang.find([('code', '=', 'en_US')])
                     party.lang = en
                     party.save()
                     user.name = 'party,' + str(party.id)
                     user.save()
-                    flash('Registration successful for email="%s", remember_me=%s' %
-                          (form.email.data, str(form.remember_me.data)))
+                    flash('Registration successful for email="%s", username=%s' %
+                          (form.email.data, form.username))
                     session['email'] = user.email
                     session['partyid'] = party.id
                     session['userid'] = user.id
@@ -499,11 +502,11 @@ def populate_form_choices(checkout_form):
     countries = models.Country.query.order_by(models.Country.name).all()
     state_names = [('', gettext(u'Please select (optional)'))]
     for state in states:
-        state_names.append([state.code, state.name])
+        state_names.append([str(state.id), state.name])
     #choices need to come in the form of a list comprised of enumerated lists
     #example [('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')]
     state_choices = state_names
-    country_names = []
+    country_names = [('', '')]
     for country in countries:
         country_names.append([country.code, country.name])
     country_choices = country_names
@@ -514,6 +517,8 @@ def populate_form_choices(checkout_form):
 # Checkout process
 @app.route('/checkout/', methods=['GET', 'POST'])
 def checkout():
+    if not session['logged_in']:
+        return redirect('/register')
     config.set_trytond(DATABASE_NAME, config_file=CONFIG)
     page_topic = gettext(u'Checkout')
     page_content = gettext(u'Please enter your address here:')
@@ -521,8 +526,9 @@ def checkout():
     form = CheckoutForm(request.form, country='CH')
     populate_form_choices(form)
     sub_total_tmp = Decimal(0.00)
-    for p in productlist:
-        sub_total_tmp += p.list_price
+    if productlist:
+        for p in productlist:
+            sub_total_tmp += p.list_price
     shipping = getShipping('Versandkosten Schweiz')
     shipping_cost_temp = 0.00
     if shipping is not None:
@@ -556,7 +562,7 @@ def checkout():
             Country = Model.get('country.country')
             (ch, ) = Country.find([('code', '=', 'CH')])
             party.addresses[0].country = ch
-            # address.subdivision = None
+            party.addresses[0].subdivision = form.state.data
             party.addresses[0].invoice = form.invoice.data
             party.addresses[0].delivery = form.delivery.data
             party.save()
@@ -569,7 +575,7 @@ def checkout():
             Country = Model.get('country.country')
             (ch, ) = Country.find([('code', '=', 'CH')])
             party.addresses[0].country = ch
-            # address.subdivision = None
+            party.address.subdivision = form.state.data
             party.addresses[0].invoice = form.invoice.data
             party.addresses[0].delivery = form.delivery.data
             party.save()
@@ -589,8 +595,8 @@ def checkout():
                 line.sequence = 1
             sale.save()
             session['sale_id'] = sale.id
-        flash('Checkout started successfully name="%s", name2=%s, saleid=%s' %
-              (form.name.data, str(form.name2.data), sale.id))
+        flash(gettext(u'Thank you %s, your address has been saved. Please proceed with payment of order number %s.') %
+              (form.name.data, sale.id))
 
         return redirect('/payment')
 
@@ -604,6 +610,8 @@ def checkout():
             form.street2.data = party.addresses[0].streetbis
             form.zip.data = party.addresses[0].zip
             form.city.data = party.addresses[0].city
+            ''' TODO: update region select list in checkout.html with correct region '''
+            form.state.data = party.addresses[0].subdivision
             form.invoice.data = party.addresses[0].invoice
             form.delivery.data = party.addresses[0].delivery
         except KeyError:
@@ -623,22 +631,32 @@ def payment():
         page_content = gettext(u'Please follow the link to pay with Paypal:')
         custom = session['sale_id']
         products = getProductFromSession()
+        sub_total_tmp = Decimal(0.00)
         item_name_list = []
         item_number_list = []
         amount_list = []
         for p in products:
             item_name_list.append(p.name)
             item_number_list.append(p.code)
+            sub_total_tmp += p.list_price
             amount_list.append(p.list_price)
-        business = "express3.com-facilitator@gmail.com"
-        item_name = ', '.join(item_name_list)
-        item_number = ', '.join(item_number_list)
+        shipping = getShipping('Versandkosten Schweiz')
+        shipping_cost_temp = 0.00
+        if shipping is not None:
+            if sub_total_tmp < Decimal(150.00*session['currency_rate']):
+                shipping_cost_temp = shipping.list_price * Decimal(session['currency_rate'])
+                sub_total_tmp += shipping_cost_temp
+        business = app.config['PAYPAL_BUSINESS']
+        data = ', '.join(item_name_list)
+        item_name = (data[:125] + '..') if len(data) > 127 else data
+        data = ', '.join(item_number_list)
+        item_number = (data[:125] + '..') if len(data) > 127 else data
         no_shipping = "0"
         TWOPLACES = Decimal(10) ** -2
         amount = (sum(amount_list)).quantize(TWOPLACES, context=Context(traps=[Inexact]))
-        currency_code = "CHF"
-        shipping_cost = "3.50"
-        hostname = "http://85.7.120.190:5000"
+        shipping_cost = format_currency_amount(shipping_cost_temp)
+        currency_code = session['currency_code']
+        hostname = app.config['PAYPAL_SHOP_DOMAIN']
         return render_template("payment.html", pt=page_topic, pc=page_content, title="Milliondog",
                                page=gettext(u'Payment'), custom=custom, business=business, item_name=item_name,
                                item_number=item_number, no_shipping=no_shipping, amount=amount,
@@ -650,15 +668,18 @@ def payment():
 @app.route('/success/', methods=['POST', 'GET'])
 def success():
     try:
-        flash('Paypal payment completed successfully.')
+        flash(gettext(u'PayPal payment completed successfully.'))
+        session.pop('cart', None)
+        session.pop('cart_item_count', None)
         return render_template("success.html")
     except Exception, e:
         return(str(e))
 
+
 @app.route('/cancel/', methods=['POST', 'GET'])
 def cancel():
     try:
-        flash('Paypal payment failed..')
+        flash(gettext(u'PayPal payment failed.'))
         return render_template("paymentfailed.html")
     except Exception, e:
         return(str(e))
