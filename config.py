@@ -15,4 +15,7 @@ SUPPORTED_LANGUAGES = {'de': 'Deutsch', 'en': 'English', 'fr': 'Francais'}
 BABEL_DEFAULT_LOCALE = 'en'
 BABEL_DEFAULT_TIMEZONE = 'UTC'
 
+PAYPAL_SHOP_DOMAIN = 'http://milliondog.ddns.net'
+PAYPAL_BUSINESS = 'express3.com-facilitator@gmail.com'
+
 DEFAULT_CURRENCY_ID = 101
