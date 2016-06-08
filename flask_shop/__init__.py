@@ -11,13 +11,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.db = SQLAlchemy(app)
 app.mail = Mail(app)
 app.config.update(
-    DEBUG=True,
+    DEBUG=app.config['MAIL_SERVER_DEBUG'],
     # EMAIL SETTINGS
-    MAIL_SERVER='smtp.gmail.com',
-    MAIL_PORT=465,
-    MAIL_USE_SSL=True,
-    MAIL_USERNAME = 'milliondog.com@gmail.com',
-    MAIL_PASSWORD = 'milliondog.123'
+    MAIL_SERVER=app.config['MAIL_SERVER'],
+    MAIL_PORT=app.config['MAIL_PORT'],
+    MAIL_USE_SSL=app.config['MAIL_USE_SSL'],
+    MAIL_USERNAME=app.config['MAIL_USERNAME'],
+    MAIL_PASSWORD=app.config['MAIL_PASSWORD']
     )
 mail = Mail(app)
 

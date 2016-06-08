@@ -21,6 +21,13 @@ PAYPAL_SHOP_DOMAIN = 'http://milliondog.ddns.net'
 PAYPAL_BUSINESS = 'express3.com-facilitator@gmail.com'
 
 CONTACT_FORM_EMAIL_SEND_ADDRESS = 'milliondog.com@gmail.com'
+# EMAIL SETTINGS
+MAIL_SERVER_DEBUG = True
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 465
+MAIL_USE_SSL = True
+MAIL_USERNAME = 'milliondog.com@gmail.com'
+MAIL_PASSWORD = 'password'
 
 UPLOAD_FOLDER = 'E:\\temp'
 ALLOWED_EXTENSIONS = set(['csv'])
