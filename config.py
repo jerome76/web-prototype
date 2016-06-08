@@ -20,6 +20,8 @@ BABEL_DEFAULT_TIMEZONE = 'UTC'
 PAYPAL_SHOP_DOMAIN = 'http://milliondog.ddns.net'
 PAYPAL_BUSINESS = 'express3.com-facilitator@gmail.com'
 
+CONTACT_FORM_EMAIL_SEND_ADDRESS = 'milliondog.com@gmail.com'
+
 UPLOAD_FOLDER = 'E:\\temp'
 ALLOWED_EXTENSIONS = set(['csv'])
 # Max content length for file upload: 1 MB

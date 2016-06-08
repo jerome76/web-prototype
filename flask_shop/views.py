@@ -544,9 +544,10 @@ def contact():
     form = ContactForm()
     if form.validate_on_submit():
         flash(gettext(u'Thank you for your message.'))
+        send_to_email = app.config['CONTACT_FORM_EMAIL_SEND_ADDRESS']
         msg = Message("Neue Nachricht über milliondog.com Kontaktformular",
-                  sender="milliondog.com@gmail.com",
-                  recipients=["milliondog.com@gmail.com"])
+                  sender=send_to_email,
+                  recipients=[send_to_email])
         msg.body = ('Name: %s\nEmail: %s\nBetreff: %s\n Nachricht: %s\n' %
                     (form.name.data, form.email.data, form.subject.data, form.message.data))
         msg.html = ('<b>Formularfelder</b><br>Name: %s<br>Email: %s<br>Betreff: %s<br> Nachricht: %s<br>' %
