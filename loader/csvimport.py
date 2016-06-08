@@ -1,11 +1,12 @@
 from proteus import config, Model, Wizard, Report
 import csv
 from decimal import *
+from flask_shop import app
 
 
 def import_products(filename):
     f = open(filename, 'rb')
-    config.set_trytond("tryton_dev", config_file="./tryton.conf")
+    config.set_trytond(app.config['TRYTON_DATABASE_NAME'], config_file=app.config['TRYTON_CONFIG_FILE'])
     try:
         Default_uom = Model.get('product.uom')
         default_uom = Default_uom.find([('symbol', '=', 'u')])

@@ -9,8 +9,8 @@ import urlparse
 from escpos import *
 import psycopg2
 
-CONFIG = "./tryton.conf"
-DATABASE_NAME = "tryton_dev"
+CONFIG = app.config['TRYTON_CONFIG_FILE']
+DATABASE_NAME = app.config['TRYTON_DATABASE_NAME']
 config.set_trytond(DATABASE_NAME, config_file=CONFIG)
 
 def getProductDirect():

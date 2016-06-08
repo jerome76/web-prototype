@@ -9,7 +9,9 @@ LANGUAGES = {
 WTF_CSRF_ENABLED = True
 SECRET_KEY = '489209348024859h2kjhfdij'
 SQLALCHEMY_DATABASE_URI = "postgresql://tryton:password@localhost:5432/tryton_dev"
-SQLALCHEMY_ECHO=True
+SQLALCHEMY_ECHO = True
+TRYTON_DATABASE_NAME = "tryton_dev"
+TRYTON_CONFIG_FILE = "./tryton.conf"
 
 SUPPORTED_LANGUAGES = {'de': 'Deutsch', 'en': 'English', 'fr': 'Francais'}
 BABEL_DEFAULT_LOCALE = 'en'
