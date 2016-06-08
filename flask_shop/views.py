@@ -480,7 +480,7 @@ def login():
                     session['userid'] = user[0].id
                     session['partyid'] = user[0].name.split(",")[1]
                     session['logged_in'] = True
-                    return redirect('/cart')
+                    return redirect('/checkout')
                 else:
                     flash(gettext(u'invalid email or password.'))
                     print('login failed: invalid password')
@@ -506,9 +506,9 @@ def register():
                 flash(gettext(u'Email address already registered.'))
                 print('Email address ' + form.email.data + ' already registered.')
             else:
-                flash('Login requested for email="%s", username=%s' %
-                      (form.email.data, str(form.username.data)))
                 config.set_trytond(DATABASE_NAME, config_file=CONFIG)
+                print('Login requested for email="%s", username=%s' %
+                      (form.email.data, str(form.username.data)))
                 User = Model.get('res.user')
                 user = User()
                 if user.id < 0:
@@ -526,12 +526,15 @@ def register():
                     party.save()
                     user.name = 'party,' + str(party.id)
                     user.save()
-                    flash('Registration successful for email="%s", username=%s' %
+                    print('Registration successful for email="%s", username=%s' %
                           (form.email.data, form.username))
                     session['email'] = user.email
                     session['partyid'] = party.id
                     session['userid'] = user.id
                     session['logged_in'] = True
+                    if session['cart_item_count'] > 0:
+                        flash(gettext(u'Registration successful. Please continue the checkout process.'))
+                        return redirect('/checkout')
                 else:
                     flash(gettext(u'System is down.'))
                     print('Cannot register email ' + form.email.data)
