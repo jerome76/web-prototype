@@ -11,10 +11,15 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="well">
                 <h2 id="title">{{ pt }}</h2>
-                <form action="" method=post enctype=multipart/form-data>
-                  <p><input type=file name=file>
-                     <input type=submit value=Upload></p>
-                </form>
+                <p><form action="" method=post enctype=multipart/form-data>
+                    <select name="file_type">
+                    <option value="products">Products</option>
+                    <option value="internal_shipments">Internal Shipments</option>
+                    <option value="customers">Customers</option>
+                    </select><br>
+                    <input type=file name=file><br>
+                    <input type=submit value=Upload><br>
+                </form></p>
             </div>
         </div>
     </div>

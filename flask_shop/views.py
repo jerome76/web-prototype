@@ -352,7 +352,9 @@ def account():
 @app.route('/admin/')
 @app.route('/admin/<section>')
 def admin(section='user'):
-    if not session['logged_in'] and session['user_name'] == app.config['DEFAULT_ADMIN_USERNAME']:
+    if not session['logged_in']:
+        return redirect('/login')
+    if session['user_name'] != app.config['DEFAULT_ADMIN_USERNAME']:
         return redirect('/login')
     config.set_trytond(DATABASE_NAME, config_file=CONFIG)
     username = ''
@@ -396,7 +398,7 @@ def allowed_file(filename):
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     page_topic = 'File ' + filename + ' uploaded successfully.'
-    if not session['logged_in'] and session['user_name'] == app.config['DEFAULT_ADMIN_USERNAME']:
+    if not session['logged_in']:
         return redirect('/login')
     # send_from_directory(app.config['UPLOAD_FOLDER'], filename)
     return render_template('uploads.html',
@@ -406,7 +408,9 @@ def uploaded_file(filename):
 @app.route('/upload/', methods=['GET', 'POST'])
 def upload():
     page_topic = "Upload new File:"
-    if not session['logged_in'] and session['user_name'] == app.config['DEFAULT_ADMIN_USERNAME']:
+    if not session['logged_in']:
+        return redirect('/login')
+    if not session['email'] == app.config['DEFAULT_ADMIN_USERNAME']:
         return redirect('/login')
     if request.method == 'POST':
         # check if the post request has the file part
@@ -414,6 +418,7 @@ def upload():
             flash(gettext(u'No file part'))
             return redirect(request.url)
         file = request.files['file']
+        file_type = request.form['file_type']
         # if user does not select file, browser also
         # submit a empty part without filename
         if file.filename == '':
@@ -422,7 +427,12 @@ def upload():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            csvimport.import_products(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            if file_type == 'products':
+                csvimport.import_products(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            elif file_type == 'customers':
+                csvimport.import_customers(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            elif file_type == 'internal_shipments':
+                csvimport.load_internal_shipment(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('uploaded_file',
                                     filename=filename))
     return render_template('upload.html',
