@@ -9,7 +9,15 @@
     {% if session['logged_in'] %}
         <h2><p>Admin page:</p></h2>
         <h4><p>{{message}} [ID:{{id}}]</p></h4>
-
+        <p>
+            <a href="/admin/user">user</a> |
+            <a href="/admin/party">party</a> |
+            <a href="/admin/stock">stock</a> |
+            <a href="/admin/product">product</a> |
+            <a href="/admin/sale">sale</a> |
+            <a href="/admin/invoice">invoice</a>
+        </p>
+        {% if db_list %}
         {% for n in db_list %}
         <div class="row">
             <div class="col-md-2">
@@ -28,7 +36,8 @@
             </div>
         </div>
         {% endfor %}
-
+        {% endif %}
+        {% if stock_list %}
         {% for n in stock_list %}
         <div class="row">
             <div class="col-md-2">
@@ -46,10 +55,12 @@
                 <p>&nbsp;&nbsp;{{ _('To Location') }}: {{n.to_location}}</p>
                 <p>&nbsp;&nbsp;{{ _('Quantity') }}: {{n.quantity}}</p>
                 <p>&nbsp;&nbsp;{{ _('Invoice Address') }}: {{n.invoice_address}}</p>
+                <p>&nbsp;&nbsp;{{ _('Shipping Address') }}: {{n.shipping_address}}</p>
             </div>
         </div>
         {% endfor %}
-
+        {% endif %}
+        {% if product_list %}
         {% for n in product_list %}
         <div class="row">
             <div class="col-md-2">
@@ -77,23 +88,24 @@
             </div>
         </div>
         {% endfor %}
-
+        {% endif %}
+        {% if sale_list %}
         {% for n in sale_list %}
         <div class="row">
             <div class="col-md-2">
                 <p>Sale: {{n.id}}</p>
             </div>
             <div class="col-md-10">
-                <p>&nbsp;&nbsp;{{ _('Currency') }}: {{n.comment}}</p>
-                <p>&nbsp;&nbsp;{{ _('Unit Price') }}: {{n.payment_term}}</p>
-                <p>&nbsp;&nbsp;{{ _('Shipment') }}: {{n.currency}}</p>
-                <p>&nbsp;&nbsp;{{ _('Effective Date') }}: {{n.shipment_method}}</p>
-                <p>&nbsp;&nbsp;{{ _('UOM') }}: {{n.state}}</p>
-                <p>&nbsp;&nbsp;{{ _('Cost Price') }}: {{n.untaxed_amount_cache}}</p>
-                <p>&nbsp;&nbsp;{{ _('Product') }}: {{n.warehouse}}</p>
-                <p>&nbsp;&nbsp;{{ _('From Location') }}: {{n.total_amount_cache}}</p>
-                <p>&nbsp;&nbsp;{{ _('To Location') }}: {{n.invoice_method}}</p>
-                <p>&nbsp;&nbsp;{{ _('Quantity') }}: {{n.invoice_address}}</p>
+                <p>&nbsp;&nbsp;{{ _('Comment') }}: {{n.comment}}</p>
+                <p>&nbsp;&nbsp;{{ _('Payment Term') }}: {{n.payment_term}}</p>
+                <p>&nbsp;&nbsp;{{ _('Currency') }}: {{n.currency}}</p>
+                <p>&nbsp;&nbsp;{{ _('Shipment method') }}: {{n.shipment_method}}</p>
+                <p>&nbsp;&nbsp;{{ _('State') }}: {{n.state}}</p>
+                <p>&nbsp;&nbsp;{{ _('Untaxed amount cache') }}: {{n.untaxed_amount_cache}}</p>
+                <p>&nbsp;&nbsp;{{ _('Warehouse') }}: {{n.warehouse}}</p>
+                <p>&nbsp;&nbsp;{{ _('Total amount cache') }}: {{n.total_amount_cache}}</p>
+                <p>&nbsp;&nbsp;{{ _('Invoice Method') }}: {{n.invoice_method}}</p>
+                <p>&nbsp;&nbsp;{{ _('Invoice Address') }}: {{n.invoice_address}}</p>
                 <ul>
                 {% for o in n.lines %}
                   <li>{{o.id, o.unit_price, o.quantity, o.product, o.type, o.unit, o.description}}</li>
@@ -102,7 +114,8 @@
             </div>
         </div>
         {% endfor %}
-
+        {% endif %}
+        {% if invoice_list %}
         {% for n in invoice_list %}
         <div class="row">
             <div class="col-md-2">
@@ -127,7 +140,7 @@
             </div>
         </div>
         {% endfor %}
-
+        {% endif %}
     {% else %}
     <div class="well">
 		<p>You need to be <a href="/login/" target="blank"><strong>logged in</strong></a> to view this page.</p>

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, flash, redirect, session, url_for, request, g
+from werkzeug.utils import secure_filename
 from flask_login import login_required, current_user
 from flask_shop import app
 from .forms import LoginForm, RegisterForm, ContactForm, CheckoutForm
@@ -11,12 +12,14 @@ from werkzeug.datastructures import ImmutableOrderedMultiDict
 import time
 import requests
 import json
+import os
 from decimal import *
 import psycopg2
 import urlparse
 from datetime import timedelta
 from passlib.hash import pbkdf2_sha256
 from validate_email import validate_email
+from loader import csvimport
 
 CONFIG = "./tryton.conf"
 DATABASE_NAME = "tryton_dev"
@@ -347,23 +350,83 @@ def account():
                            id=user[0].id, sale_list=salelist, title="Milliondog", page='Account')
 
 @app.route('/admin/')
-def admin():
+@app.route('/admin/<section>')
+def admin(section='user'):
+    if not session['logged_in'] and session['user_name'] == app.config['DEFAULT_ADMIN_USERNAME']:
+        return redirect('/login')
     config.set_trytond(DATABASE_NAME, config_file=CONFIG)
-    User = Model.get('res.user')
-    user = User.find(['id', '=', '1'])
-    Party = Model.get('party.party')
-    partyList = Party.find(['id', '>=', '0'])
-    Stock = Model.get('stock.move')
-    stocklist = Stock.find(['id', '>=', '0'])
-    Product = Model.get('product.product')
-    productlist = Product.find(['id', '>=', '0'])
-    Sale = Model.get('sale.sale')
-    salelist = Sale.find(['id', '>=', '0'])
-    Invoice = Model.get('account.invoice')
-    invoicelist = Invoice.find(['id', '>=', '0'])
-    return render_template('admin.html', message=user[0].name,
-                           id=user[0].id, db_list=partyList, invoice_list=invoicelist, sale_list=salelist,
+    username = ''
+    userid = 0
+    partylist = None
+    stocklist = None
+    productlist = None
+    salelist = None
+    invoicelist = None
+    if section == 'user':
+        User = Model.get('res.user')
+        user = User.find(['id', '=', '1'])
+        if len(user) > 0:
+            username = user[0].name
+            userid = user[0].id
+    elif section == 'party':
+        Party = Model.get('party.party')
+        partylist = Party.find(['id', '>=', '0'])
+    elif section == 'stock':
+        Stock = Model.get('stock.move')
+        stocklist = Stock.find(['id', '>=', '0'])
+    elif section == 'product':
+        Product = Model.get('product.product')
+        productlist = Product.find(['id', '>=', '0'])
+    elif section == 'sale':
+        Sale = Model.get('sale.sale')
+        salelist = Sale.find(['id', '>=', '0'])
+    elif section == 'invoice':
+        Invoice = Model.get('account.invoice')
+        invoicelist = Invoice.find(['id', '>=', '0'])
+    return render_template('admin.html', message=username,
+                           id=userid, db_list=partylist, invoice_list=invoicelist, sale_list=salelist,
                            stock_list=stocklist, product_list=productlist, title="Milliondog", page='Account')
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    page_topic = 'File ' + filename + ' uploaded successfully.'
+    if not session['logged_in'] and session['user_name'] == app.config['DEFAULT_ADMIN_USERNAME']:
+        return redirect('/login')
+    # send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+    return render_template('uploads.html',
+                    title="Milliondog", page=gettext('Upload new File'), pt=page_topic)
+
+
+@app.route('/upload/', methods=['GET', 'POST'])
+def upload():
+    page_topic = "Upload new File:"
+    if not session['logged_in'] and session['user_name'] == app.config['DEFAULT_ADMIN_USERNAME']:
+        return redirect('/login')
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash(gettext(u'No file part'))
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash(gettext(u'No selected file'))
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            csvimport.import_products(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('uploaded_file',
+                                    filename=filename))
+    return render_template('upload.html',
+                           title="Milliondog", page=gettext('Upload new File'), pt=page_topic)
 
 
 @app.route('/setlang/<language>')

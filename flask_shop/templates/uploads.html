@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %} - {{page}}{% endblock %}
+{% block page %} / Account{% endblock %}
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="container">
+    {% if session['logged_in'] %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="well">
+                <h2 id="title">{{ pt }}</h2>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="well">
+		<p>You need to be <a href="/login/" target="blank"><strong>logged in</strong></a> to view this page.</p>
+    </div>
+	{% endif %}
+</div>
+{% endblock %}
