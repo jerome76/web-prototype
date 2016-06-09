@@ -3,6 +3,7 @@ sudo cp web-prototype.sh trytond.sh
 sudo update-rc.d trytond.sh defaults
 sudo service web-prototype restart
 sudo update-rc.d erp-client.sh defaults
+sudo update-rc.d web-prototype.sh defaults
 sudo service erp-client restart
 
 
