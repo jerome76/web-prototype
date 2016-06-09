@@ -99,7 +99,10 @@ def import_customers(filename):
                 party.addresses[0].country = cc
                 if row['state'] is not None:
                     Subdivision = Model.get('country.subdivision')
-                    (subdivision,) = Subdivision.find([('code', 'like', row['country'] + '-' + row['state'] + '%')])
+                    if countrycode == 'GB':
+                        (subdivision,) = Subdivision.find([('name', '=', row['state']), ('country', '=', 13)])
+                    else:
+                        (subdivision,) = Subdivision.find([('code', 'like', row['country'] + '-' + row['state'] + '%')])
                     party.addresses[0].subdivision = subdivision
                 if row['invoice'] == 'TRUE':
                     party.addresses[0].invoice = True
