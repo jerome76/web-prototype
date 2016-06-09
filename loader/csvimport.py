@@ -98,12 +98,15 @@ def import_customers(filename):
                 party.addresses[0].city = row['city']
                 party.addresses[0].country = cc
                 if row['state'] is not None:
-                    Subdivision = Model.get('country.subdivision')
-                    if countrycode == 'GB':
-                        (subdivision,) = Subdivision.find([('name', '=', row['state']), ('country', '=', 13)])
-                    else:
-                        (subdivision,) = Subdivision.find([('code', 'like', row['country'] + '-' + row['state'] + '%')])
-                    party.addresses[0].subdivision = subdivision
+                    try:
+                        Subdivision = Model.get('country.subdivision')
+                        if countrycode == 'GB':
+                            (subdivision,) = Subdivision.find([('name', '=', row['state']), ('country', '=', 13)])
+                        else:
+                            (subdivision,) = Subdivision.find([('code', 'like', row['country'] + '-' + row['state'] + '%')])
+                        party.addresses[0].subdivision = subdivision
+                    except ValueError:
+                        print ('***** Error: could not find subdivision: ' + row['state'] + ' for country ' + + row['country'])
                 if row['invoice'] == 'TRUE':
                     party.addresses[0].invoice = True
                 else:
