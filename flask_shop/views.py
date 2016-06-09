@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, flash, redirect, session, url_for, request, g
+from flask import Flask, render_template, flash, redirect, session, url_for, request, g, send_from_directory
 from werkzeug.utils import secure_filename
 from flask_login import login_required, current_user
 from flask_shop import app
@@ -37,7 +37,7 @@ def getShipping(product_name):
         return product[0]
 
 
-def getProductDirect(category=None, size=None):
+def getProductDirect(category=None, size=None, available_only=None):
     if category is None:
         category_condition = 'and 1 = 1 '
     else:
@@ -46,6 +46,12 @@ def getProductDirect(category=None, size=None):
         size_condition = 'and 1 = 1 '
     else:
         size_condition = "and product.attributes like '%" + size + "%' "
+    if available_only is None:
+        available_only_condition = 'and 1 = 1 '
+    elif available_only:
+        available_only_condition = "and product.attributes like '%\"available\": true,%' "
+    else:
+        available_only_condition = 'and 1 = 1 '
     con = None
     result = None
     try:
@@ -69,6 +75,7 @@ def getProductDirect(category=None, size=None):
                     "and t.id = ptpc.template " +
                     category_condition +
                     size_condition +
+                    available_only_condition +
                     "and ptpc.category = pc.id " +
                     "order by product.id")
         resultset = cur.fetchall()
@@ -224,7 +231,7 @@ def shop(category=None, size=None):
         </h4>''')
     start = time.time()
     # fastproducts = models.Product.query.all()
-    directproducts = getProductDirect(category, size)
+    directproducts = getProductDirect(category, size, available_only=True)
     end = time.time()
     print("Shop.getProductDirect " + str(end - start) + " ms.")
     resp = render_template('shop.html', pt=page_topic, pc=page_content, db_model='Products', db_list=directproducts,
@@ -390,6 +397,13 @@ def admin(section='user'):
                            stock_list=stocklist, product_list=productlist, title="Milliondog", page='Account')
 
 
+@app.route('/logfile/')
+def show_log():
+    if not session['logged_in']:
+        return redirect('/login')
+    return send_from_directory(app.config['FLASK_LOG_DIRECTORY'], app.config['FLASK_LOG_FILE'])
+
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
@@ -422,7 +436,7 @@ def upload():
         # if user does not select file, browser also
         # submit a empty part without filename
         if file.filename == '':
-            flash(gettext(u'No selected file'))
+            flash(gettext(u'No file selected'))
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
@@ -480,7 +494,11 @@ def login():
                     session['userid'] = user[0].id
                     session['partyid'] = user[0].name.split(",")[1]
                     session['logged_in'] = True
-                    return redirect('/checkout')
+                    try:
+                        if session['cart']:
+                            return redirect('/checkout')
+                    except KeyError:
+                        return redirect('/cart')
                 else:
                     flash(gettext(u'invalid email or password.'))
                     print('login failed: invalid password')
@@ -673,9 +691,19 @@ def checkout():
                 line.sequence = 1
             sale.save()
             session['sale_id'] = sale.id
+            # remove products
+            if app.config['DEACTIVATE_PRODUCT_WHEN_SOLD']:
+                Product = Model.get('product.product')
+                for p in productlist:
+                    tmp_product = Product.find(['code', '=', p.code])
+                    attribute_dict = tmp_product[0].attributes
+                    for key in attribute_dict.keys():
+                        if key == 'available':
+                            attribute_dict[key] = False
+                    tmp_product[0].attributes = attribute_dict
+                    tmp_product[0].save()
         flash(gettext(u'Thank you %s, your address has been saved. Please proceed with payment of order number %s.') %
               (form.name.data, sale.id))
-
         return redirect('/payment')
 
     if form.name.data is None:

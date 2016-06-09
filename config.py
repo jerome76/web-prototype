@@ -12,6 +12,8 @@ SQLALCHEMY_DATABASE_URI = "postgresql://tryton:password@localhost:5432/tryton_de
 SQLALCHEMY_ECHO = True
 TRYTON_DATABASE_NAME = "tryton_dev"
 TRYTON_CONFIG_FILE = "./tryton.conf"
+FLASK_LOG_DIRECTORY = "/var/log/sl/"
+FLASK_LOG_FILE = "web-prototype.log"
 
 SUPPORTED_LANGUAGES = {'de': 'Deutsch', 'en': 'English', 'fr': 'Francais'}
 BABEL_DEFAULT_LOCALE = 'en'
@@ -36,3 +38,4 @@ MAX_CONTENT_LENGTH = 1 * 1024 * 1024
 
 DEFAULT_CURRENCY_ID = 101
 DEFAULT_ADMIN_USERNAME = 'user@host.com'
+DEACTIVATE_PRODUCT_WHEN_SOLD = True

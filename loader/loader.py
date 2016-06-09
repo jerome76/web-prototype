@@ -151,11 +151,11 @@ def loadProducts():
                             new_attributes['serial_number'] = row['ArtNumber']
                         elif a.name == 'pattern':
                             new_attributes['pattern'] = row['Pattern']
-                        elif a.name == 'topseller':
-                            if row['Topseller'] == 'TRUE':
-                                new_attributes['topseller'] = True
+                        elif a.name == 'available':
+                            if row['Available'] == 'TRUE':
+                                new_attributes['available'] = True
                             else:
-                                new_attributes['topseller'] = False
+                                new_attributes['available'] = False
                     producttemplate.attribute_set = attributeset[0]
                     producttemplate.save()
                     product.template = producttemplate

@@ -13,7 +13,7 @@ def load_internal_shipment(filename):
         readertest = csv.DictReader(f)
         for row in readertest:
             print(row['Price'], row['Shipping'], row['Manufacturer'], row['ArtNumber'])
-
+        f.seek(0)
         print('Start import')
         StockShipmentInternal = Model.get('stock.shipment.internal')
         stockshipmentinternal = StockShipmentInternal()
@@ -59,6 +59,7 @@ def import_customers(filename):
         for row in readertest:
             print(row['country_code'], row['first_name'], row['last_name'], row['company_name'])
 
+        f.seek(0)
         print('Start import')
         reader = csv.DictReader(f)
         for row in reader:
@@ -96,6 +97,7 @@ def import_products(filename):
         for row in readertest:
             print(row['Price'], row['Title'], row['ArtNumber'], row['Description'], row['Price'], row['CostPrice'])
 
+        f.seek(0)
         print('Start import')
         Default_uom = Model.get('product.uom')
         default_uom = Default_uom.find([('symbol', '=', 'u')])
@@ -145,11 +147,11 @@ def import_products(filename):
                         new_attributes['serial_number'] = row['ArtNumber']
                     elif a.name == 'pattern':
                         new_attributes['pattern'] = row['Pattern']
-                    elif a.name == 'topseller':
-                        if row['Topseller'] == 'TRUE':
-                            new_attributes['topseller'] = True
+                    elif a.name == 'available':
+                        if row['Available'] == 'TRUE':
+                            new_attributes['available'] = True
                         else:
-                            new_attributes['topseller'] = False
+                            new_attributes['available'] = False
                 producttemplate.attribute_set = attributeset[0]
                 producttemplate.save()
                 product.template = producttemplate
