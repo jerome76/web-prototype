@@ -106,7 +106,8 @@ def import_customers(filename):
                             (subdivision,) = Subdivision.find([('code', 'like', row['country'] + '-' + row['state'] + '%')])
                         party.addresses[0].subdivision = subdivision
                     except ValueError:
-                        print ('***** Error: could not find subdivision: ' + row['state'] + ' for country ' + + row['country'])
+                        print ('***** Error: could not find subdivision: ' + row['state'] + ' for country ' +
+                               row['country'])
                 if row['invoice'] == 'TRUE':
                     party.addresses[0].invoice = True
                 else:
