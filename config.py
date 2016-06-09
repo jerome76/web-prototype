@@ -31,7 +31,7 @@ MAIL_USE_SSL = True
 MAIL_USERNAME = 'milliondog.com@gmail.com'
 MAIL_PASSWORD = 'password'
 
-UPLOAD_FOLDER = 'E:\\temp'
+UPLOAD_FOLDER = '/tmp'
 ALLOWED_EXTENSIONS = set(['csv'])
 # Max content length for file upload: 1 MB
 MAX_CONTENT_LENGTH = 1 * 1024 * 1024
