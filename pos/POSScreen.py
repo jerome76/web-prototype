@@ -196,7 +196,7 @@ class POSScreen(Screen):
         print "Initialize products selection"
 
     def update_icon(self, online=True):
-        offline = '-offline'
+        offline = '_offline'
         if online:
             offline = ''
         self.icon_wid.source = 'data/icon' + offline + '.png'

@@ -74,6 +74,9 @@ class MainApp(App):
             'server.url': 'http://milliondog.ddns.net/'
         })
 
+    def open_settings(self, *largs):
+        self.config.set('section1', 'default_order_id', self.root.get_screen('posscreen').order_id)
+
     def close_settings(self, settings):
         super(MainApp, self).close_settings(settings)
         orderid = self.config.get('section1', 'default_order_id')
