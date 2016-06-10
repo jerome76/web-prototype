@@ -76,9 +76,12 @@ class MainApp(App):
 
     def open_settings(self, *largs):
         self.config.set('section1', 'default_order_id', self.root.get_screen('posscreen').order_id)
+        self.config.write()
+        super(MainApp, self).open_settings()
 
     def close_settings(self, settings):
         super(MainApp, self).close_settings(settings)
+        self.config.write()
         orderid = self.config.get('section1', 'default_order_id')
         self.root.get_screen('posscreen').order_id = int(orderid)
         self.root.get_screen('posscreen').btn_order_id_wid.text = str(orderid)
