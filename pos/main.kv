@@ -10,6 +10,7 @@ ScreenManagement:
     CustomerScreen:
 
 <MainScreen>:
+    textinput_user_wid: main_username
     name: "main"
     canvas.before:
         Color:
@@ -571,6 +572,7 @@ ScreenManagement:
     btn_disc_wid: my_btn_disc
     btn_price_wid: my_btn_price
     btn_customer_wid: my_customer_button
+    btn_order_id_wid: payslip_order_id
     icon_wid: my_icon_status
     my_tabbed_panel_wid: my_tabbed_panel
 
@@ -618,12 +620,13 @@ ScreenManagement:
                 size_hint: 0.3, 1
 
             Button:
+                id: payslip_order_id
                 size_hint: 0.1, 1
                 color: 1,1,1,1
                 font_size: '24sp'
                 background_color: (0.81, 0.27, 0.33, 1)
                 background_normal: ''
-                text: '***1***'
+                text: '0'
             Button:
                 size_hint: 0.05, 1
                 color: 0.1,0.1,0.1,1

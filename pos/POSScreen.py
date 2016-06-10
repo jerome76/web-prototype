@@ -42,19 +42,20 @@ class ImageButton(ButtonBehavior, kivy.uix.image.Image):
         if upload_count > 0:
             self.popup.open()
             self.pb.value = 0
-            file_count = len(os.listdir('offline/'))
-            increment = 100.0/file_count
+            file_count = len(glob.glob('offline/*.json'))
+            increment = 100.0/file_count + 1
             for fn in glob.glob('offline/*.json'):
-                if os.path.isfile('offline/'+fn):
+                if os.path.isfile(fn):
                     Clock.schedule_once(partial(self.upload_payslips, fn, increment), 0)
 
     def upload_payslips(self, fn, pb_inc, *args):
         def on_success(req, result):
             self.pb.value += pb_inc
             print("Progressbar is on {0}%".format(self.pb.value))
-            os.remove('offline/' + fn)
+            os.remove(fn)
             if self.pb.value >= 99.9:
                 self.popup.dismiss()
+                self.update_icon(True)
 
         def on_failure(req, result):
             on_error(req, result)
@@ -64,13 +65,14 @@ class ImageButton(ButtonBehavior, kivy.uix.image.Image):
             print("Progressbar is on {0}%".format(self.pb.value))
             if self.pb.value >= 99.9:
                 self.popup.dismiss()
+                self.update_icon(False)
 
         try:
             print ("POSScreen.upload_payslips()" + fn + ' ' + str(pb_inc))
             config = ConfigParser.get_configparser(name='app')
             print(config.get('serverconnection', 'server.url'))
             saleurl = config.get('serverconnection', 'server.url') + "pos/sale/"
-            with open('offline/'+fn) as data_file:
+            with open(fn) as data_file:
                 result = json.load(data_file)
                 file_param = dict([])
                 file_param['filename'] = fn
@@ -117,9 +119,11 @@ class POSScreen(Screen):
     products_json = []
     sale_json = []
     customer_id = 0
+    order_id = 0
     payslip_items_list = []
     my_data_view = ListProperty([])
     selected_value = StringProperty('select a product.')
+    username = ''
 
     def __init__(self, **kwargs):
         super(Screen,self).__init__(**kwargs)
@@ -129,27 +133,13 @@ class POSScreen(Screen):
     def post_init(self, *args):
         config = ConfigParser.get_configparser(name='app')
         self.customer_id = config.get('section1', 'default_customer_id')
+        self.order_id = int(config.get('section1', 'default_order_id'))
         self.btn_customer_wid.text = 'Client: ' + str(self.customer_id)
         print ('post_init...')
 
     def on_pre_enter(self, *args):
         def on_success(req, result):
-            self.icon_wid.source='data/icon.png'
-            try:
-                upload_count = len(glob.glob('offline/*.json'))
-                if upload_count > 0:
-                    img = Image.open('data/icon.png')
-                    draw = ImageDraw.Draw(img)
-                    draw.ellipse((50, 65, 95, 95), fill=(165, 208, 101, 0))
-                    font = ImageFont.truetype("data/verdanab.ttf", 24)
-                    posx = 65
-                    if upload_count > 9:
-                        posx = 55
-                    draw.text((posx, 65), str(upload_count), (255, 255, 255), font=font)
-                    img.save('data/icon2.png')
-                    self.icon_wid.source = 'data/icon2.png'
-            except:
-                traceback.print_exc(file=sys.stdout)
+            self.update_icon(True)
             with open('products.json', 'w') as fp:
                 json.dump(result, fp)
                 fp.close()
@@ -174,21 +164,7 @@ class POSScreen(Screen):
             on_error(req, result)
 
         def on_error(req, result):
-            try:
-                upload_count = len(glob.glob('offline/*.json'))
-                if upload_count > 0:
-                    img = Image.open('data/icon-offline.png')
-                    draw = ImageDraw.Draw(img)
-                    draw.ellipse((50, 65, 95, 95), fill=(165, 208, 101, 0))
-                    font = ImageFont.truetype("data/verdanab.ttf", 24)
-                    posx = 65
-                    if upload_count > 9:
-                        posx = 55
-                    draw.text((posx, 65), str(upload_count), (255, 255, 255), font=font)
-                    img.save('data/icon2-offline.png')
-                    self.icon_wid.source = 'data/icon2-offline.png'
-            except:
-                traceback.print_exc(file=sys.stdout)
+            self.update_icon(False)
             for key, val in self.ids.items():
                 print("key={0}, val={1}".format(key, val))
             if len(self.products_list) > 0:
@@ -211,6 +187,8 @@ class POSScreen(Screen):
                 self.my_tabbed_panel_wid.grid_layout_home_wid.height = (len(result['result'])/4)*110
 
         try:
+            self.btn_order_id_wid.text = str(self.order_id)
+            self.username = self.manager.get_screen('main').textinput_user_wid.text
             config = ConfigParser.get_configparser(name='app')
             print(config.get('serverconnection', 'server.url'))
             producturl = config.get('serverconnection', 'server.url') + "pos/products/"
@@ -222,6 +200,27 @@ class POSScreen(Screen):
         except:
             traceback.print_exc(file=sys.stdout)
         print "Initialize products selection"
+
+    def update_icon(self, online=True):
+        offline = '-offline'
+        if online:
+            offline = ''
+        self.icon_wid.source = 'data/icon' + offline + '.png'
+        try:
+            upload_count = len(glob.glob('offline/*.json'))
+            if upload_count > 0:
+                img = Image.open('data/icon' + offline + '.png')
+                draw = ImageDraw.Draw(img)
+                draw.ellipse((50, 65, 95, 95), fill=(165, 208, 101, 0))
+                font = ImageFont.truetype("data/verdanab.ttf", 24)
+                posx = 65
+                if upload_count > 9:
+                    posx = 55
+                draw.text((posx, 65), str(upload_count), (255, 255, 255), font=font)
+                img.save('data/icon2' + offline + '.png')
+                self.icon_wid.source = 'data/icon2' + offline + '.png'
+        except:
+            traceback.print_exc(file=sys.stdout)
 
     def do_search(self):
         def on_success(req, result):
@@ -238,13 +237,20 @@ class POSScreen(Screen):
                 self.my_tabbed_panel_wid.switch_to(self.my_tabbed_panel_wid.tab_search_wid)
             self.my_tabbed_panel_wid.grid_layout_search_wid.height = (len(result['result'])/4+4)*110
 
+        def on_failure(req, result):
+            on_error(req, result)
+
+        def on_error(req, result):
+            print ('POSScrean.search().on_error() ' + result)
+
+        print ('POSScreen.do_search():')
         if len(self.products_search_list) > 0:
             for n in self.products_search_list:
                 self.my_tabbed_panel_wid.grid_layout_search_wid.remove_widget(n)
         self.products_search_list = []
         config = ConfigParser.get_configparser(name='app')
         producturl = config.get('serverconnection', 'server.url') + "pos/product/" + self.text_input_wid.text
-        UrlRequest(producturl, on_success)
+        UrlRequest(producturl, on_success=on_success, on_failure=on_failure, on_error=on_error)
 
     def do_category(self, category):
         print('do_category: ' + category)
@@ -278,6 +284,7 @@ class POSScreen(Screen):
         del self.my_data_view[:]
         self._selected_line_index = 0
         self.list_view_wid.height = self.height * 0.6
+        self.btn_order_id_wid.text = str(self.order_id)
 
     def do_add_item(self, event):
         print('Add product button <%s> state is <%s>' % (self, event))

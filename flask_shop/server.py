@@ -2,6 +2,7 @@
 from flask_shop import app, models
 from flask import Flask, jsonify, request
 from proteus import config, Model, Wizard, Report
+from datetime import date, datetime
 import time
 import decimal
 import json
@@ -119,6 +120,7 @@ def make_sale():
     print_payslip = False
     payslip = request.get_json(force=True)
     payslip_customer = payslip['customer']
+    payslip_info = payslip['payslip_info']
     payslip_items = payslip['items']
     # create sale order
     config.set_trytond(DATABASE_NAME, config_file=CONFIG)
@@ -129,6 +131,17 @@ def make_sale():
     sale = Sale()
     if (sale.id < 0):
         sale.party = party
+        sale.reference = '[' + payslip_info['username'] + '] - ' + datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        sale.number = payslip_info['order_id']
+        sale.description = 'uuid: ' + payslip_info['payslip_uuid']
+        # check if sale has been processed
+        SaleOld = Model.get('sale.sale')
+        saleold = SaleOld.find([('description', '=', 'uuid: ' + payslip_info['payslip_uuid'])])
+        if len(saleold) > 0:
+            print('Order has already been processed.')
+            listold = [{'id': str(saleold[0].id), 'party': str(saleold[0].party.id)}]
+            return jsonify(result=listold)
+        sale.sale_date = date.today()
         Paymentterm = Model.get('account.invoice.payment_term')
         paymentterm = Paymentterm.find([('name', '=', 'cash')])
         sale.payment_term = paymentterm[0]

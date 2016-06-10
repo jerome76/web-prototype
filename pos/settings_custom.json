@@ -21,6 +21,12 @@
       "section": "section1",
       "key": "default_customer_id" },
 
+    { "type": "numeric",
+      "title": "Default order id",
+      "desc": "Default order id for payment slip",
+      "section": "section1",
+      "key": "default_order_id" },
+
     { "type": "options",
       "title": "POS printing enabled",
       "desc": "Enable POS printing",

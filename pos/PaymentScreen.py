@@ -107,6 +107,7 @@ class PaymentScreen(Screen):
 
     def pay(self):
         unique_id = uuid.uuid4()
+        order_id = self.manager.get_screen('posscreen').order_id
 
         def on_success(req, result):
             os.remove('offline/' + str(unique_id) + '.json')
@@ -131,9 +132,14 @@ class PaymentScreen(Screen):
             print("Pay and clear list")
             payslip_json = dict([])
             payslip_positions = self.manager.get_screen('posscreen').my_data_view
+            payslip_info = dict([])
+            payslip_info['payslip_uuid'] = str(unique_id)
+            payslip_info['order_id'] = str(order_id)
+            payslip_info['username'] = self.manager.get_screen('posscreen').username
             customer = dict([])
             customer['customerid'] = self.manager.get_screen('posscreen').customer_id
             payslip_json['customer'] = customer
+            payslip_json['payslip_info'] = payslip_info
             payslip_items = []
             for i in payslip_positions:
                 print("selling: " + str(i))
@@ -158,6 +164,7 @@ class PaymentScreen(Screen):
             else:
                 self.parent.current = "posscreen"
             self.manager.get_screen('posscreen').do_clear_item_list()
+            self.manager.get_screen('posscreen').order_id = order_id + 1
             self.parent.current = "posscreen"
         except Exception:
             print(traceback.format_exc())
