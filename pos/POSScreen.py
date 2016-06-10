@@ -55,7 +55,6 @@ class ImageButton(ButtonBehavior, kivy.uix.image.Image):
             os.remove(fn)
             if self.pb.value >= 99.9:
                 self.popup.dismiss()
-                self.update_icon(True)
 
         def on_failure(req, result):
             on_error(req, result)
@@ -65,7 +64,6 @@ class ImageButton(ButtonBehavior, kivy.uix.image.Image):
             print("Progressbar is on {0}%".format(self.pb.value))
             if self.pb.value >= 99.9:
                 self.popup.dismiss()
-                self.update_icon(False)
 
         try:
             print ("POSScreen.upload_payslips()" + fn + ' ' + str(pb_inc))

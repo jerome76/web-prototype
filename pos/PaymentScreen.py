@@ -112,7 +112,7 @@ class PaymentScreen(Screen):
 
         def on_success(req, result):
             os.remove('offline/' + str(unique_id) + '.json')
-            self.manager.get_screen('posscreen').icon_wid.source = 'icon.png'
+            self.manager.get_screen('posscreen').update_icon(True)
             with open('sale.json', 'w') as fp:
                 json.dump(result, fp)
                 fp.close()
@@ -125,7 +125,7 @@ class PaymentScreen(Screen):
 
         def on_error(req, result):
             print ('on_error: Could not send payment. Saved to file instead.')
-            self.manager.get_screen('posscreen').icon_wid.source = 'icon_offline.png'
+            self.manager.get_screen('posscreen').update_icon(False)
             if self.parent is not None:
                 self.parent.current = "posscreen"
 
