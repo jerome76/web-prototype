@@ -72,7 +72,7 @@ def getProductDirect():
 @app.route("/pos/customers/", methods=['GET'])
 def get_customers():
     config.set_trytond(DATABASE_NAME, config_file=CONFIG)
-    customers = models.Customer.query.all()
+    customers = models.Customer.query.order_by(models.Customer.name).all()
     list = []
     for c in customers:
         list.append({'id': str(c.id), 'city': c.city, 'name': c.name, 'zip': c.zip, 'country': c.country,

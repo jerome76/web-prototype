@@ -193,7 +193,7 @@ ScreenManagement:
                         color: (0.2, 0.2, 0.2, 1.0)
                         font_size: '24sp'
                         size_hint: .25, .5
-                    TextInput:
+                    FloatInput:
                         id: payment_amount_tendered
                         color: (0.2, 0.2, 0.2, 1.0)
                         text: ''
@@ -201,6 +201,7 @@ ScreenManagement:
                         multiline: False
                         font_size: '24sp'
                         on_text_validate: None
+                        on_text: app.root.get_screen('paymentscreen').on_text(self, args[0])
                         size_hint: .25, .5
                     Label:
                         id: payment_amount_change

@@ -23,13 +23,16 @@ import glob
 import traceback
 from functools import partial
 import time
-#from escpos import *
+import sys
+from kivy.graphics import *
+from kivy.graphics.texture import Texture
+from kivy.core.image import Image
 
 TRYTON_HOST = "http://192.168.1.102:5000/pos/products"
 TRYTON_HOST_SEARCH = "http://192.168.1.102:5000/pos/product/"
 
 
-class ImageButton(ButtonBehavior, Image):
+class ImageButton(ButtonBehavior, kivy.uix.image.Image):
     pb = ProgressBar(max=100) #100
     popup = Popup(title='Uploading payslips',
                   content=pb,
@@ -134,6 +137,22 @@ class POSScreen(Screen):
     def on_pre_enter(self, *args):
         def on_success(req, result):
             self.icon_wid.source='data/icon.png'
+            try:
+                texture_info = Texture.create(size=(64, 64))
+                size = 64 * 64 * 3
+                buf = [int(x * 255 / size) for x in range(size)]
+                buf = b''.join(map(chr, buf))
+                texture = kivy.core.image.Image('data/icon.png').texture
+                texture.blit_buffer(buf, pos=(0, 0), size=(64, 64), colorfmt='rgb', bufferfmt='ubyte')
+                texture1 = texture.get_region(64, 64, 64, 64)
+                with texture1:
+                    Color(1, 1, 0)
+                    d = 30.
+                    Ellipse(texture=texture1, pos=(50, 50), size=(d, d))
+                    Rectangle(texture=texture1, pos=(0, 0), size=(100, 98))
+                self.icon_wid.texture = texture
+            except:
+                traceback.print_exc(file=sys.stdout)
             with open('products.json', 'w') as fp:
                 json.dump(result, fp)
                 fp.close()
@@ -183,12 +202,13 @@ class POSScreen(Screen):
             config = ConfigParser.get_configparser(name='app')
             print(config.get('serverconnection', 'server.url'))
             producturl = config.get('serverconnection', 'server.url') + "pos/products/"
+            self.text_input_wid.focus = True
             if len(self.products_list) == 0:
                 UrlRequest(url=producturl, on_success=on_success, on_failure=on_failure, on_error=on_error)
             else:
                 return
         except:
-            print "POSScreen Error: Could not load products"
+            traceback.print_exc(file=sys.stdout)
         print "Initialize products selection"
 
     def do_search(self):

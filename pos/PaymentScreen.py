@@ -5,12 +5,27 @@ from kivy.config import ConfigParser
 from kivy.properties import ObjectProperty, StringProperty, ListProperty
 from kivy.network.urlrequest import UrlRequest
 from kivy.uix.screenmanager import Screen
+from kivy.uix.textinput import TextInput
 import json
 from decimal import Decimal
 import uuid
+import re
 import os
 import traceback
-from ESCPrint  import EscPrint
+from ESCPrint import EscPrint
+
+
+class FloatInput(TextInput):
+    pat = re.compile('[^0-9]')
+
+    def insert_text(self, substring, from_undo=False):
+        pat = self.pat
+        if '.' in self.text:
+            s = re.sub(pat, '', substring)
+        else:
+            s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
+        return super(FloatInput, self).insert_text(s, from_undo=from_undo)
+
 
 class PaymentScreen(Screen):
     label_wid = ObjectProperty()
@@ -23,6 +38,7 @@ class PaymentScreen(Screen):
         self.label_wid.text = str(self.manager.get_screen('posscreen').get_total())
         self.text_input_wid.text = ''
         self.label_change_wid.text = ''
+        self.text_input_wid.focus = True
 
     def getProduct(self, product_code):
         product_json = self.manager.get_screen('posscreen').products_json
@@ -67,11 +83,27 @@ class PaymentScreen(Screen):
         if len(self.text_input_wid.text) > 0:
             change = Decimal(self.text_input_wid.text) - self.manager.get_screen('posscreen').get_total()
             if change >= Decimal(0.00):
+                self.label_change_wid.color = (0, 0, 0, 1)
                 self.label_change_wid.text = str(change)
             else:
-                self.label_change_wid.text = ''
+                self.label_change_wid.color = (1, 0, 0, 1)
+                self.label_change_wid.text = str(change)
         else:
             self.label_change_wid.text = ''
+
+    def on_text(self, instance, value):
+        print('PaymentScreen.on_text(FloatInput): ' + value.text)
+        amount = Decimal(0.00)
+        if value.text != '':
+            amount = Decimal(value.text)
+        change = amount - self.manager.get_screen('posscreen').get_total()
+        if change >= Decimal(0.00):
+            self.label_change_wid.color = (0, 0, 0, 1)
+            self.label_change_wid.text = str(change)
+        else:
+            self.label_change_wid.color = (1, 0, 0, 1)
+            self.label_change_wid.text = str(change)
+
 
     def pay(self):
         unique_id = uuid.uuid4()
@@ -82,19 +114,18 @@ class PaymentScreen(Screen):
             with open('sale.json', 'w') as fp:
                 json.dump(result, fp)
                 fp.close()
-            self.sale_json = result
             print ('on_success: sale returned.')
-            self.manager.get_screen('posscreen').do_clear_item_list()
-            self.parent.current = "posscreen"
+            if self.parent is not None:
+                self.parent.current = "posscreen"
 
         def on_failure(req, result):
             on_error(req, result)
 
         def on_error(req, result):
-            print ('on_error: Could not send payment. Save to file instead.')
+            print ('on_error: Could not send payment. Saved to file instead.')
             self.manager.get_screen('posscreen').icon_wid.source = 'icon_offline.png'
-            self.manager.get_screen('posscreen').do_clear_item_list()
-            self.parent.current = "posscreen"
+            if self.parent is not None:
+                self.parent.current = "posscreen"
 
         try:
             print("Pay and clear list")
@@ -125,8 +156,9 @@ class PaymentScreen(Screen):
             if len(self.manager.get_screen('posscreen').my_data_view) > 0:
                 UrlRequest(url=saleurl, on_success=on_success, on_failure=on_failure, on_error=on_error, req_headers=headers, req_body=data_json)
             else:
-                self.manager.get_screen('posscreen').do_clear_item_list()
                 self.parent.current = "posscreen"
+            self.manager.get_screen('posscreen').do_clear_item_list()
+            self.parent.current = "posscreen"
         except Exception:
             print(traceback.format_exc())
             print "PaymentScreen.pay() Error: Could not send payslip"
