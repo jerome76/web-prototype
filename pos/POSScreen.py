@@ -137,7 +137,6 @@ class POSScreen(Screen):
             self.icon_wid.source='data/icon.png'
             try:
                 upload_count = len(glob.glob('offline/*.json'))
-                upload_count = 7
                 if upload_count > 0:
                     img = Image.open('data/icon.png')
                     draw = ImageDraw.Draw(img)
@@ -175,6 +174,21 @@ class POSScreen(Screen):
             on_error(req, result)
 
         def on_error(req, result):
+            try:
+                upload_count = len(glob.glob('offline/*.json'))
+                if upload_count > 0:
+                    img = Image.open('data/icon-offline.png')
+                    draw = ImageDraw.Draw(img)
+                    draw.ellipse((50, 65, 95, 95), fill=(165, 208, 101, 0))
+                    font = ImageFont.truetype("data/verdanab.ttf", 24)
+                    posx = 65
+                    if upload_count > 9:
+                        posx = 55
+                    draw.text((posx, 65), str(upload_count), (255, 255, 255), font=font)
+                    img.save('data/icon2-offline.png')
+                    self.icon_wid.source = 'data/icon2-offline.png'
+            except:
+                traceback.print_exc(file=sys.stdout)
             for key, val in self.ids.items():
                 print("key={0}, val={1}".format(key, val))
             if len(self.products_list) > 0:
