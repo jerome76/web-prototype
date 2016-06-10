@@ -24,9 +24,7 @@ import traceback
 from functools import partial
 import time
 import sys
-from kivy.graphics import *
-from kivy.graphics.texture import Texture
-from kivy.core.image import Image
+from PIL import Image, ImageDraw, ImageFont
 
 TRYTON_HOST = "http://192.168.1.102:5000/pos/products"
 TRYTON_HOST_SEARCH = "http://192.168.1.102:5000/pos/product/"
@@ -138,19 +136,19 @@ class POSScreen(Screen):
         def on_success(req, result):
             self.icon_wid.source='data/icon.png'
             try:
-                texture_info = Texture.create(size=(64, 64))
-                size = 64 * 64 * 3
-                buf = [int(x * 255 / size) for x in range(size)]
-                buf = b''.join(map(chr, buf))
-                texture = kivy.core.image.Image('data/icon.png').texture
-                texture.blit_buffer(buf, pos=(0, 0), size=(64, 64), colorfmt='rgb', bufferfmt='ubyte')
-                texture1 = texture.get_region(64, 64, 64, 64)
-                with texture1:
-                    Color(1, 1, 0)
-                    d = 30.
-                    Ellipse(texture=texture1, pos=(50, 50), size=(d, d))
-                    Rectangle(texture=texture1, pos=(0, 0), size=(100, 98))
-                self.icon_wid.texture = texture
+                upload_count = len(glob.glob('offline/*.json'))
+                upload_count = 7
+                if upload_count > 0:
+                    img = Image.open('data/icon.png')
+                    draw = ImageDraw.Draw(img)
+                    draw.ellipse((50, 65, 95, 95), fill=(165, 208, 101, 0))
+                    font = ImageFont.truetype("data/verdanab.ttf", 24)
+                    posx = 65
+                    if upload_count > 9:
+                        posx = 55
+                    draw.text((posx, 65), str(upload_count), (255, 255, 255), font=font)
+                    img.save('data/icon2.png')
+                    self.icon_wid.source = 'data/icon2.png'
             except:
                 traceback.print_exc(file=sys.stdout)
             with open('products.json', 'w') as fp:
