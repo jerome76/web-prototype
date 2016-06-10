@@ -65,9 +65,9 @@ class MainApp(App):
 
     def build_config(self, config):
         config.setdefaults('section1', {
-            'default_customer_id': '2',
+            'default_customer_id': 2,
             'default_payment_type': 'cash',
-            'default_order_id': '1000',
+            'default_order_id': 1000,
             'pos_printing_enabled': True
         })
         config.setdefaults('serverconnection', {
@@ -77,7 +77,7 @@ class MainApp(App):
     def close_settings(self, settings):
         super(MainApp, self).close_settings(settings)
         orderid = self.config.get('section1', 'default_order_id')
-        self.root.get_screen('posscreen').order_id = orderid
+        self.root.get_screen('posscreen').order_id = int(orderid)
         self.root.get_screen('posscreen').btn_order_id_wid.text = str(orderid)
 
     def build_settings(self, settings):
