@@ -2,18 +2,15 @@ import kivy
 kivy.require('1.9.1') # replace with your current kivy version !
 
 from kivy.uix.button import Button
-from kivy.uix.label import Label
 from kivy.config import Config, ConfigParser
-from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ObjectProperty, StringProperty, ListProperty
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.progressbar import ProgressBar
 from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.image import Image
 from kivy.network.urlrequest import UrlRequest
-from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.uix.screenmanager import ScreenManager, Screen
 import json
-import urllib2
 from kivy.clock import Clock
 from decimal import Decimal, InvalidOperation
 from kivy.factory import Factory
@@ -22,7 +19,6 @@ import os, os.path
 import glob
 import traceback
 from functools import partial
-import time
 import sys
 from PIL import Image, ImageDraw, ImageFont
 

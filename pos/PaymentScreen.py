@@ -2,7 +2,7 @@ import kivy
 kivy.require('1.9.1')
 
 from kivy.config import ConfigParser
-from kivy.properties import ObjectProperty, StringProperty, ListProperty
+from kivy.properties import ObjectProperty
 from kivy.network.urlrequest import UrlRequest
 from kivy.uix.screenmanager import Screen
 from kivy.uix.textinput import TextInput
@@ -13,7 +13,7 @@ import re
 import os
 import traceback
 from ESCPrint import EscPrint
-from datetime import date, datetime
+from datetime import datetime
 
 
 class FloatInput(TextInput):
