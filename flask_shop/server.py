@@ -131,7 +131,7 @@ def make_sale():
     sale = Sale()
     if (sale.id < 0):
         sale.party = party
-        sale.reference = '[' + payslip_info['username'] + '] - ' + datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        sale.reference = '[' + payslip_info['username'] + '] - ' + payslip_info['order_date']
         sale.number = payslip_info['order_id']
         sale.description = 'uuid: ' + payslip_info['payslip_uuid']
         # check if sale has been processed

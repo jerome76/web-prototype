@@ -13,6 +13,7 @@ import re
 import os
 import traceback
 from ESCPrint import EscPrint
+from datetime import date, datetime
 
 
 class FloatInput(TextInput):
@@ -135,6 +136,7 @@ class PaymentScreen(Screen):
             payslip_info = dict([])
             payslip_info['payslip_uuid'] = str(unique_id)
             payslip_info['order_id'] = str(order_id)
+            payslip_info['order_date'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             payslip_info['username'] = self.manager.get_screen('posscreen').username
             customer = dict([])
             customer['customerid'] = self.manager.get_screen('posscreen').customer_id
