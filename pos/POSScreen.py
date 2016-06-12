@@ -51,6 +51,7 @@ class ImageButton(ButtonBehavior, kivy.uix.image.Image):
             os.remove(fn)
             if self.pb.value >= 99.9:
                 self.popup.dismiss()
+                self.parent.parent.parent.update_icon(True)
 
         def on_failure(req, result):
             on_error(req, result)
@@ -60,6 +61,7 @@ class ImageButton(ButtonBehavior, kivy.uix.image.Image):
             print("Progressbar is on {0}%".format(self.pb.value))
             if self.pb.value >= 99.9:
                 self.popup.dismiss()
+                self.parent.parent.parent.update_icon(False)
 
         try:
             print ("POSScreen.upload_payslips()" + fn + ' ' + str(pb_inc))
@@ -216,6 +218,9 @@ class POSScreen(Screen):
         except:
             traceback.print_exc(file=sys.stdout)
 
+    def format_currency_amount(self, amount):
+        return '{:20,.2f}'.format(amount)
+
     def do_search(self):
         def on_success(req, result):
             print ('search success.')
@@ -285,7 +290,8 @@ class POSScreen(Screen):
         product = self.getProduct(event.id)
         if product is not None:
             newitem = DataItem(event.id, text="[" + str(product['code']) + "] " + product['name']
-                                    + '               ' + str(Decimal(product['price']) * Decimal(1.000))
+                                    + '               '
+                                    + self.format_currency_amount(Decimal(product['price']) * Decimal(1.000))
                                     + ' ' + self.default_currency + "\n"
                                     + '   1 ' + product['uom_symbol'] + ' at ' + product['price']
                                     + ' ' + self.default_currency
@@ -320,7 +326,7 @@ class POSScreen(Screen):
         print("selection_change: " + change.text + " " + str(change.is_selected))
         change.background_color = [1, 1, 1, 1]
         self.selected_value = 'Selected: {}'.format(change.text)
-        self.label_total_wid.text = 'Total: ' + str(self.get_total())
+        self.label_total_wid.text = 'Total: ' + self.format_currency_amount(self.get_total())
 
 
     def update_qty_disc_price(self, product_code, quantity, discount, price):
@@ -341,9 +347,9 @@ class POSScreen(Screen):
     def get_line(self, product, quantity, discount, price):
         return "[" + str(product['code']) + "] " + product['name'] \
                + '               ' \
-               + str(price * quantity) + ' ' + self.default_currency + "\n"  \
-               + '  ' + str(quantity) + ' ' + product['uom_symbol'] + ' at ' + str(price) + ' ' \
-               + self.default_currency + " / " + product['uom_symbol'] \
+               + self.format_currency_amount(price * quantity) + ' ' + self.default_currency + "\n"  \
+               + '  ' + str(quantity) + ' ' + product['uom_symbol'] + ' at ' + self.format_currency_amount(price) \
+               + ' ' + self.default_currency + " / " + product['uom_symbol'] \
                + '               ' + str(discount)
 
     def get_total(self):
@@ -452,7 +458,7 @@ class POSScreen(Screen):
               ' discount:' + str(active_line.discount))
         self.label_wid.text = self.info
         print(str(self.get_total()))
-        self.label_total_wid.text = 'Total: ' + str(self.get_total())
+        self.label_total_wid.text = 'Total: ' + self.format_currency_amount(self.get_total())
 
 
 class MyTabbedPanel(TabbedPanel):

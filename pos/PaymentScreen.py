@@ -36,7 +36,7 @@ class PaymentScreen(Screen):
 
     def on_pre_enter(self, *args):
         print ('PaymentScreen on_pre_enter...')
-        self.label_wid.text = str(self.manager.get_screen('posscreen').get_total())
+        self.label_wid.text = self.format_currency_amount(self.manager.get_screen('posscreen').get_total())
         self.text_input_wid.text = ''
         self.label_change_wid.text = ''
         self.text_input_wid.focus = True
@@ -85,10 +85,10 @@ class PaymentScreen(Screen):
             change = Decimal(self.text_input_wid.text) - self.manager.get_screen('posscreen').get_total()
             if change >= Decimal(0.00):
                 self.label_change_wid.color = (0, 0, 0, 1)
-                self.label_change_wid.text = str(change)
+                self.label_change_wid.text = self.format_currency_amount(change)
             else:
                 self.label_change_wid.color = (1, 0, 0, 1)
-                self.label_change_wid.text = str(change)
+                self.label_change_wid.text = self.format_currency_amount(change)
         else:
             self.label_change_wid.text = ''
 
@@ -100,11 +100,13 @@ class PaymentScreen(Screen):
         change = amount - self.manager.get_screen('posscreen').get_total()
         if change >= Decimal(0.00):
             self.label_change_wid.color = (0, 0, 0, 1)
-            self.label_change_wid.text = str(change)
+            self.label_change_wid.text = self.format_currency_amount(change)
         else:
             self.label_change_wid.color = (1, 0, 0, 1)
-            self.label_change_wid.text = str(change)
+            self.label_change_wid.text = self.format_currency_amount(change)
 
+    def format_currency_amount(self, amount):
+        return '{:20,.2f}'.format(amount)
 
     def pay(self):
         unique_id = uuid.uuid4()
