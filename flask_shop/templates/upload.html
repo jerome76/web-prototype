@@ -11,11 +11,14 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="well">
                 <h2 id="title">{{ pt }}</h2>
+                <p>Max upload file size: {{ max_content_length_mb }} MBytes</p>
                 <p><form action="" method=post enctype=multipart/form-data>
                     <select name="file_type">
                     <option value="products">Products</option>
                     <option value="internal_shipments">Internal Shipments</option>
                     <option value="customers">Customers</option>
+                    <option value="webshop_images_zip">Webshop Images in Zip-File</option>
+                    <option value="pos_images_zip">POS Images in Zip-File</option>
                     </select><br>
                     <input type=file name=file><br>
                     <input type=submit value=Upload><br>

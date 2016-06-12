@@ -32,9 +32,11 @@ MAIL_USERNAME = 'milliondog.com@gmail.com'
 MAIL_PASSWORD = 'password'
 
 UPLOAD_FOLDER = '/tmp'
-ALLOWED_EXTENSIONS = set(['csv'])
+ALLOWED_EXTENSIONS = set(['csv', 'zip'])
 # Max content length for file upload: 1 MB
-MAX_CONTENT_LENGTH = 1 * 1024 * 1024
+MAX_CONTENT_LENGTH = 4 * 1024 * 1024
+POS_PRODUCT_IMAGES_DIRECTORY = './pos/products/'
+WEBSHOP_PRODUCT_IMAGES_DIRECTORY = './flask_shop/static/products/'
 
 DEFAULT_CURRENCY_ID = 101
 DEFAULT_ADMIN_USERNAME = 'user@host.com'

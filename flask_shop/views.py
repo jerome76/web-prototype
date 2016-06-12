@@ -20,6 +20,7 @@ from datetime import timedelta
 from passlib.hash import pbkdf2_sha256
 from validate_email import validate_email
 from loader import csvimport
+import zipfile
 
 CONFIG = app.config['TRYTON_CONFIG_FILE']
 DATABASE_NAME = app.config['TRYTON_DATABASE_NAME']
@@ -447,10 +448,28 @@ def upload():
                 csvimport.import_customers(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             elif file_type == 'internal_shipments':
                 csvimport.load_internal_shipment(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            elif file_type == 'webshop_images_zip':
+                fh = open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'rb')
+                z = zipfile.ZipFile(fh)
+                for name in z.namelist():
+                    outpath = app.config['WEBSHOP_PRODUCT_IMAGES_DIRECTORY']
+                    if name[-4:].lower() == '.png' or name[-4:].lower() == '.jpg' or name[-5:].lower() == '.jpeg':
+                        z.extract(name, outpath)
+                fh.close()
+            elif file_type == 'pos_images_zip':
+                fh = open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'rb')
+                z = zipfile.ZipFile(fh)
+                for name in z.namelist():
+                    outpath = app.config['POS_PRODUCT_IMAGES_DIRECTORY']
+                    if name[-4:].lower() == '.png' or name[-4:].lower() == '.jpg' or name[-5:].lower() == '.jpeg':
+                        z.extract(name, outpath)
+                fh.close()
             return redirect(url_for('uploaded_file',
                                     filename=filename))
+    max_content_length_mb = app.config['MAX_CONTENT_LENGTH'] / 1024 / 1024
     return render_template('upload.html',
-                           title="Milliondog", page=gettext('Upload new File'), pt=page_topic)
+                           title="Milliondog", page=gettext('Upload new File'), pt=page_topic,
+                           max_content_length_mb=max_content_length_mb)
 
 
 @app.route('/setlang/<language>')
