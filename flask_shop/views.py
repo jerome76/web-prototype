@@ -472,15 +472,15 @@ def upload():
                            max_content_length_mb=max_content_length_mb)
 
 
-@app.route('/setlang/<language>')
-def setlang(language=None):
+@app.route('/setlang/<language>/<path:goto>')
+def setlang(language=None, goto=None):
     setattr(g, 'lang_code', language)
     session['lang_code'] = language
     refresh()
-    return redirect("/")
+    return redirect("/" + goto)
 
-@app.route('/setcurrency/<currency>')
-def setcurrency(currency=None):
+@app.route('/setcurrency/<currency>/<path:goto>')
+def setcurrency(currency=None, goto=None):
     setattr(g, 'currency_code', currency)
     session['currency_code'] = currency
     config.set_trytond(DATABASE_NAME, config_file=CONFIG)
@@ -489,7 +489,7 @@ def setcurrency(currency=None):
     for n in currency_rate:
         if n.currency.code == currency:
             session['currency_rate'] = float(n.rate)
-    return redirect("/")
+    return redirect("/" + goto)
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
