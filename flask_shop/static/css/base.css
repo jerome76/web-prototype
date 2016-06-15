@@ -11,6 +11,16 @@
     z-index: 30;
 }
 
+ul.nav li.dropdown:hover ul.dropdown-menu {
+    display: block;
+}
+
+.full-width-div {
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+
 #footer a {
     padding: 0 8px;
     color: white;
@@ -31,29 +41,24 @@
     padding-left: 40px;
 }
 
-.nav a{
-    font-family: "Perpetua Titling MT";
-    padding-right: 20px !important;
-    padding-top: 30px !important;
-    color: #4E4E4E !important;
-    font-size: 1.8em;
-}
-
-.nav li{
-    padding-right: 5px !important;
-}
-
-.navbar-default{
-}
-
-.navbar-right{
-    padding-right: 30px !important;
-}
-
-#lang {
+.local{
     padding-right: 0px !important;
     font-size: 1.1em !important;
 }
+
+.nav a{
+    font-family: "Perpetua Titling MT";
+    padding-right: 10px !important;
+    padding-top: 30px !important;
+    color: #4E4E4E !important;
+    font-size: 1.6em;
+}
+
+
+.navbar-right{
+    padding-right: 15px !important;
+}
+
 
 #title{
     color: #ba9fbb;
@@ -61,7 +66,6 @@
 
 body {
     font-family: "Perpetua";
-    height: 100%;
 }
 
 .carousel .item {
@@ -90,7 +94,6 @@ form textarea#message{
     background-color: #8c5c8e;
     border-color: #B298B3;
 }
-
 /*full width container*/
 @media (max-width: 767px) {
     .block {

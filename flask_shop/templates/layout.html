@@ -16,7 +16,7 @@
 </head>
 
 
-<body onload="init();">
+<body>
     <div class="navbar-wrapper">
         <div class="container-fluid">
             <nav class="navbar transparent navbar-default navbar-static-top">
@@ -28,34 +28,46 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand hidden-xs hidden-sm" href="/index">
+                        <a class="navbar-brand hidden-xs hidden-sm hidden-md" href="/index">
                             <img src="{{ url_for('static', filename='images/logo.png') }}" />
                         </a>
-                        <a class="navbar-brand hidden-lg hidden-md" href="/index">
+                        <a class="navbar-brand hidden-lg" href="/index" style="padding-top: 40px">
                             <img src="{{ url_for('static', filename='images/MillionDog_Logo_200x22.png') }}" />
                         </a>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <div class="row">
-                                <div class="col-md-8"></div>
-                                <div class="col-md-4">
-                                    <a href="/setcurrency/CHF" id="lang">CHF</a>
-                                    <a href="/setcurrency/EUR" id="lang">EUR</a>
-                                    <a href="/setcurrency/USD" id="lang">USD</a>
+                                <div class="col-md-7"></div>
+                                <div class="col-md-5">
+                                    <a href="#" id="curr-chf" class="local">CHF</a>
+                                    <a href="#" id="curr-eur" class="local">EUR</a>
+                                    <a href="#" id="curr-usd" class="local">USD</a>
                                     &nbsp;&nbsp;&nbsp;
-                                    <a href="/setlang/en" id="lang">EN</a>
-                                    <span> / </span>
-                                    <a href="/setlang/de" id="lang">DE</a>
+                                    <a href="#" id="lang-en" class="local" style="padding-right: 0px !important">EN</a>
+                                    <span>/</span>
+                                    <a href="#" id="lang-de" class="local">DE</a>
                                     {% if session.cart_item_count|safe %}
                                         &nbsp;&nbsp;&nbsp;
-                                        <a href="/cart" id="lang"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                        <a href="/cart" class="local"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                             [{{session['cart_item_count']}}]</a>
                                     {% endif %}
                                 </div>
                             </div>
                             <li><a href="/index">Home</a></li>
-                            <li><a href="/categories">{{ _('Shop') }}</a></li>
+
+                            <li class="dropdown">
+                                <a href="/categories" role="button" aria-expanded="false">Shop <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/shop/Cosy-Bandana">Cosy-Bandana</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/shop/Cosy-Boomerang">Cosy-Boomerang</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/shop/Cosy-Loop">Cosy-Loop</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/shop/Cosy-Kaye">Cosy-Kaye</a></li>
+                                </ul>
+                            </li>
                             <li><a href="/sendus"><font color="#a742ab">{{ _('Send us') }}</font></a></li>
                             <li><a href="/gallery">{{ _('Gallery') }}</a></li>
                             <li><a href="/about">{{ _('About us') }}</a></li>
@@ -99,20 +111,22 @@
         ('/privacy/', 'privacy', _('Disclaimer')),
         ('/legal/', 'legal', _('Legal notice'))
     ] -%}
-    <br><br><br>
-	 <div class="container-fluid"  id="footer">
-          <div class="row">
-            <div class="col-md-8 col-sm-12">
-                {% for href, id, caption in navigation_bar %}
-                <a href="{{ href|e }}"{% if id == active_page %} class="active"{% endif %}>
-                {{ caption }}</a>
-                {% endfor %}
+    <br><br>
+    <footer class="footer">
+        <div class="container-fluid"  id="footer">
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    {% for href, id, caption in navigation_bar %}
+                    <a href="{{ href|e }}"{% if id == active_page %} class="active"{% endif %}>
+                    {{ caption }}</a>
+                    {% endfor %}
+                </div>
+                <div class="col-md-4 col-sm-12 text-right" id="registered">
+                  2016 MillionDog - All rights reserved
+                </div>
             </div>
-            <div class="col-md-4 col-sm-12 text-right" id="registered">
-              2016 MillionDog - All rights reserved
-            </div>
-          </div>
         </div>
+    </footer>
 
 </body>
 
@@ -120,6 +134,47 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
 <script src="/static/js/bootstrap-image-gallery.min.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+            $("#lang-de").click(function(){
+                window.location = '/setlang/de' + window.location.pathname;
+                return false;
+            }); 
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+            $("#lang-en").click(function(){
+                window.location = '/setlang/en' + window.location.pathname;
+                return false;
+            }); 
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+            $("#curr-chf").click(function(){
+                window.location = '/setcurrency/CHF' + window.location.pathname;
+                return false;
+            }); 
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+            $("#curr-usd").click(function(){
+                window.location = '/setcurrency/USD' + window.location.pathname;
+                return false;
+            }); 
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+            $("#lang-eur").click(function(){
+                window.location = '/setcurrency/EUR' + window.location.pathname;
+                return false;
+            }); 
+    });
+</script>
 {% block page_js %}
 {% endblock %}
 
