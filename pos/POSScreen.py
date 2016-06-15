@@ -215,6 +215,7 @@ class POSScreen(Screen):
                 draw.text((posx, 65), str(upload_count), (255, 255, 255), font=font)
                 img.save('data/icon2' + offline + '.png')
                 self.icon_wid.source = 'data/icon2' + offline + '.png'
+                self.icon_wid.reload()
         except:
             traceback.print_exc(file=sys.stdout)
 
