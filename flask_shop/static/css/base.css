@@ -11,6 +11,8 @@
     z-index: 30;
 }
 
+img { vertical-align: middle; }
+
 ul.nav li.dropdown:hover ul.dropdown-menu {
     display: block;
 }

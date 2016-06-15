@@ -51,16 +51,16 @@
     <center><p>{{ _('Please measure the neck of your dog, so you can be sure, you will order the right Cosy size.') }}</p></center>
     {% if category == 'Cosy-Bandana' %}
         <div class="row">
-            <div class="col-md-2"></div>    
-            <div class="col-md-3">
+            <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2"></div>    
+            <div class="col-md-3 col-xs-3 col-lg-3 col-sm-3">
                 <a href="/shop/Cosy-Bandana/S"><span class="badge" id="small">S</span></a>
                  26 - 29 cm
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-xs-3 col-lg-3 col-sm-3">
                 <a href="/shop/Cosy-Bandana/M"><span class="badge" id="medium">M</span></a>
                 31 - 36 cm
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-xs-3 col-lg-3 col-sm-3">
                 <a href="/shop/Cosy-Bandana/L"><span class="badge" id="large">L</span></a>
                 45 - 51 cm
             </div>
@@ -68,20 +68,20 @@
         </div>            
     {% elif category == 'Cosy-Loop' %}
         <div class="row">
-            <div class="col-md-2"></div>    
-            <div class="col-md-2">
+            <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2"></div>    
+            <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2">
                 <a href="/shop/Cosy-Loop/XS-S"><span class="badge" id="small">S</span></a>
                  26 - 29 cm
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2">
                 <a href="/shop/Cosy-Loop/S-M"><span class="badge" id="medium">M</span></a>
                 31 - 36 cm
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2">
                 <a href="/shop/Cosy-Loop/M-L"><span class="badge" id="large">L</span></a>
                 45 - 51 cm
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2">
                 <a href="/shop/Cosy-Loop/L-XL"><span class="badge" id="xlarge">XL</span></a>
                 > 51 cm
             </div>
@@ -89,16 +89,16 @@
         </div>            
     {% elif category == 'Cosy-Boomerang' %}
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-3">
+            <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2"></div>
+            <div class="col-md-3 col-xs-3 col-lg-3 col-sm-3">
                 <a href="/shop/Cosy-Boomerang/XS-S"><span class="badge" id="small">S</span></a>
                  26 - 29 cm
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-xs-3 col-lg-3 col-sm-3">
                 <a href="/shop/Cosy-Boomerang/S-M"><span class="badge" id="medium">M</span></a>
                 31 - 36 cm
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-xs-3 col-lg-3 col-sm-3">
                 <a href="/shop/Cosy-Boomerang/M-L"><span class="badge" id="large">L</span></a>
                 45 - 51 cm
             </div>
@@ -106,16 +106,16 @@
         </div>
     {% else %}
         <div class="row">
-            <div class="col-md-2"></div>    
-            <div class="col-md-3">
+            <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2"></div>    
+            <div class="col-md-3 col-xs-3 col-lg-3 col-sm-3">
                 <a href="/shop/Cosy-Kaye/XS-S"><span class="badge" id="small">S</span></a>
                  26 - 29 cm
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-xs-3 col-lg-3 col-sm-3">
                 <a href="/shop/Cosy-Kaye/S-M"><span class="badge" id="medium">M</span></a>
                 31 - 36 cm
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-xs-3 col-lg-3 col-sm-3">
                 <a href="/shop/Cosy-Kaye/M-L"><span class="badge" id="large">L</span></a>
                 45 - 51 cm
             </div>
@@ -127,7 +127,7 @@
     <hr>
     <div class="row">
     {% for n in db_list %}
-        <div class="col-md-3">
+        <div class="col-md-3 col-xs-3 col-lg-3 col-sm-3">
             <a href="/product/{{n.id}}">
                 <div class="thumbnail">
                     <img class="img-responsive img-rounded" src="/static/products/{{ n.attributes['image_tn'] }}">

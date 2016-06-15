@@ -38,8 +38,8 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <div class="row">
-                                <div class="col-md-7"></div>
-                                <div class="col-md-5">
+                                <div class="col-md-7 col-xs-7 col-lg-7 col-sm-7"></div>
+                                <div class="col-md-5 col-xs-5 col-lg-5 col-sm-5">
                                     <a href="#" id="curr-chf" class="local">CHF</a>
                                     <a href="#" id="curr-eur" class="local">EUR</a>
                                     <a href="#" id="curr-usd" class="local">USD</a>
@@ -117,13 +117,13 @@
     <footer class="footer">
         <div class="container-fluid"  id="footer">
             <div class="row">
-                <div class="col-md-8 col-sm-12">
+                <div class="col-md-8 col-sm-12 col-xs-12">
                     {% for href, id, caption in navigation_bar %}
                     <a href="{{ href|e }}"{% if id == active_page %} class="active"{% endif %}>
                     {{ caption }}</a>
                     {% endfor %}
                 </div>
-                <div class="col-md-4 col-sm-12 text-right" id="registered">
+                <div class="col-md-4 col-sm-12 col-xs-12 text-right" id="registered">
                   2016 MillionDog - All rights reserved
                 </div>
             </div>
