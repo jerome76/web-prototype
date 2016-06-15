@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block page_css %}
+<style>
+#small{
+    font-size: 25px;
+    padding: 3px 15px;
+    border-radius: 20px;
+    line-height: 1.428571429;
+    background-color: #dfd3df;
+}
+#medium{
+    width: 53px;
+    height: 53px;
+    font-size: 25px;
+    padding: 7px 0px;
+    border-radius: 25px;
+    line-height: 1.428571429;
+    background-color: #c3abc3;
+}
+#large{
+    font-size: 25px;
+    padding: 15px 25px;
+    border-radius: 30px;
+    line-height: 1.33;
+    background-color: #a884a8;
+}
+#xlarge{
+    width: 80px;
+    height: 80px;
+    font-size: 25px;
+    border-radius: 35px;
+    padding: 23px 0;
+    line-height: 1.33;
+    background-color: #8c5c8e;
+}
+.caption{
+    text-align: center;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="page-header" id="title">{{ category }}</h2>
+            {{ pc |safe }}
+        </div>
+    </div>
+    <hr>
+</div>
+{% endblock %}

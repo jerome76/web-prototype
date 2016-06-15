@@ -7,71 +7,1273 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-22 09:55+0200\n"
-"PO-Revision-Date: 2016-04-22 09:55+0200\n"
+"POT-Creation-Date: 2016-06-15 14:14+0200\n"
+"PO-Revision-Date: 2016-04-22 10:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: de\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.3\n"
+"Generated-By: Babel 2.0\n"
 
-#: flask_shop/views.py:18
+#: flask_shop/views.py:170 flask_shop/views.py:174
+#: flask_shop/templates/layout.html:75
 msgid "About us"
 msgstr "Über uns"
 
-#: flask_shop/views.py:19
+#: flask_shop/views.py:171
 msgid ""
-"\n"
-"                We created Milliondog because we love dogs. Milliondog "
-"symbolizes the importance of a dog for his owner and our philosophy "
-"reflects just that. Each Milliondog Cosy is unique in material and colour"
-" and emphasises the individual personality and uniqueness of your "
-"pawesome darling.\n"
-"                <br><br>We love our work and you can see this in every "
-"Cosy.\n"
-"                "
-msgstr "Aus unserer Liebe zu Hunden gründeten wir Milliondog. Der Name steht symbolisch für die Bedeutung und den Wert, den der Hund für seinen Besitzer hat. Unsere Philosophie baut auf diese Bedeutung. Die handgefertigten Cosys sind Unikate in Stoff- und Farbkombination und unterstreichen die individuelle Persönlichkeit und Einzigartigkeit Ihres Lieblings.<br>Wir lieben unsere Arbeit und das sieht man an jedem Cosy…."
+"<h4><p>We created Milliondog because we love dogs. Milliondog symbolizes "
+"the importance of a dog for his owner and our philosophy reflects just "
+"that. Each Milliondog Cosy is unique in material and colour and "
+"emphasises the individual personality and uniqueness of your pawesome "
+"darling.</p>\n"
+"        <p>We love our work and you can see this in every Cosy.</p>\n"
+"        </h4>"
+msgstr ""
+"<h4><p>Aus unserer Liebe zu Hunden gründeten wir Milliondog. Der Name "
+"steht symbolisch für die Bedeutung und den Wert, den der Hund für seinen "
+"Besitzer hat. Unsere Philosophie baut auf diese Bedeutung. Die "
+"handgefertigten Cosys sind Unikate in Stoff- und Farbkombination und "
+"unterstreichen die individuelle Persönlichkeit und Einzigartigkeit Ihres "
+"Lieblings.</p>\n"
+"<p>Wir lieben unsere Arbeit und das sieht man an jedem Cosy….\"</p><h4>"
 
-#: flask_shop/templates/layout.html:49 flask_shop/views.py:27
+#: flask_shop/views.py:178 flask_shop/views.py:183
+#: flask_shop/templates/layout.html:73
+msgid "Send us"
+msgstr "Schickt uns"
+
+#: flask_shop/views.py:179 flask_shop/views.py:215
+msgid ""
+"<h4><p>We welcome your enquiries regarding our exclusive service using "
+"your own fabrics, for example we can use material from your children’s, "
+"parent’s or partner’s clothes to make a special Milliondog-Cosy for your "
+"dog. Get in touch with us so we can work together to give your dog a "
+"unique look.</p>\n"
+"        <p>Let your dog play his own part by wearing a Milliondog-Cosy at"
+" a special day in your life.</p>\n"
+"        <p>For more information contact us by <a "
+"href=\"mailto:informme@milliondog.com\">Email</a>.</p>\n"
+"        </h4>"
+msgstr ""
+"<h4><p>Nutzen Sie&nbsp;unseren exklusiven Service. Gerne&nbsp;verarbeiten"
+" wir für Sie auch&nbsp;Stoffe mit besonderer emotionaler Bedeutung, wie "
+"zum Beispiel Kleidungsstücke von Kindern, Eltern, Partnern "
+"etc.</p><p>Kontaktieren Sie uns gerne per <a "
+"href=\"mailto:informme@milliondog.com\">Email</a>.</p></h4>"
+
+#: flask_shop/views.py:193 flask_shop/views.py:208
+#: flask_shop/templates/admin.html:53 flask_shop/templates/admin.html:76
+#: flask_shop/templates/admin.html:131
+msgid "Product"
+msgstr "Produkt"
+
+#: flask_shop/views.py:194
+msgid "Product:"
+msgstr "Produkt:"
+
+#: flask_shop/views.py:213 flask_shop/views.py:220 flask_shop/views.py:241
+#: flask_shop/views.py:255
+msgid "Shop"
+msgstr "Shop"
+
+#: flask_shop/views.py:214
+msgid ""
+"<h4><p>You do not find the appropriate Cosy in the shop? We would love to"
+" advise you for your individual material combination.</p></h4>"
+msgstr ""
+"<h4><p>Sie finden nicht das passende Cosy im Shop? Wir beraten Sie gerne "
+"für ihre individuelle Stoffkombination.</p></h4>"
+
+#: flask_shop/views.py:219 flask_shop/templates/layout.html:70
+msgid "Custom-made"
+msgstr "Sonderanfertigung"
+
+#: flask_shop/views.py:242
+msgid ""
+"<h4><p>Every Milliondog-Cosy is a handmade unique piece and emphasises "
+"the personality of your dog.\n"
+"        <br>The individual, careful processing of the comfortable cotton "
+"and jersey materials for a Milliondog-Cosy\n"
+"        begins for us with the choice of the special materials and their "
+"combination with each other.\n"
+"        <br>Give your dog the friendly look he deserves – every dog can "
+"be a true Milliondog.\n"
+"        <br>You can choose a standard Cosy sizes or you can order a Cosy "
+"in exactly the right size for your dog.\n"
+"        <br>Each Cosy is reversible, it can be worn on either side.</p>\n"
+"        </h4>"
+msgstr ""
+"<h4><p>Die individuelle, sorgfältige Verarbeitung der bequemen Baumwoll- "
+"und Jerseystoffe zu einem MillionDog-Cosy beginnt für uns bei der Auswahl"
+" der besonderen Stoffe und deren Kombinationen miteinander.<br>Jedes "
+"MillionDog-Cosy ist ein handgefertigtes Einzelstück und hebt die "
+"Persönlichkeit ihres Hundes hervor.<br><br>Jeder Hund ist doch ein wahrer"
+" MillionDog...<br><br>Wir bieten Cosy-Standardgrössen und fertigen "
+"speziell auf einen von Ihnen angegebenen Halsumfang Ihres Hundes.<br>Die "
+"Cosys sind beidseits tragbar.</p></h4>"
+
+#: flask_shop/views.py:260 flask_shop/views.py:262
+#: flask_shop/templates/gallery.html:46 flask_shop/templates/layout.html:74
 msgid "Gallery"
 msgstr "Galerie"
 
-#: flask_shop/views.py:28
+#: flask_shop/views.py:261
 msgid "Gallery:"
 msgstr "Galerie:"
 
-#: flask_shop/views.py:33
-msgid "Contact"
-msgstr "Kontakt"
-
-#: flask_shop/views.py:34
-msgid "You can send us a message here:"
-msgstr "Kontaktieren Sie uns unverbindlich, wir freuen uns über Ihre Nachricht:"
-
-#: flask_shop/views.py:49
-msgid "Start"
-msgstr "Start"
-
-#: flask_shop/views.py:50
-msgid "exclusive accessoires for your awesome darling"
-msgstr "Exklusive Accessoires für Ihren einzigartigen Liebling"
-
-#: flask_shop/templates/layout.html:50
-msgid "About"
-msgstr "Über uns"
-
-#: flask_shop/templates/layout.html:51
-msgid "Contact Us"
-msgstr "Kontakt"
-
-#: flask_shop/templates/layout.html:52
+#: flask_shop/views.py:276
 msgid "Products"
 msgstr "Produkte"
 
-#: flask_shop/templates/layout.html:53
-msgid "Product Categories"
-msgstr "Kategorien"
+#: flask_shop/views.py:290
+msgid "Start"
+msgstr "Start"
+
+#: flask_shop/views.py:291
+msgid "exclusive accessoires for your awesome darling"
+msgstr "Exklusive Accessoires für Ihren einzigartigen Liebling"
+
+#: flask_shop/views.py:436 flask_shop/views.py:487
+msgid "Upload new File"
+msgstr "Eine weitere Datei hochladen"
+
+#: flask_shop/views.py:449
+msgid "No file part"
+msgstr "Datei fehlt"
+
+#: flask_shop/views.py:456
+msgid "No file selected"
+msgstr "Keine Datei ausgewählt"
+
+#: flask_shop/views.py:526
+msgid "login successful."
+msgstr "Anmeldung erfolgreich"
+
+#: flask_shop/views.py:538 flask_shop/views.py:541
+msgid "invalid email or password."
+msgstr "Email oder Passwort ist ungültig"
+
+#: flask_shop/views.py:544 flask_shop/views.py:595
+msgid "Invalid email address given."
+msgstr "Email Adresse ist ungültig."
+
+#: flask_shop/views.py:547 flask_shop/templates/login.html:11
+#: flask_shop/templates/login.html:39
+msgid "Sign in"
+msgstr "Anmelden"
+
+#: flask_shop/views.py:559
+msgid "Email address already registered."
+msgstr "Email-Adresse ist bereits registriert."
+
+#: flask_shop/views.py:589
+msgid "Registration successful. Please continue the checkout process."
+msgstr "Registrierung war erfolgreich. Bitte fahren Sie mit dem Zahlvorgang fort."
+
+#: flask_shop/views.py:592
+msgid "System is down."
+msgstr "Das System ist ausser Betrieb"
+
+#: flask_shop/views.py:598 flask_shop/templates/register.html:18
+msgid "Register"
+msgstr "Registrieren"
+
+#: flask_shop/views.py:608 flask_shop/views.py:623
+#: flask_shop/templates/layout.html:76
+msgid "Contact"
+msgstr "Kontakt"
+
+#: flask_shop/views.py:609 flask_shop/templates/contact.html:12
+msgid "You can send us a message here:"
+msgstr "Kontaktieren Sie uns unverbindlich, wir freuen uns über Ihre Nachricht:"
+
+#: flask_shop/views.py:612
+msgid "Thank you for your message."
+msgstr "Vielen Dank für Ihre Nachricht."
+
+#: flask_shop/views.py:633
+msgid "Please select (optional)"
+msgstr "Bitte wählen (optional)"
+
+#: flask_shop/views.py:653 flask_shop/views.py:764
+#: flask_shop/templates/cart.html:58
+msgid "Checkout"
+msgstr "Zur Kasse"
+
+#: flask_shop/views.py:654
+msgid "Please enter your address here:"
+msgstr "Geben Sie bitte nachfolgend Ihre Adresse an:"
+
+#: flask_shop/views.py:740
+#, python-format
+msgid ""
+"Thank you %s, your address has been saved. Please proceed with payment of"
+" order number %s."
+msgstr ""
+"Vielen Dank %s, Ihre Adresse wurde gespeichert. Bitte fahren sie mit dem "
+"Bezahlvorgang für Auftrag %s fort."
+
+#: flask_shop/views.py:771 flask_shop/views.py:802
+#: flask_shop/templates/payment.html:13
+#: flask_shop/templates/paymentfailed.html:12
+#: flask_shop/templates/success.html:12
+msgid "Payment"
+msgstr "Bezahlung"
+
+#: flask_shop/views.py:772
+msgid "Please follow the link to pay with Paypal:"
+msgstr "Bitte benutzen Sie folgenden Link um mit Paypal zu bezahlen:"
+
+#: flask_shop/views.py:812
+msgid "PayPal payment completed successfully."
+msgstr "Der PayPal Zahlungsvorgang endete erfolgreich."
+
+#: flask_shop/views.py:823
+msgid "PayPal payment failed."
+msgstr "Der Paypal Zahlungsvorgang ist fehlgeschlagen."
+
+#: flask_shop/views.py:951 flask_shop/views.py:957
+#: flask_shop/templates/layout.html:110
+msgid "Payment and Shipping"
+msgstr "Zahlung und Versand"
+
+#: flask_shop/views.py:952
+msgid ""
+"<p>We accept PayPal payment only.</p><br>\n"
+"        <p>Handling time: 2-3 days</p><br>\n"
+"        <p>Estimate shipping time is about 4-7 working days within "
+"Switzerland, approximately 20 working days for overseas, 7.50 CHF, for "
+"all articles.</p><br>\n"
+"        <p>Please feel free to contact us if you have any question. Hope "
+"you enjoy dealing with us!</p><br>\n"
+"        "
+msgstr ""
+"<p>Zahlung und Versand<br><br>Schweiz: 3.50 CHF, ab 150 CHF "
+"versandkostenfrei<br><br>Weltweit : 7.50 CHF, Kauf ausschliesslich per "
+"Paypal<br>Versandkosten und Bezahlung<br><br>Zahlungsmöglichkeiten<br>Für"
+" Lieferungen innerhalb der Schweiz und in andere Länder bieten wir "
+"folgende Zahlungsmöglichkeiten, sofern im Angebot keine anderen "
+"Bestimmungen definiert sind:<br>– PayPal (Was ist "
+"PayPal)<br><br>Lieferung<br>Der Versand Ihrer Bestellung erfolgt per "
+"schweizerische Post<br><br>Wir versenden WELTWEIT<br><br>Die jeweils "
+"anfallenden Versandkosten finden Sie "
+"obenstehend<br><br>Versandkosten<br>Für den Versand innerhalb der Schweiz"
+" berechnen wir pauschal pro Bestellung 3,50 CHF Versandkosten.<br>Ab "
+"einem Bruttobestellwert von 150,00 CHF versenden wir "
+"frachtfrei.<br><br>Weltweit Versand unter 0,5 kg für 7.50 "
+"CHF<br><br>Bitte beachten Sie, dass bei grenzüberschreitenden Lieferungen"
+" weitere Steuern (etwa im Fall eines innergemeinschaftlichen Erwerbs) "
+"und/oder Abgaben, etwa in Form von Zöllen anfallen können, die von Ihnen "
+"zu tragen sind.<br><br>"
+
+#: flask_shop/views.py:962 flask_shop/views.py:969
+#: flask_shop/templates/layout.html:111
+msgid "Right of revocation"
+msgstr "Widerrufsrecht"
+
+#: flask_shop/views.py:963
+msgid ""
+"<p>Conditions of returned goods<br><br></p>\n"
+"        <p>We will gladly take back your order if you are not "
+"satisfied.</p><br>\n"
+"        <p>Please note, however that the goods must be in the normal "
+"conditions.</p><br>\n"
+"        <p>All returns of goods that have obviously been used and that "
+"therefore can not be sold will not be accepted.</p><br>\n"
+"        <p>The payment amount will be credited back to your PayPal "
+"account.</p><br>\n"
+"        "
+msgstr ""
+"<p>Wir fertigen jedes unserer Produkte mit grösster Sorgfalt. Sollten Sie"
+" dennoch Grund zu Unzufriedenheit oder eine falsche Grösse bestellt "
+"haben, können Sie die Ware an uns zurück schicken.<br>Die Versandkosten "
+"hierfür fallen zu Ihren Lasten.</p><p>Natürlichen Personen, nachfolgend "
+"Verbraucher genannt, die ein Rechtsgeschäft zu Zwecken abschliessen, die "
+"weder ihrer gewerblichen noch ihrer selbständigen beruflichen Tätigkeit "
+"zugerechnet werden können steht ein Widerrufsrecht nach folgender "
+"Massgabe zu,</p><h2>Widerrufsbelehrung</h2><h3>Widerrufsrecht</h3><p>Sie "
+"haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen "
+"Vertrag zu widerrufen.</p><p>Die Widerrufsfrist beträgt vierzehn Tage ab "
+"dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der "
+"Beförderer ist, die letzte Ware in Besitz genommen haben bzw. "
+"hat.</p><p>Um Ihr Widerrufsrecht auszuüben, müssen Sie "
+"uns<br>(MillionDog, Sabine Reiss, Anke Siegrist<br>Obere Rebbergstrasse "
+"34,<br>CH- 4800 Zofingen,<br>Tel: 062 – 752 40 48,<br>E-Mail: <a "
+"href=\"mailto:informme@milliondog.com\">informme@milliondog.com</a>)<br>mittels"
+" einer eindeutigen Erklärung (z. B. ein mit der Post versandter Brief "
+"oder E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, "
+"informieren. Sie können dafür das beigefügte Muster-Widerrufsformular "
+"verwenden, das jedoch nicht vorgeschrieben ist.</p><p>Zur Wahrung der "
+"Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung "
+"des Widerrufsrechts vor Ablauf der Widerrufsfrist "
+"absenden.</p><p>&nbsp;</p><p><strong>Folgen des "
+"Widerrufs<br></strong>Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen"
+" alle Zahlungen, die wir von Ihnen erhalten haben, einschließlich der "
+"Lieferkosten (mit Ausnahme der zusätzlichen Kosten, die sich daraus "
+"ergeben, dass Sie eine andere Art der Lieferung als die von uns "
+"angebotene, günstigste Standardlieferung gewählt haben), unverzüglich und"
+" spätestens binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die "
+"Mitteilung über Ihren Widerruf dieses Vertrags bei uns eingegangen ist. "
+"Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei "
+"der ursprünglichen Transaktion eingesetzt haben, es sei denn, mit Ihnen "
+"wurde ausdrücklich etwas anderes vereinbart; in keinem Fall werden Ihnen "
+"wegen dieser Rückzahlung Entgelte berechnet. Wir können die "
+"Rückzahlung&nbsp; verweigern, bis wir die Waren wieder zurückerhalten "
+"haben oder bis Sie den Nachweis erbracht haben, dass Sie die Waren "
+"zurückgesandt haben, je nachdem, welches der frühere Zeitpunkt "
+"ist.</p><p>Sie haben die Waren unverzüglich und in jedem Fall spätestens "
+"binnen vierzehn Tagen ab dem Tag, an dem Sie uns über den Widerruf dieses"
+" Vertrags unterrichten, an uns&nbsp; zurückzusenden oder zu übergeben. "
+"Die Frist ist gewahrt, wenn Sie die Waren vor Ablauf der Frist von "
+"vierzehn Tagen absenden. Sie tragen die unmittelbaren Kosten der "
+"Rücksendung der Waren.</p><p>Sie müssen für einen etwaigen Wertverlust "
+"der Waren nur aufkommen, wenn dieser Wertverlust auf einen zur Prüfung "
+"der Beschaffenheit, Eigenschaften und Funktionsweise der Waren nicht "
+"notwendigen Umgang mit ihnen zurückzuführen "
+"ist.</p<p>&nbsp;</p><p><strong>Ausschluss bzw. vorzeitiges Erlöschen des "
+"Widerrufsrechts:<br></strong>Das Widerrufsrecht besteht nicht bei "
+"Verträgen<br>– zur Lieferung von Waren, die nicht vorgefertigt sind und "
+"für deren Herstellung eine individuelle Auswahl oder Bestimmung durch den"
+" Verbraucher maßgeblich ist oder die eindeutig auf die persönlichen "
+"Bedürfnisse des Verbrauchers zugeschnitten "
+"sind.</p><p>&nbsp;</p><p><strong>Allgemeine Hinweise<br></strong>1.1 "
+"Bitte vermeiden Sie Beschädigungen und Verunreinigungen der Ware. Senden "
+"Sie die Ware bitte möglichst in Originalverpackung mit sämtlichem Zubehör"
+" und mit allen Verpackungsbestandteilen an uns zurück. Verwenden Sie ggf."
+" eine schützende Umverpackung. Wenn Sie die Originalverpackung nicht mehr"
+" besitzen, sorgen Sie bitte mit einer geeigneten Verpackung für einen "
+"ausreichenden Schutz vor Transportschäden.</p><p>1.2 Senden Sie die "
+"Waren, die aufgrund ihrer Beschaffenheit normal mit der Post "
+"zurückgesandt werden können, bitte ausreichend frankiert an uns "
+"zurück.</p><p>1.3 Bitte beachten Sie, dass die vorgenannten Ziffern 1-2 "
+"nicht Voraussetzung für die wirksame Ausübung des Widerrufsrechts "
+"sind.</p><p>&nbsp;</p><h3>Muster-Widerrufsformular</h3><p>(Wenn Sie den "
+"Vertrag widerrufen wollen, dann füllen Sie bitte dieses Formular aus und "
+"senden Sie es zurück.)</p><p>MillionDog, Sabine Reiss, Anke "
+"Siegrist<br>Obere Rebbergstrasse 34<br>CH- 4800 Zofingen<br>E-Mail: <a "
+"href=\"mailto:informme@milliondog.com\">informme@milliondog.com</a></p><p>Hiermit"
+" widerrufe(n) ich/wir(*) den von mir/uns abgeschlossenen Vertrag über den"
+" Kauf der folgenden Waren (*)/ die Erbringung der folgenden "
+"Dienstleistung (*)</p><p>– Bestellt am (*) /erhalten am (*)</p><p>– Name "
+"des/der Verbraucher(s)</p><p>– Anschrift des/der Verbraucher(s)</p><p>– "
+"Unterschrift des/der Verbraucher(s) (nur bei Mitteilung auf "
+"Papier)</p><p>– Datum</p><p>&nbsp;</p><p>(*) Unzutreffendes streichen</p>"
+
+#: flask_shop/views.py:974 flask_shop/views.py:1014
+#: flask_shop/templates/layout.html:112
+msgid "Terms and conditions"
+msgstr "AGB"
+
+#: flask_shop/views.py:975
+msgid ""
+"<p><strong>Allgemeine Geschäftsbedingungen mit "
+"Kundeninformationen</strong></p>\n"
+"        <p>1. Geltungsbereich<br>\n"
+"        2. Vertragsschluss<br>\n"
+"        3. Widerrufsrecht<br>\n"
+"        4. Preise und Zahlungsbedingungen<br>\n"
+"        5. Liefer und Versandbedingungen<br>\n"
+"        6. Mängelhaftung<br>\n"
+"        7. Freistellung bei Verletzung von Drittrechten<br>\n"
+"        8. Anwendbares Recht</p>\n"
+"        <p><strong>1. Geltungsbereich<br>\n"
+"        </strong>1.1 Diese Allgemeinen Geschäftsbedingungen (nachfolgend "
+"“AGB”) von “Milliondog” (nachfolgend “Verkäufer”), gelten für alle "
+"Verträge, die ein Verbraucher oder Unternehmer (nachfolgend “Kunde”) mit "
+"dem Verkäufer hinsichtlich der vom Verkäufer in seinem Online-Shop "
+"dargestellten Waren und/oder Leistungen abschließt. Hiermit wird der "
+"Einbeziehung von eigenen Bedingungen des Kunden widersprochen, es sei "
+"denn, es ist etwas anderes vereinbart.</p>\n"
+"        <p>1.2 Verbraucher im Sinne dieser AGB ist jede natürliche "
+"Person, die ein Rechtsgeschäft zu Zwecken abschließt, die überwiegend "
+"weder ihrer gewerblichen noch ihrer selbstständigen beruflichen Tätigkeit"
+" zugerechnet werden können. Unternehmer im Sinne dieser AGB ist jede "
+"natürliche oder juristische Person oder eine rechtsfähige "
+"Personengesellschaft, die bei Abschluss eines Rechtsgeschäfts in Ausübung"
+" ihrer selbstständigen beruflichen oder gewerblichen Tätigkeit "
+"handelt.</p>\n"
+"        <p><strong>2. Vertragsschluss<br>\n"
+"        </strong>2.1 Die im Online-Shop des Verkäufers enthaltenen "
+"Produktdarstellungen stellen keine verbindlichen Angebote seitens des "
+"Verkäufers dar, sondern dienen zur Abgabe eines verbindlichen Angebots "
+"durch den Kunden.</p>\n"
+"        <p>2.2 Der Kunde kann das Angebot über das in den Online-Shop des"
+" Verkäufers integrierte Online-Bestellformular abgeben. Dabei gibt der "
+"Kunde, nachdem er die ausgewählten Waren und/oder Leistungen in den "
+"virtuellen Warenkorb gelegt und den elektronischen Bestellprozess "
+"durchlaufen hat, durch Klicken des den Bestellvorgang abschliessenden "
+"Buttons ein rechtlich verbindliches Vertragsangebot in Bezug auf die im "
+"Warenkorb enthaltenen Waren und/oder Leistungen ab.</p>\n"
+"        <p>2.3 Der Verkäufer kann das Angebot des Kunden innerhalb von "
+"fünf Tagen annehmen,<br>\n"
+"        – indem er dem Kunden eine schriftliche Auftragsbestätigung oder "
+"eine Auftragsbestätigung in Textform (Fax oder E-Mail) übermittelt, wobei"
+" insoweit der Zugang der Auftragsbestätigung beim Kunden massgeblich ist,"
+" oder</p>\n"
+"        <p>– indem er dem Kunden die bestellte Ware liefert, wobei "
+"insoweit der Zugang der Ware beim Kunden massgeblich ist.</p>\n"
+"        <p>Liegen mehrere der vorgenannten Alternativen vor, kommt der "
+"Vertrag in dem Zeitpunkt zustande, in dem eine der vorgenannten "
+"Alternativen zuerst eintritt. Nimmt der Verkäufer das Angebot des Kunden "
+"innerhalb vorgenannter Frist nicht an, so gilt dies als Ablehnung des "
+"Angebots mit der Folge, dass der Kunde nicht mehr an seine "
+"Willenserklärung gebunden ist.</p>\n"
+"        <p>2.4 Die Frist zur Annahme des Angebots beginnt am Tag nach der"
+" Absendung des Angebots durch den Kunden zu laufen und endet mit dem "
+"Ablauf des fünften Tages, welcher auf die Absendung des Angebots "
+"folgt.</p>\n"
+"        <p>2.5 Bei der Abgabe eines Angebots über das Online-"
+"Bestellformular des Verkäufers wird der Vertragstext vom Verkäufer "
+"gespeichert und dem Kunden nach Absendung seiner Bestellung nebst den "
+"vorliegenden AGB in Textform (z. B. E-Mail, Fax oder Brief) zugeschickt. "
+"Zusätzlich wird der Vertragstext auf der Internetseite des Verkäufers "
+"archiviert und kann vom Kunden über sein passwortgeschütztes Kundenkonto "
+"unter Angabe der entsprechenden Login-Daten kostenlos abgerufen werden, "
+"sofern der Kunde vor Absendung seiner Bestellung ein Kundenkonto im "
+"Online-Shop des Verkäufers angelegt hat.</p>\n"
+"        <p>2.6 Vor verbindlicher Abgabe der Bestellung über das Online-"
+"Bestellformular des Verkäufers kann der Kunde seine Eingaben laufend über"
+" die üblichen Tastatur- und Mausfunktionen korrigieren. Darüber hinaus "
+"werden alle Eingaben vor der verbindlichen Abgabe der Bestellung noch "
+"einmal in einem Bestätigungsfenster angezeigt und können auch dort "
+"mittels der üblichen Tastatur- und Mausfunktionen korrigiert werden.</p>"
+"\n"
+"        <p>2.7 Für den Vertragsschluss steht ausschließlich die deutsche "
+"Sprache zur Verfügung.</p>\n"
+"        <p>2.8 Die Bestellabwicklung und Kontaktaufnahme finden in der "
+"Regel per E-Mail und automatisierter Bestellabwicklung statt. Der Kunde "
+"hat sicherzustellen, dass die von ihm zur Bestellabwicklung angegebene E"
+"-Mail-Adresse zutreffend ist, so dass unter dieser Adresse die vom "
+"Verkäufer versandten E-Mails empfangen werden können. Insbesondere hat "
+"der Kunde bei dem Einsatz von SPAM-Filtern sicherzustellen, dass alle vom"
+" Verkäufer oder von diesem mit der Bestellabwicklung beauftragten Dritten"
+" versandten Mails zugestellt werden können.</p>\n"
+"        <p><strong>3. Widerrufsrecht<br>\n"
+"        </strong>Verbrauchern steht grundsätzlich ein Widerrufsrecht zu. "
+"Nähere Informationen zum Widerrufsrecht ergeben sich aus der&nbsp;<a "
+"href=\"http://milliondog.com/widerrufsrecht/\">Widerrufsbelehrung</a>&nbsp;des"
+" Verkäufers.</p>\n"
+"        <p><strong>4. Preise und Zahlungsbedingungen<br>\n"
+"        </strong>4.1 Sofern sich aus dem Angebot des Verkäufers nichts "
+"anderes ergibt, handelt es sich bei den angegebenen Preisen um Endpreise,"
+" die die gesetzliche Umsatzsteuer enthalten. Gegebenenfalls zusätzlich "
+"anfallende Liefer- und Versandkosten werden in der jeweiligen "
+"Produktbeschreibung gesondert angegeben.</p>\n"
+"        <p>4.2 Bei Lieferungen in Länder ausserhalb der Europäischen "
+"Union können im Einzelfall weitere Kosten anfallen, die der Verkäufer "
+"nicht zu vertreten hat und die vom Kunden zu tragen sind. Hierzu zählen "
+"beispielsweise Kosten für die Geldübermittlung durch Kreditinstitute "
+"(z.B. Überweisungsgebühren, Wechselkursgebühren) oder einfuhrrechtliche "
+"Abgaben bzw. Steuern (z.B. Zölle).</p>\n"
+"        <p><strong>5. Liefer und Versandbedingungen<br>\n"
+"        </strong>5.1 Die Lieferung von Waren erfolgt regelmäßig auf dem "
+"Versandwege und an die vom Kunden angegebene Lieferanschrift. Bei der "
+"Abwicklung der Transaktion, ist die in der Kaufabwicklung des Verkäufers "
+"angegebene Lieferanschrift maßgeblich. Für die Zahlungsart PayPal gilt "
+"die vom Kunden zum Zeitpunkt der Bezahlung bei PayPal hinterlegte "
+"Lieferanschrift als massgeblich.</p>\n"
+"        <p>5.2 Sendet das Transportunternehmen die versandte Ware an den "
+"Verkäufer zurück, da eine Zustellung beim Kunden nicht möglich war, trägt"
+" der Kunde die Kosten für den erfolglosen Versand. Dies gilt nicht, wenn "
+"er den Umstand, der zur Unmöglichkeit der Zustellung geführt hat, nicht "
+"zu vertreten hat oder wenn er vorübergehend an der Annahme der "
+"angebotenen Leistung verhindert war, es sei denn, dass der Verkäufer ihm "
+"die Leistung eine angemessene Zeit vorher angekündigt hatte.</p>\n"
+"        <p><strong>6. Mängelhaftung<br>\n"
+"        </strong>Es gilt die gesetzliche Mängelhaftung</p>\n"
+"        <p><strong>7. Freistellung bei Verletzung von Drittrechten<br>\n"
+"        </strong>Schuldet der Verkäufer nach dem Inhalt des Vertrages "
+"neben der Warenlieferung auch die Verarbeitung der Ware nach bestimmten "
+"Vorgaben des Kunden, hat der Kunde sicherzustellen, dass die dem "
+"Verkäufer von ihm zum Zwecke der Verarbeitung überlassenen Inhalte nicht "
+"die Rechte Dritter (z. B. Urheberrechte oder Markenrechte) verletzen. Der"
+" Kunde stellt den Verkäufer von Ansprüchen Dritter frei, die diese im "
+"Zusammenhang mit einer Verletzung ihrer Rechte durch die vertragsgemässe "
+"Nutzung der Inhalte des Kunden durch den Verkäufer diesem gegenüber "
+"geltend machen können. Der Kunde übernimmt hierbei auch die angemessenen "
+"Kosten der notwendigen Rechtsverteidigung einschliesslich aller Gerichts-"
+" und Anwaltskosten in gesetzlicher Höhe. Dies gilt nicht, wenn die "
+"Rechtsverletzung vom Kunden nicht zu vertreten ist. Der Kunde ist "
+"verpflichtet, dem Verkäufer im Falle einer Inanspruchnahme durch Dritte "
+"unverzüglich, wahrheitsgemäss und vollständig alle Informationen zur "
+"Verfügung zu stellen, die für die Prüfung der Ansprüche und eine "
+"Verteidigung erforderlich sind.</p>\n"
+"        <p><strong>8. Anwendbares Recht<br>\n"
+"        </strong>8.1 Für sämtliche Rechtsbeziehungen der Parteien gilt "
+"das Recht der Schweiz, unter Ausschluss der Gesetze über den "
+"internationalen Kauf beweglicher Waren. Bei Verbrauchern gilt diese "
+"Rechtswahl nur insoweit, als nicht der gewährte Schutz durch zwingende "
+"Bestimmungen des Rechts des Staates, in dem der Verbraucher seinen "
+"gewöhnlichen Aufenthalt hat, entzogen wird.</p>\n"
+"        "
+msgstr ""
+"<p><strong>Allgemeine Geschäftsbedingungen mit "
+"Kundeninformationen</strong></p>\n"
+"        <p>1. Geltungsbereich<br>\n"
+"        2. Vertragsschluss<br>\n"
+"        3. Widerrufsrecht<br>\n"
+"        4. Preise und Zahlungsbedingungen<br>\n"
+"        5. Liefer und Versandbedingungen<br>\n"
+"        6. Mängelhaftung<br>\n"
+"        7. Freistellung bei Verletzung von Drittrechten<br>\n"
+"        8. Anwendbares Recht</p>\n"
+"        <p><strong>1. Geltungsbereich<br>\n"
+"        </strong>1.1 Diese Allgemeinen Geschäftsbedingungen (nachfolgend "
+"“AGB”) von “Milliondog” (nachfolgend “Verkäufer”), gelten für alle "
+"Verträge, die ein Verbraucher oder Unternehmer (nachfolgend “Kunde”) mit "
+"dem Verkäufer hinsichtlich der vom Verkäufer in seinem Online-Shop "
+"dargestellten Waren und/oder Leistungen abschließt. Hiermit wird der "
+"Einbeziehung von eigenen Bedingungen des Kunden widersprochen, es sei "
+"denn, es ist etwas anderes vereinbart.</p>\n"
+"        <p>1.2 Verbraucher im Sinne dieser AGB ist jede natürliche "
+"Person, die ein Rechtsgeschäft zu Zwecken abschließt, die überwiegend "
+"weder ihrer gewerblichen noch ihrer selbstständigen beruflichen Tätigkeit"
+" zugerechnet werden können. Unternehmer im Sinne dieser AGB ist jede "
+"natürliche oder juristische Person oder eine rechtsfähige "
+"Personengesellschaft, die bei Abschluss eines Rechtsgeschäfts in Ausübung"
+" ihrer selbstständigen beruflichen oder gewerblichen Tätigkeit "
+"handelt.</p>\n"
+"        <p><strong>2. Vertragsschluss<br>\n"
+"        </strong>2.1 Die im Online-Shop des Verkäufers enthaltenen "
+"Produktdarstellungen stellen keine verbindlichen Angebote seitens des "
+"Verkäufers dar, sondern dienen zur Abgabe eines verbindlichen Angebots "
+"durch den Kunden.</p>\n"
+"        <p>2.2 Der Kunde kann das Angebot über das in den Online-Shop des"
+" Verkäufers integrierte Online-Bestellformular abgeben. Dabei gibt der "
+"Kunde, nachdem er die ausgewählten Waren und/oder Leistungen in den "
+"virtuellen Warenkorb gelegt und den elektronischen Bestellprozess "
+"durchlaufen hat, durch Klicken des den Bestellvorgang abschliessenden "
+"Buttons ein rechtlich verbindliches Vertragsangebot in Bezug auf die im "
+"Warenkorb enthaltenen Waren und/oder Leistungen ab.</p>\n"
+"        <p>2.3 Der Verkäufer kann das Angebot des Kunden innerhalb von "
+"fünf Tagen annehmen,<br>\n"
+"        – indem er dem Kunden eine schriftliche Auftragsbestätigung oder "
+"eine Auftragsbestätigung in Textform (Fax oder E-Mail) übermittelt, wobei"
+" insoweit der Zugang der Auftragsbestätigung beim Kunden massgeblich ist,"
+" oder</p>\n"
+"        <p>– indem er dem Kunden die bestellte Ware liefert, wobei "
+"insoweit der Zugang der Ware beim Kunden massgeblich ist.</p>\n"
+"        <p>Liegen mehrere der vorgenannten Alternativen vor, kommt der "
+"Vertrag in dem Zeitpunkt zustande, in dem eine der vorgenannten "
+"Alternativen zuerst eintritt. Nimmt der Verkäufer das Angebot des Kunden "
+"innerhalb vorgenannter Frist nicht an, so gilt dies als Ablehnung des "
+"Angebots mit der Folge, dass der Kunde nicht mehr an seine "
+"Willenserklärung gebunden ist.</p>\n"
+"        <p>2.4 Die Frist zur Annahme des Angebots beginnt am Tag nach der"
+" Absendung des Angebots durch den Kunden zu laufen und endet mit dem "
+"Ablauf des fünften Tages, welcher auf die Absendung des Angebots "
+"folgt.</p>\n"
+"        <p>2.5 Bei der Abgabe eines Angebots über das Online-"
+"Bestellformular des Verkäufers wird der Vertragstext vom Verkäufer "
+"gespeichert und dem Kunden nach Absendung seiner Bestellung nebst den "
+"vorliegenden AGB in Textform (z. B. E-Mail, Fax oder Brief) zugeschickt. "
+"Zusätzlich wird der Vertragstext auf der Internetseite des Verkäufers "
+"archiviert und kann vom Kunden über sein passwortgeschütztes Kundenkonto "
+"unter Angabe der entsprechenden Login-Daten kostenlos abgerufen werden, "
+"sofern der Kunde vor Absendung seiner Bestellung ein Kundenkonto im "
+"Online-Shop des Verkäufers angelegt hat.</p>\n"
+"        <p>2.6 Vor verbindlicher Abgabe der Bestellung über das Online-"
+"Bestellformular des Verkäufers kann der Kunde seine Eingaben laufend über"
+" die üblichen Tastatur- und Mausfunktionen korrigieren. Darüber hinaus "
+"werden alle Eingaben vor der verbindlichen Abgabe der Bestellung noch "
+"einmal in einem Bestätigungsfenster angezeigt und können auch dort "
+"mittels der üblichen Tastatur- und Mausfunktionen korrigiert werden.</p>"
+"\n"
+"        <p>2.7 Für den Vertragsschluss steht ausschließlich die deutsche "
+"Sprache zur Verfügung.</p>\n"
+"        <p>2.8 Die Bestellabwicklung und Kontaktaufnahme finden in der "
+"Regel per E-Mail und automatisierter Bestellabwicklung statt. Der Kunde "
+"hat sicherzustellen, dass die von ihm zur Bestellabwicklung angegebene E"
+"-Mail-Adresse zutreffend ist, so dass unter dieser Adresse die vom "
+"Verkäufer versandten E-Mails empfangen werden können. Insbesondere hat "
+"der Kunde bei dem Einsatz von SPAM-Filtern sicherzustellen, dass alle vom"
+" Verkäufer oder von diesem mit der Bestellabwicklung beauftragten Dritten"
+" versandten Mails zugestellt werden können.</p>\n"
+"        <p><strong>3. Widerrufsrecht<br>\n"
+"        </strong>Verbrauchern steht grundsätzlich ein Widerrufsrecht zu. "
+"Nähere Informationen zum Widerrufsrecht ergeben sich aus der&nbsp;<a "
+"href=\"http://milliondog.com/widerrufsrecht/\">Widerrufsbelehrung</a>&nbsp;des"
+" Verkäufers.</p>\n"
+"        <p><strong>4. Preise und Zahlungsbedingungen<br>\n"
+"        </strong>4.1 Sofern sich aus dem Angebot des Verkäufers nichts "
+"anderes ergibt, handelt es sich bei den angegebenen Preisen um Endpreise,"
+" die die gesetzliche Umsatzsteuer enthalten. Gegebenenfalls zusätzlich "
+"anfallende Liefer- und Versandkosten werden in der jeweiligen "
+"Produktbeschreibung gesondert angegeben.</p>\n"
+"        <p>4.2 Bei Lieferungen in Länder ausserhalb der Europäischen "
+"Union können im Einzelfall weitere Kosten anfallen, die der Verkäufer "
+"nicht zu vertreten hat und die vom Kunden zu tragen sind. Hierzu zählen "
+"beispielsweise Kosten für die Geldübermittlung durch Kreditinstitute "
+"(z.B. Überweisungsgebühren, Wechselkursgebühren) oder einfuhrrechtliche "
+"Abgaben bzw. Steuern (z.B. Zölle).</p>\n"
+"        <p><strong>5. Liefer und Versandbedingungen<br>\n"
+"        </strong>5.1 Die Lieferung von Waren erfolgt regelmäßig auf dem "
+"Versandwege und an die vom Kunden angegebene Lieferanschrift. Bei der "
+"Abwicklung der Transaktion, ist die in der Kaufabwicklung des Verkäufers "
+"angegebene Lieferanschrift maßgeblich. Für die Zahlungsart PayPal gilt "
+"die vom Kunden zum Zeitpunkt der Bezahlung bei PayPal hinterlegte "
+"Lieferanschrift als massgeblich.</p>\n"
+"        <p>5.2 Sendet das Transportunternehmen die versandte Ware an den "
+"Verkäufer zurück, da eine Zustellung beim Kunden nicht möglich war, trägt"
+" der Kunde die Kosten für den erfolglosen Versand. Dies gilt nicht, wenn "
+"er den Umstand, der zur Unmöglichkeit der Zustellung geführt hat, nicht "
+"zu vertreten hat oder wenn er vorübergehend an der Annahme der "
+"angebotenen Leistung verhindert war, es sei denn, dass der Verkäufer ihm "
+"die Leistung eine angemessene Zeit vorher angekündigt hatte.</p>\n"
+"        <p><strong>6. Mängelhaftung<br>\n"
+"        </strong>Es gilt die gesetzliche Mängelhaftung</p>\n"
+"        <p><strong>7. Freistellung bei Verletzung von Drittrechten<br>\n"
+"        </strong>Schuldet der Verkäufer nach dem Inhalt des Vertrages "
+"neben der Warenlieferung auch die Verarbeitung der Ware nach bestimmten "
+"Vorgaben des Kunden, hat der Kunde sicherzustellen, dass die dem "
+"Verkäufer von ihm zum Zwecke der Verarbeitung überlassenen Inhalte nicht "
+"die Rechte Dritter (z. B. Urheberrechte oder Markenrechte) verletzen. Der"
+" Kunde stellt den Verkäufer von Ansprüchen Dritter frei, die diese im "
+"Zusammenhang mit einer Verletzung ihrer Rechte durch die vertragsgemässe "
+"Nutzung der Inhalte des Kunden durch den Verkäufer diesem gegenüber "
+"geltend machen können. Der Kunde übernimmt hierbei auch die angemessenen "
+"Kosten der notwendigen Rechtsverteidigung einschliesslich aller Gerichts-"
+" und Anwaltskosten in gesetzlicher Höhe. Dies gilt nicht, wenn die "
+"Rechtsverletzung vom Kunden nicht zu vertreten ist. Der Kunde ist "
+"verpflichtet, dem Verkäufer im Falle einer Inanspruchnahme durch Dritte "
+"unverzüglich, wahrheitsgemäss und vollständig alle Informationen zur "
+"Verfügung zu stellen, die für die Prüfung der Ansprüche und eine "
+"Verteidigung erforderlich sind.</p>\n"
+"        <p><strong>8. Anwendbares Recht<br>\n"
+"        </strong>8.1 Für sämtliche Rechtsbeziehungen der Parteien gilt "
+"das Recht der Schweiz, unter Ausschluss der Gesetze über den "
+"internationalen Kauf beweglicher Waren. Bei Verbrauchern gilt diese "
+"Rechtswahl nur insoweit, als nicht der gewährte Schutz durch zwingende "
+"Bestimmungen des Rechts des Staates, in dem der Verbraucher seinen "
+"gewöhnlichen Aufenthalt hat, entzogen wird.</p>\n"
+"        "
+
+#: flask_shop/views.py:1019 flask_shop/views.py:1056
+#: flask_shop/templates/layout.html:113
+msgid "Disclaimer"
+msgstr "Datenschutz"
+
+#: flask_shop/views.py:1020
+msgid ""
+"<p><strong>Der Schutz Ihrer Privatsphäre ist uns ein wichtiges Anliegen. "
+"Bitte beachten Sie die folgenden Punkte unserer "
+"Datenschutzerklärung.</strong></p>\n"
+"        <p><strong>Geltungsbereich<br>\n"
+"        </strong>Diese Datenschutzerklärung klärt Nutzer über die Art, "
+"den Umfang und Zwecke der Erhebung und Verwendung personenbezogener Daten"
+" durch den verantwortlichen Anbieter Sabine Reiss und Anke Siegrist, "
+"Obere Rebbergstrasse 34, CH-4800 Zofingen , Telefon: +41 62 752 40 48, "
+"E-Mail: informme@milliondog.com auf dieser Website (im folgenden "
+"“Angebot”) auf.</p>\n"
+"        <p>Das Bundesgesetz über den Datenschutz (DSG) bildet die "
+"Grundlage dieser Datenschutzerklärung.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Zugriffsdaten/ Server-Logfiles<br>\n"
+"        </strong>Der Anbieter (beziehungsweise sein Webspace-Provider) "
+"erhebt Daten über jeden Zugriff auf das Angebot (so genannte "
+"Serverlogfiles). Zu den Zugriffsdaten gehören:</p>\n"
+"        <p>Name der abgerufenen Webseite, Datei, Datum und Uhrzeit des "
+"Abrufs, übertragene Datenmenge, Meldung über erfolgreichen Abruf, "
+"Browsertyp nebst Version, das Betriebssystem des Nutzers, Referrer URL "
+"(die zuvor besuchte Seite), IP-Adresse und der anfragende Provider.</p>\n"
+"        <p>Der Anbieter verwendet die Protokolldaten nur für statistische"
+" Auswertungen zum Zweck des Betriebs, der Sicherheit und der Optimierung "
+"des Angebotes. Der Anbieterbehält sich jedoch vor, die Protokolldaten "
+"nachträglich zu überprüfen, wenn aufgrund konkreter Anhaltspunkte der "
+"berechtigte Verdacht einer rechtswidrigen Nutzung besteht.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Umgang mit personenbezogenen Daten<br>\n"
+"        </strong>Personenbezogene Daten sind Informationen, mit deren "
+"Hilfe eine Person bestimmbar ist, also Angaben, die zurück zu einer "
+"Person verfolgt werden können. Dazu gehören der Name, die Emailadresse "
+"oder die Telefonnummer. Aber auch Daten über Vorlieben, Hobbies, "
+"Mitgliedschaften oder welche Webseiten von jemandem angesehen wurden "
+"zählen zu personenbezogenen Daten.</p>\n"
+"        <p>Personenbezogene Daten werden von dem Anbieter nur dann "
+"erhoben, genutzt und weiter gegeben, wenn dies gesetzlich erlaubt ist "
+"oder die Nutzer in die Datenerhebung einwilligen.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Kontaktaufnahme<br>\n"
+"        </strong>Bei der Kontaktaufnahme mit dem Anbieter (zum Beispiel "
+"per Kontaktformular oder E-Mail) werden die Angaben des Nutzers zwecks "
+"Bearbeitung der Anfrage sowie für den Fall, dass Anschlussfragen "
+"entstehen, gespeichert.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Kommentare und Beiträge<br>\n"
+"        </strong>Wenn Nutzer Kommentare im Blog oder sonstige Beiträge "
+"hinterlassen, werden ihre IP-Adressen gespeichert. Das erfolgt zur "
+"Sicherheit des Anbieters, falls jemand in Kommentaren und Beiträgen "
+"widerrechtliche Inhalte schreibt (Beleidigungen, verbotene politische "
+"Propaganda, etc.). In diesem Fall kann der Anbieter selbst für den "
+"Kommentar oder Beitrag belangt werden und ist daher an der Identität des "
+"Verfassers interessiert.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Cookies<br>\n"
+"        </strong>Cookies sind kleine Dateien, die es ermöglichen, auf dem"
+" Zugriffsgerät der Nutzer (PC, Smartphone o.ä.) spezifische, auf das "
+"Gerät bezogene Informationen zu speichern. Sie dienen zum einem der "
+"Benutzerfreundlichkeit von Webseiten und damit den Nutzern (z.B. "
+"Speicherung von Logindaten). Zum anderen dienen sie, um die statistische "
+"Daten der Webseitennutzung zu erfassen und sie zwecks Verbesserung des "
+"Angebotes analysieren zu können. Die Nutzer können auf den Einsatz der "
+"Cookies Einfluss nehmen. Die meisten Browser verfügen eine Option mit der"
+" das Speichern von Cookies eingeschränkt oder komplett verhindert wird. "
+"Allerdings wird darauf hingewiesen, dass die Nutzung und insbesondere der"
+" Nutzungskomfort ohne Cookies eingeschränkt werden.</p>\n"
+"        <p>Sie können viele Online-Anzeigen-Cookies von Unternehmen über "
+"die US-amerikanische Seite <a "
+"href=\"http://www.aboutads.info/choices/\">http://www.aboutads.info/choices/</a>"
+" oder die EU-Seite <a href=\"http://www.youronlinechoices.com/uk/your-ad-"
+"choices/ \">http://www.youronlinechoices.com/uk/your-ad-choices/ </a> "
+"verwalten.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Registrierfunktion<br>\n"
+"        </strong>Die im Rahmen der Registrierung eingegebenen Daten "
+"werden für die Zwecke der Nutzung des Angebotes verwendet. Die Nutzer "
+"können über angebots- oder registrierungsrelevante Informationen, wie "
+"Änderungen des Angebotsumfangs oder technische Umstände per E-Mail "
+"informiert werden. Die erhobenen Daten sind aus der Eingabemaske im "
+"Rahmen der Registrierung ersichtlich. Dazu gehören Name, postalische "
+"Adresse, E-Mail-Adresse.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Google Analytics<br>\n"
+"        </strong>Dieses Angebot benutzt Google Analytics, einen "
+"Webanalysedienst der Google Inc. („Google“). Google Analytics verwendet "
+"sog. „Cookies“, Textdateien, die auf Computer der Nutzer gespeichert "
+"werden und die eine Analyse der Benutzung der Website durch sie "
+"ermöglichen. Die durch den Cookie erzeugten Informationen über Benutzung "
+"dieser Website durch die Nutzer werden in der Regel an einen Server von "
+"Google in den USA übertragen und dort gespeichert.</p>\n"
+"        <p>Im Falle der Aktivierung der IP-Anonymisierung auf dieser "
+"Webseite, wird die IP-Adresse der Nutzer von Google jedoch innerhalb von "
+"Mitgliedstaaten der Europäischen Union oder in anderen Vertragsstaaten "
+"des Abkommens über den Europäischen Wirtschaftsraum zuvor gekürzt. Nur in"
+" Ausnahmefällen wird die volle IP-Adresse an einen Server von Google in "
+"den USA übertragen und dort gekürzt. Die IP-Anonymisierung ist auf dieser"
+" Website aktiv. Im Auftrag des Betreibers dieser Website wird Google "
+"diese Informationen benutzen, um die Nutzung der Website durch die Nutzer"
+" auszuwerten, um Reports über die Websiteaktivitäten zusammenzustellen "
+"und um weitere mit der Websitenutzung und der Internetnutzung verbundene "
+"Dienstleistungen gegenüber dem Websitebetreiber zu erbringen.</p>\n"
+"        <p>Die im Rahmen von Google Analytics von Ihrem Browser "
+"übermittelte IP-Adresse wird nicht mit anderen Daten von Google "
+"zusammengeführt. Die Nutzer können die Speicherung der Cookies durch eine"
+" entsprechende Einstellung Ihrer Browser-Software verhindern; Dieses "
+"Angebot weist die Nutzer jedoch darauf hin, dass Sie in diesem Fall "
+"gegebenenfalls nicht sämtliche Funktionen dieser Website vollumfänglich "
+"werden nutzen können. Die Nutzer können darüber hinaus die Erfassung der "
+"durch das Cookie erzeugten und auf ihre Nutzung der Website bezogenen "
+"Daten (inkl. Ihrer IP-Adresse) an Google sowie die Verarbeitung dieser "
+"Daten durch Google verhindern, indem sie das unter dem folgenden Link "
+"verfügbare Browser-Plugin herunterladen und installieren: <a "
+"href=\"http://tools.google.com/dlpage/gaoptout?hl=de\">http://tools.google.com/dlpage/gaoptout?hl=de</a>.</p>"
+"\n"
+"        <p>Alternativ zum Browser-Add-On oder innerhalb von Browsern auf "
+"mobilen Geräten, <a id=\"GAOptOut\" title=\"Google Analytics Opt-Out-"
+"Cookie setzen\" href=\"javascript:gaOptout()\">klicken Sie bitte diesen "
+"Link</a>, um die Erfassung durch Google Analytics innerhalb dieser "
+"Website zukünftig zu verhindern. Dabei wird ein Opt-Out-Cookie auf Ihrem "
+"Gerät abgelegt. Löschen Sie Ihre Cookies, müssen Sie diesen Link erneut "
+"klicken.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Widerruf, Änderungen, Berichtigungen und "
+"Aktualisierungen<br>\n"
+"        </strong>Der Nutzer hat das Recht, auf Antrag unentgeltlich "
+"Auskunft zu erhalten über die personenbezogenen Daten, die über ihn "
+"gespeichert wurden. Zusätzlich hat der Nutzer das Recht auf Berichtigung "
+"unrichtiger Daten, Sperrung und Löschung seiner personenbezogenen Daten, "
+"soweit dem keine gesetzliche Aufbewahrungspflicht entgegensteht.</p>\n"
+"        "
+msgstr ""
+"<p><strong>Der Schutz Ihrer Privatsphäre ist uns ein wichtiges Anliegen. "
+"Bitte beachten Sie die folgenden Punkte unserer "
+"Datenschutzerklärung.</strong></p>\n"
+"        <p><strong>Geltungsbereich<br>\n"
+"        </strong>Diese Datenschutzerklärung klärt Nutzer über die Art, "
+"den Umfang und Zwecke der Erhebung und Verwendung personenbezogener Daten"
+" durch den verantwortlichen Anbieter Sabine Reiss und Anke Siegrist, "
+"Obere Rebbergstrasse 34, CH-4800 Zofingen , Telefon: +41 62 752 40 48, "
+"E-Mail: informme@milliondog.com auf dieser Website (im folgenden "
+"“Angebot”) auf.</p>\n"
+"        <p>Das Bundesgesetz über den Datenschutz (DSG) bildet die "
+"Grundlage dieser Datenschutzerklärung.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Zugriffsdaten/ Server-Logfiles<br>\n"
+"        </strong>Der Anbieter (beziehungsweise sein Webspace-Provider) "
+"erhebt Daten über jeden Zugriff auf das Angebot (so genannte "
+"Serverlogfiles). Zu den Zugriffsdaten gehören:</p>\n"
+"        <p>Name der abgerufenen Webseite, Datei, Datum und Uhrzeit des "
+"Abrufs, übertragene Datenmenge, Meldung über erfolgreichen Abruf, "
+"Browsertyp nebst Version, das Betriebssystem des Nutzers, Referrer URL "
+"(die zuvor besuchte Seite), IP-Adresse und der anfragende Provider.</p>\n"
+"        <p>Der Anbieter verwendet die Protokolldaten nur für statistische"
+" Auswertungen zum Zweck des Betriebs, der Sicherheit und der Optimierung "
+"des Angebotes. Der Anbieterbehält sich jedoch vor, die Protokolldaten "
+"nachträglich zu überprüfen, wenn aufgrund konkreter Anhaltspunkte der "
+"berechtigte Verdacht einer rechtswidrigen Nutzung besteht.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Umgang mit personenbezogenen Daten<br>\n"
+"        </strong>Personenbezogene Daten sind Informationen, mit deren "
+"Hilfe eine Person bestimmbar ist, also Angaben, die zurück zu einer "
+"Person verfolgt werden können. Dazu gehören der Name, die Emailadresse "
+"oder die Telefonnummer. Aber auch Daten über Vorlieben, Hobbies, "
+"Mitgliedschaften oder welche Webseiten von jemandem angesehen wurden "
+"zählen zu personenbezogenen Daten.</p>\n"
+"        <p>Personenbezogene Daten werden von dem Anbieter nur dann "
+"erhoben, genutzt und weiter gegeben, wenn dies gesetzlich erlaubt ist "
+"oder die Nutzer in die Datenerhebung einwilligen.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Kontaktaufnahme<br>\n"
+"        </strong>Bei der Kontaktaufnahme mit dem Anbieter (zum Beispiel "
+"per Kontaktformular oder E-Mail) werden die Angaben des Nutzers zwecks "
+"Bearbeitung der Anfrage sowie für den Fall, dass Anschlussfragen "
+"entstehen, gespeichert.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Kommentare und Beiträge<br>\n"
+"        </strong>Wenn Nutzer Kommentare im Blog oder sonstige Beiträge "
+"hinterlassen, werden ihre IP-Adressen gespeichert. Das erfolgt zur "
+"Sicherheit des Anbieters, falls jemand in Kommentaren und Beiträgen "
+"widerrechtliche Inhalte schreibt (Beleidigungen, verbotene politische "
+"Propaganda, etc.). In diesem Fall kann der Anbieter selbst für den "
+"Kommentar oder Beitrag belangt werden und ist daher an der Identität des "
+"Verfassers interessiert.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Cookies<br>\n"
+"        </strong>Cookies sind kleine Dateien, die es ermöglichen, auf dem"
+" Zugriffsgerät der Nutzer (PC, Smartphone o.ä.) spezifische, auf das "
+"Gerät bezogene Informationen zu speichern. Sie dienen zum einem der "
+"Benutzerfreundlichkeit von Webseiten und damit den Nutzern (z.B. "
+"Speicherung von Logindaten). Zum anderen dienen sie, um die statistische "
+"Daten der Webseitennutzung zu erfassen und sie zwecks Verbesserung des "
+"Angebotes analysieren zu können. Die Nutzer können auf den Einsatz der "
+"Cookies Einfluss nehmen. Die meisten Browser verfügen eine Option mit der"
+" das Speichern von Cookies eingeschränkt oder komplett verhindert wird. "
+"Allerdings wird darauf hingewiesen, dass die Nutzung und insbesondere der"
+" Nutzungskomfort ohne Cookies eingeschränkt werden.</p>\n"
+"        <p>Sie können viele Online-Anzeigen-Cookies von Unternehmen über "
+"die US-amerikanische Seite <a "
+"href=\"http://www.aboutads.info/choices/\">http://www.aboutads.info/choices/</a>"
+" oder die EU-Seite <a href=\"http://www.youronlinechoices.com/uk/your-ad-"
+"choices/ \">http://www.youronlinechoices.com/uk/your-ad-choices/ </a> "
+"verwalten.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Registrierfunktion<br>\n"
+"        </strong>Die im Rahmen der Registrierung eingegebenen Daten "
+"werden für die Zwecke der Nutzung des Angebotes verwendet. Die Nutzer "
+"können über angebots- oder registrierungsrelevante Informationen, wie "
+"Änderungen des Angebotsumfangs oder technische Umstände per E-Mail "
+"informiert werden. Die erhobenen Daten sind aus der Eingabemaske im "
+"Rahmen der Registrierung ersichtlich. Dazu gehören Name, postalische "
+"Adresse, E-Mail-Adresse.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Google Analytics<br>\n"
+"        </strong>Dieses Angebot benutzt Google Analytics, einen "
+"Webanalysedienst der Google Inc. („Google“). Google Analytics verwendet "
+"sog. „Cookies“, Textdateien, die auf Computer der Nutzer gespeichert "
+"werden und die eine Analyse der Benutzung der Website durch sie "
+"ermöglichen. Die durch den Cookie erzeugten Informationen über Benutzung "
+"dieser Website durch die Nutzer werden in der Regel an einen Server von "
+"Google in den USA übertragen und dort gespeichert.</p>\n"
+"        <p>Im Falle der Aktivierung der IP-Anonymisierung auf dieser "
+"Webseite, wird die IP-Adresse der Nutzer von Google jedoch innerhalb von "
+"Mitgliedstaaten der Europäischen Union oder in anderen Vertragsstaaten "
+"des Abkommens über den Europäischen Wirtschaftsraum zuvor gekürzt. Nur in"
+" Ausnahmefällen wird die volle IP-Adresse an einen Server von Google in "
+"den USA übertragen und dort gekürzt. Die IP-Anonymisierung ist auf dieser"
+" Website aktiv. Im Auftrag des Betreibers dieser Website wird Google "
+"diese Informationen benutzen, um die Nutzung der Website durch die Nutzer"
+" auszuwerten, um Reports über die Websiteaktivitäten zusammenzustellen "
+"und um weitere mit der Websitenutzung und der Internetnutzung verbundene "
+"Dienstleistungen gegenüber dem Websitebetreiber zu erbringen.</p>\n"
+"        <p>Die im Rahmen von Google Analytics von Ihrem Browser "
+"übermittelte IP-Adresse wird nicht mit anderen Daten von Google "
+"zusammengeführt. Die Nutzer können die Speicherung der Cookies durch eine"
+" entsprechende Einstellung Ihrer Browser-Software verhindern; Dieses "
+"Angebot weist die Nutzer jedoch darauf hin, dass Sie in diesem Fall "
+"gegebenenfalls nicht sämtliche Funktionen dieser Website vollumfänglich "
+"werden nutzen können. Die Nutzer können darüber hinaus die Erfassung der "
+"durch das Cookie erzeugten und auf ihre Nutzung der Website bezogenen "
+"Daten (inkl. Ihrer IP-Adresse) an Google sowie die Verarbeitung dieser "
+"Daten durch Google verhindern, indem sie das unter dem folgenden Link "
+"verfügbare Browser-Plugin herunterladen und installieren: <a "
+"href=\"http://tools.google.com/dlpage/gaoptout?hl=de\">http://tools.google.com/dlpage/gaoptout?hl=de</a>.</p>"
+"\n"
+"        <p>Alternativ zum Browser-Add-On oder innerhalb von Browsern auf "
+"mobilen Geräten, <a id=\"GAOptOut\" title=\"Google Analytics Opt-Out-"
+"Cookie setzen\" href=\"javascript:gaOptout()\">klicken Sie bitte diesen "
+"Link</a>, um die Erfassung durch Google Analytics innerhalb dieser "
+"Website zukünftig zu verhindern. Dabei wird ein Opt-Out-Cookie auf Ihrem "
+"Gerät abgelegt. Löschen Sie Ihre Cookies, müssen Sie diesen Link erneut "
+"klicken.</p>\n"
+"        <p>&nbsp;</p>\n"
+"        <p><strong>Widerruf, Änderungen, Berichtigungen und "
+"Aktualisierungen<br>\n"
+"        </strong>Der Nutzer hat das Recht, auf Antrag unentgeltlich "
+"Auskunft zu erhalten über die personenbezogenen Daten, die über ihn "
+"gespeichert wurden. Zusätzlich hat der Nutzer das Recht auf Berichtigung "
+"unrichtiger Daten, Sperrung und Löschung seiner personenbezogenen Daten, "
+"soweit dem keine gesetzliche Aufbewahrungspflicht entgegensteht.</p>\n"
+"        "
+
+#: flask_shop/views.py:1061 flask_shop/views.py:1070
+#: flask_shop/templates/layout.html:114
+msgid "Legal notice"
+msgstr "Impressum"
+
+#: flask_shop/views.py:1062
+msgid ""
+"<p>\n"
+"        MillionDog<br>\n"
+"        Inhaber: Sabine Reiss und Anke Siegrist<br>\n"
+"        Obere Rebbergstrasse 34<br>\n"
+"        CH-4800 Zofingen<br>\n"
+"        e-mail: informme@milliondog.com<br><br>\n"
+"        All contents on www.milliondog are owned by Milliondog and "
+"copyright protected. Any use of milliondog`s contents, including "
+"pictures, texts and intellectual property needs strictly consent by "
+"Milliondog</p>\n"
+"        "
+msgstr ""
+"<p>\n"
+"        MillionDog<br>\n"
+"        Inhaber: Sabine Reiss und Anke Siegrist<br>\n"
+"        Obere Rebbergstrasse 34<br>\n"
+"        CH-4800 Zofingen<br>\n"
+"        e-mail: informme@milliondog.com<br><br>\n"
+"        Sämtliche Inhalte auf www.milliondog.com sind urheberrechtlich "
+"geschützt. Jegliche Verwendung von Bildern und Texten, im Gesamten "
+"und/oder Auszügen in gedruckter oder digitaler Weise im Internet darf "
+"ausschliesslich nurmit der Zustimmung von MillionDog, namentlich Sabine "
+"Reiss und Anke Siegrist erfolgen.<br>\n"
+"Beschwerdeverfahren<br>\n"
+"Online-Streitbeilegung gemäß Art. 14 Abs. 1 ODR-VO: Die Europäische "
+"Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit, "
+"die Sie unter http://ec.europa.eu/consumers/odr/ finden.</p>\n"
+"                "
+
+#: flask_shop/templates/account.html:19
+msgid "Order State"
+msgstr "Auftragsstatus"
+
+#: flask_shop/templates/account.html:20
+msgid "Payment term"
+msgstr "Zahlungsmethode"
+
+#: flask_shop/templates/account.html:21
+msgid "Amount"
+msgstr "Preis"
+
+#: flask_shop/templates/account.html:22
+msgid "Untaxed Amount"
+msgstr "Preis ohne Steuer"
+
+#: flask_shop/templates/account.html:23
+msgid "Tax"
+msgstr "Steuer"
+
+#: flask_shop/templates/account.html:24 flask_shop/templates/admin.html:102
+msgid "Shipment method"
+msgstr "Versandmethode"
+
+#: flask_shop/templates/account.html:25
+msgid "Shipment state"
+msgstr "Lieferstatus"
+
+#: flask_shop/templates/account.html:26
+msgid "Invoice method"
+msgstr "Zahlungsmethode"
+
+#: flask_shop/templates/account.html:27
+msgid "Invoice state"
+msgstr "Rechnungsstatus"
+
+#: flask_shop/templates/account.html:28
+msgid "Invoice address"
+msgstr "Rechnungsadresse"
+
+#: flask_shop/templates/admin.html:27 flask_shop/templates/checkout.html:26
+msgid "Name"
+msgstr "Name"
+
+#: flask_shop/templates/admin.html:28
+msgid "Code"
+msgstr "Code"
+
+#: flask_shop/templates/admin.html:29
+msgid "Active"
+msgstr "Aktif"
+
+#: flask_shop/templates/admin.html:47 flask_shop/templates/admin.html:70
+#: flask_shop/templates/admin.html:101 flask_shop/templates/admin.html:125
+msgid "Currency"
+msgstr "Währung"
+
+#: flask_shop/templates/admin.html:48 flask_shop/templates/admin.html:71
+#: flask_shop/templates/admin.html:126
+msgid "Unit Price"
+msgstr "Preis pro Einheit"
+
+#: flask_shop/templates/admin.html:49 flask_shop/templates/admin.html:72
+#: flask_shop/templates/admin.html:127
+msgid "Shipment"
+msgstr "Lieferung"
+
+#: flask_shop/templates/admin.html:50 flask_shop/templates/admin.html:73
+#: flask_shop/templates/admin.html:128
+msgid "Effective Date"
+msgstr "Valutadatum"
+
+#: flask_shop/templates/admin.html:51 flask_shop/templates/admin.html:74
+#: flask_shop/templates/admin.html:129
+msgid "UOM"
+msgstr "Masseinheit"
+
+#: flask_shop/templates/admin.html:52 flask_shop/templates/admin.html:75
+#: flask_shop/templates/admin.html:130
+msgid "Cost Price"
+msgstr "Einkaufspreis"
+
+#: flask_shop/templates/admin.html:54 flask_shop/templates/admin.html:77
+#: flask_shop/templates/admin.html:132
+msgid "From Location"
+msgstr "Ursprungswarenlager"
+
+#: flask_shop/templates/admin.html:55 flask_shop/templates/admin.html:78
+#: flask_shop/templates/admin.html:133
+msgid "To Location"
+msgstr "Zielwarenlager"
+
+#: flask_shop/templates/admin.html:56 flask_shop/templates/admin.html:79
+msgid "Quantity"
+msgstr "Anzahl"
+
+#: flask_shop/templates/admin.html:57 flask_shop/templates/admin.html:80
+#: flask_shop/templates/admin.html:81 flask_shop/templates/admin.html:82
+#: flask_shop/templates/admin.html:108 flask_shop/templates/checkout.html:109
+msgid "Invoice Address"
+msgstr "Rechnungsadresse"
+
+#: flask_shop/templates/admin.html:58
+msgid "Shipping Address"
+msgstr "Lieferadresse"
+
+#: flask_shop/templates/admin.html:99
+msgid "Comment"
+msgstr "Kommentar"
+
+#: flask_shop/templates/admin.html:100
+msgid "Payment Term"
+msgstr "Zahlungsmethode"
+
+#: flask_shop/templates/admin.html:103
+msgid "State"
+msgstr "Status"
+
+#: flask_shop/templates/admin.html:104
+msgid "Untaxed amount cache"
+msgstr "Preis ohne Steuer"
+
+#: flask_shop/templates/admin.html:105
+msgid "Warehouse"
+msgstr "Lager"
+
+#: flask_shop/templates/admin.html:106
+msgid "Total amount cache"
+msgstr "Gesamtsumme Cache"
+
+#: flask_shop/templates/admin.html:107
+msgid "Invoice Method"
+msgstr "Zahlungsmethode"
+
+#: flask_shop/templates/cart.html:3
+msgid "cart"
+msgstr "Warenkorb"
+
+#: flask_shop/templates/cart.html:10 flask_shop/templates/checkout.html:140
+msgid "Items in cart"
+msgstr "Produkte im Warenkorb"
+
+#: flask_shop/templates/cart.html:19 flask_shop/templates/checkout.html:149
+#: flask_shop/templates/product.html:11
+msgid "Art. Nr."
+msgstr "Artikelnummer"
+
+#: flask_shop/templates/cart.html:20 flask_shop/templates/checkout.html:150
+#: flask_shop/templates/product.html:12
+msgid "Size"
+msgstr "Grösse"
+
+#: flask_shop/templates/cart.html:22 flask_shop/templates/checkout.html:152
+#: flask_shop/templates/product.html:14 flask_shop/templates/shop.html:139
+msgid "VAT incl., excluding <a href=\"/shipping\">shipping</a>"
+msgstr "inklusive MwSt, zzgl. <a href=\"/shipping\">Versandkosten</a>"
+
+#: flask_shop/templates/cart.html:23
+msgid "Remove"
+msgstr "Entfernen"
+
+#: flask_shop/templates/cart.html:34 flask_shop/templates/checkout.html:163
+msgid "Shipping"
+msgstr "Versand"
+
+#: flask_shop/templates/cart.html:45 flask_shop/templates/checkout.html:174
+msgid "Total"
+msgstr "Gesamtsumme"
+
+#: flask_shop/templates/cart.html:53
+msgid "Continue shopping"
+msgstr "Weiter einkaufen"
+
+#: flask_shop/templates/cart.html:63
+msgid "cart_empty"
+msgstr "Dein Warenkorb ist gegenwärtig leer"
+
+#: flask_shop/templates/cart.html:64
+msgid "back_to_shop"
+msgstr "Zurück zum Shop"
+
+#: flask_shop/templates/checkout.html:37
+msgid "Street"
+msgstr "Strasse"
+
+#: flask_shop/templates/checkout.html:48
+msgid "Street detail"
+msgstr "Strasse Zusatz"
+
+#: flask_shop/templates/checkout.html:59
+msgid "Postcode/Zip"
+msgstr "Postleitzahl"
+
+#: flask_shop/templates/checkout.html:70
+msgid "City"
+msgstr "Stadt"
+
+#: flask_shop/templates/checkout.html:81
+msgid "Country"
+msgstr "Land"
+
+#: flask_shop/templates/checkout.html:92
+msgid "State/Province"
+msgstr "Region"
+
+#: flask_shop/templates/checkout.html:103
+msgid "Delivery Address"
+msgstr "Lieferadresse"
+
+#: flask_shop/templates/checkout.html:115
+msgid "Accept <a href=\"/termsandconditions\">terms and conditions</a>"
+msgstr "<a href=\"/termsandconditions\">AGB</a> akzeptieren"
+
+#: flask_shop/templates/checkout.html:129
+msgid "Buy now"
+msgstr "Bestellen"
+
+#: flask_shop/templates/contact.html:11
+msgid "Contact us"
+msgstr "Kontaktformular"
+
+#: flask_shop/templates/contact.html:15
+msgid "Name (required)"
+msgstr "Ihr Name (Pflichtfeld)"
+
+#: flask_shop/templates/contact.html:26
+msgid "Email (required)"
+msgstr "Ihre E-Mail-Adresse (Pflichtfeld)"
+
+#: flask_shop/templates/contact.html:37
+msgid "Subject (required)"
+msgstr "Betreff (Pflichtfeld)"
+
+#: flask_shop/templates/contact.html:48
+msgid "Message"
+msgstr "Ihre Nachricht"
+
+#: flask_shop/templates/contact.html:59
+msgid "2+3=?"
+msgstr "2+3=?"
+
+#: flask_shop/templates/contact.html:71
+msgid "Send"
+msgstr "Absenden"
+
+#: flask_shop/templates/layout.html:78
+msgid "Logout"
+msgstr "Abmelden"
+
+#: flask_shop/templates/layout.html:80
+msgid "Login"
+msgstr "Anmelden"
+
+#: flask_shop/templates/login.html:14 flask_shop/templates/register.html:44
+msgid "Email"
+msgstr "Email-Adresse"
+
+#: flask_shop/templates/login.html:25 flask_shop/templates/register.html:55
+msgid "Password"
+msgstr "Passwort"
+
+#: flask_shop/templates/login.html:35
+msgid "Remember me"
+msgstr "Angemeldet bleiben"
+
+#: flask_shop/templates/payment.html:14
+msgid "In order to pay you will be forwarded to Paypal"
+msgstr "Für die Zahlung werden sie zu Paypal weitergeleitet."
+
+#: flask_shop/templates/paymentfailed.html:13
+msgid "Payment failed!"
+msgstr "Die Zahlung ist fehlgeschlagen."
+
+#: flask_shop/templates/product.html:16 flask_shop/templates/shop.html:141
+msgid "Add to cart"
+msgstr "In den Warenkorb"
+
+#: flask_shop/templates/register.html:10
+msgid "If you already have an account with us, please login at the"
+msgstr "Besitzen Sie bereits ein Kundenkonto? Hier geht es zur"
+
+#: flask_shop/templates/register.html:11
+msgid "login page"
+msgstr "Anmeldeseite"
+
+#: flask_shop/templates/register.html:33
+msgid "Username"
+msgstr "Benutzername"
+
+#: flask_shop/templates/register.html:66
+msgid "Confirm password"
+msgstr "Passwort"
+
+#: flask_shop/templates/register.html:78
+msgid "register"
+msgstr "Registrieren"
+
+#: flask_shop/templates/shop.html:50
+msgid "Dimensions table: (Dog neck)"
+msgstr "Grössentabelle: Halsumfang"
+
+#: flask_shop/templates/shop.html:51
+msgid ""
+"Please measure the neck of your dog, so you can be sure, you will order "
+"the right Cosy size."
+msgstr ""
+"Messen Sie zur Sicherheit den Halsumfang Ihres Hundes um die richtige "
+"Cosy-Grösse bestellen zu können."
+
+#: flask_shop/templates/shop.html:125
+msgid "Delivery Time"
+msgstr "Lieferzeiten"
+
+#: flask_shop/templates/shop.html:126
+msgid ""
+"4-7 working days within Switzerland, approximately 20 working days for "
+"overseas."
+msgstr "Inland 4-7 Werktage, Ausland bis 20 Tage je nach Land"
+
+#: flask_shop/templates/success.html:13
+msgid "Thank you for your purchase!"
+msgstr "Der Bezahlvorgang wurde erfolgreich abgeschlossen."
 

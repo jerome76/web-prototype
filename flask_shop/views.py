@@ -106,6 +106,7 @@ def getProductDirect(category=None, size=None, available_only=None):
             con.close()
     return result
 
+
 @babel.localeselector
 def get_locale():
     try:
@@ -205,6 +206,21 @@ def product(productid=None):
         item['list_price'] = '{:20,.2f}'.format(Decimal(product[0].list_price) * Decimal(session['currency_rate']))
     return render_template('product.html', pt=page_topic, pc=page_content, product=item,
                            title="Milliondog", page=gettext('Product'))
+
+
+@app.route("/custom-made")
+def custommade():
+    page_topic = gettext(u'Shop')
+    page_content = gettext(u'<h4><p>You do not find the appropriate Cosy in the shop? We would love to advise you for your individual material combination.</p></h4>') + \
+                   gettext(u'''<h4><p>We welcome your enquiries regarding our exclusive service using your own fabrics, for example we can use material from your children’s, parent’s or partner’s clothes to make a special Milliondog-Cosy for your dog. Get in touch with us so we can work together to give your dog a unique look.</p>
+        <p>Let your dog play his own part by wearing a Milliondog-Cosy at a special day in your life.</p>
+        <p>For more information contact us by <a href=\"mailto:informme@milliondog.com\">Email</a>.</p>
+        </h4>''')
+    category = gettext(u'Custom-made')
+    resp = render_template('custom-made.html', pt=page_topic, pc=page_content, title="Milliondog", page=gettext('Shop'),
+                           category=category)
+    return resp
+
 
 @app.route("/categories")
 def category():
