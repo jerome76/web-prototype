@@ -76,9 +76,9 @@ def getProductDirect(category=None, size=None, available_only=None):
                     "and t.id = ptpc.template " +
                     category_condition +
                     size_condition +
-                    available_only_condition +
                     "and ptpc.category = pc.id " +
                     "order by product.id")
+
         resultset = cur.fetchall()
         result = []
         for p in resultset:
@@ -488,6 +488,7 @@ def upload():
                            max_content_length_mb=max_content_length_mb)
 
 
+@app.route('/setlang/<language>')
 @app.route('/setlang/<language>/<path:goto>')
 def setlang(language=None, goto=None):
     setattr(g, 'lang_code', language)
@@ -495,6 +496,7 @@ def setlang(language=None, goto=None):
     refresh()
     return redirect("/" + goto)
 
+@app.route('/setcurrency/<currency>')
 @app.route('/setcurrency/<currency>/<path:goto>')
 def setcurrency(currency=None, goto=None):
     setattr(g, 'currency_code', currency)
@@ -675,6 +677,7 @@ def checkout():
             party = Party.find([('id', '=', partyid)])[0]
         except KeyError:
             Party = Model.get('party.party')
+        con = psycopg2.connect("dbname='tryton_dev' user='tryton' host='localhost' password='password'")
             party = Party()
 
         if party.id < 0:
