@@ -461,6 +461,12 @@ def upload():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             if file_type == 'products':
                 csvimport.import_products(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            elif file_type == 'product_categories':
+                csvimport.import_product_categories(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            elif file_type == 'product_attributeset':
+                csvimport.import_product_attributeset(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            elif file_type == 'product_template':
+                csvimport.import_product_template(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             elif file_type == 'customers':
                 csvimport.import_customers(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             elif file_type == 'internal_shipments':

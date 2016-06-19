@@ -157,6 +157,13 @@ def import_customers(filename):
         f.close()
 
 
+def getProductTemplate(producttemplatelist=None, name=None):
+    for i in producttemplatelist:
+        if name == i.name:
+            return i
+    return None
+
+
 def import_products(filename):
     f = open(filename, 'rb')
     config.set_trytond(app.config['TRYTON_DATABASE_NAME'], config_file=app.config['TRYTON_CONFIG_FILE'])
@@ -170,32 +177,207 @@ def import_products(filename):
         f.seek(0)
         print('Start import')
         reader = csv.DictReader(f)
+        Producttemplate = Model.get('product.template')
+        producttemplatelist = Producttemplate.find([('id', '>', 0)])
+        Product = Model.get('product.product')
         for row in reader:
             print(row['code'], row['name'], row['description'], row['quantity'])
-            Product = Model.get('product.product')
             product = Product()
-            Producttemplate = Model.get('product.template')
-            producttemplatelist = Producttemplate.find([('name', '=', row['product.template_name'])])
-            if producttemplatelist is None:
-                raise KeyError('No product.template found for ' + row['product.template_name'])
+            product.code = row['code']
+            product.name = row['name']
+            product.description = row['description']
+            # attributes:
+            new_attributes = {}
+            for fieldname in reader.fieldnames:
+                if fieldname[0:10] == 'attribute_':
+                    if row[fieldname] == 'TRUE':
+                        new_attributes[fieldname[10:]] = True
+                    elif row[fieldname] == 'FALSE':
+                        new_attributes[fieldname[10:]] = False
+                    else:
+                        new_attributes[fieldname[10:]] = row[fieldname]
+            product.template = getProductTemplate(producttemplatelist, row['product.template_name'])
+            product.attributes = new_attributes
+            product.save()
+    finally:
+        f.close()
+
+
+def getUOM(productUOMList=None, unit=None):
+    for i in productUOMList:
+        if unit == i.symbol:
+            return i
+    return None
+
+
+def getProductCategory(productcategoryList=None, name=None):
+    for i in productcategoryList:
+        if name == i.name:
+            return i
+    return None
+
+
+def getProductAttributeset(productattributesetList=None, name=None):
+    for i in productattributesetList:
+        if name == i.name:
+            return i
+    return None
+
+
+def import_product_template(filename):
+    f = open(filename, 'rb')
+    config.set_trytond(app.config['TRYTON_DATABASE_NAME'], config_file=app.config['TRYTON_CONFIG_FILE'])
+    try:
+        print('Testing csv file structure for product templates')
+        readertest = csv.DictReader(f)
+        print(readertest.fieldnames)
+        for row in readertest:
+            print(row['name'], row['default_uom'], row['consumable'], row['type'], row['attribute_set'],
+                  row['taxes_category'], row['accounts_category'], row['account_category'], row['purchasable'],
+                  row['purchase_uom'], row['salable'], row['sale_uom'])
+
+        f.seek(0)
+        print('Start import')
+        reader = csv.DictReader(f)
+        ProductUOM = Model.get('product.uom')
+        productUOMList = ProductUOM.find([('id', '>', 0)])
+        Attributeset = Model.get('product.attribute.set')
+        attributesetlist = Attributeset.find([('id', '>', 0)])
+        Category = Model.get('product.category')
+        categorylist = Category.find([('id', '>', 0)])
+        for row in reader:
+            print(row['name'], row['default_uom'], row['consumable'], row['type'], row['attribute_set'],
+                  row['taxes_category'], row['accounts_category'], row['account_category'], row['purchasable'],
+                  row['purchase_uom'], row['salable'], row['sale_uom'])
+            ProductTemplate = Model.get('product.template')
+            Product = Model.get('product.product')
+            duplicate = ProductTemplate.find([('name', '=', row['name'])])
+            if duplicate:
+                print('Existing product template found: ' + row['name'])
             else:
-                producttemplate = producttemplatelist[0]
-            if product.id < 0:
-                product.code = row['code']
-                product.name = row['name']
-                product.description = row['description']
-                # attributes:
-                new_attributes = {}
-                for fieldname in reader.fieldnames:
-                    if fieldname[0:10] == 'attribute_':
-                        if row[fieldname] == 'TRUE':
-                            new_attributes[fieldname[10:]] = True
-                        elif row[fieldname] == 'FALSE':
-                            new_attributes[fieldname[10:]] = False
-                        else:
-                            new_attributes[fieldname[10:]] = row[fieldname]
+                producttemplate = ProductTemplate()
+                producttemplate.name = row['name']
+                producttemplate.default_uom = getUOM(productUOMList, row['default_uom'])
+                if row['consumable'] == 'TRUE':
+                    producttemplate.consumable = True
+                else:
+                    producttemplate.consumable = False
+                producttemplate.type = row['type']
+                producttemplate.attribute_set = getProductAttributeset(attributesetlist, row['attribute_set'])
+                if row['taxes_category'] == 'TRUE':
+                    producttemplate.taxes_category = True
+                else:
+                    producttemplate.taxes_category = False
+                if row['accounts_category'] == 'TRUE':
+                    producttemplate.accounts_category = True
+                else:
+                    producttemplate.accounts_category = False
+                producttemplate.account_category = getProductCategory(categorylist, row['account_category'])
+                if row['purchasable'] == 'TRUE':
+                    producttemplate.purchasable = True
+                else:
+                    producttemplate.purchasable = False
+                producttemplate.purchase_uom = getUOM(productUOMList, row['purchase_uom'])
+                if row['salable'] == 'TRUE':
+                    producttemplate.salable = True
+                else:
+                    producttemplate.salable = False
+                producttemplate.sale_uom = getUOM(productUOMList, row['sale_uom'])
+                producttemplate.list_price = Decimal(row['list_price'])
+                producttemplate.cost_price = Decimal(row['cost_price'])
+                producttemplate.save()
+                '''product = Product()
+                product.code = ''
+                product.description = ''
                 product.template = producttemplate
-                product.attributes = new_attributes
-                product.save()
+                product.save()'''
+    finally:
+        f.close()
+
+
+def import_product_attributeset(filename):
+    f = open(filename, 'rb')
+    config.set_trytond(app.config['TRYTON_DATABASE_NAME'], config_file=app.config['TRYTON_CONFIG_FILE'])
+    try:
+        print('Testing csv file structure for product attributeset')
+        readertest = csv.DictReader(f)
+        print(readertest.fieldnames)
+        for row in readertest:
+            print(row['attributeset_name'], row['digits'], row['selection'], row['name'], row['string'], row['type_'],
+                  row['selection_sorted'])
+
+        f.seek(0)
+        print('Start import')
+        reader = csv.DictReader(f)
+        for row in reader:
+            print(row['attributeset_name'], row['digits'], row['selection'], row['name'], row['string'], row['type_'],
+                  row['selection_sorted'])
+            Attributeset = Model.get('product.attribute.set')
+            attributesetlist = Attributeset.find([('name', '=', row['attributeset_name'])])
+            if attributesetlist:
+                attributeset = attributesetlist[0]
+            else:
+                attributeset = Attributeset()
+                attributeset.name = row['attributeset_name']
+                attributeset.save()
+            Attribute = Model.get('product.attribute')
+            duplicate = Attribute.find([('name', '=', row['name'])])
+            if duplicate:
+                print('Existing attribute found: ' + row['name'])
+            else:
+                attribute = attributeset.attributes.new()
+                attribute.digits = int(row['digits'])
+                attribute.selection = row['selection']
+                attribute.name = row['name']
+                attribute.string = row['string']
+                attribute.type_ = row['type_']
+                if row['selection_sorted'] == 'TRUE':
+                    attribute.selection_sorted = True
+                else:
+                    attribute.selection_sorted = False
+                attributeset.save()
+    finally:
+        f.close()
+
+
+def import_product_categories(filename):
+    f = open(filename, 'rb')
+    config.set_trytond(app.config['TRYTON_DATABASE_NAME'], config_file=app.config['TRYTON_CONFIG_FILE'])
+    try:
+        print('Testing csv file structure for categories')
+        readertest = csv.DictReader(f)
+        print(readertest.fieldnames)
+        for row in readertest:
+            print(row['name'], row['parent'], row['accounting'], row['taxes_parent'], row['account_parent'])
+
+        f.seek(0)
+        print('Start import')
+        reader = csv.DictReader(f)
+        for row in reader:
+            print(row['name'], row['parent'], row['accounting'], row['taxes_parent'], row['account_parent'])
+            Category = Model.get('product.category')
+            duplicate = Category.find([('name', '=', row['name'])])
+            if duplicate:
+                print('Existing category found: ' + row['name'])
+            else:
+                category = Category()
+                category.name = row['name']
+                if row['accounting'] == 'TRUE':
+                    category.accounting = True
+                else:
+                    category.accounting = False
+                if row['taxes_parent'] == 'TRUE':
+                    category.taxes_parent = True
+                else:
+                    category.taxes_parent = False
+                if row['account_parent'] == 'TRUE':
+                    category.account_parent = True
+                else:
+                    category.account_parent = False
+                if row['parent'] != '':
+                    parent = Category.find([('name', '=', row['parent'])])
+                    if parent:
+                        category.parent = parent[0]
+                category.save()
     finally:
         f.close()
