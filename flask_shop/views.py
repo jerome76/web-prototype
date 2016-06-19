@@ -313,7 +313,7 @@ def cart():
     if cart:
         for p in cart:
             sub_total_tmp += p.list_price
-    shipping = getShipping('Versandkosten Schweiz')
+    shipping = getShipping('Shipping local')
     shipping_cost_temp = 0.00
     if shipping is not None:
         if sub_total_tmp < Decimal(150.00*session['currency_rate']):
@@ -324,7 +324,7 @@ def cart():
     shipping_cost = format_currency_amount(shipping_cost_temp)
     session['user_name'] = 'paypal_testuser'
     return render_template('cart.html', message=user[0].name, id=user[0].id, cart=cart, sub_total=sub_total,
-                           shipping=shipping, shipping_cost=shipping_cost,
+                           shipping=shipping, shipping_cost=shipping_cost, shipping_text=gettext(u'Shipping local'),
                            title="Milliondog", page='Cart')
 
 
@@ -668,7 +668,7 @@ def checkout():
     if productlist:
         for p in productlist:
             sub_total_tmp += p.list_price
-    shipping = getShipping('Versandkosten Schweiz')
+    shipping = getShipping('Shipping local')
     shipping_cost_temp = 0.00
     if shipping is not None:
         if sub_total_tmp < Decimal(150.00*session['currency_rate']):
@@ -768,7 +768,7 @@ def checkout():
             print('user is not logged in')
 
     return render_template('checkout.html', cart=productlist, sub_total=sub_total,
-                           shipping=shipping, shipping_cost=shipping_cost,
+                           shipping=shipping, shipping_cost=shipping_cost, shipping_text=gettext(u'Shipping local'),
                            pt=page_topic, pc=page_content, product=productlist, title="Milliondog",
                            page=gettext(u'Checkout'), form=form)
 
@@ -790,7 +790,7 @@ def payment():
             item_number_list.append(p.code)
             sub_total_tmp += p.list_price
             amount_list.append(p.list_price)
-        shipping = getShipping('Versandkosten Schweiz')
+        shipping = getShipping('Shipping local')
         shipping_cost_temp = 0.00
         if shipping is not None:
             if sub_total_tmp < Decimal(150.00*session['currency_rate']):
