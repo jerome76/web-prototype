@@ -76,6 +76,7 @@ def getProductDirect(category=None, size=None, available_only=None):
                     "and t.id = ptpc.template " +
                     category_condition +
                     size_condition +
+                    available_only_condition +
                     "and ptpc.category = pc.id " +
                     "order by product.id")
 
@@ -677,7 +678,6 @@ def checkout():
             party = Party.find([('id', '=', partyid)])[0]
         except KeyError:
             Party = Model.get('party.party')
-        con = psycopg2.connect("dbname='tryton_dev' user='tryton' host='localhost' password='password'")
             party = Party()
 
         if party.id < 0:

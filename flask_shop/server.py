@@ -154,6 +154,12 @@ def make_sale():
             line.quantity = 1
             line.sequence = 1
         sale.save()
+        try:
+            sale.click('quote')
+            sale.click('confirm')
+            sale.click('process')
+        except Exception, e:
+            print 'make_sale.Exception %s' % e
         saleId = sale.id
 
     if print_payslip:

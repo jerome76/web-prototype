@@ -220,7 +220,7 @@ class POSScreen(Screen):
             traceback.print_exc(file=sys.stdout)
 
     @staticmethod
-    def format_currency_amount(self, amount):
+    def format_currency_amount(amount):
         return '{:20,.2f}'.format(amount)
 
     def do_search(self):
