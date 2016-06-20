@@ -148,6 +148,14 @@ def make_sale():
         for payslip_line in payslip_items:
             Product = Model.get('product.product')
             product = Product.find(['id', '=', payslip_line['id']])
+            # remove products
+            if app.config['DEACTIVATE_PRODUCT_WHEN_SOLD']:
+                attribute_dict = product[0].attributes
+                for key in attribute_dict.keys():
+                    if key == 'available':
+                        attribute_dict[key] = False
+                product[0].attributes = attribute_dict
+                product[0].save()
             line = sale.lines.new(quantity=1)
             line.product = product[0]
             line.description = product[0].name
