@@ -597,9 +597,14 @@ def register():
                     session['partyid'] = party.id
                     session['userid'] = user.id
                     session['logged_in'] = True
-                    if session['cart_item_count'] > 0:
-                        flash(gettext(u'Registration successful. Please continue the checkout process.'))
-                        return redirect('/checkout')
+                    try:
+                        if session['cart_item_count'] > 0:
+                            flash(gettext(u'Registration successful. Please continue the checkout process.'))
+                            return redirect('/checkout')
+                    except:
+                        session['cart_item_count'] = 0
+                        flash(gettext(u'Registration successful.'))
+                        return redirect('/shop')
                 else:
                     flash(gettext(u'System is down.'))
                     print('Cannot register email ' + form.email.data)
