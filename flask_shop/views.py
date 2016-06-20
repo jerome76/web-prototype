@@ -469,8 +469,11 @@ def upload():
                 csvimport.import_product_template(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             elif file_type == 'customers':
                 csvimport.import_customers(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            elif file_type == 'internal_shipments':
-                csvimport.load_internal_shipment(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            elif file_type == 'import_supplier_shipments':
+                try:
+                    csvimport.import_shipment_in(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                except ValueError as error:
+                    flash(gettext(u'Could not process file: ') + repr(error))
             elif file_type == 'webshop_images_zip':
                 fh = open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'rb')
                 z = zipfile.ZipFile(fh)

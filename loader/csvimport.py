@@ -4,6 +4,8 @@ from decimal import *
 from flask_shop import app
 from datetime import date
 
+DEFAULT_PARTY_SUPPLIER = 'Supplier'
+
 
 def load_internal_shipment(filename):
     f = open(filename, 'rb')
@@ -47,12 +49,12 @@ def load_internal_shipment(filename):
                 if row['stock.move_effective_date'] == 'today':
                     effective_date = date.today()
                 else:
-                    effective_date = date.strptime("2012-10-09", "%Y-%m-%dT")
+                    effective_date = date.strptime(row['stock.move_effective_date'], "%Y-%m-%dT")
                 stockmove.effective_date = effective_date
                 if row['stock.move_planned_date'] == 'today':
                     planned_date = date.today()
                 else:
-                    planned_date = date.strptime("2012-10-09", "%Y-%m-%dT")
+                    planned_date = date.strptime(row['stock.move_planned_date'], "%Y-%m-%dT")
                 stockmove.planned_date = planned_date
                 stockmove.unit_price = Decimal(row['stock.move_unit_price'])
                 if row['stock.move_cost_price'] == 'default':
@@ -379,5 +381,88 @@ def import_product_categories(filename):
                     if parent:
                         category.parent = parent[0]
                 category.save()
+    finally:
+        f.close()
+
+
+def getLocation(locationlist, code):
+    for i in locationlist:
+        if code == i.code:
+            return i
+    return None
+
+
+def import_shipment_in(filename):
+    f = open(filename, 'rb')
+    config.set_trytond(app.config['TRYTON_DATABASE_NAME'], config_file=app.config['TRYTON_CONFIG_FILE'])
+    try:
+        print('Testing csv file structure for product supplier shipment')
+        readertest = csv.DictReader(f)
+        print(readertest.fieldnames)
+        for row in readertest:
+            print(row['code'], row['name'], row['description'], row['quantity'], row['product.template_name'],
+                  row['stock.location_warehouse'], row['stock.location_from'], row['stock.location_to'],
+                  row['stock.move_effective_date'], row['stock.move_planned_date'], row['stock.move_unit_price'],
+                  row['stock.move_cost_price'], row['supplier'])
+
+        f.seek(0)
+        print('Start import')
+        StockShipmentIn = Model.get('stock.shipment.in')
+        duplicate = StockShipmentIn.find([('reference', '=', filename)])
+        if duplicate:
+            print('Existing supplier shipment found: ' + str(duplicate[0].id) + ' - ' + filename)
+            raise ValueError('Existing supplier shipment found with the same filename: ' + str(duplicate[0].id) + ' - '
+                             + filename)
+        else:
+            stockshipmentin = StockShipmentIn()
+            stockshipmentin.reference = filename
+            Location = Model.get('stock.location')
+            locationlist = Location.find([('id', '>', 0)])
+            Party = Model.get('party.party')
+            supplier = Party.find([('name', '=', DEFAULT_PARTY_SUPPLIER)], limit=1)
+            PartyAddress = Model.get('party.address')
+            supplier_address = PartyAddress.find([('party', '=', supplier[0].id)], limit=1)
+            if row['stock.move_planned_date'] == 'today':
+                planned_date = date.today()
+            else:
+                planned_date = date.strptime(row['stock.move_planned_date'], "%Y-%m-%dT")
+            stockshipmentin.planned_date = planned_date
+            if row['stock.move_effective_date'] == 'today':
+                effective_date = date.today()
+            else:
+                effective_date = date.strptime(row['stock.move_effective_date'], "%Y-%m-%dT")
+            stockshipmentin.effective_date = effective_date
+            stockshipmentin.supplier = supplier[0]
+            stockshipmentin.contact_address = supplier_address[0]
+            stockshipmentin.warehouse = getLocation(locationlist, row['stock.location_warehouse'])
+            stockshipmentin.save()
+            ProductUOM = Model.get('product.uom')
+            productUOMList = ProductUOM.find([('id', '>', 0)])
+            reader = csv.DictReader(f)
+            moves = []
+            if stockshipmentin.id > 0:
+                StockInventoryLine = Model.get('stock.inventory.line')
+                stockinventoryline = StockInventoryLine()
+                for row in reader:
+                    print(row['code'], row['name'], row['description'], row['quantity'], row['product.template_name'])
+                    # internal SUP -> IN
+                    stockmove = stockinventoryline.moves.new()
+                    stockmove.shipment = stockshipmentin
+                    Product = Model.get('product.product')
+                    product = Product.find([('code', '=', row['code'])])
+                    stockmove.product = product[0]
+                    stockmove.quantity = Decimal(row['quantity'])
+                    stockmove.uom = getUOM(productUOMList, row['stock.move_uom'])
+                    stockmove.from_location = getLocation(locationlist, 'SUP')
+                    stockmove.to_location = getLocation(locationlist, row['stock.location_from'])
+                    stockmove.planned_date = planned_date
+                    stockmove.effective_date = effective_date
+                    stockmove.unit_price = Decimal(row['stock.move_unit_price'])
+                    if row['stock.move_cost_price'] == 'default':
+                        stockmove.cost_price = product[0].cost_price
+                    else:
+                        stockmove.cost_price = Decimal(row['stock.move_cost_price'])
+                    stockmove.save()
+                    moves.append(stockmove)
     finally:
         f.close()
