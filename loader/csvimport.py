@@ -275,7 +275,9 @@ def import_product_template(filename):
                 else:
                     producttemplate.accounts_category = False
                 producttemplate.account_category = getProductCategory(categorylist, row['account_category'])
-                producttemplate.categories.append(getProductCategory(categorylist, row['account_category']))
+                Category = Model.get('product.category')
+                category = Category.find([('name', '=', row['account_category'])])
+                producttemplate.categories.append(category[0])
                 if row['purchasable'] == 'TRUE':
                     producttemplate.purchasable = True
                 else:

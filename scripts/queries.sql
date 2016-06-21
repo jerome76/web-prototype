@@ -44,3 +44,13 @@ select * from ir_model where ir_model.id > 70 and ir_model.id < 80;
 77;"product.template";"Product Template";"Product Template";"product"
 78;"product.product";"Product Variant";"Product Variant";"product"
 79;"product.template-product.category";"Template - Category";"Template - Category";"product"
+
+
+select * from ir_model_field where id = 2251;
+--select * from ir_model where id = 124;
+select * from account_account;
+9;"2016-06-21 11:24:57.628928";t;;"";17;1;"";f;86;13;1;1;"";t;;f;"stock";"Stock";t;16
+10;"2016-06-21 11:24:57.628928";t;;"";19;1;"";f;88;13;1;1;"";t;;f;"stock";"Stock Customer";t;18
+11;"2016-06-21 11:24:57.628928";t;;"";21;1;"";f;90;13;1;1;"";t;;f;"stock";"Stock Lost and Found";t;20
+12;"2016-06-21 11:24:57.628928";t;;"";23;1;"";f;89;13;1;1;"";t;;f;"stock";"Stock Production";t;22
+13;"2016-06-21 11:24:57.628928";t;;"";25;1;"";f;87;13;1;1;"";t;;f;"stock";"Stock Supplier";t;24

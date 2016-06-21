@@ -11,7 +11,7 @@ from trytond.modules.company.tests.tools import get_company
 __all__ = ['create_fiscalyear', 'create_chart', 'get_accounts',
     'create_tax', 'set_tax_code']
 CONFIG = "../tryton.conf"
-DATABASE_NAME = "tryton_test"
+DATABASE_NAME = "milliondog"
 ACCOUNT_STOCK_METHOD = 'anglo_saxon'
 POST_MOVE_SEQ = 'ACCN'
 CUSTOMER_INVOICE_SEQ = 'CINV'
@@ -23,6 +23,7 @@ DEFAULT_VAT_TAX_PERCENTAGE = '0.08'
 DEFAULT_VAT_TAX_NAME = 'VAT0'
 DEFAULT_PARTY_SUPPLIER = 'Supplier'
 DEFAULT_PAYMENT_TERM_NAME = 'cash'
+DEFAULT_PRODUCT_CATEGORY = 'stockable'
 
 
 def create_fiscalyear(company=None, today=None, config=None):
@@ -260,6 +261,43 @@ def create_product_config():
 def create_account_configuration(accounts=None, company=None):
     if not company:
         company = get_company()
+    # account.configuration
+    Sequence = Model.get('ir.sequence')
+    sequence = Sequence.find([('code', '=', 'account.payment.group')])
+    ACModel = Model.get('ir.model')
+    acmodel = ACModel.find([('model', '=', 'account.configuration')])
+    ACModelField = Model.get('ir.model.field')
+    acmodelfield = ACModelField.find([('name', '=', 'payment_group_sequence'), ('model', '=', acmodel[0].id)])
+    AccountConfiguration = Model.get('account.configuration')
+    existing = AccountConfiguration.find([('id', '>', '0')])
+    if existing:
+        print('Warning: Account configuration already exists!')
+        return
+    else:
+        print('Creating account configuration.')
+        accountconfiguration = AccountConfiguration()
+        accountconfiguration.save()
+        Property = Model.get('ir.property')
+        acproperty = Property()
+        acproperty.res = accountconfiguration
+        acproperty.value = sequence[0]
+        acproperty.field = acmodelfield[0]
+        acproperty.save()
+        acproperty = Property()
+        ACModelField = Model.get('ir.model.field')
+        acmodelfield = ACModelField.find([('name', '=', 'cost_price_counterpart_account'), ('model', '=', acmodel[0].id)])
+        acproperty.res = accountconfiguration
+        acproperty.value = accounts['cogs']
+        acproperty.field = acmodelfield[0]
+        acproperty.save()
+        acproperty = Property()
+        ACModelField = Model.get('ir.model.field')
+        acmodelfield = ACModelField.find([('name', '=', 'stock_journal'), ('model', '=', acmodel[0].id)])
+        acproperty.res = accountconfiguration
+        acproperty.value = accounts['expense']
+        acproperty.field = acmodelfield[0]
+        acproperty.save()
+
     ModelField = Model.get('ir.model.field')
     modelfield = ModelField.find([('name', '=', 'cost_price_counterpart_account')])
     if modelfield:
@@ -344,6 +382,90 @@ def create_account_configuration(accounts=None, company=None):
             property.save()
 
 
+def get_account(accountlist, name):
+    for i in accountlist:
+        if name == i.name:
+            return i
+    return None
+
+def create_product_category(accounts):
+    Category = Model.get('product.category')
+    duplicate = Category.find([('name', '=', DEFAULT_PRODUCT_CATEGORY)])
+    if duplicate:
+        print('Warning: category ' + duplicate[0].name + ' already exists!')
+    else:
+        category = Category()
+        category.name = DEFAULT_PRODUCT_CATEGORY
+        category.accounting = True
+        category.taxes_parent = False
+        category.account_parent = False
+        Tax = Model.get('account.tax')
+        tax = Tax.find([('name', '=', DEFAULT_VAT_TAX_NAME)], limit=1)
+        category.supplier_taxes.append(tax[0])
+        tax = Tax.find([('name', '=', DEFAULT_VAT_TAX_NAME)], limit=1)
+        category.customer_taxes.append(tax[0])
+        category.save()
+        print("Success: Product category '" + DEFAULT_PRODUCT_CATEGORY + "' created!")
+        Account = Model.get('account.account')
+        stockaccountlist = Account.find([('kind', '=', 'stock')])
+        PCModel = Model.get('ir.model')
+        pcmodel = PCModel.find([('model', '=', 'product.category')])
+        ModelField = Model.get('ir.model.field')
+        modelfield = ModelField.find([('name', '=', 'account_expense'), ('model', '=', pcmodel[0].id)])
+        Property = Model.get('ir.property')
+        property = Property.find([('field', '=', modelfield[0].id), ('res', 'not like', 'product.category,%')])
+        if len(property) == 0:
+            property = Property()
+            # property.rec_name = 'account.account'
+            property.field = modelfield[0]
+            property.value = accounts['expense']
+            property.company = get_company()
+            property.save()
+        else:
+            return
+        modelfield = ModelField.find([('name', '=', 'account_revenue'), ('model', '=', pcmodel[0].id)])
+        property = Property()
+        property.field = modelfield[0]
+        property.value = accounts['revenue']
+        property.company = get_company()
+        property.save()
+        modelfield = ModelField.find([('name', '=', 'account_stock'), ('model', '=', pcmodel[0].id)])
+        property = Property()
+        property.field = modelfield[0]
+        property.value = get_account(stockaccountlist, 'Stock')
+        property.company = get_company()
+        property.save()
+        modelfield = ModelField.find([('name', '=', 'account_cogs'), ('model', '=', pcmodel[0].id)])
+        property = Property()
+        property.field = modelfield[0]
+        property.value = accounts['cogs']
+        property.company = get_company()
+        property.save()
+        modelfield = ModelField.find([('name', '=', 'account_stock_lost_found'), ('model', '=', pcmodel[0].id)])
+        property = Property()
+        property.field = modelfield[0]
+        property.value = get_account(stockaccountlist, 'Stock Lost and Found')
+        property.company = get_company()
+        property.save()
+        modelfield = ModelField.find([('name', '=', 'account_stock_supplier'), ('model', '=', pcmodel[0].id)])
+        property = Property()
+        property.field = modelfield[0]
+        property.value = get_account(stockaccountlist, 'Stock Supplier')
+        property.company = get_company()
+        property.save()
+        modelfield = ModelField.find([('name', '=', 'account_stock_production'), ('model', '=', pcmodel[0].id)])
+        property = Property()
+        property.field = modelfield[0]
+        property.value = get_account(stockaccountlist, 'Stock Production')
+        property.company = get_company()
+        property.save()
+        modelfield = ModelField.find([('name', '=', 'account_stock_customer'), ('model', '=', pcmodel[0].id)])
+        property = Property()
+        property.field = modelfield[0]
+        property.value = get_account(stockaccountlist, 'Stock Customer')
+        property.company = get_company()
+
+
 def main():
     company = get_company()
     fiscalyear = create_fiscalyear(company)
@@ -358,6 +480,8 @@ def main():
     supplier = create_supplier()
     # create product config
     create_product_config()
+    create_product_category(accounts)
+
 
 if __name__ == '__main__':
     config.set_trytond(DATABASE_NAME, config_file=CONFIG)
