@@ -8,6 +8,7 @@ from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.progressbar import ProgressBar
 from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.image import Image
+from kivy.metrics import dp
 from kivy.network.urlrequest import UrlRequest
 from kivy.uix.screenmanager import ScreenManager, Screen
 import json
@@ -154,7 +155,7 @@ class POSScreen(Screen):
                 self.products_list.append(btn)
                 print ('add online product ' + code)
                 self.my_tabbed_panel_wid.grid_layout_home_wid.add_widget(btn)
-            self.my_tabbed_panel_wid.grid_layout_home_wid.height = (len(result['result'])/4)*110
+            self.my_tabbed_panel_wid.grid_layout_home_wid.height = (len(result['result'])/4)*dp(110)
 
         def on_failure(req, result):
             on_error(req, result)
@@ -188,7 +189,7 @@ class POSScreen(Screen):
             config = ConfigParser.get_configparser(name='app')
             print(config.get('serverconnection', 'server.url'))
             producturl = config.get('serverconnection', 'server.url') + "pos/products/"
-            self.text_input_wid.focus = True
+            #self.text_input_wid.focus = True
             if len(self.products_list) == 0:
                 UrlRequest(url=producturl, on_success=on_success, on_failure=on_failure, on_error=on_error)
             else:
@@ -292,7 +293,7 @@ class POSScreen(Screen):
         product = self.getProduct(event.id)
         if product is not None:
             newitem = DataItem(event.id, text="[" + str(product['code']) + "] " + product['name']
-                                    + '               '
+                                    + ' '
                                     + self.format_currency_amount(Decimal(product['price']) * Decimal(1.000))
                                     + ' ' + self.default_currency + "\n"
                                     + '   1 ' + product['uom_symbol'] + ' at ' + product['price']
@@ -315,19 +316,13 @@ class POSScreen(Screen):
             adapter.handle_selection(view, True)
             view.trigger_action(duration=0)
         # self.list_view_wid.adapter.set_data_item_selection(newitem, True)
-        '''
-        if len(self.payslip_items_list) > 10:
-            self.list_view_wid.height = (len(self.payslip_items_list)+4) * 48
-        else:
-            self.list_view_wid.height = self.height * 0.6
-        '''
         print('do_add_item finished.')
 
     def selection_change(self, change):
         print('_selected_line_index: ', self._selected_line_index)
         print("selection_change: " + change.text + " " + str(change.is_selected))
         change.background_color = [1, 1, 1, 1]
-        self.selected_value = 'Selected: {}'.format(change.text)
+        self.selected_value = '{}'.format(change.text)
         self.label_total_wid.text = 'Total: ' + self.format_currency_amount(self.get_total())
 
 
@@ -348,11 +343,11 @@ class POSScreen(Screen):
 
     def get_line(self, product, quantity, discount, price):
         return "[" + str(product['code']) + "] " + product['name'] \
-               + '               ' \
+               + ' ' \
                + self.format_currency_amount(price * quantity) + ' ' + self.default_currency + "\n"  \
-               + '  ' + str(quantity) + ' ' + product['uom_symbol'] + ' at ' + self.format_currency_amount(price) \
+               + ' ' + str(quantity) + ' ' + product['uom_symbol'] + ' at ' + self.format_currency_amount(price) \
                + ' ' + self.default_currency + " / " + product['uom_symbol'] \
-               + '               ' + str(discount)
+               + ' ' + str(discount)
 
     def get_total(self):
         total = Decimal(0.000)

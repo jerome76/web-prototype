@@ -464,6 +464,7 @@ def create_product_category(accounts):
         property.field = modelfield[0]
         property.value = get_account(stockaccountlist, 'Stock Customer')
         property.company = get_company()
+        property.save()
 
 
 def main():
