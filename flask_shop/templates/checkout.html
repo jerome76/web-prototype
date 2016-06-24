@@ -7,10 +7,9 @@
 {% block content %}
 <script type="text/javascript">
 function init(){
-    if (document.checkout.state == '') {
-        updatestate(216);
-    }
-
+    selectedindex = document.checkout.state.selectedIndex;
+    updatestate(document.checkout.country.selectedIndex);
+    document.checkout.state.selectedIndex = selectedindex;
 }
 </script>
 <div class="container">
@@ -441,6 +440,22 @@ function updatestate(selectedstategroup){
     if (selectedstategroup>0){
         for (i=0; i<states[selectedstategroup].length; i++)
             stateslist.options[stateslist.options.length]=new Option(states[selectedstategroup][i].split("|")[0], states[selectedstategroup][i].split("|")[1])
+    }
+}
+
+
+if(window.attachEvent) {
+    window.attachEvent('onload', init);
+} else {
+    if(window.onload) {
+        var curronload = window.onload;
+        var newonload = function(evt) {
+            curronload(evt);
+            init(evt);
+        };
+        window.onload = newonload;
+    } else {
+        window.onload = init;
     }
 }
 </script>
