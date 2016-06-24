@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %} - {{page}}{% endblock %}
+{% block page %}{% endblock %}
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="well">
+                <h2 id="title">{{ error_title }}:</h2>
+				<h4>{{ error_message }}</h4>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

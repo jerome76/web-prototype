@@ -108,6 +108,24 @@ def getProductDirect(category=None, size=None, available_only=None):
     return result
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error.html', error_title=gettext(u'Page not found'),
+                           error_message=gettext(u'The page you are trying to access does not exist.')), 404
+
+
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template('error.html', error_title=gettext(u'Internal server error'),
+                           error_message=gettext(u'Something went wrong.')), 500
+
+
+@app.errorhandler(403)
+def page_not_found(e):
+    return render_template('error.html', error_title=gettext(u'Access forbidden'),
+                           error_message=gettext(u'You are not allowed to access this page.')), 403
+
+
 @babel.localeselector
 def get_locale():
     try:
