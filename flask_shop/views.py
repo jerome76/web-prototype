@@ -707,9 +707,11 @@ def checkout():
             country_id = form.country.data
             state_id = form.state.data
             Country = Model.get('country.country')
-            (ch, ) = Country.find([('code', '=', 'CH')])
+            (ch, ) = Country.find([('code', '=', country_id)])
             party.addresses[0].country = ch
-            party.addresses[0].subdivision = form.state.data
+            Subdivision = Model.get('country.subdivision')
+            (subdivision, ) = Subdivision.find([('id', '=', state_id)])
+            party.addresses[0].subdivision = subdivision
             party.addresses[0].invoice = form.invoice.data
             party.addresses[0].delivery = form.delivery.data
             party.save()
@@ -719,11 +721,14 @@ def checkout():
             party.addresses[0].streetbis = form.street2.data
             party.addresses[0].zip = form.zip.data
             party.addresses[0].city = form.city.data
+            country_id = form.country.data
+            state_id = form.state.data
             Country = Model.get('country.country')
-            (ch, ) = Country.find([('code', '=', 'CH')])
+            (ch, ) = Country.find([('code', '=', country_id)])
             party.addresses[0].country = ch
-            # TODO: correct subdivision
-            # party.addresses[0].subdivision = form.state.data
+            Subdivision = Model.get('country.subdivision')
+            (subdivision, ) = Subdivision.find([('id', '=', state_id)])
+            party.addresses[0].subdivision = subdivision
             party.addresses[0].invoice = form.invoice.data
             party.addresses[0].delivery = form.delivery.data
             party.save()
@@ -754,8 +759,7 @@ def checkout():
                             attribute_dict[key] = False
                     tmp_product[0].attributes = attribute_dict
                     tmp_product[0].save()
-        flash(gettext(u'Thank you %s, your address has been saved. Please proceed with payment of order number %s.') %
-              (form.name.data, sale.id))
+        flash(gettext(u'Thank you, your address has been saved. Please proceed with the payment.'))
         return redirect('/payment')
 
     if form.name.data is None:
@@ -768,8 +772,10 @@ def checkout():
             form.street2.data = party.addresses[0].streetbis
             form.zip.data = party.addresses[0].zip
             form.city.data = party.addresses[0].city
-            ''' TODO: update region select list in checkout.html with correct region '''
-            form.state.data = party.addresses[0].subdivision
+            if party.addresses[0].country:
+                form.country.data = party.addresses[0].country.code
+            if party.addresses[0].subdivision:
+                form.state.data = str(party.addresses[0].subdivision.id)
             form.invoice.data = party.addresses[0].invoice
             form.delivery.data = party.addresses[0].delivery
         except KeyError:

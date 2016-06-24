@@ -7,9 +7,9 @@
 {% block content %}
 <script type="text/javascript">
 function init(){
-    selectedindex = document.checkout.state.selectedIndex;
+    value = document.checkout.state.value;
     updatestate(document.checkout.country.selectedIndex);
-    document.checkout.state.selectedIndex = selectedindex;
+    document.checkout.state.value = value;
 }
 </script>
 <div class="container">
