@@ -1,6 +1,7 @@
 from flask_wtf import Form
 from wtforms import StringField, BooleanField, PasswordField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, EqualTo, AnyOf
+from flask_babel import lazy_gettext
 
 
 class LoginForm(Form):
@@ -12,7 +13,7 @@ class LoginForm(Form):
 class RegisterForm(Form):
     username = StringField('username', validators=[DataRequired()])
     email = StringField('email', validators=[DataRequired()])
-    password = PasswordField('password', validators=[EqualTo('confirm', message='Passwords must match')])
+    password = PasswordField('password', validators=[EqualTo('confirm', message=lazy_gettext(u'Passwords must match'))])
     confirm = PasswordField('confirm', validators=[DataRequired()])
 
 
@@ -29,7 +30,7 @@ class CheckoutForm(Form):
     delivery = BooleanField('delivery', default=False)
     invoice = BooleanField('invoice', default=False)
     acceptterms = BooleanField('acceptterms', default=False,
-                               validators=[AnyOf([True], message='You must accept the terms and conditions')])
+                               validators=[AnyOf([True], message=lazy_gettext(u'You must accept the terms and conditions'))])
 
 
 class ContactForm(Form):

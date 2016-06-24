@@ -7,18 +7,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-19 19:20+0200\n"
+"POT-Creation-Date: 2016-06-24 22:25+0200\n"
 "PO-Revision-Date: 2016-04-22 10:06+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.0\n"
+"Generated-By: Babel 2.3.4\n"
 
-#: flask_shop/views.py:171 flask_shop/views.py:175
-#: flask_shop/templates/layout.html:76
+#: flask_shop/forms.py:16
+msgid "Passwords must match"
+msgstr "Passwörter müssen übereinstimmen."
+
+#: flask_shop/forms.py:33
+msgid "You must accept the terms and conditions"
+msgstr "Sie müssen die AGB akzeptieren."
+
+#: flask_shop/templates/layout.html:76 flask_shop/views.py:171
+#: flask_shop/views.py:175
 msgid "About us"
 msgstr "Über uns"
 
@@ -40,8 +49,8 @@ msgstr ""
 "Lieblings.</p>\n"
 "<p>Wir lieben unsere Arbeit und das sieht man an jedem Cosy….\"</p><h4>"
 
-#: flask_shop/views.py:179 flask_shop/views.py:184
-#: flask_shop/templates/layout.html:74
+#: flask_shop/templates/layout.html:74 flask_shop/views.py:179
+#: flask_shop/views.py:184
 msgid "Send us"
 msgstr "Schickt uns"
 
@@ -64,9 +73,9 @@ msgstr ""
 "etc.</p><p>Kontaktieren Sie uns gerne per <a "
 "href=\"mailto:informme@milliondog.com\">Email</a>.</p></h4>"
 
-#: flask_shop/views.py:194 flask_shop/views.py:209
 #: flask_shop/templates/admin.html:53 flask_shop/templates/admin.html:76
-#: flask_shop/templates/admin.html:131
+#: flask_shop/templates/admin.html:131 flask_shop/views.py:194
+#: flask_shop/views.py:209
 msgid "Product"
 msgstr "Produkt"
 
@@ -87,7 +96,7 @@ msgstr ""
 "<h4><p>Sie finden nicht das passende Cosy im Shop? Wir beraten Sie gerne "
 "für ihre individuelle Stoffkombination.</p></h4>"
 
-#: flask_shop/views.py:220 flask_shop/templates/layout.html:71
+#: flask_shop/templates/layout.html:71 flask_shop/views.py:220
 msgid "Custom-made"
 msgstr "Sonderanfertigung"
 
@@ -115,8 +124,8 @@ msgstr ""
 "speziell auf einen von Ihnen angegebenen Halsumfang Ihres Hundes.<br>Die "
 "Cosys sind beidseits tragbar.</p></h4>"
 
-#: flask_shop/views.py:261 flask_shop/views.py:263
 #: flask_shop/templates/gallery.html:46 flask_shop/templates/layout.html:75
+#: flask_shop/views.py:261 flask_shop/views.py:263
 msgid "Gallery"
 msgstr "Galerie"
 
@@ -136,11 +145,11 @@ msgstr "Start"
 msgid "exclusive accessoires for your awesome darling"
 msgstr "Exklusive Accessoires für Ihren einzigartigen Liebling"
 
-#: flask_shop/views.py:327 flask_shop/views.py:771
+#: flask_shop/views.py:327 flask_shop/views.py:784
 msgid "Shipping local"
 msgstr "Versand Schweiz"
 
-#: flask_shop/views.py:437 flask_shop/views.py:494
+#: flask_shop/views.py:437 flask_shop/views.py:497
 msgid "Upload new File"
 msgstr "Eine weitere Datei hochladen"
 
@@ -152,99 +161,102 @@ msgstr "Datei fehlt"
 msgid "No file selected"
 msgstr "Keine Datei ausgewählt"
 
-#: flask_shop/views.py:535
+#: flask_shop/views.py:476
+msgid "Could not process file: "
+msgstr ""
+
+#: flask_shop/views.py:538
 msgid "login successful."
 msgstr "Anmeldung erfolgreich"
 
-#: flask_shop/views.py:547 flask_shop/views.py:550
+#: flask_shop/views.py:550 flask_shop/views.py:553
 msgid "invalid email or password."
 msgstr "Email oder Passwort ist ungültig"
 
-#: flask_shop/views.py:553 flask_shop/views.py:604
+#: flask_shop/views.py:556 flask_shop/views.py:611
 msgid "Invalid email address given."
 msgstr "Email Adresse ist ungültig."
 
-#: flask_shop/views.py:556 flask_shop/templates/login.html:11
-#: flask_shop/templates/login.html:39
+#: flask_shop/templates/login.html:11 flask_shop/templates/login.html:39
+#: flask_shop/views.py:558
 msgid "Sign in"
 msgstr "Anmelden"
 
-#: flask_shop/views.py:568
+#: flask_shop/views.py:570
 msgid "Email address already registered."
 msgstr "Email-Adresse ist bereits registriert."
 
-#: flask_shop/views.py:598
+#: flask_shop/views.py:601
 msgid "Registration successful. Please continue the checkout process."
 msgstr "Registrierung war erfolgreich. Bitte fahren Sie mit dem Zahlvorgang fort."
 
-#: flask_shop/views.py:601
+#: flask_shop/views.py:605
+msgid "Registration successful."
+msgstr ""
+
+#: flask_shop/views.py:608
 msgid "System is down."
 msgstr "Das System ist ausser Betrieb"
 
-#: flask_shop/views.py:607 flask_shop/templates/register.html:18
+#: flask_shop/templates/register.html:18 flask_shop/views.py:614
 msgid "Register"
 msgstr "Registrieren"
 
-#: flask_shop/views.py:617 flask_shop/views.py:632
-#: flask_shop/templates/layout.html:77
+#: flask_shop/templates/layout.html:77 flask_shop/views.py:624
+#: flask_shop/views.py:639
 msgid "Contact"
 msgstr "Kontakt"
 
-#: flask_shop/views.py:618 flask_shop/templates/contact.html:12
+#: flask_shop/templates/contact.html:12 flask_shop/views.py:625
 msgid "You can send us a message here:"
 msgstr "Kontaktieren Sie uns unverbindlich, wir freuen uns über Ihre Nachricht:"
 
-#: flask_shop/views.py:621
+#: flask_shop/views.py:628
 msgid "Thank you for your message."
 msgstr "Vielen Dank für Ihre Nachricht."
 
-#: flask_shop/views.py:642
+#: flask_shop/views.py:649
 msgid "Please select (optional)"
 msgstr "Bitte wählen (optional)"
 
-#: flask_shop/views.py:662 flask_shop/views.py:773
-#: flask_shop/templates/cart.html:58
+#: flask_shop/templates/cart.html:58 flask_shop/views.py:669
+#: flask_shop/views.py:786
 msgid "Checkout"
 msgstr "Zur Kasse"
 
-#: flask_shop/views.py:663
+#: flask_shop/views.py:670
 msgid "Please enter your address here:"
 msgstr "Geben Sie bitte nachfolgend Ihre Adresse an:"
 
-#: flask_shop/views.py:749
-#, python-format
-msgid ""
-"Thank you %s, your address has been saved. Please proceed with payment of"
-" order number %s."
+#: flask_shop/views.py:761
+msgid "Thank you, your address has been saved. Please proceed with the payment."
 msgstr ""
-"Vielen Dank %s, Ihre Adresse wurde gespeichert. Bitte fahren sie mit dem "
-"Bezahlvorgang für Auftrag %s fort."
 
-#: flask_shop/views.py:780 flask_shop/views.py:811
 #: flask_shop/templates/payment.html:13
 #: flask_shop/templates/paymentfailed.html:12
-#: flask_shop/templates/success.html:12
+#: flask_shop/templates/success.html:12 flask_shop/views.py:793
+#: flask_shop/views.py:824
 msgid "Payment"
 msgstr "Bezahlung"
 
-#: flask_shop/views.py:781
+#: flask_shop/views.py:794
 msgid "Please follow the link to pay with Paypal:"
 msgstr "Bitte benutzen Sie folgenden Link um mit Paypal zu bezahlen:"
 
-#: flask_shop/views.py:821
+#: flask_shop/views.py:834
 msgid "PayPal payment completed successfully."
 msgstr "Der PayPal Zahlungsvorgang endete erfolgreich."
 
-#: flask_shop/views.py:832
+#: flask_shop/views.py:845
 msgid "PayPal payment failed."
 msgstr "Der Paypal Zahlungsvorgang ist fehlgeschlagen."
 
-#: flask_shop/views.py:960 flask_shop/views.py:966
-#: flask_shop/templates/layout.html:111
+#: flask_shop/templates/layout.html:105 flask_shop/views.py:973
+#: flask_shop/views.py:979
 msgid "Payment and Shipping"
 msgstr "Zahlung und Versand"
 
-#: flask_shop/views.py:961
+#: flask_shop/views.py:974
 msgid ""
 "<p>We accept PayPal payment only.</p><br>\n"
 "        <p>Handling time: 2-3 days</p><br>\n"
@@ -273,12 +285,12 @@ msgstr ""
 "und/oder Abgaben, etwa in Form von Zöllen anfallen können, die von Ihnen "
 "zu tragen sind.<br><br>"
 
-#: flask_shop/views.py:971 flask_shop/views.py:978
-#: flask_shop/templates/layout.html:112
+#: flask_shop/templates/layout.html:106 flask_shop/views.py:984
+#: flask_shop/views.py:991
 msgid "Right of revocation"
 msgstr "Widerrufsrecht"
 
-#: flask_shop/views.py:972
+#: flask_shop/views.py:985
 msgid ""
 "<p>Conditions of returned goods<br><br></p>\n"
 "        <p>We will gladly take back your order if you are not "
@@ -366,12 +378,12 @@ msgstr ""
 "Unterschrift des/der Verbraucher(s) (nur bei Mitteilung auf "
 "Papier)</p><p>– Datum</p><p>&nbsp;</p><p>(*) Unzutreffendes streichen</p>"
 
-#: flask_shop/views.py:983 flask_shop/views.py:1023
-#: flask_shop/templates/layout.html:113
+#: flask_shop/templates/layout.html:107 flask_shop/views.py:996
+#: flask_shop/views.py:1036
 msgid "Terms and conditions"
 msgstr "AGB"
 
-#: flask_shop/views.py:984
+#: flask_shop/views.py:997
 msgid ""
 "<p><strong>Allgemeine Geschäftsbedingungen mit "
 "Kundeninformationen</strong></p>\n"
@@ -655,12 +667,12 @@ msgstr ""
 "gewöhnlichen Aufenthalt hat, entzogen wird.</p>\n"
 "        "
 
-#: flask_shop/views.py:1028 flask_shop/views.py:1065
-#: flask_shop/templates/layout.html:114
+#: flask_shop/templates/layout.html:108 flask_shop/views.py:1041
+#: flask_shop/views.py:1078
 msgid "Disclaimer"
 msgstr "Datenschutz"
 
-#: flask_shop/views.py:1029
+#: flask_shop/views.py:1042
 msgid ""
 "<p><strong>Der Schutz Ihrer Privatsphäre ist uns ein wichtiges Anliegen. "
 "Bitte beachten Sie die folgenden Punkte unserer "
@@ -922,12 +934,12 @@ msgstr ""
 "soweit dem keine gesetzliche Aufbewahrungspflicht entgegensteht.</p>\n"
 "        "
 
-#: flask_shop/views.py:1070 flask_shop/views.py:1079
-#: flask_shop/templates/layout.html:115
+#: flask_shop/templates/layout.html:109 flask_shop/views.py:1083
+#: flask_shop/views.py:1092
 msgid "Legal notice"
 msgstr "Impressum"
 
-#: flask_shop/views.py:1071
+#: flask_shop/views.py:1084
 msgid ""
 "<p>\n"
 "        MillionDog<br>\n"
@@ -998,7 +1010,7 @@ msgstr "Rechnungsstatus"
 msgid "Invoice address"
 msgstr "Rechnungsadresse"
 
-#: flask_shop/templates/admin.html:27 flask_shop/templates/checkout.html:26
+#: flask_shop/templates/admin.html:27 flask_shop/templates/checkout.html:25
 msgid "Name"
 msgstr "Name"
 
@@ -1056,7 +1068,7 @@ msgstr "Anzahl"
 
 #: flask_shop/templates/admin.html:57 flask_shop/templates/admin.html:80
 #: flask_shop/templates/admin.html:81 flask_shop/templates/admin.html:82
-#: flask_shop/templates/admin.html:108 flask_shop/templates/checkout.html:109
+#: flask_shop/templates/admin.html:108 flask_shop/templates/checkout.html:108
 msgid "Invoice Address"
 msgstr "Rechnungsadresse"
 
@@ -1096,21 +1108,21 @@ msgstr "Zahlungsmethode"
 msgid "cart"
 msgstr "Warenkorb"
 
-#: flask_shop/templates/cart.html:10 flask_shop/templates/checkout.html:140
+#: flask_shop/templates/cart.html:10 flask_shop/templates/checkout.html:139
 msgid "Items in cart"
 msgstr "Produkte im Warenkorb"
 
-#: flask_shop/templates/cart.html:19 flask_shop/templates/checkout.html:149
+#: flask_shop/templates/cart.html:19 flask_shop/templates/checkout.html:148
 #: flask_shop/templates/product.html:11
 msgid "Art. Nr."
 msgstr "Artikelnummer"
 
-#: flask_shop/templates/cart.html:20 flask_shop/templates/checkout.html:150
+#: flask_shop/templates/cart.html:20 flask_shop/templates/checkout.html:149
 #: flask_shop/templates/product.html:12
 msgid "Size"
 msgstr "Grösse"
 
-#: flask_shop/templates/cart.html:22 flask_shop/templates/checkout.html:152
+#: flask_shop/templates/cart.html:22 flask_shop/templates/checkout.html:151
 #: flask_shop/templates/product.html:14 flask_shop/templates/shop.html:139
 msgid "VAT incl., excluding <a href=\"/shipping\">shipping</a>"
 msgstr "inklusive MwSt, zzgl. <a href=\"/shipping\">Versandkosten</a>"
@@ -1119,11 +1131,11 @@ msgstr "inklusive MwSt, zzgl. <a href=\"/shipping\">Versandkosten</a>"
 msgid "Remove"
 msgstr "Entfernen"
 
-#: flask_shop/templates/cart.html:34 flask_shop/templates/checkout.html:163
+#: flask_shop/templates/cart.html:34 flask_shop/templates/checkout.html:162
 msgid "Shipping"
 msgstr "Versand"
 
-#: flask_shop/templates/cart.html:45 flask_shop/templates/checkout.html:174
+#: flask_shop/templates/cart.html:45 flask_shop/templates/checkout.html:173
 msgid "Total"
 msgstr "Gesamtsumme"
 
@@ -1139,39 +1151,39 @@ msgstr "Dein Warenkorb ist gegenwärtig leer"
 msgid "back_to_shop"
 msgstr "Zurück zum Shop"
 
-#: flask_shop/templates/checkout.html:37
+#: flask_shop/templates/checkout.html:36
 msgid "Street"
 msgstr "Strasse"
 
-#: flask_shop/templates/checkout.html:48
+#: flask_shop/templates/checkout.html:47
 msgid "Street detail"
 msgstr "Strasse Zusatz"
 
-#: flask_shop/templates/checkout.html:59
+#: flask_shop/templates/checkout.html:58
 msgid "Postcode/Zip"
 msgstr "Postleitzahl"
 
-#: flask_shop/templates/checkout.html:70
+#: flask_shop/templates/checkout.html:69
 msgid "City"
 msgstr "Stadt"
 
-#: flask_shop/templates/checkout.html:81
+#: flask_shop/templates/checkout.html:80
 msgid "Country"
 msgstr "Land"
 
-#: flask_shop/templates/checkout.html:92
+#: flask_shop/templates/checkout.html:91
 msgid "State/Province"
 msgstr "Region"
 
-#: flask_shop/templates/checkout.html:103
+#: flask_shop/templates/checkout.html:102
 msgid "Delivery Address"
 msgstr "Lieferadresse"
 
-#: flask_shop/templates/checkout.html:115
+#: flask_shop/templates/checkout.html:114
 msgid "Accept <a href=\"/termsandconditions\">terms and conditions</a>"
 msgstr "<a href=\"/termsandconditions\">AGB</a> akzeptieren"
 
-#: flask_shop/templates/checkout.html:129
+#: flask_shop/templates/checkout.html:128
 msgid "Buy now"
 msgstr "Bestellen"
 
@@ -1280,4 +1292,7 @@ msgstr "Inland 4-7 Werktage, Ausland bis 20 Tage je nach Land"
 #: flask_shop/templates/success.html:13
 msgid "Thank you for your purchase!"
 msgstr "Der Bezahlvorgang wurde erfolgreich abgeschlossen."
+
+#~ msgid ""
+#~ msgstr ""
 
