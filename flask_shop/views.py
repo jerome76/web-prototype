@@ -447,14 +447,14 @@ def upload():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
-            flash(gettext(u'No file part'))
+            flash(gettext(u'No file part'), 'danger')
             return redirect(request.url)
         file = request.files['file']
         file_type = request.form['file_type']
         # if user does not select file, browser also
         # submit a empty part without filename
         if file.filename == '':
-            flash(gettext(u'No file selected'))
+            flash(gettext(u'No file selected'), 'danger')
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
@@ -473,7 +473,7 @@ def upload():
                 try:
                     csvimport.import_shipment_in(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 except ValueError as error:
-                    flash(gettext(u'Could not process file: ') + repr(error))
+                    flash(gettext(u'Could not process file: ') + repr(error), 'danger')
             elif file_type == 'webshop_images_zip':
                 fh = open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'rb')
                 z = zipfile.ZipFile(fh)
@@ -535,7 +535,7 @@ def login():
                 is_valid = pbkdf2_sha256.verify(form.password.data, passwordhash)
                 end = time.time()
                 if is_valid:
-                    flash(gettext(u'login successful.'))
+                    flash(gettext(u'login successful.'), 'success')
                     print('login successful in ' + str(end-start) + ' msec.')
                     session['email'] = user[0].email
                     session['userid'] = user[0].id
@@ -547,16 +547,15 @@ def login():
                     except KeyError:
                         return redirect('/cart')
                 else:
-                    flash(gettext(u'invalid email or password.'))
+                    flash(gettext(u'invalid email or password.'), 'danger')
                     print('login failed: invalid password')
             else:
-                flash(gettext(u'invalid email or password.'))
+                flash(gettext(u'invalid email or password.'), 'danger')
                 print('No user found with login ' + form.email.data)
         else:
-            flash(gettext(u'Invalid email address given.'))
+            flash(gettext(u'Invalid email address given.'), 'danger')
             print('login failed: invalid email')
-    return render_template('login.html',
-                           title="Milliondog", page=gettext('Sign in'), form=form)
+    return render_template('login.html', title="Milliondog", page=gettext('Sign in'), form=form)
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
@@ -568,7 +567,7 @@ def register():
             User = Model.get('res.user')
             user = User.find(['email', '=', form.email.data])
             if user:
-                flash(gettext(u'Email address already registered.'))
+                flash(gettext(u'Email address already registered.'), 'danger')
                 print('Email address ' + form.email.data + ' already registered.')
             else:
                 config.set_trytond(DATABASE_NAME, config_file=CONFIG)
@@ -599,17 +598,17 @@ def register():
                     session['logged_in'] = True
                     try:
                         if session['cart_item_count'] > 0:
-                            flash(gettext(u'Registration successful. Please continue the checkout process.'))
+                            flash(gettext(u'Registration successful. Please continue the checkout process.'), 'success')
                             return redirect('/checkout')
                     except:
                         session['cart_item_count'] = 0
-                        flash(gettext(u'Registration successful.'))
+                        flash(gettext(u'Registration successful.'), 'success')
                         return redirect('/shop')
                 else:
-                    flash(gettext(u'System is down.'))
+                    flash(gettext(u'System is down.'), 'danger')
                     print('Cannot register email ' + form.email.data)
         else:
-            flash(gettext(u'Invalid email address given.'))
+            flash(gettext(u'Invalid email address given.'), 'danger')
             print('Invalid email address ' + form.email.data)
     return render_template('register.html',
                            title="Milliondog", page=gettext('Register'), form=form)
@@ -626,7 +625,7 @@ def contact():
     page_content = gettext(u'You can send us a message here:')
     form = ContactForm()
     if form.validate_on_submit():
-        flash(gettext(u'Thank you for your message.'))
+        flash(gettext(u'Thank you for your message.'), 'success')
         send_to_email = app.config['CONTACT_FORM_EMAIL_SEND_ADDRESS']
         msg = Message("Neue Nachricht über milliondog.com Kontaktformular",
                   sender=send_to_email,
@@ -759,7 +758,7 @@ def checkout():
                             attribute_dict[key] = False
                     tmp_product[0].attributes = attribute_dict
                     tmp_product[0].save()
-        flash(gettext(u'Thank you, your address has been saved. Please proceed with the payment.'))
+        flash(gettext(u'Thank you, your address has been saved. Please proceed with the payment.'), 'success')
         return redirect('/payment')
 
     if form.name.data is None:
@@ -832,7 +831,7 @@ def payment():
 @app.route('/success/', methods=['POST', 'GET'])
 def success():
     try:
-        flash(gettext(u'PayPal payment completed successfully.'))
+        flash(gettext(u'PayPal payment completed successfully.'), 'success')
         session.pop('cart', None)
         session.pop('cart_item_count', None)
         return render_template("success.html")
@@ -843,7 +842,7 @@ def success():
 @app.route('/cancel/', methods=['POST', 'GET'])
 def cancel():
     try:
-        flash(gettext(u'PayPal payment failed.'))
+        flash(gettext(u'PayPal payment failed.'), 'danger')
         return render_template("paymentfailed.html")
     except Exception, e:
         return(str(e))
