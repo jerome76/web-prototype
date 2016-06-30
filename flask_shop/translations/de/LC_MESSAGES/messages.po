@@ -83,11 +83,13 @@ msgid ""
 "href=\"mailto:informme@milliondog.com\">Email</a>.</p>\n"
 "        </h4>"
 msgstr ""
-"<h4><p>Nutzen Sie&nbsp;unseren exklusiven Service. Gerne&nbsp;verarbeiten"
-" wir für Sie auch&nbsp;Stoffe mit besonderer emotionaler Bedeutung, wie "
-"zum Beispiel Kleidungsstücke von Kindern, Eltern, Partnern "
-"etc.</p><p>Kontaktieren Sie uns gerne per <a "
-"href=\"mailto:informme@milliondog.com\">Email</a>.</p></h4>"
+"<h4><p>Wir freuen uns über Anfragen zu unserem exklusiven Service, "
+"um Ihre eigenen Stoffe, wie beispielsweise Kleidungsstücke Ihrer Kinder, Eltern oder Partner, "
+"verwenden zu können, um ein besonderes Milliondog-Cosy "
+"für Ihren Hund zu machen. Setzen Sie sich mit uns in Verbindung, damit wir "
+"zusammen Ihrem Hund einen einzigartigen Look geben können.</p>\n"
+"<p>Kontaktieren Sie uns gerne per <a href=\"mailto:informme@milliondog.com\">Email</a>.</p>\n"
+"        </h4>"
 
 #: flask_shop/templates/admin.html:53 flask_shop/templates/admin.html:76
 #: flask_shop/templates/admin.html:131 flask_shop/views.py:212
