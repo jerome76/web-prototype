@@ -16,3 +16,6 @@ install all tryton modules: (install_modules.sh)
 install translations:
 pybabel compile -d flask_shop/translations
 
+nohup gunicorn --bind 0.0.0.0:5080 flask_shop:app &
+nohup gunicorn --bind 0.0.0.0:5000 flask_shop:app &
+
