@@ -755,6 +755,9 @@ def checkout():
         sale = Sale()
         if (sale.id < 0):
             sale.party = party
+            Currency = Model.get('currency.currency')
+            (currency, ) = Currency.find([('code', '=', session['currency_code'])])
+            sale.currency = currency;
             Paymentterm = Model.get('account.invoice.payment_term')
             paymentterm = Paymentterm.find([('name', '=', 'cash')])
             sale.payment_term = paymentterm[0]
@@ -762,6 +765,13 @@ def checkout():
                 line = sale.lines.new(quantity=1)
                 line.product = p
                 line.description = p.name + ' - ' + p.code
+                line.quantity = 1
+                line.sequence = 1
+            # add shipping if needed
+            if shipping_cost > Decimal(0.00):
+                line = sale.lines.new(quantity=1)
+                line.product = shipping
+                line.description = shipping.name
                 line.quantity = 1
                 line.sequence = 1
             sale.save()
