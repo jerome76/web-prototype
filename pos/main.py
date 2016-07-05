@@ -68,6 +68,7 @@ class MainApp(App):
             'default_customer_id': 2,
             'default_payment_type': 'cash',
             'default_order_id': 1000,
+            'hide_out_of_stock_items': True,
             'pos_printing_enabled': True
         })
         config.setdefaults('serverconnection', {

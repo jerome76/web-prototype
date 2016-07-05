@@ -27,6 +27,13 @@
       "section": "section1",
       "key": "default_order_id" },
 
+      { "type": "options",
+      "title": "Hide out of stock items",
+      "desc": "Hide items which are out of stock (needs restart)",
+      "section": "section1",
+      "key": "hide_out_of_stock_items",
+      "options": ["True", "False"] },
+
     { "type": "options",
       "title": "POS printing enabled",
       "desc": "Enable POS printing",

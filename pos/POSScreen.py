@@ -188,7 +188,8 @@ class POSScreen(Screen):
             self.username = self.manager.get_screen('main').textinput_user_wid.text
             config = ConfigParser.get_configparser(name='app')
             print(config.get('serverconnection', 'server.url'))
-            producturl = config.get('serverconnection', 'server.url') + "pos/products/"
+            hideoutofstockitems = config.get('section1', 'hide_out_of_stock_items')
+            producturl = config.get('serverconnection', 'server.url') + "pos/products/" + hideoutofstockitems
             #self.text_input_wid.focus = True
             if len(self.products_list) == 0:
                 UrlRequest(url=producturl, on_success=on_success, on_failure=on_failure, on_error=on_error)

@@ -14,9 +14,13 @@ CONFIG = app.config['TRYTON_CONFIG_FILE']
 DATABASE_NAME = app.config['TRYTON_DATABASE_NAME']
 config.set_trytond(DATABASE_NAME, config_file=CONFIG)
 
-def getProductDirect():
+
+def getProductDirect(hideoutofstockitems):
     category_condition = 'and 1 = 1 '
     size_condition = 'and 1 = 1 '
+    outofstock_condition = 'and 1 = 1 '
+    if hideoutofstockitems == 'True':
+        outofstock_condition = "and product.attributes like '%\"available\": true%' "
     con = None
     result = None
     try:
@@ -41,6 +45,7 @@ def getProductDirect():
                     "and t.id = ptpc.template " +
                     category_condition +
                     size_condition +
+                    outofstock_condition +
                     "and ptpc.category = pc.id " +
                     "order by product.id")
         resultset = cur.fetchall()
@@ -82,9 +87,9 @@ def get_customers():
     return jsonify(result=list)
 
 
-@app.route("/pos/products/", methods=['GET'])
-def get_products():
-    products = getProductDirect()
+@app.route("/pos/products/<hideoutofstockitems>", methods=['GET'])
+def get_products(hideoutofstockitems='False'):
+    products = getProductDirect(hideoutofstockitems)
     list = []
     for p in products:
         list.append({'id': p['id'], 'code': p['code'], 'name': p['name'], 'price': p['list_price'],
