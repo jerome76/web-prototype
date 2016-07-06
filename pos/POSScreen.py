@@ -5,8 +5,10 @@ from kivy.uix.button import Button
 from kivy.config import Config, ConfigParser
 from kivy.properties import ObjectProperty, StringProperty, ListProperty
 from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.scrollview import ScrollView
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.progressbar import ProgressBar
-from kivy.uix.tabbedpanel import TabbedPanel
+from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelHeader
 from kivy.uix.image import Image
 from kivy.metrics import dp
 from kivy.network.urlrequest import UrlRequest
@@ -49,7 +51,11 @@ class ImageButton(ButtonBehavior, kivy.uix.image.Image):
         def on_success(req, result):
             self.pb.value += pb_inc
             print("Progressbar is on {0}%".format(self.pb.value))
-            os.remove(fn)
+            try:
+                os.remove(fn)
+            except OSError:
+                print(traceback.format_exc())
+                print "POSScreen.upload_payslips() on_success: no such file or directory"
             if self.pb.value >= 99.9:
                 self.popup.dismiss()
                 self.parent.parent.parent.update_icon(True)
@@ -114,6 +120,8 @@ class POSScreen(Screen):
     products_list = []
     products_search_list = []
     products_json = []
+    categories_list = []
+    categories_json = []
     sale_json = []
     customer_id = 0
     order_id = 0
@@ -183,6 +191,47 @@ class POSScreen(Screen):
                     self.my_tabbed_panel_wid.grid_layout_home_wid.add_widget(btn)
                 self.my_tabbed_panel_wid.grid_layout_home_wid.height = (len(result['result'])/4)*110
 
+        def getTabHeader(tablist=None, name=''):
+            for t in tablist:
+                if t.text == name:
+                    return True
+            return False
+
+        def on_success_categories(req, result):
+            with open('categories.json', 'w') as fp:
+                json.dump(result, fp)
+                fp.close()
+            self.categories_json = result
+            print ('categories loaded.')
+            for i in result['result']:
+                name = i['name']
+                if not getTabHeader(self.my_tabbed_panel_wid.tab_list, name):
+                    th = TabbedPanelHeader(text=name)
+                    self.my_tabbed_panel_wid.add_widget(th)
+                    layout = GridLayout(cols=4, spacing=2, size_hint_y=None)
+                    layout.bind(minimum_height=layout.setter('height'))
+                    root = ScrollView()
+                    root.add_widget(layout)
+                    th.content = root
+
+                print ('add online category ' + name)
+
+        def on_failure_categories(req, result):
+            on_error(req, result)
+
+        def on_error_categories(req, result):
+            self.update_icon(False)
+            print 'could not load categories'
+            with open('categories.json') as data_file:
+                result = json.load(data_file)
+                self.categories_json = result
+            for i in result['result']:
+                name = i['name']
+                if not getTabHeader(self.my_tabbed_panel_wid.tab_list, name):
+                    th = TabbedPanelHeader(text=name)
+                    self.my_tabbed_panel_wid.add_widget(th)
+                    print ('add local category ' + name)
+
         try:
             self.btn_order_id_wid.text = str(self.order_id)
             self.username = self.manager.get_screen('main').textinput_user_wid.text
@@ -190,9 +239,14 @@ class POSScreen(Screen):
             print(config.get('serverconnection', 'server.url'))
             hideoutofstockitems = config.get('section1', 'hide_out_of_stock_items')
             producturl = config.get('serverconnection', 'server.url') + "pos/products/" + hideoutofstockitems
-            #self.text_input_wid.focus = True
             if len(self.products_list) == 0:
                 UrlRequest(url=producturl, on_success=on_success, on_failure=on_failure, on_error=on_error)
+            else:
+                return
+            categoryurl = config.get('serverconnection', 'server.url') + "pos/categories/"
+            if len(self.categories_list) == 0:
+                UrlRequest(url=categoryurl, on_success=on_success_categories, on_failure=on_failure_categories,
+                           on_error=on_error_categories)
             else:
                 return
         except:
@@ -467,17 +521,42 @@ class MyTabbedPanel(TabbedPanel):
     def switch_to(self, header):
         super(MyTabbedPanel, self).switch_to(header)
         print 'switch_to, content is ', header.text
+        if self.parent is not None:
+            posscreen = self.parent.parent.parent.parent
+            for tab in self.tab_list:
+                if not tab.text == '' and not tab.text == 'Home' and not tab.text == 'Search' and tab.text == header.text:
+                    self.content.children[0].children[0].clear_widgets()
+                    with open('products.json') as data_file:
+                        result = json.load(data_file)
+                        products_json = result
+                    for p in products_json['result']:
+                        if header.text == p['category']:
+                            code = p['code']
+                            if code == '':
+                                continue
+                            btn = Factory.CustomButton(image_source='./products/'+code+'-small.png', id=code,
+                                                       size_hint_y=None, width=300, height=100, subtext=code)
+                            btn.bind(on_press=posscreen.do_add_item)
+                            self.content.children[0].children[0].add_widget(btn)
+                            print ('add local product ' + code)
+
+    def reset_tab_headers(self):
+        for tab in self.tab_list:
+            tab.background_color = [0.2, 0.2, 0.2, 1.0]
 
     def content_changed_cb(self, obj, value):
+        self.reset_tab_headers()
         if value.text == 'Home':
             value.background_color = (0.81, 0.27, 0.33, 1)
             value.background_normal = ''
             value.background_down = ''
-            self.tab_search_wid.background_color = [0.2, 0.2, 0.2, 1.0]
-            self.tab_search_wid.background_color = [0.2, 0.2, 0.2, 1.0]
-        if value.text == 'Search':
+        elif value.text == 'Search':
             value.background_color = (0.81, 0.27, 0.33, 1)
             value.background_down = ''
             value.background_normal = ''
-            self.tab_home_wid.background_color = [0.2, 0.2, 0.2, 1.0]
-            self.tab_home_wid.background_color = [0.2, 0.2, 0.2, 1.0]
+        else:
+            print 'load category ' + value.text
+            value.background_color = (0.81, 0.27, 0.33, 1)
+            value.background_down = ''
+            value.background_normal = ''
+

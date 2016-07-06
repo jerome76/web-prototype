@@ -26,6 +26,13 @@ class Customer(app.db.Model):
     invoice = app.db.Column(app.db.Boolean, unique=False)
 
 
+class Categories(app.db.Model):
+    __tablename__ = 'product_category'
+    id = app.db.Column(app.db.Integer, primary_key=True)
+    name = app.db.Column(app.db.String(64), unique=True)
+    parent = app.db.Column(app.db.Integer, app.db.ForeignKey("product_category.id"))
+
+
 class Template(app.db.Model):
     __tablename__ = 'product_template'
     id = app.db.Column(app.db.Integer, primary_key=True)

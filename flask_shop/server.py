@@ -87,15 +87,26 @@ def get_customers():
     return jsonify(result=list)
 
 
+@app.route("/pos/categories/", methods=['GET'])
+def get_categories():
+    config.set_trytond(DATABASE_NAME, config_file=CONFIG)
+    categories = models.Categories.query.order_by(models.Categories.name).all()
+    list = []
+    for c in categories:
+        list.append({'id': str(c.id), 'name': c.name, 'parent': str(c.parent) })
+    return jsonify(result=list)
+
+
 @app.route("/pos/products/<hideoutofstockitems>", methods=['GET'])
 def get_products(hideoutofstockitems='False'):
     products = getProductDirect(hideoutofstockitems)
     list = []
     for p in products:
-        list.append({'id': p['id'], 'code': p['code'], 'name': p['name'], 'price': p['list_price'],
+        list.append({'id': p['id'], 'code': p['code'], 'category': p['category'], 'name': p['name'], 'price': p['list_price'],
                      'uom_id': p['uom_id'], 'uom_name': p['uom_name'], 'uom_symbol': p['uom_symbol'],
                      'uom_rounding': p['uom_rounding']})
     return jsonify(result=list)
+
 
 @app.route("/pos/currency/", methods=['GET'])
 def get_currency():
