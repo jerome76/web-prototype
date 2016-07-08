@@ -6,6 +6,7 @@ from kivy.properties import ObjectProperty
 from kivy.network.urlrequest import UrlRequest
 from kivy.uix.screenmanager import Screen
 from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
 import json
 from decimal import Decimal
 import uuid
@@ -29,23 +30,51 @@ class FloatInput(TextInput):
 
 
 class PaymentScreen(Screen):
-    label_wid = ObjectProperty()
+    payment_amount_due_wid = ObjectProperty()
     text_input_wid = ObjectProperty()
     label_change_wid = ObjectProperty()
-    icon_wid = ObjectProperty()
+    payment_type_wid = ObjectProperty()
+    active_currency = None
+    amount_due = Decimal(0.000)
+    posscreen = None
+
+    def get_currency(self, currency):
+        for c in self.posscreen.currencies_list:
+            if c['code'] == currency:
+                return c
+
+    @staticmethod
+    def get_amount(currency_code, amount):
+        return str(currency_code) + ' {:10,.2f}'.format(amount)
 
     def on_pre_enter(self, *args):
         print ('PaymentScreen on_pre_enter...')
-        self.label_wid.text = self.format_currency_amount(self.manager.get_screen('posscreen').get_total())
         self.text_input_wid.text = ''
         self.label_change_wid.text = ''
         self.text_input_wid.focus = True
+        self.posscreen = self.manager.get_screen('posscreen')
+        self.amount_due = self.posscreen.get_total()
+        self.active_currency = self.posscreen.default_currency
+        self.payment_amount_due_wid.text = self.get_amount(self.active_currency, self.amount_due)
+        if len(self.payment_type_wid.children) < 3:
+            for c in self.posscreen.currencies_list:
+                btn = Button(text=c['code'], size_hint=(1, 0.1))
+                btn.bind(on_press=self.clk)
+                self.payment_type_wid.add_widget(btn)
 
-    def getProduct(self, product_code):
-        product_json = self.manager.get_screen('posscreen').products_json
-        for i in product_json['result']:
-            current_code = i['code']
-            if current_code == product_code:
+    def clk(self, obj):
+        self.active_currency = obj.text
+        print("active_currency is: " + self.active_currency)
+        currency = self.get_currency(self.active_currency)
+        self.amount_due = self.posscreen.get_total() * Decimal(currency['rate'])
+        self.payment_amount_due_wid.text = self.get_amount(self.active_currency, self.amount_due);
+        self.text_input_wid.text = ''
+
+    def getProduct(self, id):
+        products_json = self.manager.get_screen('posscreen').products_json
+        for i in products_json['result']:
+            current_id = str(i['id'])
+            if current_id == id:
                 return i
         return
 
@@ -82,13 +111,13 @@ class PaymentScreen(Screen):
                 amount = Decimal(self.text_input_wid.text) + Decimal(50.000)
                 self.text_input_wid.text = str(amount)
         if len(self.text_input_wid.text) > 0:
-            change = Decimal(self.text_input_wid.text) - self.manager.get_screen('posscreen').get_total()
+            change = Decimal(self.text_input_wid.text) - self.amount_due
             if change >= Decimal(0.00):
                 self.label_change_wid.color = (0, 0, 0, 1)
-                self.label_change_wid.text = self.format_currency_amount(change)
+                self.label_change_wid.text = self.get_amount(self.active_currency, change)
             else:
                 self.label_change_wid.color = (1, 0, 0, 1)
-                self.label_change_wid.text = self.format_currency_amount(change)
+                self.label_change_wid.text = self.get_amount(self.active_currency, change)
         else:
             self.label_change_wid.text = ''
 
@@ -97,16 +126,13 @@ class PaymentScreen(Screen):
         amount = Decimal(0.00)
         if value.text != '':
             amount = Decimal(value.text)
-        change = amount - self.manager.get_screen('posscreen').get_total()
+        change = amount - self.amount_due
         if change >= Decimal(0.00):
             self.label_change_wid.color = (0, 0, 0, 1)
-            self.label_change_wid.text = self.format_currency_amount(change)
+            self.label_change_wid.text = self.get_amount(self.active_currency, change)
         else:
             self.label_change_wid.color = (1, 0, 0, 1)
-            self.label_change_wid.text = self.format_currency_amount(change)
-
-    def format_currency_amount(self, amount):
-        return '{:20,.2f}'.format(amount)
+            self.label_change_wid.text = self.get_amount(self.active_currency, change)
 
     def pay(self):
         unique_id = uuid.uuid4()
@@ -140,6 +166,7 @@ class PaymentScreen(Screen):
             payslip_info['order_id'] = str(order_id)
             payslip_info['order_date'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             payslip_info['username'] = self.manager.get_screen('posscreen').username
+            payslip_info['currency'] = self.active_currency
             customer = dict([])
             customer['customerid'] = self.manager.get_screen('posscreen').customer_id
             payslip_json['customer'] = customer
@@ -147,7 +174,7 @@ class PaymentScreen(Screen):
             payslip_items = []
             for i in payslip_positions:
                 print("selling: " + str(i))
-                next_element = self.getProduct(i.product_code)
+                next_element = self.getProduct(i.product_id)
                 if next_element is not None:
                     payslip_items.append(next_element)
             payslip_json['items'] = payslip_items

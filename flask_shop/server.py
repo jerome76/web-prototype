@@ -36,8 +36,7 @@ def getProductDirect(hideoutofstockitems):
                     "from product_product product, " +
                     "product_template t, ir_property p, product_uom uom, " +
                     '"product_template-product_category" ptpc, product_category pc ' +
-                    "where product.code <> '' " +
-                    "and product.template = t.id "
+                    "where product.template = t.id "
                     "and t.sale_uom = uom.id " +
                     "and p.res = 'product.template,'||t.id " +
                     "and p.field = (select f.id from ir_model_field f, ir_model m "
@@ -149,6 +148,9 @@ def make_sale():
         sale.party = party
         sale.reference = '[' + payslip_info['username'] + '] - ' + payslip_info['order_date']
         sale.number = payslip_info['order_id']
+        Currency = Model.get('currency.currency')
+        (currency, ) = Currency.find([('code', '=', payslip_info['currency'])])
+        sale.currency = currency
         sale.description = 'uuid: ' + payslip_info['payslip_uuid']
         # check if sale has been processed
         SaleOld = Model.get('sale.sale')
@@ -167,11 +169,12 @@ def make_sale():
             # remove products
             if app.config['DEACTIVATE_PRODUCT_WHEN_SOLD']:
                 attribute_dict = product[0].attributes
-                for key in attribute_dict.keys():
-                    if key == 'available':
-                        attribute_dict[key] = False
-                product[0].attributes = attribute_dict
-                product[0].save()
+                if attribute_dict is not None:
+                    for key in attribute_dict.keys():
+                        if key == 'available':
+                            attribute_dict[key] = False
+                    product[0].attributes = attribute_dict
+                    product[0].save()
             line = sale.lines.new(quantity=1)
             line.product = product[0]
             line.description = product[0].name

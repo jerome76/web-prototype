@@ -87,9 +87,10 @@ ScreenManagement:
 
 
 <PaymentScreen>:
-    label_wid: payment_amount_due
+    payment_amount_due_wid: payment_amount_due
     text_input_wid: payment_amount_tendered
     label_change_wid: payment_amount_change
+    payment_type_wid: payment_type
 
     name: "paymentscreen"
     canvas.before:
@@ -149,8 +150,8 @@ ScreenManagement:
                 orientation: 'horizontal'
                 size_hint: 0.2, 1
 
-                StackLayout:
-                    orientation: 'rl-tb'
+                BoxLayout:
+                    orientation: 'vertical'
                     id: payment_type
                     size_hint: 0.3, 1
 
@@ -170,7 +171,6 @@ ScreenManagement:
 
                 GridLayout:
                     cols: 4
-                    id: payment_type
                     padding: 1
                     spacing: 2
                     size_hint: 1, 0.2
@@ -219,7 +219,7 @@ ScreenManagement:
                     Label:
                         id: payment_amount_method
                         color: (0.2, 0.2, 0.2, 1.0)
-                        text: 'Cash (CHF)'
+                        text: 'Cash'
                         font_size: '24sp'
                         size_hint: .25, .5
 

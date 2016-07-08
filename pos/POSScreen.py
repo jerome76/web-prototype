@@ -93,15 +93,15 @@ class DataItem(object):
     qty = Decimal(0.00)
     discount = Decimal(0.00)
     price = Decimal(0.00)
-    product_code = None
+    product_id = None
 
-    def __init__(self, product_code, text='', is_selected=False, qty=Decimal(1.00), discount=Decimal(0.00), price=Decimal(0.00)):
+    def __init__(self, product_id, text='', is_selected=False, qty=Decimal(1.00), discount=Decimal(0.00), price=Decimal(0.00)):
         self.text = text
         self.is_selected = is_selected
         self.qty = qty
         self.discount = discount
         self.price = price
-        self.product_code = product_code
+        self.product_id = product_id
 
 
 class POSScreen(Screen):
@@ -122,8 +122,13 @@ class POSScreen(Screen):
     products_json = []
     categories_list = []
     categories_json = []
+    currencies_list = []
+    currencies_json = []
+    customers_list = []
+    customers_json = []
     sale_json = []
     customer_id = 0
+    customer_name = ''
     order_id = 0
     payslip_items_list = []
     my_data_view = ListProperty([])
@@ -139,7 +144,17 @@ class POSScreen(Screen):
         config = ConfigParser.get_configparser(name='app')
         self.customer_id = config.get('section1', 'default_customer_id')
         self.order_id = int(config.get('section1', 'default_order_id'))
-        self.btn_customer_wid.text = 'Client: ' + str(self.customer_id)
+        with open('customers.json') as data_file:
+            result = json.load(data_file)
+            self.customers_json = result
+        for c in result['result']:
+            self.customers_list.append(c)
+        customer = self.get_customer(self.customer_id)
+        if customer:
+            self.customer_name = customer["name"]
+        else:
+            self.customer_name = '???'
+        self.btn_customer_wid.text = 'Client: ' + self.customer_name
         print ('post_init...')
 
     def on_pre_enter(self, *args):
@@ -153,15 +168,18 @@ class POSScreen(Screen):
 
             if len(result['result']) > 0:
                 self.my_tabbed_panel_wid.grid_layout_home_wid.clear_widgets()
-            for i in result['result']:
-                code = i['code']
-                if code == '':
-                    code = '200001'
-                btn = Factory.CustomButton(image_source='./products/'+code+'-small.png', id=code,
-                                           size_hint_y=None, width=300, height=100, subtext=code)
+            for p in result['result']:
+                p_id = str(p['id'])
+                if p['code'] is None or p['code'] == '':
+                    subtext = p['name']
+                else:
+                    subtext = p['code']
+                image_source = self.get_local_image(p)
+                btn = Factory.CustomButton(image_source=image_source, id=p_id,
+                                           size_hint_y=None, width=300, height=100, subtext=subtext)
                 btn.bind(on_press=self.do_add_item)
                 self.products_list.append(btn)
-                print ('add online product ' + code)
+                print ('add online product ' + str(p['id']))
                 self.my_tabbed_panel_wid.grid_layout_home_wid.add_widget(btn)
             self.my_tabbed_panel_wid.grid_layout_home_wid.height = (len(result['result'])/4)*dp(110)
 
@@ -179,15 +197,18 @@ class POSScreen(Screen):
                 with open('products.json') as data_file:
                     result = json.load(data_file)
                     self.products_json = result
-                for i in result['result']:
-                    code = i['code']
-                    if code == '':
-                        code = '200001'
-                    btn = Factory.CustomButton(image_source='./products/'+code+'-small.png', id=code,
-                                               size_hint_y=None, width=300, height=100, subtext=code)
+                for p in result['result']:
+                    p_id = str(p['id'])
+                    if p['code'] is None or p['code'] == '':
+                        subtext = p['name']
+                    else:
+                        subtext = p['code']
+                    image_source = self.get_local_image(p)
+                    btn = Factory.CustomButton(image_source=image_source, id=p_id,
+                                               size_hint_y=None, width=300, height=100, subtext=subtext)
                     btn.bind(on_press=self.do_add_item)
                     self.products_list.append(btn)
-                    print ('add local product ' + code)
+                    print ('add local product ' + str(p['id']))
                     self.my_tabbed_panel_wid.grid_layout_home_wid.add_widget(btn)
                 self.my_tabbed_panel_wid.grid_layout_home_wid.height = (len(result['result'])/4)*110
 
@@ -205,6 +226,7 @@ class POSScreen(Screen):
             print ('categories loaded.')
             for i in result['result']:
                 name = i['name']
+                self.categories_list.append(i)
                 if not getTabHeader(self.my_tabbed_panel_wid.tab_list, name):
                     th = TabbedPanelHeader(text=name)
                     self.my_tabbed_panel_wid.add_widget(th)
@@ -213,7 +235,6 @@ class POSScreen(Screen):
                     root = ScrollView()
                     root.add_widget(layout)
                     th.content = root
-
                 print ('add online category ' + name)
 
         def on_failure_categories(req, result):
@@ -222,16 +243,59 @@ class POSScreen(Screen):
         def on_error_categories(req, result):
             self.update_icon(False)
             print 'could not load categories'
-            with open('categories.json') as data_file:
-                result = json.load(data_file)
-                self.categories_json = result
-            for i in result['result']:
-                name = i['name']
-                if not getTabHeader(self.my_tabbed_panel_wid.tab_list, name):
-                    th = TabbedPanelHeader(text=name)
-                    self.my_tabbed_panel_wid.add_widget(th)
-                    print ('add local category ' + name)
+            try:
+                with open('categories.json') as data_file:
+                    result = json.load(data_file)
+                    self.categories_json = result
+                for i in result['result']:
+                    name = i['name']
+                    self.categories_list.append(i)
+                    if not getTabHeader(self.my_tabbed_panel_wid.tab_list, name):
+                        th = TabbedPanelHeader(text=name)
+                        self.my_tabbed_panel_wid.add_widget(th)
+                        layout = GridLayout(cols=4, spacing=2, size_hint_y=None)
+                        layout.bind(minimum_height=layout.setter('height'))
+                        root = ScrollView()
+                        root.add_widget(layout)
+                        th.content = root
+                        print ('add local category ' + name)
+            except:
+                traceback.print_exc(file=sys.stdout)
 
+        def on_success_currencies(req, result):
+            with open('currencies.json', 'w') as fp:
+                json.dump(result, fp)
+                fp.close()
+            self.currencies_json = result
+            print ('currencies loaded.')
+            for i in result['result']:
+                rate = Decimal(i['rate'])
+                if rate == Decimal(1.000):
+                    self.default_currency = i['code']
+                    print ('set default currency ' + i['code'])
+                if rate > Decimal(0.00000):
+                    self.currencies_list.append(i)
+                    print ('add currency ' + i['code'])
+
+        def on_failure_currencies(req, result):
+            on_error(req, result)
+
+        def on_error_currencies(req, result):
+            self.update_icon(False)
+            print 'could not load currencies'
+            try:
+                with open('currencies.json') as data_file:
+                    result = json.load(data_file)
+                    self.currencies_json = result
+                for i in result['result']:
+                    rate = Decimal(i['rate'])
+                    if rate == Decimal(1.000):
+                        self.default_currency = i['code']
+                        print ('set default currency ' + i['code'])
+                    if i['rate'] > Decimal(0.00000):
+                        self.currencies_list.append(i)
+            except:
+                traceback.print_exc(file=sys.stdout)
         try:
             self.btn_order_id_wid.text = str(self.order_id)
             self.username = self.manager.get_screen('main').textinput_user_wid.text
@@ -241,14 +305,15 @@ class POSScreen(Screen):
             producturl = config.get('serverconnection', 'server.url') + "pos/products/" + hideoutofstockitems
             if len(self.products_list) == 0:
                 UrlRequest(url=producturl, on_success=on_success, on_failure=on_failure, on_error=on_error)
-            else:
-                return
             categoryurl = config.get('serverconnection', 'server.url') + "pos/categories/"
             if len(self.categories_list) == 0:
                 UrlRequest(url=categoryurl, on_success=on_success_categories, on_failure=on_failure_categories,
                            on_error=on_error_categories)
-            else:
-                return
+            currencyurl = config.get('serverconnection', 'server.url') + "pos/currency/"
+            if len(self.currencies_list) == 0:
+                UrlRequest(url=currencyurl, on_success=on_success_currencies, on_failure=on_failure_currencies,
+                       on_error=on_error_currencies)
+
         except:
             traceback.print_exc(file=sys.stdout)
         print "Initialize products selection"
@@ -282,12 +347,15 @@ class POSScreen(Screen):
     def do_search(self):
         def on_success(req, result):
             print ('search success.')
-            for i in result['result']:
-                code = str(i['code'])
-                if code == '':
-                    code = '200001'
-                btn = Factory.CustomButton(image_source='./products/'+code+'-small.png', id=code,
-                                           size_hint_y=None, width=300, height=100, subtext=code)
+            for p in result['result']:
+                p_id = str(p['id'])
+                if p['code'] is None or p['code'] == '':
+                    subtext = p['name']
+                else:
+                    subtext = p['code']
+                image_source = self.get_local_image(p)
+                btn = Factory.CustomButton(image_source=image_source, id=p_id,
+                                           size_hint_y=None, width=300, height=100, subtext=subtext)
                 btn.bind(on_press=self.do_add_item)
                 self.products_search_list.append(btn)
                 self.my_tabbed_panel_wid.grid_layout_search_wid.add_widget(btn)
@@ -316,25 +384,42 @@ class POSScreen(Screen):
             with open('products.json') as data_file:
                 result = json.load(data_file)
                 self.products_json = result
-            for i in result['result']:
-                code = i['code']
-                if code == '':
-                    code = '200001'
-                btn = Factory.CustomButton(image_source='./products/'+code+'-small.png', id=code,
-                                           size_hint_y=None, width=300, height=100, subtext=code)
+            for p in result['result']:
+                p_id = str(p['id'])
+                if p['code'] is None or p['code'] == '':
+                    subtext = p['name']
+                else:
+                    subtext = p['code']
+                image_source = self.get_local_image(p)
+                btn = Factory.CustomButton(image_source=image_source, id=p_id,
+                                           size_hint_y=None, width=300, height=100, subtext=subtext)
                 btn.bind(on_press=self.do_add_item)
                 self.products_list.append(btn)
-                print ('add local product ' + code)
+                print ('add local product ' + str(p['id']))
                 self.my_tabbed_panel_wid.grid_layout_home_wid.add_widget(btn)
             self.my_tabbed_panel_wid.grid_layout_home_wid.height = (len(result['result'])/4)*110
 
-
-    def getProduct(self, code):
+    def get_product(self, p_id):
         for i in self.products_json['result']:
-            current_code = i['code']
-            if current_code == code:
+            current_id = str(i['id'])
+            if current_id == p_id:
                 return i
         return
+
+    def get_customer(self, c_id):
+        for i in self.customers_json['result']:
+            current_id = str(i['id'])
+            if current_id == c_id:
+                return i
+        return
+
+    @staticmethod
+    def get_local_image(product):
+        image_source = './products/' + str(product['code']) + '-small.png'
+        if os.path.isfile(image_source):
+            return image_source
+        else:
+            return './products/null-small.png'
 
     def do_clear_item_list(self):
         print('do_clear_item_list')
@@ -345,9 +430,9 @@ class POSScreen(Screen):
 
     def do_add_item(self, event):
         print('Add product button <%s> state is <%s>' % (self, event))
-        product = self.getProduct(event.id)
+        product = self.get_product(event.id)
         if product is not None:
-            newitem = DataItem(event.id, text="[" + str(product['code']) + "] " + product['name']
+            newitem = DataItem(event.id, text="[" + str(product['id']) + '-' + str(product['code']) + "] " + product['name']
                                     + ' '
                                     + self.format_currency_amount(Decimal(product['price']) * Decimal(1.000))
                                     + ' ' + self.default_currency + "\n"
@@ -381,10 +466,10 @@ class POSScreen(Screen):
         self.label_total_wid.text = 'Total: ' + self.format_currency_amount(self.get_total())
 
 
-    def update_qty_disc_price(self, product_code, quantity, discount, price):
+    def update_qty_disc_price(self, product_id, quantity, discount, price):
         if self.list_view_wid.adapter.get_count() > 0:
             self.my_data_view[self._selected_line_index-1].qty = quantity
-            product = self.getProduct(product_code)
+            product = self.get_product(product_id)
             text = self.get_line(product, quantity, discount, price)
             self.my_data_view[self._selected_line_index-1].text = text
             if hasattr(self.list_view_wid, '_reset_spopulate'):
@@ -397,7 +482,7 @@ class POSScreen(Screen):
         self.info = ''
 
     def get_line(self, product, quantity, discount, price):
-        return "[" + str(product['code']) + "] " + product['name'] \
+        return "[" + str(product['id']) + '-' + str(product['code']) + "] " + product['name'] \
                + ' ' \
                + self.format_currency_amount(price * quantity) + ' ' + self.default_currency + "\n"  \
                + ' ' + str(quantity) + ' ' + product['uom_symbol'] + ' at ' + self.format_currency_amount(price) \
@@ -416,7 +501,7 @@ class POSScreen(Screen):
         if self._selected_line_index == 0:
             return
         active_line = self.my_data_view[self._selected_line_index-1]
-        product_code = active_line.product_code
+        product_id = active_line.product_id
         if type(event) is int:
             do_update_line = True
             if len(self.my_data_view) > 0:
@@ -485,26 +570,26 @@ class POSScreen(Screen):
                 if len(self.info) > 0:
                     active_line.qty = Decimal(self.info)
                 if len(self.info) == 0:
-                    self.update_qty_disc_price(product_code, Decimal(1.0), active_line.discount, active_line.price)
+                    self.update_qty_disc_price(product_id, Decimal(1.0), active_line.discount, active_line.price)
                 else:
-                    self.update_qty_disc_price(product_code, Decimal(self.info), active_line.discount, active_line.price)
+                    self.update_qty_disc_price(product_id, Decimal(self.info), active_line.discount, active_line.price)
             elif self._mode == 'Disc':
                 if len(self.info) > 0:
                     active_line.discount = Decimal(self.info)
                 if len(self.info) == 0:
-                    self.update_qty_disc_price(product_code, active_line.qty, active_line.discount, active_line.price)
+                    self.update_qty_disc_price(product_id, active_line.qty, active_line.discount, active_line.price)
                 else:
-                    self.update_qty_disc_price(product_code, active_line.qty, Decimal(self.info), active_line.price)
+                    self.update_qty_disc_price(product_id, active_line.qty, Decimal(self.info), active_line.price)
             elif self._mode == 'Price':
                 if len(self.info) > 0:
                     active_line.price = Decimal(self.info)
                 if len(self.info) == 0:
-                    self.update_qty_disc_price(product_code, active_line.qty, active_line.discount, active_line.price)
+                    self.update_qty_disc_price(product_id, active_line.qty, active_line.discount, active_line.price)
                 else:
-                    self.update_qty_disc_price(product_code, active_line.qty, active_line.discount, Decimal(self.info))
+                    self.update_qty_disc_price(product_id, active_line.qty, active_line.discount, Decimal(self.info))
         print('mode: ' + self._mode +
               ' info: ' + self.info +
-              ' product_code:' + product_code +
+              ' product_id:' + product_id +
               ' qty:' + str(active_line.qty) +
               ' price:' + str(active_line.price) +
               ' discount:' + str(active_line.discount))
@@ -525,20 +610,25 @@ class MyTabbedPanel(TabbedPanel):
             posscreen = self.parent.parent.parent.parent
             for tab in self.tab_list:
                 if not tab.text == '' and not tab.text == 'Home' and not tab.text == 'Search' and tab.text == header.text:
+                    if len(self.content.children[0].children[0].children) > 0:
+                        continue
                     self.content.children[0].children[0].clear_widgets()
                     with open('products.json') as data_file:
                         result = json.load(data_file)
                         products_json = result
                     for p in products_json['result']:
                         if header.text == p['category']:
-                            code = p['code']
-                            if code == '':
-                                continue
-                            btn = Factory.CustomButton(image_source='./products/'+code+'-small.png', id=code,
-                                                       size_hint_y=None, width=300, height=100, subtext=code)
+                            p_id = str(p['id'])
+                            if p['code'] is None or p['code'] == '':
+                                subtext = p['name']
+                            else:
+                                subtext = p['code']
+                            image_source = posscreen.get_local_image(p)
+                            btn = Factory.CustomButton(image_source=image_source, id=p_id,
+                                                       size_hint_y=None, width=300, height=100, subtext=subtext)
                             btn.bind(on_press=posscreen.do_add_item)
                             self.content.children[0].children[0].add_widget(btn)
-                            print ('add local product ' + code)
+                            print ('add local product ' + str(p['id']))
 
     def reset_tab_headers(self):
         for tab in self.tab_list:

@@ -1,3 +1,5 @@
+import os
+os.environ['KIVY_IMAGE'] = 'pil,sdl2'
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.app import App
@@ -52,7 +54,8 @@ class CustomerScreen(Screen):
         print('CustomerScreen Button was ' + str(event))
         self.label_wid.text = ('[' + event.id + '] ' + event.text)
         self.manager.get_screen('posscreen').customer_id = event.id
-        self.manager.get_screen('posscreen').btn_customer_wid.text = 'Client: ' + event.id
+        self.manager.get_screen('posscreen').customer_name = self.manager.get_screen('posscreen').get_customer(event.id)["name"]
+        self.manager.get_screen('posscreen').btn_customer_wid.text = self.manager.get_screen('posscreen').customer_name
 
 
 class ScreenManagement(ScreenManager):
