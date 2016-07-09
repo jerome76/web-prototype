@@ -175,6 +175,7 @@ class PaymentScreen(Screen):
             for i in payslip_positions:
                 print("selling: " + str(i))
                 next_element = self.getProduct(i.product_id)
+                next_element["item_qty"] = str(i.qty)
                 if next_element is not None:
                     payslip_items.append(next_element)
             payslip_json['items'] = payslip_items

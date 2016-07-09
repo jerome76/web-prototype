@@ -3,6 +3,7 @@ from flask_shop import app, models
 from flask import Flask, jsonify, request
 from proteus import config, Model, Wizard, Report
 from datetime import date, datetime
+from decimal import Decimal
 import time
 import decimal
 import json
@@ -163,7 +164,7 @@ def make_sale():
         Paymentterm = Model.get('account.invoice.payment_term')
         paymentterm = Paymentterm.find([('name', '=', 'cash')])
         sale.payment_term = paymentterm[0]
-        for payslip_line in payslip_items:
+        for idx, payslip_line in enumerate(payslip_items):
             Product = Model.get('product.product')
             product = Product.find(['id', '=', payslip_line['id']])
             # remove products
@@ -178,8 +179,8 @@ def make_sale():
             line = sale.lines.new(quantity=1)
             line.product = product[0]
             line.description = product[0].name
-            line.quantity = 1
-            line.sequence = 1
+            line.quantity = int(payslip_line['item_qty'])
+            line.sequence = idx
         sale.save()
         try:
             sale.click('quote')

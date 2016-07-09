@@ -238,7 +238,7 @@ class POSScreen(Screen):
                 print ('add online category ' + name)
 
         def on_failure_categories(req, result):
-            on_error(req, result)
+            on_error_categories(req, result)
 
         def on_error_categories(req, result):
             self.update_icon(False)
@@ -278,7 +278,7 @@ class POSScreen(Screen):
                     print ('add currency ' + i['code'])
 
         def on_failure_currencies(req, result):
-            on_error(req, result)
+            on_error_currencies(req, result)
 
         def on_error_currencies(req, result):
             self.update_icon(False)
@@ -469,9 +469,9 @@ class POSScreen(Screen):
 
     def update_qty_disc_price(self, product_id, quantity, discount, price):
         if self.list_view_wid.adapter.get_count() > 0:
-            self.my_data_view[self._selected_line_index-1].qty = quantity
+            self.my_data_view[self._selected_line_index-1].qty = Decimal(round(quantity))
             product = self.get_product(product_id)
-            text = self.get_line(product, quantity, discount, price)
+            text = self.get_line(product, Decimal(round(quantity)), discount, price)
             self.my_data_view[self._selected_line_index-1].text = text
             if hasattr(self.list_view_wid, '_reset_spopulate'):
                 self.list_view_wid.adapter.data.prop.dispatch(self.list_view_wid.adapter.data.obj())

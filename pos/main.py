@@ -39,6 +39,36 @@ class CustomerScreen(Screen):
                 print ('add customer ' + str(i['id']))
                 self.customer_list_wid.add_widget(btn)
             self.customer_list_wid.height = (len(result['result'])+4)*50
+
+        def on_failure(req, result):
+            on_error(req, result)
+
+        def on_error(req, result):
+            print 'could not load customers'
+            try:
+                with open('customers.json') as data_file:
+                    result = json.load(data_file)
+                    self.customer_list_wid.clear_widgets()
+                for i in result['result']:
+                    cd_name = i['name']
+                    if i['name'] is None:
+                        cd_name = str(i['id'])
+                    cd_address = i['street'], i['city'], i['zip'], str(i['country'])
+                    btn_text = cd_name.ljust(22) + ', '.join(item for item in cd_address if item)
+                    btn = Button(id=str(i['id']), text=btn_text, halign="left", valign="middle")
+                    btn.bind(on_press=self.do_action)
+                    btn.color = (0.1, 0.1, 0.1, 1)
+                    btn.font_size = '18sp'
+                    btn.background_color = (0.9, 0.9, 0.9, 1.0)
+                    btn.background_normal = ''
+                    btn.text_size[0] = self.size[0] * 0.9
+                    btn.size_hint_y = 0.05
+                    print ('add customer ' + str(i['id']))
+                    self.customer_list_wid.add_widget(btn)
+                self.customer_list_wid.height = (len(result['result']) + 4) * 50
+            except:
+                traceback.print_exc(file=sys.stdout)
+
         try:
             print("Select Customer")
             self.label_wid.text = self.manager.get_screen('posscreen').customer_id
@@ -46,7 +76,7 @@ class CustomerScreen(Screen):
             config = ConfigParser.get_configparser(name='app')
             print(config.get('serverconnection', 'server.url'))
             customerurl = config.get('serverconnection', 'server.url') + "pos/customers/"
-            UrlRequest(customerurl, on_success)
+            UrlRequest(customerurl, on_success=on_success, on_failure=on_failure, on_error=on_error)
         except:
             print "Error: Could not load products"
 
