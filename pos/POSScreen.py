@@ -19,7 +19,7 @@ from decimal import Decimal, InvalidOperation
 from kivy.factory import Factory
 from kivy.uix.popup import Popup
 import os, os.path
-import glob
+import glob, urllib2
 import traceback
 from functools import partial
 import sys
@@ -46,6 +46,7 @@ class ImageButton(ButtonBehavior, kivy.uix.image.Image):
             for fn in glob.glob('offline/*.json'):
                 if os.path.isfile(fn):
                     Clock.schedule_once(partial(self.upload_payslips, fn, increment), 0)
+        self.parent.parent.parent.load_all_images()
 
     def upload_payslips(self, fn, pb_inc, *args):
         def on_success(req, result):
@@ -344,6 +345,26 @@ class POSScreen(Screen):
     def format_currency_amount(amount):
         return '{:20,.2f}'.format(amount)
 
+    def load_all_images(self):
+        config = ConfigParser.get_configparser(name='app')
+        for p in self.products_json['result']:
+            image_name = p['code']
+            if p['code'] is None:
+                image_name = str(p['id'])
+            image_file = image_name + "-small.png"
+            self.download_photo(config.get('serverconnection', 'server.url') + "static/products/" + image_file,
+                                "./products/" + image_file)
+
+    def download_photo(self, img_url, file_path):
+        try:
+            response = urllib2.urlopen(img_url)
+            content = response.read()
+            downloaded_image = file(file_path, "wb")
+            downloaded_image.write(content)
+            downloaded_image.close()
+        except urllib2.HTTPError, e:
+            print('File not found ' + img_url)
+
     def do_search(self):
         def on_success(req, result):
             print ('search success.')
@@ -416,7 +437,10 @@ class POSScreen(Screen):
 
     @staticmethod
     def get_local_image(product):
-        image_source = './products/' + str(product['code']) + '-small.png'
+        image_name = product['code']
+        if product['code'] is None:
+            image_name = product['id']
+        image_source = './products/' + str(image_name) + '-small.png'
         if os.path.isfile(image_source):
             return image_source
         else:
