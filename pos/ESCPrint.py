@@ -9,7 +9,7 @@ class EscPrint:
         pass
 
     @staticmethod
-    def print_payslip(payslip):
+    def print_payslip(payslip, payslip_info):
         try:
             """ Seiko Epson Corp. Receipt Printer M129 Definitions (EPSON TM-T88IV) """
             # Epson = printer.Usb(0x04b8,0x0202)
@@ -33,12 +33,12 @@ class EscPrint:
             total = decimal.Decimal(0.00)
             for counter, payslip_line in enumerate(payslip):
                 pos_left = str(counter) + "  " + payslip_line['code'] + " " + payslip_line['name']
-                pos_right = payslip_line['price'] + " CHF\n"
+                pos_right = payslip_line['price'] + " " + payslip_info['currency'] + "\n"
                 Epson.text(pos_left + pos_right.rjust(42 - len(pos_left)))
                 total = total + decimal.Decimal(payslip_line['price'])
             Epson.text("                                          \n")
             Epson.text("------------------------------------------\n")
-            payslip_total = str(total) + " CHF\n"
+            payslip_total = str(total) + " " + payslip_info['currency'] + "\n"
             Epson.text("Total :   " + payslip_total.rjust(42 - 10))
             # Print text
             Epson.text("\n\n")

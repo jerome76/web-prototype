@@ -361,6 +361,7 @@ class POSScreen(Screen):
                 self.my_tabbed_panel_wid.grid_layout_search_wid.add_widget(btn)
                 self.my_tabbed_panel_wid.switch_to(self.my_tabbed_panel_wid.tab_search_wid)
             self.my_tabbed_panel_wid.grid_layout_search_wid.height = (len(result['result'])/4+4)*110
+            self.text_input_wid.text = ''
 
         def on_failure(req, result):
             on_error(req, result)

@@ -185,7 +185,7 @@ class PaymentScreen(Screen):
             config = ConfigParser.get_configparser(name='app')
             print_enabled = config.get('section1', 'pos_printing_enabled')
             if print_enabled == 'True':
-                EscPrint.print_payslip(payslip_items)
+                EscPrint.print_payslip(payslip_items, payslip_info)
             saleurl = config.get('serverconnection', 'server.url') + "pos/sale/"
             print(config.get('serverconnection', 'server.url'))
             data_json = json.dumps(payslip_json)
