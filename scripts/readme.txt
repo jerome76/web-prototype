@@ -12,3 +12,6 @@ flask md: 5000
 flask jc: 8080
 tryton: 8000
 erp-client: 8081
+
+nohup gunicorn -b 0.0.0.0:5000 flask_shop:app &
+nohup gunicorn -b 0.0.0.0:5001 flask_shop:app &
