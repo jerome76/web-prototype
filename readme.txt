@@ -18,6 +18,7 @@ pybabel compile -d flask_shop/translations
 
 sudo pip install gunicorn
 
+sudo ln -s ~/path/to/your/mysite/nginx.ini /etc/nginx/sites-enabled/
 sudo nginx -s reload
 sudo service nginx restart
 nohup gunicorn --bind 0.0.0.0:5080 flask_shop:app &
