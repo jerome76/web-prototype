@@ -1,1 +1,1 @@
-{"result": [{"id": "1", "parent": "None", "name": "Consumables"}, {"id": "2", "parent": "None", "name": "Finished Goods"}, {"id": "3", "parent": "None", "name": "Service"}]}
+{"result": [{"id": "10", "parent": "8", "name": "Cosy-Bandana"}, {"id": "12", "parent": "8", "name": "Cosy-Boomerang"}, {"id": "11", "parent": "8", "name": "Cosy-Kaye"}, {"id": "9", "parent": "8", "name": "Cosy-Loop"}, {"id": "13", "parent": "None", "name": "Shipping"}, {"id": "8", "parent": "None", "name": "stockable"}]}

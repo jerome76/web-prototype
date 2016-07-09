@@ -1,4 +1,6 @@
 import os
+# THIS IS NEEDED FOR WINDOWS INSTALLER
+# REMOVE THIS ON ANDROID: os.environ['KIVY_IMAGE'] = 'pil,sdl2'
 os.environ['KIVY_IMAGE'] = 'pil,sdl2'
 from kivy.core.window import Window
 from kivy.lang import Builder
@@ -102,7 +104,8 @@ class MainApp(App):
             'default_payment_type': 'cash',
             'default_order_id': 1000,
             'hide_out_of_stock_items': True,
-            'pos_printing_enabled': True
+            'pos_printing_enabled': True,
+            'download_images_after_sync': False
         })
         config.setdefaults('serverconnection', {
             'server.url': 'http://milliondog.ddns.net/'

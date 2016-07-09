@@ -46,7 +46,9 @@ class ImageButton(ButtonBehavior, kivy.uix.image.Image):
             for fn in glob.glob('offline/*.json'):
                 if os.path.isfile(fn):
                     Clock.schedule_once(partial(self.upload_payslips, fn, increment), 0)
-        self.parent.parent.parent.load_all_images()
+        config = ConfigParser.get_configparser(name='app')
+        if config.get('section1', 'download_images_after_sync') == 'True':
+            self.parent.parent.parent.load_all_images()
 
     def upload_payslips(self, fn, pb_inc, *args):
         def on_success(req, result):
@@ -362,7 +364,7 @@ class POSScreen(Screen):
             downloaded_image = file(file_path, "wb")
             downloaded_image.write(content)
             downloaded_image.close()
-        except urllib2.HTTPError, e:
+        except urllib2.HTTPError, urllib2.URLError:
             print('File not found ' + img_url)
 
     def do_search(self):
