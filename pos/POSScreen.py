@@ -390,7 +390,7 @@ class POSScreen(Screen):
             on_error(req, result)
 
         def on_error(req, result):
-            print ('POSScrean.search().on_error() ' + result)
+            print ('POSScrean.search().on_error() ')
 
         print ('POSScreen.do_search():')
         if len(self.products_search_list) > 0:

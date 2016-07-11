@@ -37,6 +37,11 @@ requirements = kivy,python-escpos,pyserial,pil,plyer
 # IMPORTANT: remove termios from .buildozer/android/platform/python-for-android/src/blacklist.txt
 # IMPORTANT: remove termios from .buildozer/android/platform/python-for-android/dist/blacklist.txt
 # IMPORTANT: remove os.environ['KIVY_IMAGE'] = 'pil,sdl2' at beginning of main.py
+# IMPORTANT: ANDROID: UNCOMMENT THIS IN PaymentScreen.py
+# from BluetoothPrint import BluetoothPrint
+# IMPORTANT: ANDROID: UNCOMMENT THIS IN PaymentScreen.py
+# blutoothprint = BluetoothPrint()
+# blutoothprint.print_payslip(payslip_items, payslip_info)
 
 
 # (str) Custom source folders for requirements

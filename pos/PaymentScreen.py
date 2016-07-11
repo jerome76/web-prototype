@@ -14,6 +14,7 @@ import re
 import os
 import traceback
 from ESCPrint import EscPrint
+# IMPORTANT: ANDROID: UNCOMMENT THIS
 # from BluetoothPrint import BluetoothPrint
 from datetime import datetime
 
@@ -137,7 +138,7 @@ class PaymentScreen(Screen):
 
     def pay(self):
         unique_id = uuid.uuid4()
-        order_id = self.manager.get_screen('posscreen').order_id
+        order_id = int(self.manager.get_screen('posscreen').order_id)
 
         def on_success(req, result):
             os.remove('offline/' + str(unique_id) + '.json')
@@ -191,7 +192,9 @@ class PaymentScreen(Screen):
             bluetooth_print_enabled = config.get('section1', 'bluetooth_printing_enabled')
             if bluetooth_print_enabled == 'True':
                 print("Start printing over Bluetooth")
-                # BluetoothPrint.print_payslip(payslip_items, payslip_info)
+                # IMPORTANT: ANDROID: UNCOMMENT THIS
+                # blutoothprint = BluetoothPrint()
+                # blutoothprint.print_payslip(payslip_items, payslip_info)
             saleurl = config.get('serverconnection', 'server.url') + "pos/sale/"
             print(config.get('serverconnection', 'server.url'))
             data_json = json.dumps(payslip_json)
@@ -201,7 +204,7 @@ class PaymentScreen(Screen):
             else:
                 self.parent.current = "posscreen"
             self.manager.get_screen('posscreen').do_clear_item_list()
-            self.manager.get_screen('posscreen').order_id = order_id + 1
+            self.manager.get_screen('posscreen').order_id = str(order_id + 1)
             self.parent.current = "posscreen"
         except Exception:
             print(traceback.format_exc())
