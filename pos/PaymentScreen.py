@@ -14,6 +14,7 @@ import re
 import os
 import traceback
 from ESCPrint import EscPrint
+# from BluetoothPrint import BluetoothPrint
 from datetime import datetime
 
 
@@ -187,6 +188,10 @@ class PaymentScreen(Screen):
             print_enabled = config.get('section1', 'pos_printing_enabled')
             if print_enabled == 'True':
                 EscPrint.print_payslip(payslip_items, payslip_info)
+            bluetooth_print_enabled = config.get('section1', 'bluetooth_printing_enabled')
+            if bluetooth_print_enabled == 'True':
+                print("Start printing over Bluetooth")
+                # BluetoothPrint.print_payslip(payslip_items, payslip_info)
             saleurl = config.get('serverconnection', 'server.url') + "pos/sale/"
             print(config.get('serverconnection', 'server.url'))
             data_json = json.dumps(payslip_json)

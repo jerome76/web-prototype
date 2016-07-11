@@ -46,7 +46,15 @@
       "desc": "Enable POS printing",
       "section": "section1",
       "key": "pos_printing_enabled",
+      "options": ["True", "False"] },
+
+    { "type": "options",
+      "title": "Bluetooth printing enabled",
+      "desc": "Enable Bluetooth printing",
+      "section": "section1",
+      "key": "bluetooth_printing_enabled",
       "options": ["True", "False"] }
+
 
 ]
 

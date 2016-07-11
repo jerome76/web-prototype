@@ -104,7 +104,8 @@ class MainApp(App):
             'default_payment_type': 'cash',
             'default_order_id': 1000,
             'hide_out_of_stock_items': True,
-            'pos_printing_enabled': True,
+            'pos_printing_enabled': False,
+            'bluetooth_printing_enabled': False,
             'download_images_after_sync': False
         })
         config.setdefaults('serverconnection', {
