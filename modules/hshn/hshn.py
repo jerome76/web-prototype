@@ -1,4 +1,5 @@
 """defines the business logic"""
+import os
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.pyson import Eval, Bool, Not
 from trytond.pool import Pool
@@ -8,6 +9,9 @@ import datetime
 
 
 __all__ = ['Hshn']
+
+MAIL_FILEPATH = os.path.join(os.path.dirname(
+    os.path.abspath(__file__)), 'mail.txt')
 
 
 class Hshn(ModelSQL, ModelView):
@@ -184,7 +188,8 @@ class Hshn(ModelSQL, ModelView):
 
         # Read in the mail content
         mail_content = {}
-        file = open('../trytond/modules/hshn/mail.txt')
+
+        file = open(MAIL_FILEPATH, 'rw+')
         for line in file:
             try:
                 name, var = line.partition('=')
