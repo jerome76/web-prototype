@@ -2,6 +2,7 @@
 import os
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.pyson import Eval, Bool, Not
+from trytond.report import Report
 from trytond.pool import Pool
 from trytond.tools import get_smtp_server
 from trytond.transaction import Transaction
@@ -12,6 +13,18 @@ __all__ = ['Hshn']
 
 MAIL_FILEPATH = os.path.join(os.path.dirname(
     os.path.abspath(__file__)), 'mail.txt')
+
+
+class HshnReport(Report):
+    __name__ = 'hshn.hshnmodul'
+
+    @classmethod
+    def _get_records(cls, ids, model, data):
+        return [{'fieldname': 'test'}]
+
+    @classmethod
+    def get_context(cls, *args, **kwargs):
+        return super(HshnReport, cls).get_context(*args, **kwargs)
 
 
 class Hshn(ModelSQL, ModelView):
