@@ -1,0 +1,4 @@
+mail_address=user@host.com
+mail_message1=Message1
+mail_message2=Message2
+mail_message3=Message3
