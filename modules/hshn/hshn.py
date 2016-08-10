@@ -1,4 +1,5 @@
 """defines the business logic"""
+import os
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.pyson import Eval, Bool, Not
 from trytond.pool import Pool
@@ -8,6 +9,9 @@ import datetime
 
 
 __all__ = ['Hshn']
+
+MAIL_FILEPATH = os.path.join(os.path.dirname(
+    os.path.abspath(__file__)), 'mail.txt')
 
 
 class Hshn(ModelSQL, ModelView):
@@ -26,10 +30,10 @@ class Hshn(ModelSQL, ModelView):
     ], 'Project study SPO3', states={
         'readonly': Eval('spo_selection') != 'SPO3',
         'required': Bool(Eval('spo_selection') != 'SPO4')
-    }, help='Please select the project study for which you will submit the proposal'+
-        '\n SEPS  = Project Study Software development EDV-No: 281531'+
-        '\n PSBWL = Project Study BWL EDV-No:281542'+
-        '\n PSWIN = Project Study economic computer science EDV-No: 281560'+
+    }, help='Please select the project study for which you will submit the proposal' +
+        '\n SEPS  = Project Study Software development EDV-No: 281531' +
+        '\n PSBWL = Project Study BWL EDV-No:281542' +
+        '\n PSWIN = Project Study economic computer science EDV-No: 281560' +
         '\n PSIT  = Project Study IT-Systems EDV-No:281584')
     project_study_spo4 = fields.Selection([
         ('None', ''),
@@ -57,7 +61,8 @@ class Hshn(ModelSQL, ModelView):
                                                                  'description of the topic \n Note: You can also add attachments')
     input_date = fields.Date('Date', readonly=True)
     like_count = fields.Integer('Like count', readonly=True)
-    lecturer = fields.Many2One('party.party', 'Lecturer', required=True, select=True, )
+    lecturer = fields.Many2One(
+        'party.party', 'Lecturer', required=True, select=True, )
     mail = fields.Boolean('Mail to lecturer', states={
         'readonly': Not(Bool(Eval('lecturer'))),
     }, help='Select the lecturer which you want to assign')
@@ -100,14 +105,14 @@ class Hshn(ModelSQL, ModelView):
         return 'like'
 
     @classmethod
-    def setup(cls):
+    def __setup__(cls):
         """Initialize the like_btn"""
-        super(Hshn, cls).setup()
+        super(Hshn, cls).__setup__()
 
         cls._buttons.update({
             'like_btn': {
             }
-            })
+        })
 
     @fields.depends('spo_selection')
     def on_change_spo_selection(self):
@@ -149,7 +154,7 @@ class Hshn(ModelSQL, ModelView):
                         return
 
             # save the liked topic to the user
-            values2 = [{'id':user_id, 'hshn_id':row.id}]
+            values2 = [{'id': user_id, 'hshn_id': row.id}]
             model_user.create(values2)
 
             # count up the likes
@@ -163,7 +168,6 @@ class Hshn(ModelSQL, ModelView):
 
         return 'reload'
 
-
     @classmethod
     def validate(cls, records_mail):
         """Check before saving if the field mail is selected(True) and send in this case the entered
@@ -176,7 +180,7 @@ class Hshn(ModelSQL, ModelView):
         model = pool.get('party.contact_mechanism')
         try:
             server = get_smtp_server()
-        except :
+        except:
             pass
 
         # get the record
@@ -184,7 +188,8 @@ class Hshn(ModelSQL, ModelView):
 
         # Read in the mail content
         mail_content = {}
-        file = open('../trytond/modules/hshn/mail.txt')
+
+        file = open(MAIL_FILEPATH, 'rw+')
         for line in file:
             try:
                 name, var = line.partition('=')
@@ -210,11 +215,11 @@ class Hshn(ModelSQL, ModelView):
                 if row2.type == 'email':
                     try:
                         server.sendmail(mail_content['mail_address'], row2.value, mail_content['mail_message1'] +
-                            str(row.lecturer.name) +
-                            mail_content['mail_message2'] +
-                            '\n'+cls.topic.string+': ' + str(row.topic) + '\n'+cls.description.string+': ' +
-                            str(row.description) + '\n' + str(row.spo_selection) + mail_content['mail_message3'] +
-                            str(project_study))
+                                        str(row.lecturer.name) +
+                                        mail_content['mail_message2'] +
+                                        '\n' + cls.topic.string + ': ' + str(row.topic) + '\n' + cls.description.string + ': ' +
+                                        str(row.description) + '\n' + str(row.spo_selection) + mail_content['mail_message3'] +
+                                        str(project_study))
                     except:
                         pass
 
