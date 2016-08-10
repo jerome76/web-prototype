@@ -186,9 +186,13 @@ class Hshn(ModelSQL, ModelView):
         mail_content = {}
         file = open('../trytond/modules/hshn/mail.txt')
         for line in file:
-            name, var = line.partition('=')
+            try:
+                name, var = line.partition('=')
+            except ValueError:
+                continue
             mail_content[name.strip()] = var
 
+        return
         # send a mail
         if row.mail is True:
 
