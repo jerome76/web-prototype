@@ -14,6 +14,8 @@
         <field name="lecturer"/>
         <label name="mail"/>
         <field name="mail"/>
+        <label name="company"/>
+        <field name="company"/>
         <separator name="description" colspan="6"/>
         <field name="description" colspan="6"/>
 </form>

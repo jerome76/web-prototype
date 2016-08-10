@@ -1,13 +1,14 @@
 """defines the business logic"""
 from trytond.model import ModelView, ModelSQL, fields
-from trytond.pyson import Eval, Bool, Not
+from trytond.pyson import If, Eval, Bool, Not
 from trytond.pool import Pool
 from trytond.tools import get_smtp_server
 from trytond.transaction import Transaction
+from trytond.modules.company import CompanyReport
 import datetime
 
 
-__all__ = ['Hshn']
+__all__ = ['Hshn', 'HshnReport']
 
 
 class Hshn(ModelSQL, ModelView):
@@ -15,6 +16,15 @@ class Hshn(ModelSQL, ModelView):
         The used fields, set deafult values,
         button actions and special logic for sending a mail are defined in the Class """
     __name__ = "hshn.hshn"
+    company = fields.Many2One('company.company', 'Company', required=True,
+        states={
+            'readonly': (Eval('state') != 'draft') | Eval('lines', [0]),
+            },
+        domain=[
+            ('id', If(Eval('context', {}).contains('company'), '=', '!='),
+                Eval('context', {}).get('company', -1)),
+            ],
+        depends=['state'], select=True)
 
     topic = fields.Char('Topic', required=True, help='Please enter your topic')
     project_study_spo3 = fields.Selection([
@@ -98,6 +108,16 @@ class Hshn(ModelSQL, ModelView):
     def default_like_state(cls):
         """Set the default value of the state field to false"""
         return 'like'
+
+    @staticmethod
+    def default_company():
+        return Transaction().context.get('company')
+
+    def _get_like_btn(self):
+        return {}
+
+    def get_like_btn(self):
+        return {}
 
     @classmethod
     def __setup__(cls):
@@ -219,3 +239,22 @@ class Hshn(ModelSQL, ModelView):
 
         # set mail to false
         row.mail = False
+
+
+class HshnReport(CompanyReport):
+    __name__ = 'hshn.hshnmodul'
+
+    @classmethod
+    def _get_records(cls, ids, model, data):
+        Hshn = Pool().get('hshn.hshn')
+        return Hshn.search([('id', '=', 7)])
+
+    @classmethod
+    def get_context(cls, records, data):
+        report_context = super(HshnReport, cls).get_context(records, data)
+        Company = Pool().get('company.company')
+        company = Company.search([('id', '=', 1)])
+        report_context['company'] = company[0]
+        return report_context
+
+
