@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<tryton>
+  <!--  Insert own menu image-->
+  <record id="hshn_icon" model="ir.ui.icon">
+      	<field name="name">tryton-hshn</field>
+      	<field name="path">icons/tryton-hshn.svg</field>
+  </record>
+
+	<!--  Input hshn_tree-->
+  <record model="ir.ui.view" id="hshn_view_tree">
+      	<field name="model">hshn.hshn</field>
+          <field name="type">tree</field>
+          <field name="name">hshn_tree</field>
+  </record>
+	<!--  Input hshn_form -->
+	<record model="ir.ui.view" id="hshn_view_form">
+            <field name="model">hshn.hshn</field>
+            <field name="type">form</field>
+            <field name="name">hshn_form</field>
+ 	</record>
+  <!--  View for the main menu and the event -->
+  <record model="ir.action.act_window" id="act_hshn_modul_form">
+     	<field name="name">Project proposals</field>
+     	<field name="res_model">hshn.hshn</field>
+ 	</record>
+ 	<!--  View that connect the form in the tree with the specification -->
+ 	<record model="ir.action.act_window.view" id="act_hshn_form_view1">
+     	<field name="sequence" eval="10"/>
+     	<field name="view" ref="hshn_view_tree"/>
+     	<field name="act_window" ref="act_hshn_modul_form"/>
+ 	</record>
+ 	<!--  View for the edition or the Form of hshn-->
+ 	<record model="ir.action.act_window.view" id="act_hshn_form_view2">
+     	<field name="sequence" eval="20"/>
+     	<field name="view" ref="hshn_view_form"/>
+     	<field name="act_window" ref="act_hshn_modul_form"/>
+ 	</record>
+ 	<!--  Report Alles -->
+ 	<record model="ir.action.report" id="report_hshn">
+     	<field name="name">Alles</field>
+     	<field name="model">hshn.hshn</field>
+     	<field name="report_name">hshn.hshnmodul</field>
+     	<field name="report">hshn/hshn.odt</field>
+ 	</record>
+ 	<record model="ir.action.keyword" id="report_hshn_modul">
+     	<field name="keyword">form_print</field>
+     	<field name="model">hshn.hshn,-1</field>
+     	<field name="action" ref="report_hshn"/>
+ 	</record>
+  <!--  Reoprt SPO3 -->
+ 	<record model="ir.action.report" id="report_hshn_SPO3">
+     	<field name="name">Vorschläge SPO3</field>
+     	<field name="model">hshn.hshn</field>
+     	<field name="report_name">hshn.hshnmodul</field>
+     	<field name="report">hshn/hshn_SPO3.odt</field>
+ 	</record>
+ 	<record model="ir.action.keyword" id="report_hshn_modul_SPO3">
+     	<field name="keyword">form_print</field>
+     	<field name="model">hshn.hshn,-1</field>
+     	<field name="action" ref="report_hshn_SPO3"/>
+ 	</record>
+   <!--  Reoprt SPO4 -->
+ 	<record model="ir.action.report" id="report_hshn_SPO4">
+     	<field name="name">Vorschläge SPO4</field>
+     	<field name="model">hshn.hshn</field>
+     	<field name="report_name">hshn.hshnmodul</field>
+     	<field name="report">hshn/hshn_SPO4.odt</field>
+ 	</record>
+ 	<record model="ir.action.keyword" id="report_hshn_modul_SPO4">
+     	<field name="keyword">form_print</field>
+     	<field name="model">hshn.hshn,-1</field>
+     	<field name="action" ref="report_hshn_SPO4"/>
+ 	</record>
+	<data>
+    <menuitem name="Hshn projects" id="menu_hshn_modul" sequence="10" icon="tryton-hshn"/>
+  </data>
+ 	<menuitem parent="menu_hshn_modul" sequence="1"
+      id="menu_hshn_modul_form" icon="tryton-list" action="act_hshn_modul_form"/>
+</tryton>

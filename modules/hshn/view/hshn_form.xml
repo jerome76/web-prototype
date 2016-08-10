@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<form col="6" string="Hshn">
+        <label name="topic" />
+        <field name="topic" colspan="3"/>
+        <label name="spo_selection"/>
+        <field name="spo_selection"/>
+        <label name="project_study_spo3"/>
+        <field name="project_study_spo3"/>
+        <label name="project_study_spo4"/>
+        <field name="project_study_spo4"/>
+        <label name="input_date"/>
+        <field name="input_date"/>
+        <label name="lecturer"/>
+        <field name="lecturer"/>
+        <label name="mail"/>
+        <field name="mail"/>
+        <separator name="description" colspan="6"/>
+        <field name="description" colspan="6"/>
+</form>

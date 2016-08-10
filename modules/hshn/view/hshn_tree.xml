@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<tree string="Hshn Modul">
+	<field name="topic"/>
+  <field name="spo_selection"/>
+  <field name="project_study_spo3"/>
+  <field name="project_study_spo4"/>
+  <field name="lecturer"/>
+  <field name="input_date"/>
+  <field name="like_count"/>
+  <button name="like_btn" string="Like"/>
+</tree>
