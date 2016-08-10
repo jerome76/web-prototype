@@ -104,14 +104,14 @@ class Hshn(ModelSQL, ModelView):
         return 'like'
 
     @classmethod
-    def setup(cls):
+    def __setup__(cls):
         """Initialize the like_btn"""
-        super(Hshn, cls).setup()
+        super(Hshn, cls).__setup__()
 
         cls._buttons.update({
             'like_btn': {
             }
-            })
+        })
 
     @fields.depends('spo_selection')
     def on_change_spo_selection(self):
