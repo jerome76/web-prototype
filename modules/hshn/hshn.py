@@ -100,10 +100,9 @@ class Hshn(ModelSQL, ModelView):
         return 'like'
 
     @classmethod
-    def setup(cls):
+    def __setup__(cls):
+        super(Hshn, cls).__setup__()
         """Initialize the like_btn"""
-        super(Hshn, cls).setup()
-
         cls._buttons.update({
             'like_btn': {
             }
